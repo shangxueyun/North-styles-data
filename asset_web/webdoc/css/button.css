@@ -1,0 +1,37 @@
+/* CSS Document */
+.btnbox {text-align:center;}
+.btnbox .button {padding:.5rem 1rem;}
+.btnbox_gap {margin:1rem 0;}
+.btnbox_align_left {text-align:left}
+.btnbox_align_right {text-align:right}
+
+.button {background:#fff;font-size:.8rem;border-radius:.2rem;padding:.3rem 1rem;display:inline-block;vertical-align:middle;line-height:1;cursor:pointer;}
+.button:before,
+.button:after {cursor:pointer;}
+
+.btn_block {border:1px solid #1976d3;background:#1976d3;color:#fff;}
+.btn_block:hover {border:1px solid #125699;background:#125699;color:#fff;}
+
+.btn_block_1 {border:1px solid #142050;background:#142050;color:rgba(255,255,255,.8);text-align:center;padding:.5rem;}
+.btn_block_1:hover {color:#fff;}
+
+.btn_block_2 {border:1px solid #2d3f81;background:#2d3f81;color:rgba(255,255,255,.8);text-align:center;padding:.5rem;}
+.btn_block_2:hover {color:#fff;}
+
+.btn_hollow {border:1px solid #cadde3;color:#324489;font-size:.75rem;padding:.15rem .5rem;}
+.btn_hollow:hover {border:1px solid #b6c7cc;color:#000;}
+
+.btn_hollow_1 {border:1px solid #e5e5e5;color:#324489;}
+.btn_hollow_1:hover {border:1px solid #d7d7d7;color:#000;}
+
+.btn_hollow_2 {border:1px solid #e5e5e5;color:#324489;padding:.5rem;}
+.btn_hollow_2:hover {border:1px solid #d7d7d7;color:#000;}
+
+.btn_hollow_3 {border:1px solid #465db7;color:#465db7;}
+.btn_hollow_3:hover {border:1px solid #000;color:#000;background:#f5f5f5;}
+
+.btn_hollow_unavailable,
+.btn_hollow_unavailable:hover {border:1px solid #999;color:#999;cursor:default;}
+
+.magnifier:before {content:"\e90e";margin-right:.3rem;vertical-align:middle;line-height:1;}
+

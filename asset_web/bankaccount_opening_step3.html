@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta name="robots" content="all" />
+
+<script src="webdoc/js/popimg.js" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<title>溟宗供应链</title>
+</head>
+<style type="text/css">
+	._div{
+		width:56%;
+		display: inline-block;
+	    color: #333;
+	    vertical-align: top;
+	    font-size: .8rem;
+	    line-height: 2rem;
+	    position:relative;
+	}
+	._div .input03{
+		border: 1px solid #e5e5e5;
+	    height: 1.9rem;
+	    width: 100%;
+	    border-radius: .2rem;
+	    line-height: 1.5rem;
+	    text-indent: .5rem;
+	}
+</style>
+<style>
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+.loading {
+	top: 50%;
+}
+.loading:before {
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 2px solid #fff;
+	border-top: 2px solid rgba(0,0,0,.1);
+}
+</style>
+<body>
+<section class="header">
+	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
+	<a class="login" id='SignOut'><img src="webdoc/img/avatar.png"> 退出</a>
+</section>
+
+<section class="sideBar">
+	<ul class="menu">
+		<li><a href="home.html"><p class="basedInfo">基本信息</p></a></li>
+		<li><a href="loan_info.html"><p class="loanInfo">贷款信息</p></a></li>
+		<li class="on"><a href="bankaccount.html"><p class="bankAccount">资金监管专户</p></a></li>
+		<li><a href="invoice.html"><p class="invoice">发票池信息</p></a></li>
+		<li><a href="receivables.html"><p class="receivables">收款账户变更</p></a></li>
+	</ul>
+</section>
+
+<section class="mainBar">
+	<div class="mainBarTop">
+		<div class="innerBox">
+			<ul class="breadCrumbs">
+				<li><a href="home.html">首页</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li><a href="bankaccount.html">资金监管专户</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li class="on"><p>资金监管开户流程</p></li>
+			</ul>
+		</div>
+	</div>
+	
+		<div class="Box">
+			<ul class="tabBox">
+				<li>基本信息补充</li>
+				<li>经办人信息</li>
+				<li class="isChoose">绑定实体账户信息</li>
+				<li>信息确认</li>
+			</ul>
+			<h2 class="heading01"><span>银行账户信息</span><i class="important">必填项</i></h2>
+			<div class="innerBox" style="min-height: 16rem;">
+			<form id='bankInfo' method="post"  autocomplete="off">
+				<ul class="list_info wide01">
+					<li>
+						<span class="important">银行名称:</span>
+						<p>
+							<input id="bank_info" autocomplete="off" class="input01" type="text" name="bankName" placeholder="例如：中国银行" required>
+							<i class="err-tipBox"><img src="webdoc/img/err.png"/><i>请输入必选项</i></i>
+						</p>
+					</li>
+					<li>
+						<span class="important">联行号:</span>
+						<p>
+							<input autocomplete="off" class="input01" type="text" placeholder="联行号会根据您输入的银行名称写入，如果没有需要自己手动填写" name="bankNo" required>
+							<i class="err-tipBox"><img src="webdoc/img/err.png"/><i>请输入必选项</i></i>
+						</p>
+					</li>
+					<li>
+						<span class="important">分支行名称:</span>
+						<p>
+							<input autocomplete="off" class="input01" type="text" name="branchName" required>
+							<i class="err-tipBox"><img src="webdoc/img/err.png"/><i>请输入必选项</i></i>
+						</p>
+					</li>
+					<li>
+						<span class="important">分支行联行号:</span>
+						<p>
+							<input autocomplete="off" class="input01" type="text" name="branchCode" required>
+							<i class="err-tipBox"><img src="webdoc/img/err.png"/><i>请输入必选项</i></i>
+						</p>
+					</li>
+					<li>
+						<span class="important">银行英文简称:</span>
+						<p>
+							<input autocomplete="off" class="input01" type="text" name="bankCode" placeholder="例如：BOC" required>
+							<i class="err-tipBox"><img src="webdoc/img/err.png"/><i>请输入必选项</i></i>
+						</p>
+					</li>
+					<li>
+						<span class="important">卡户名:</span>
+						<p>
+							<input autocomplete="off" class="input01" type="text" name="accountName" placeholder="例如：XXX有限公司" required>
+							<i class="err-tipBox"><img src="webdoc/img/err.png"/><i>请输入必选项</i></i>
+						</p>
+					</li>
+					<li>
+						<span class="important">银行卡号:</span>
+						<p>
+							<input autocomplete="off" class="input01" type="text" name="accountNo"  required>
+							<i class="err-tipBox"><img src="webdoc/img/err.png"/><i>请输入必选项</i></i>
+						</p>
+					</li>
+					<li>
+						<span class="important">开户行省份:</span>
+						<p>
+							<input autocomplete="off" class="input01" type="text" name="province" placeholder="例如：湖南省" required>
+							<i class="err-tipBox"><img src="webdoc/img/err.png"/><i>请输入必选项</i></i>
+						</p>
+					</li>
+					<li>
+						<span class="important">开户行城市:</span>
+						<p>
+							<input autocomplete="off" class="input01" type="text" name="city" placeholder="例如：长沙市" required>
+							<i class="err-tipBox"><img src="webdoc/img/err.png"/><i>请输入必选项</i></i>
+						</p>
+					</li>
+					<!-- <li>
+						<span class="">卡类型:</span>
+						<p> 
+							<select class="input01" name='cardType'> 
+								<option value="">请选择....</option>
+								<option value="CREDIT_CARD">贷记卡</option>
+								<option value="DEBIT_CARD">借记卡</option>
+							</select>
+						</p>
+					</li> -->
+
+				</ul>
+			</form>
+			</div>
+		</div>
+		<div class="submitbox">
+			<ul class="list_info wide01">
+				<li>
+					<span>&nbsp;</span>
+					<p>
+						<!--<a class="button btn_hollow_2" href="javascript:void(0);" onclick="history.back(-1);return false;">取消</a>-->
+						<!--<a class="button btn_block_2" href="javascript:void(0);">下一步</a>-->
+						<input id="input-button" value='下一步' type="submit"/>
+					</p>
+				</li>
+			</ul>
+		</div>
+	
+</section>
+
+<!--use for function of showImage-->
+<section class="popbox off" id="popbox_1">
+	<div class="img_Pop">
+		<b class="close" id="hideImg01"></b>
+		<div id="imgbox" class="imgbox"><div class="loading"></div></div>
+	</div>
+</section>
+
+<div id="loading_div" style="display: none;">
+	<div class="loading"></div>
+</div>
+</body>
+</html>
+<script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="text/javascript" src="webdoc/js/BANK_CODE.js" ></script>
+<script type="text/javascript" src="webdoc/js/bankaccount_opening_step3.js" ></script>
+<script>
+/////////
+//请注意//
+//1. 触发显示图片功能元素，需要提前给该元素的属性赋值（data-img）
+//2. 所有触发显示图片功能元素的name属性值，必须一致
+//showImage(触发显示图片功能的元素name属性值，关闭图片弹框的ID值，图片弹框的ID值，图片容器的ID值)
+    var name_show_img = new ShowImage;
+	name_show_img.init("name_show_img","hideImg01","popbox_1","imgbox");
+</script>
+<style>
+	#input-button{
+		width:5.5rem;
+		height:2rem !important;
+		border: 0;
+		background: #2d3f81;
+		color: #FFFFFF;
+		border-radius:3px;	
+	}
+</style>

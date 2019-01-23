@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta name="robots" content="all" />
+
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<title>溟宗供应链</title>
+</head>
+
+<body>
+<section class="header">
+	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
+	<a class="login" id='SignOut'><img src="webdoc/img/avatar.png"> 退出</a>
+</section>
+
+<section class="sideBar">
+	<ul class="menu">
+		<li><a href="home.html"><p class="basedInfo">基本信息</p></a></li>
+		<li><a href="loan_info.html"><p class="loanInfo">贷款信息</p></a></li>
+		<li class="on"><a href="bankaccount.html"><p class="bankAccount">资金监管专户</p></a></li>
+		<li><a href="invoice.html"><p class="invoice">发票池信息</p></a></li>
+		<li><a href="receivables.html"><p class="receivables">收款账户变更</p></a></li>
+	</ul>
+</section>
+
+<section class="mainBar">
+	<div class="mainBarTop">
+		<div class="innerBox">
+			<ul class="breadCrumbs">
+				<li><a href="home.html">首页</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li><a href="bankaccount.html">资金监管专户</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li class="on"><p>绑定企业账户信息</p></li>
+			</ul>
+		</div>
+	</div>
+	<div class="Box">
+		<h2 class="heading01"><span>绑定企业账户信息</span></h2>
+		<div class="innerBox">
+			<div class="pbox">
+				<p style="padding-top: 3rem">
+					<span class="">银行账号：</span>
+					<em></em>
+				</p>
+				<p style="padding-top: 3rem">
+					<span class="">银行账户名称：</span>
+					<em></em>
+				</p>
+				<p style="padding-top: 3rem">
+					<span class="">开户行名称：</span>
+					<em></em>
+				</p>
+				<p style="padding-top: 3rem">
+					<span class="">开户行联行号：</span>
+					<em></em>
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>
+<script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="text/javascript">
+	let resultData = JSON.parse(sessionStorage.getItem("result")),
+	_bankCardInfo = resultData.bizData.bankCardInfo;
+	$(".pbox").find("em").eq(0).html(_bankCardInfo.accountName)
+	$(".pbox").find("em").eq(1).html(_bankCardInfo.accountNo)
+	$(".pbox").find("em").eq(2).html(_bankCardInfo.bankName+_bankCardInfo.branchName)
+	$(".pbox").find("em").eq(3).html(_bankCardInfo.bankNo)
+</script>

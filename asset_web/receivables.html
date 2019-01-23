@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="cache-control" content="no-cache"/>
+	<meta name="robots" content="all" />
+
+	<script src="webdoc/js/popbox.js" language="javascript"></script>
+	<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+
+	<link rel="stylesheet" type="text/css" href="webdoc/datepicker/css/datepicker.css">
+	<link rel="stylesheet" href="webdoc/css/pagination.css" />
+	<script src="webdoc/js/popimg.js" language="javascript"></script>
+	<title>溟宗供应链</title>
+</head>
+<style>
+	.cib {
+		padding: 5px 2px;
+	}
+
+	.cib input {
+		vertical-align: bottom;
+		height: 20px;
+		color: #567e84;
+		margin: 2px 0px;
+	}
+
+	.cib button {
+		vertical-align: bottom;
+		height: 26px;
+		cursor: pointer;
+		background-color: #cbefff;
+		border: 1px solid #44a8d6;
+		color: #567e84;
+		margin: 2px 0px;
+	}
+
+	.desc {
+		padding-left: 2px;
+		color: #657e9a;
+	}
+
+	.code-con{
+		font-size: 18px;
+	}
+
+	.hr-c{
+		background-color: #2196F3;
+		height: 5px;
+		border: 0px;
+	}
+	.confirmBtn{
+		width:40px;
+	}
+	#pagination_12{
+		display: flex;
+		justify-content: flex-end;
+		align-items:center;
+		margin-top:1.5rem;
+	}
+</style>
+<style>
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+.loading {
+	top: 50%;
+}
+.loading:before {
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 2px solid #fff;
+	border-top: 2px solid rgba(0,0,0,.1);
+}
+</style>
+<style>
+	#loading_div{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		background: rgba(255, 255, 255, 0.8);
+		top: 0;
+		left: 0;
+		z-index: 111;
+	}
+	.loading {
+		top: 50%;
+	}
+	.loading:before {
+		width: 2.5rem;
+		height: 2.5rem;
+		border: 2px solid #fff;
+		border-top: 2px solid rgba(0,0,0,.1);
+	}
+	.pageNum li{
+		float: left;
+	height: 32px;
+	line-height: 32px;
+	margin-left: 20px;
+    text-align: center;
+	}
+	.pageNum li:nth-last-child(3){
+		float: left;
+		width: 150px;
+	}
+	.pageNum li a{
+		display: block;
+    width: 80px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+	}
+	.Box .innerBox {
+		min-height: 30rem;
+	}
+	input {
+		text-indent: 4px;
+	}
+	.settleCycle{
+		width: 65%;
+		float: right;
+		margin-top: -4px;
+	}
+	</style>
+<body>
+<section class="header">
+	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
+	<a class="login" id='SignOut'><img src="webdoc/img/avatar.png"> 退出</a>
+</section>
+
+<section class="sideBar">
+	<ul class="menu">
+		<li><a href="home.html"><p class="basedInfo">基本信息</p></a></li>
+		<li><a href="loan_info.html"><p class="loanInfo">贷款信息</p></a></li>
+		<li><a href="bankaccount.html"><p class="bankAccount">资金监管专户</p></a></li>
+		<li><a href="invoice.html"><p class="invoice">发票池信息</p></a></li>
+		<li class="on"><a href="receivables.html"><p class="receivables">收款账户变更</p></a></li>
+	</ul>
+</section>
+
+<section class="mainBar">
+	<div class="mainBarTop">
+		<div class="innerBox">
+			<ul class="breadCrumbs">
+				<li><a href="home.html">首页</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li class="on"><p>收款账户变更</p></li>
+			</ul>
+		</div>
+	</div>
+	<div class="Box">
+		<h2 class="heading01"><span>收款账户变更</span></h2>
+		<div class="innerBox">
+			<div>
+				<a id="btn03" class="button btn_hollow_2" href="javascript:void(0);">+添加回款变更信息</a>
+			</div>
+			<div class="gap16"></div>
+			<div class="tablebox">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<th>回款客户名称</th>
+						<th>结算方式</th>
+						<th>上一年度客户开票额</th>
+						<th>回款变更凭证</th>
+					</tr>
+				</table>
+			</div>
+			<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;" id="page_ELE">
+				<ul>
+					<li><a class="prev" disabled="disabled" href="javascript:void(0);" id="prev">上一页</a></li>
+					<li><i class="on">1</i></li>
+					<li><a class="next" id="next" href="javascript:void(0);">下一页</a></li>
+					<li>&nbsp;&nbsp;|&nbsp;共1页，到 <input autocomplete="off" type="text" id="inputVlaue"/> 页</li>
+					<li><a id="skip" href="javascript:void(0);">确定</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+<!--use for function of PopBox-->
+<section class="popbox off" id="popbox">
+	<div class="inputinfo_Pop">
+		<h3 class="heading">添加商户<em><a id="closePopbox" class="close">关闭</a></em></h3>
+		<form>
+			<div class="listbox">
+				<div class="item">
+					<b>商户名称：</b>
+					<i class="inputbox"><input autocomplete="off" class="warn" type="text" name="invoiceTitle" id="invoiceTitle" placeholder="请输入商户名称">
+						<q class="warntxt">请正确输入商户名称</q>
+					</i>
+				</div>
+				<div class="item">
+					<b>结算方式：</b>
+					<label>
+						<input autocomplete="off" value="0" name="settleMode"  type="radio"> 票到</label>
+					<label>
+						<input autocomplete="off" value="1" name="settleMode" type="radio">贷到</label>
+					<i class="inputbox settleCycle"><input type="number" name="settleCycle" id="settleCycle" placeholder="请输入天数"><em>天</em><q class="warntxt"></q></i>
+				</div>
+				<div class="item">
+					<b>上一年对该商户开票总额：</b>
+					<i class="inputbox"><input autocomplete="off" type="text" name="preAmount" id="preAmount" placeholder="请输入总额"><em>元</em><q class="warntxt"></q></i>
+				</div>
+				<div class="item">
+					<b>开票日期距回款日期天数：</b>
+					<i class="inputbox"><input autocomplete="off" type="text" name="preAmount" id="paybackDays" placeholder="请输入天数"><em>天</em><q class="warntxt"></q></i>
+				</div>
+				<div class="item" id="preview">
+					<b>上传账户变更证明：</b>
+					<input type="file" name="modifyPhoto" id="modifyPhoto">
+					<input type="hidden" id="file">
+				</div>
+			</div>
+		</form>
+		<hr>
+		<div class="btnbox">
+			<a id="btn_hollow" class="button btn_hollow_1" href="javascript:void(0);">取消</a>
+			<a id="btn02" class="button btn_block_1" onclick="_addbank()" href="javascript:void(0);">确定</a>
+		</div>
+		<div class="gap32"></div>
+	</div>
+</section>
+<section class="popbox off" id="popbox_1">
+	<div class="img_Pop">
+		<b class="close" id="hideImg01"></b>
+		<div id="imgbox" class="imgbox">
+			<img id="recImg" src="" style="width: 100%;height:680px ">
+		</div>
+	</div>
+</section>
+
+<div id="loading_div" style="display: none;">
+	<div class="loading"></div>
+</div>
+
+</body>
+</html>
+<script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="text/javascript" src="webdoc/js/pageHTML.js" ></script>
+<script type="text/javascript" src="webdoc/js/receivables.js"></script>
+
+<script src="webdoc/datepicker/js/plugins/moment.min.js"></script>
+<script type="text/javascript" src="webdoc/js/pagination.min.js" ></script>
+<script src="webdoc/datepicker/js/datepicker.all.js"></script>
+<script src="webdoc/js/datepicker.js"></script>
+
+<script>
+    var name_show_img = new ShowImage;
+    name_show_img.init("name_show_img","hideImg01","popbox_1","imgbox");
+    //PopBox(触发按钮的ID值，弹框的ID值)
+    var popbox = new PopBox();
+    popbox.hide("btn_hollow","popbox");
+    popbox.hide("btn02","popbox");
+    popbox.hide("closePopbox","popbox");
+    popbox.show("btn03","popbox");
+
+    var eleFile = document.querySelector('#modifyPhoto');
+    eleFile.addEventListener('change', function() {
+        var file = this.files[0];
+        // 确认选择的文件是图片
+        if(file.type.indexOf("image") == 0) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(e) {
+                // 图片base64化
+                var newUrl = this.result;
+                $('#file').val(newUrl);
+            };
+        }
+    });
+    $(function(){
+        $("#select").bind("click",function(){
+            $(this).siblings('div').removeClass('selected');  // 删除其他兄弟元素的样式
+            $(this).css("","");
+        });
+    });
+</script>

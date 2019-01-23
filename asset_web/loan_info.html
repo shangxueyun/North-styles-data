@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="cache-control" content="no-cache"/>
+	<meta name="robots" content="all" />
+	<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+	<link rel="stylesheet" type="text/css" href="webdoc/datepicker/css/datepicker.css">
+	<link rel="stylesheet" href="webdoc/css/pagination.css" />
+
+	<script src="webdoc/js/order_toggle.js"></script>
+	<title>溟宗供应链</title>
+</head>
+<style>
+	.cib {
+		padding: 5px 2px;
+	}
+
+	.cib input {
+		vertical-align: bottom;
+		height: 20px;
+		color: #567e84;
+		margin: 2px 0px;
+	}
+
+	.cib button {
+		vertical-align: bottom;
+		height: 26px;
+		cursor: pointer;
+		background-color: #cbefff;
+		border: 1px solid #44a8d6;
+		color: #567e84;
+		margin: 2px 0px;
+	}
+
+	.desc {
+		padding-left: 2px;
+		color: #657e9a;
+	}
+
+	.code-con{
+		font-size: 18px;
+	}
+
+	.hr-c{
+		background-color: #2196F3;
+		height: 5px;
+		border: 0px;
+	}
+	.confirmBtn{
+		width:40px;
+	}
+	#pagination_12{
+		display: flex;
+		justify-content: flex-end;
+		align-items:center;
+		margin-top:1.5rem;
+	}
+	.ana_select ul li a{color: inherit;}
+	.ana_select ul li a:hover{color: #ffffff;}
+	.tablebox{overflow-x:inherit;height: 38rem;}
+	.loan a{color: #ffffff;padding: 10px;background: gray;}
+	.loan a:hover{background: #2d3f81;}
+	.blue{background: #2d3f81;}
+</style>
+<style>
+	#loading_div{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		background: rgba(255, 255, 255, 0.8);
+		top: 0;
+		left: 0;
+		z-index: 111;
+	}
+	.loading {
+		top: 50%;
+	}
+	.loading:before {
+		width: 2.5rem;
+		height: 2.5rem;
+		border: 2px solid #fff;
+		border-top: 2px solid rgba(0,0,0,.1);
+	}
+	.pageNum li{
+		float: left;
+	height: 32px;
+	line-height: 32px;
+	margin-left: 20px;
+    text-align: center;
+	}
+	.pageNum li:nth-last-child(3){
+		float: left;
+		width: 150px;
+	}
+	.pageNum li a{
+		display: block;
+    width: 80px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+	}
+	.Box .innerBox {
+		min-height: 30rem;
+	}
+	input {
+		text-indent: 4px;
+	}
+	</style>
+<body>
+<section class="header">
+	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
+	<a class="login" id='SignOut'><img src="webdoc/img/avatar.png"> 退出</a>
+</section>
+
+<section class="sideBar">
+	<ul class="menu">
+		<li><a href="home.html"><p class="basedInfo">基本信息</p></a></li>
+		<li class="on"><a href="loan_info.html"><p class="loanInfo">贷款信息</p></a></li>
+		<li><a href="bankaccount.html"><p class="bankAccount">资金监管专户</p></a></li>
+		<li><a href="invoice.html"><p class="invoice">发票池信息</p></a></li>
+		<li><a href="receivables.html"><p class="receivables">收款账户变更</p></a></li>
+	</ul>
+</section>
+
+<section class="mainBar">
+	<div class="mainBarTop">
+		<div class="innerBox">
+			<ul class="breadCrumbs">
+				<li><a href="home.html">首页</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li class="on"><p>贷款信息</p></li>
+			</ul>
+		</div>
+	</div>
+	<div class="Box">
+		<h2 class="heading01"><span>贷款信息</span></h2>
+		<div class="innerBox">
+			<div class="inlineBox alignRight">
+				<div class="inlineBlock">
+					<div class="c-datepicker-date-editor  J-datepicker-range-day mt10">
+						<i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
+						<input autocomplete="off" style="width: 10rem" type="text" class="c-datepicker-data-input only-date" placeholder="选择日期范围" id="queryRangeDate">
+					</div>
+				</div>
+
+				<div class="inlineBlock">
+					<div class="ana_select" id="ana_select_1">
+						<dl>
+							<dt id='_datatype'>请选择</dt>
+							<dd class="off">
+								<ul>
+									<li>申请日</li>
+									<li>放款日</li>
+									<li>到期日</li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				<div class="inlineBlock"><a class="button btn_block_2 magnifier" href="javascript:void(0)">查询</a></div>
+			</div>
+			<div style="clear: both"></div>
+			<div class="loan">
+				<a id="lending" class="button" href="loan_info.html">放款信息</a>
+				<a id="reimbursement" class="button " href="reimbursement.html">还款信息</a>
+			</div>
+			<div class="gap16"></div>
+			<div class="tablebox" >
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<th>序号</th>
+						<th>
+							<div class="ana_select" id="ana_select">状态
+								<ul class="off">
+									<li class="on">全部</li>
+									<li><a onclick="PageFUNC(1,'I')" href="javascript:void(0)">处理中</a></li>
+									<li><a onclick="PageFUNC(1,'I1')" href="javascript:void(0)">审核通过</a></li>
+									<li><a onclick="PageFUNC(1,'I2')" href="javascript:void(0)">待放款确认</a></li>
+									<li><a onclick="PageFUNC(1,'I3')" href="javascript:void(0)">放款中</a></li>
+									<li><a onclick="PageFUNC(1,'I4')" href="javascript:void(0)">放款失败</a></li>
+									<li><a onclick="PageFUNC(1,'S')" href="javascript:void(0)">放款成功</a></li>
+									<li><a onclick="PageFUNC(1,'F')" href="javascript:void(0)">未通过</a></li>
+								</ul>
+							</div>
+						</th>
+						<th><i id="order_settings_01" class="order_down">发起申请日</i></th>
+						<th><i id="order_settings_02" class="order_down">放款日</i></th>
+						<th><i id="order_settings_03" class="order_down">贷款到期日</i></th>
+						<th>贷款期限</th>
+						<th>应还本金</th>
+						<th>贷款利率</th>
+						<th>贷款利息</th>
+						<!--<th>已逾期天数</th>-->
+						<!--<th>逾期金额</th>-->
+					</tr>
+				</table>
+			</div>
+			<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;" id="page_ELE">
+				<ul>
+					<li><a class="prev" disabled="disabled" href="javascript:void(0);" id="prev">上一页</a></li>
+					<li><i class="on">1</i></li>
+					<li><a class='page_ELE_CHILD' href="javascript:void(0);">2</a></li>
+					<li><a href="javascript:void(0);">3</a></li>
+					<li><a href="javascript:void(0);">4</a></li>
+					<li><a href="javascript:void(0);">5</a></li>
+					<li><a class="next" id="next" href="javascript:void(0);">下一页</a></li>
+					<li>&nbsp;&nbsp;|&nbsp;共100页，到 <input autocomplete="off" type="text" id="inputVlaue"/> 页</li>
+					<li><a id="skip" href="javascript:void(0);">确定</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div id="loading_div" style="display: none;">
+	<div class="loading"></div>
+</div>
+</body>
+</html>
+
+<script>
+    var order_Toggle_01 = new order_Toggle;
+    order_Toggle_01.toggle("order_settings_01");
+    var order_Toggle_02 = new order_Toggle;
+    order_Toggle_02.toggle("order_settings_02");
+    var order_Toggle_03 = new order_Toggle;
+    order_Toggle_03.toggle("order_settings_03");
+
+    function ana_select()
+    {
+        document.getElementById("ana_select").onclick = function()
+        {
+            if(this.getElementsByTagName("ul").item(0).getAttribute("class") == "off")
+            {
+
+                this.getElementsByTagName("ul").item(0).setAttribute("class","on");
+            }
+            else if(this.getElementsByTagName("ul").item(0).getAttribute("class") == "on")
+            {
+                this.getElementsByTagName("ul").item(0).setAttribute("class","off");
+            }
+        }
+        var li = document.getElementById("ana_select").getElementsByTagName("li");
+        for(i=0;i<li.length;i++)
+        {
+            li.item(i).onclick = function()
+            {
+                for(o=0;o<li.length;o++)
+                {
+                    li.item(o).removeAttribute("class");
+                }
+
+                this.setAttribute("class","on");
+            }
+        }
+    }
+    ana_select();
+
+    function ana_select_1()
+    {
+        document.getElementById("ana_select_1").onclick = function()
+        {
+            if(this.getElementsByTagName("dd").item(0).getAttribute("class") == "off")
+            {
+                this.getElementsByTagName("dd").item(0).setAttribute("class","on");
+            }
+            else if(this.getElementsByTagName("dd").item(0).getAttribute("class") == "on")
+            {
+                this.getElementsByTagName("dd").item(0).setAttribute("class","off");
+            }
+        }
+        var li = document.getElementById("ana_select_1").getElementsByTagName("li");
+        for(i=0;i<li.length;i++)
+        {
+            li.item(i).onclick = function()
+            {
+                for(o=0;o<li.length;o++)
+                {
+                    li.item(o).removeAttribute("class");
+                }
+                this.setAttribute("class","on");
+                document.getElementById("ana_select_1").getElementsByTagName("dt").item(0).innerHTML = this.innerHTML;
+            }
+        }
+    }
+    ana_select_1();
+
+</script>
+
+<script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js" ></script>
+<script src="webdoc/js/home.js"></script>
+<script type="text/javascript" src="webdoc/js/pageHTML.js" ></script>
+<script type="text/javascript" src="webdoc/js/loan_info.js" ></script>
+<script src="webdoc/laydate/laydate.js"></script>
+<script>
+	lay('#version').html('-v'+ laydate.v);
+	//日期范围
+	laydate.render({
+	  elem: '#queryRangeDate',
+	  theme: '#2d3f81'
+      ,range: true
+    });
+</script>

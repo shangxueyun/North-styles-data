@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="cache-control" content="no-cache"/>
+	<meta name="robots" content="all" />
+
+	<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+	<title>溟宗供应链</title>
+</head>
+<style>
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+.loading {
+	top: 50%;
+}
+.loading:before {
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 2px solid #fff;
+	border-top: 2px solid rgba(0,0,0,.1);
+}
+</style>
+
+<body>
+<section class="header">
+	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
+	<a class="login" id='SignOut'><img src="webdoc/img/avatar.png"> 退出</a>
+</section>
+
+<section class="sideBar">
+	<ul class="menu">
+		<li><a href="home.html"><p class="basedInfo">基本信息</p></a></li>
+		<li><a href="loan_info.html"><p class="loanInfo">贷款信息</p></a></li>
+		<li class="on"><a href="bankaccount.html"><p class="bankAccount">资金监管专户</p></a></li>
+		<li><a href="invoice.html"><p class="invoice">发票池信息</p></a></li>
+		<li><a href="receivables.html"><p class="receivables">收款账户变更</p></a></li>
+	</ul>
+</section>
+
+<section class="mainBar">
+	<div class="mainBarTop">
+		<div class="innerBox">
+			<ul class="breadCrumbs">
+				<li><a href="home.html">首页</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li class="on"><p>资金监管专户</p></li>
+			</ul>
+		</div>
+	</div>
+	<div class="Box">
+		<h2 class="heading01"><span>基本信息</span></h2>
+		<div class="innerBox">
+			<div class="companybox companybox01" style="display: none;">
+				<div class="companybox_left">
+					<img src="webdoc/img/company.svg">
+					<div>
+						<h3>某某科技公司</h3>
+						<p>
+							<i class="opened">已开通</i>
+						</p>
+					</div>
+				</div>
+				<ul>
+					<li><p>账户余额</p><p><b class="_accountBalance">0.00</b><i>元</i> </p></li>
+					<li><p>冻结余额</p><p><b class="_freezeBalance">0.00</b><i>元</i> </p></li>
+					<li><p>可提现余额</p><p><b class="_withdrewBalance">0.00</b><i>元</i> </p></li>
+					<li><a class="button btn_hollow_2" href="bankaccount_drawback.html">申请提现</a></li>
+				</ul>
+			</div>
+			<div class="companybox companybox02" style="display: none;">
+				<div class="companybox_left">
+					<img src="webdoc/img/company.svg">
+					<div>
+						<h3>某某科技公司</h3>
+						<p>
+							<i class="closed">未开通</i>
+							<a >去开通 &raquo;</a>
+						</p>
+					</div>
+				</div>
+				<ul>
+					<li><p>账户余额</p><p><b class="_accountBalance">0.00</b><i>元</i> </p></li>
+					<li><p>冻结余额</p><p><b class="_freezeBalance">0.00</b><i>元</i> </p></li>
+					<li><p>可提现余额</p><p><b class="_withdrewBalance">0.00</b><i>元</i> </p></li>
+					<li><a class="button btn_hollow_2" href="bankaccount_drawback.html">申请提现</a></li>
+				</ul>
+			</div>
+			<div class="companybox companybox03" style="display: none;">
+				<div class="companybox_left">
+					<img src="webdoc/img/company.svg">
+					<div>
+						<h3>某某科技公司</h3>
+						<p>
+							<i class="opening">开通中</i>
+							<a id="OpenAccount_course" href="bankaccount_opening_being_processed.html">查看进程 &raquo;</a>
+						</p>
+					</div>
+				</div>
+				<ul>
+					<li><p>账户余额</p><p><b class="_accountBalance">0.00</b><i>元</i> </p></li>
+					<li><p>冻结余额</p><p><b class="_freezeBalance">0.00</b><i>元</i> </p></li>
+					<li><p>可提现余额</p><p><b class="_withdrewBalance">0.00</b><i>元</i> </p></li>
+					<li><a class="button btn_hollow_2" href="bankaccount_drawback.html">申请提现</a></li>
+				</ul>
+			</div>
+			<hr class="hr01" />
+			<h3 class="heading02">账户基本信息</h3>
+			<div class="pbox">
+				<p>
+					<i>户名：</i>
+					<em></em>
+				</p>
+				<p>
+					<i>账号：</i>
+					<em></em>
+				</p>
+				<p>
+					<i>账户性质：</i>
+					<em>众邦银行E帐通子账户</em>
+				</p>
+			</div>
+			<hr class="hr01" /><div class="gap16"></div>
+			<div class="pbox">
+				<p style="padding: 0px 0px 6px 0px;">
+					<a href="bankaccount_transaction_record.html">交易记录 &raquo;</a>
+				</p>
+				<p style="border-top: 1px solid #dedede;border-bottom: 1px solid #dedede;padding: 1rem 0;">
+					<a href="bankaccount_bind.html">绑定企业账户 &raquo;</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div id="loading_div" style="display: none;">
+	<div class="loading"></div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="module">
+
+import AJAX from './webdoc/js/api.js';
+
+(function(){
+	$(loading_div).show()
+	let data = JSON.parse(sessionStorage.data)
+	data.bizContent.queryContentList = ["COMPANY","BANK_CARD","BANK_ACCOUNT"]
+	AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
+		$(loading_div).hide()
+		
+		if(result.requestStatus=="SUCCESS"){
+			sessionStorage.setItem('result',JSON.stringify(result));
+			var _bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
+
+			if(_bankAccountInfo.status==null){
+				StatusSWich($(".companybox02"),_bankAccountInfo,result.bizData.companyInfo.companyName)
+				$(".companybox02").show();
+				if(result.bizData.bankCardInfo.bankCode){
+					$(".companybox02 a").attr("href","bankaccount_confirm_info.html");
+				} 
+				else if(result.bizData.transactorInfo){
+					$(".companybox02 a").attr("href","bankaccount_opening_step3.html");
+				}else if(result.bizData.companyInfo.telephone){
+					$(".companybox02 a").attr("href","bankaccount_opening_step2.html");
+				}else{
+					$(".companybox02 a").attr("href","bankaccount_opening_step1.html");
+				}
+			}else if(_bankAccountInfo.status==0){
+				//openFundAccountAdvance
+				StatusSWich($(".companybox03"),_bankAccountInfo,result.bizData.companyInfo.companyName)
+				$(".companybox03").show();
+				$(loading_div).show()
+				AJAX.AjaxResult('openFundAccountAdvance','POST',JSON.parse(sessionStorage.data),'application/json').then(function(result){
+					$(loading_div).hide()
+					if(result.requestStatus=="SUCCESS"){
+						let status = result.bizData.status,OpenAccount_course = $(OpenAccount_course)
+						//S成功，I:处理中 F:失败
+						if(status = "S")
+							OpenAccount_course.attr("href","bankaccount_opening_done.html")
+						else if(status = "I")
+							OpenAccount_course.attr("href","bankaccount_opening_setps.html")
+						else if(status = "F")
+							OpenAccount_course.attr("href","bankaccount_opening_fail.html")
+						else
+							OpenAccount_course.attr("href","bankaccount_opening_being_processed.html");
+					}else{
+						$(loading_div).hide()
+						alert("请求失败")
+					}
+				}, err => {
+					$(loading_div).hide()
+					alert("请求失败")
+				})
+				.catch((error) => {
+					//alert("服务器内部错误")
+				})
+			}else if(_bankAccountInfo.status==1){
+					StatusSWich($(".companybox01"),_bankAccountInfo,result.bizData.companyInfo.companyName)
+					$(".companybox01").show()
+			}
+			$(".pbox").find("em").eq(0).html(_bankAccountInfo.accountName)
+			$(".pbox").find("em").eq(1).html(_bankAccountInfo.accountNo)
+		}else{
+			$(loading_div).hide()
+			alert("请求失败")
+		}
+	}, err => {
+		$(loading_div).hide()
+		alert("请求失败")
+	})
+	.catch((error) => {
+		//alert("服务器内部错误")
+	})
+})()
+
+function StatusSWich(ele,obj,name){
+	if(!obj)
+	{
+		$(ele.children().children().children("h3")).text(String_clear(name))
+		return false
+	}
+	let h3ele = ele.children().children().children("h3"),
+	Balancechildren = ele.children().children("li").children("p").children("b"),
+	accountBalanceEle,
+	freezeBalance,
+	withdrewBalance;
+
+	for(var i in Balancechildren)
+	{
+		if(Balancechildren[i].className == "_accountBalance")
+			accountBalanceEle = $(Balancechildren[i])
+			else if(Balancechildren[i].className == "_freezeBalance")
+			freezeBalance = $(Balancechildren[i])
+			else if(Balancechildren[i].className == "_withdrewBalance")
+			withdrewBalance = $(Balancechildren[i])
+	}
+	freezeBalance.text(Number(obj.freezeBalance)/100+" ")			
+	h3ele.text(name)
+	accountBalanceEle.text(Number(obj.accountBalance)/100+" ");
+	withdrewBalance.text(Number(obj.withdrewBalance)/100+" ");
+}
+</script>

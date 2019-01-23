@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta name="robots" content="all" />
+
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<title>溟宗供应链金融系统</title>
+</head>
+
+<body>
+<section class="logobox">
+	<section class="login_bg" id="login_bg" data-img="webdoc/img/cityphoto.jpg">
+		<div><i>Welcome!</i>
+		<p>—————溟宗供应链金融系统</p></div>
+	</section>
+	<!--18029083223-->
+	<!--13918936191-->
+	<section class="login_body">
+		<dl>
+			<dt><img src="webdoc/img/logo_icon.svg"></dt>
+			<dd>
+				<ul>
+					<!--18029083223 123456-->
+					<li class="phone"><p><input autocomplete="off" type="text" placeholder="手机号" required='required' autocomplete="off"></p></li>
+					<li class="clock"><p><input autocomplete="off" type="password" placeholder="密码" required='required' autocomplete="off"></p></li>
+					<li><span class='warnIcon'></span><span class="warntxt"></span></li>
+					<li><button class="button btn_block_1">登录</button></li>
+				</ul>
+			</dd>
+		</dl>
+	</section>
+</section>
+</body>
+</html>
+<script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+
+<script  type="module">
+	import AJAX from './webdoc/js/api.js';
+    //获取当前时间
+    function formateDateAndTimeToString(){
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth()+1;
+        var day = date.getDate();
+        var hours = date.getHours();
+        var mins = date.getMinutes();
+        var secs = date.getSeconds();
+        if(month<10) month = "0"+month;
+        if(day<10) day = "0"+day;
+        if(hours<10) hours = "0"+hours;
+        if(mins<10) mins = "0"+mins;
+        if(secs<10) secs = "0"+secs;
+        month = month.toString()
+        hours = hours.toString()
+        mins = mins.toString()
+        secs = secs.toString()
+        return year+month+day+hours+mins+secs;
+    }
+	var img = new Image;
+	img.src = document.getElementById("login_bg").getAttribute("data-img");
+	img.onload = function()
+	{
+		if(img.width < img.height)
+		{
+			img.style.cssText = "width:100%";
+		}
+		else if(img.width >=  img.height)
+		{
+			img.style.cssText = "height:100%";
+		}
+		img.id = "bgimg";
+		document.getElementById("login_bg").appendChild(img);
+		setTimeout(function(){
+			document.getElementById("bgimg").className = "on";
+		},50)
+	}
+	$(function () {
+		$(".warnIcon").hide()
+		$(".button").click(()=>{
+			if($(".phone").find("input").val()!=''&&$(".clock").find("input").val()!=''){
+				var _data = {
+	       			"service":'member_register',
+    				"version":'1.0',
+    				"partnerId": '111111111111',
+	       			"bizContent":{
+	       				"requestNo":'S20181012199',
+	       				"requestTime":formateDateAndTimeToString(),
+		       			"inputCharset":'utf-8',
+		       			"signType":'RSA',
+		       			"sign":'sign',
+		       			"client":'PC',
+		       			"identityType":'PHONE_NO',
+	       			    "loginIdentity":$(".phone").find("input").val(),
+	       			    "loginVoucher":$(".clock").find("input").val(),
+	       			    "extension": null,
+                        "verifyType":'PASSWORD',
+                    }
+		       	}
+			
+				AJAX.AjaxResult('memberLogin','POST',_data,'application/json').then(function(response){
+					if(response.requestStatus=="SUCCESS"){
+						$(".warnIcon").hide()
+						window.location.href = "home.html";
+						window.sessionStorage.setItem("token",response.bizData.token)
+					}else{
+						$(".warnIcon").hide()
+						alert(response.returnMessage)
+					}
+				}, err => {
+					$(".warnIcon").hide()
+		       		alert("请求失败")
+				})
+				.catch((error) => {
+					//alert("服务器内部错误")
+				})
+			}
+			else{
+				$(".warntxt").html("请正确填写信息")
+				$(".warnIcon").show()
+			}
+		})
+	});
+
+</script>

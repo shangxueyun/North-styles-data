@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta name="robots" content="all" />
+
+<script src="webdoc/js/popimg.js" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<title>溟宗供应链</title>
+</head>
+<style>
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+.loading {
+	top: 50%;
+}
+.loading:before {
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 2px solid #fff;
+	border-top: 2px solid rgba(0,0,0,.1);
+}
+</style>
+
+<body style="height:100%">
+
+<section class="header">
+	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
+	<a class="login" id='SignOut'><img src="webdoc/img/avatar.png"> 退出</a>
+</section>
+
+<section class="sideBar">
+	<ul class="menu">
+		<li class="on"><a href="home.html"><p class="basedInfo">基本信息</p></a></li>
+		<li><a href="loan_info.html"><p class="loanInfo">贷款信息</p></a></li>
+		<li><a href="bankaccount.html"><p class="bankAccount">资金监管专户</p></a></li>
+		<li><a href="invoice.html"><p class="invoice">发票池信息</p></a></li>
+		<li><a href="receivables.html"><p class="receivables">收款账户变更</p></a></li>
+	</ul>
+</section>
+<section class="mainBar">
+	<div class="mainBarTop">
+		<div class="innerBox">			
+			<ul class="breadCrumbs">
+				<li><a href="home.html">首页</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li class="on"><p>基本信息</p></li>
+			</ul>
+		</div>
+	</div>
+	<div class="Box">
+		<h2 class="heading01"><span>基本信息</span></h2>
+		<div class="innerBox">
+			<div class="companybox">
+				<div class="companybox_left">
+					<img src="webdoc/img/company.svg">
+					<div>
+						<h3 style="height: 40px;"></h3>
+						<p class="open_p">
+							<i class="red">您还未开通资金监管账户</i>
+							<a class="open_btn">&raquo;点击开通</a>
+						</p>
+					</div>
+					
+				</div>
+				<ul>
+					<li><p>账户余额</p> <p><b class="_accountBalance">-</b><i>元</i> </p></li>
+					<li><p>可提现余额</p> <p><b class="_withdrewBalance">-</b><i>元</i> </p></li>
+				</ul>
+			</div>
+			<hr class="hr01" />
+			<h3 class="heading02">企业基本信息</h3>
+			<div class="pbox companyInfo">
+				<p>
+					<i>企业名称：</i>
+					<em></em>
+				</p>
+				<p>
+					<i>统一社会信用代码：</i>
+					<em></em>
+				</p>
+				<p>
+					<i>实际经营地址：</i>
+					<em></em>
+				</p>
+				<p>
+					<i>营业执照照片：</i>
+					<em><img src="webdoc/img/img.svg"></em>
+					<a name="name_show_img" href="javascript:void(0);" id="licenseNoPhoto">点击查看</a>
+				</p>
+			</div>
+			<hr class="hr01" />
+			<h3 class="heading02">法定代表人信息</h3>
+			<div class="pbox LegalPerInfo">
+				<p>
+					<i>法人姓名：</i>
+					<em></em>
+				</p>
+				<p>
+					<i>法人手机号：</i>
+					<em></em>
+				</p>
+				<p>
+					<i>法人身份证号：</i>
+					<em></em>
+				</p>
+				<p>
+					<i>身份证正反面：</i>
+					<em><img src="webdoc/img/img.svg"></em>
+					<a name="name_show_img" href="javascript:void(0);" id="legalIdCardPhotoFrontUrl">点击查看</a>
+					<a name="name_show_img" href="javascript:void(0);" id="legalIdCardPhotoBehindUrl">点击查看</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+<!--use for function of PopBox-->
+<section class="popbox off" id="popbox">
+	<div class="confirm_Pop">
+		<div class="txtbox">
+			<p>
+			<img class="txticon" src="webdoc/img/question_mark.svg">
+			确定将该图片删除?
+			</p>
+		</div>
+		<div class="btnbox">
+			<a id="btn01" class="button btn_hollow_1" href="javascript:void(0);">取消</a>
+			<a id="btn02" class="button btn_block" href="javascript:void(0);">确定</a>
+		</div>
+	</div>
+</section>
+<!--use for function of showImage-->
+<section class="popbox off" id="popbox_1">
+	<div class="img_Pop">
+		<b class="close" id="hideImg01"></b>
+		<div id="imgbox" class="imgbox"><div class="loading"></div></div>
+	</div>
+</section>
+
+<div id="loading_div" style="display: none;">
+	<div class="loading"></div>
+</div>
+</body>
+</html>
+<script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="module">
+/////////
+//请注意//
+//1. 触发显示图片功能元素，需要提前给该元素的属性赋值（data-img）
+//2. 所有触发显示图片功能元素的name属性值，必须一致
+//showImage(触发显示图片功能的元素name属性值，关闭图片弹框的ID值，图片弹框的ID值，图片容器的ID值)
+import AJAX from './webdoc/js/api.js';
+
+var name_show_img = new ShowImage;
+name_show_img.init("name_show_img","hideImg01","popbox_1","imgbox");
+$(function(){
+	var _result
+	let data = JSON.parse(sessionStorage.data)
+	$("#loading_div").show()
+	AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
+		$("#loading_div").hide()
+		if(result.requestStatus=="SUCCESS"){
+			_result=result;sessionStorage.setItem('result',JSON.stringify(result));
+			var _companyMember=String_clear("Object",result.bizData.companyInfo);
+				var _bankAccountInfo = result.bizData.bankAccountInfo
+				$(".companybox").find("h3").text(_companyMember.companyName)
+				if(_bankAccountInfo.status==null){
+					$(".open_p").show()
+				}else if(_bankAccountInfo.status==0){
+					$(".open_p").show()
+				}else if(_bankAccountInfo.status==1){
+					$("._accountBalance").html(Number(_bankAccountInfo.accountBalance)/100)
+					$("._withdrewBalance").html(Number(_bankAccountInfo.withdrewBalance)/100)
+					$(".open_p").hide()
+					//$(".open_p").show()
+				}
+				$(".companyInfo").find("em").eq(0).html(_companyMember.companyName)
+				$(".companyInfo").find("em").eq(1).html(_companyMember.licenseNo)
+				$(".companyInfo").find("em").eq(2).html(_companyMember.licenseAddress)
+				$(".LegalPerInfo").find("em").eq(0).html(_companyMember.legalPersonName)
+				$(".LegalPerInfo").find("em").eq(1).html(_companyMember.legalPersonPhone)
+				$(".LegalPerInfo").find("em").eq(2).html(_companyMember.legalPersonId);
+				if(_companyMember.licenseNoPhoto!=null){
+					$("#licenseNoPhoto").attr("data-img",_companyMember.licenseNoPhoto);
+				}else {
+					$("#licenseNoPhoto").attr("data-img","http://jobnotes.cn/images/micdesign2014120412.jpg")
+				}
+				if(_companyMember.legalIdCardPhotoFrontUrl!=null){
+					$("#legalIdCardPhotoFrontUrl").attr("data-img",_companyMember.legalIdCardPhotoFrontUrl)
+				}else {
+					$("#legalIdCardPhotoFrontUrl").attr("data-img","http://jobnotes.cn/images/micdesign2014120412.jpg")
+				}
+				if(_companyMember.legalIdCardPhotoBehindUrl!=null){
+					$("#legalIdCardPhotoBehindUrl").attr("data-img",_companyMember.legalIdCardPhotoBehindUrl)
+				}else {
+					$("#legalIdCardPhotoBehindUrl").attr("data-img","http://jobnotes.cn/images/micdesign2014120412.jpg")
+				}
+		}else{
+			$("#loading_div").hide()
+			alert("请求失败")
+		}
+	}, err => {
+		$("#loading_div").hide()
+		alert("请求失败")
+	})
+	.catch((error) => {
+		//alert("服务器内部错误")
+	})
+//		根据接口返回信息,跳转到相应的开户步骤页面
+	$(".open_btn").click(function(){
+		if(_result.bizData.bankCardInfo.bankCode){
+			window.location.href='bankaccount_confirm_info.html'
+		} 
+		else if(_result.bizData.transactorInfo){
+			window.location.href='bankaccount_opening_step3.html'
+		}else if(_result.bizData.companyInfo.telephone){
+			window.location.href='bankaccount_opening_step2.html'
+		}else{
+			window.location.href='bankaccount_opening_step1.html'
+		}
+	})
+	
+});
+</script>

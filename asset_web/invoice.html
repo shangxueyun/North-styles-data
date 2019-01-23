@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="cache-control" content="no-cache"/>
+	<meta name="robots" content="all" />
+
+	<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+
+	<link rel="stylesheet" type="text/css" href="webdoc/datepicker/css/datepicker.css">
+	<link rel="stylesheet" href="webdoc/css/pagination.css" />
+	<title>溟宗供应链</title>
+</head>
+<style>
+	.cib {
+		padding: 5px 2px;
+	}
+
+	.cib input {
+		vertical-align: bottom;
+		height: 20px;
+		color: #567e84;
+		margin: 2px 0px;
+	}
+
+	.cib button {
+		vertical-align: bottom;
+		height: 26px;
+		cursor: pointer;
+		background-color: #cbefff;
+		border: 1px solid #44a8d6;
+		color: #567e84;
+		margin: 2px 0px;
+	}
+
+	.desc {
+		padding-left: 2px;
+		color: #657e9a;
+	}
+
+	.code-con{
+		font-size: 18px;
+	}
+
+	.hr-c{
+		background-color: #2196F3;
+		height: 5px;
+		border: 0px;
+	}
+	.confirmBtn{
+		width:40px;
+	}
+	#pagination_12{
+		display: flex;
+		justify-content: flex-end;
+		align-items:center;
+		margin-top:1.5rem;
+	}
+
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+.loading {
+	top: 50%;
+}
+.loading:before {
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 2px solid #fff;
+	border-top: 2px solid rgba(0,0,0,.1);
+}
+</style>
+<style>
+	#loading_div{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		background: rgba(255, 255, 255, 0.8);
+		top: 0;
+		left: 0;
+		z-index: 111;
+	}
+	.loading {
+		top: 50%;
+	}
+	.loading:before {
+		width: 2.5rem;
+		height: 2.5rem;
+		border: 2px solid #fff;
+		border-top: 2px solid rgba(0,0,0,.1);
+	}
+	.pageNum li{
+		float: left;
+	height: 32px;
+	line-height: 32px;
+	margin-left: 20px;
+    text-align: center;
+	}
+	.pageNum li:nth-last-child(3){
+		float: left;
+		width: 150px;
+	}
+	.pageNum li a{
+		display: block;
+    width: 80px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+	}
+	.Box .innerBox {
+		min-height: 30rem;
+	}
+	input {
+		text-indent: 4px;
+	}
+	</style>
+<body>
+<section class="header">
+	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
+	<a class="login" id='SignOut'><img src="webdoc/img/avatar.png"> 退出</a>
+</section>
+
+<section class="sideBar">
+	<ul class="menu">
+		<li><a href="home.html"><p class="basedInfo">基本信息</p></a></li>
+		<li><a href="loan_info.html"><p class="loanInfo">贷款信息</p></a></li>
+		<li><a href="bankaccount.html"><p class="bankAccount">资金监管专户</p></a></li>
+		<li class="on"><a href="invoice.html"><p class="invoice">发票池信息</p></a></li>
+		<li><a href="receivables.html"><p class="receivables">收款账户变更</p></a></li>
+	</ul>
+</section>
+
+<section class="mainBar">
+	<div class="mainBarTop">
+		<div class="innerBox">
+			<ul class="breadCrumbs">
+				<li><a href="home.html">首页</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li class="on"><p>发票池信息</p></li>
+			</ul>
+		</div>
+	</div>
+	<div class="Box">
+		<h2 class="heading01"><span>发票池信息</span></h2>
+		<div class="innerBox">
+			<div class="invoicebox">
+				<div class="item01">
+					<div><b>发票池上月底总金额</b><i id="eyes" class="open"></i></div>
+					<div><strong id="money"></strong><em>&nbsp;元</em></div>
+				</div>
+				<div class="item02">
+					<div><b>企业名称：</b><i id="companyName"></i></div>
+					<!--<div><b>收款账户：</b><i>6225 8821 1900 9876</i></div>-->
+					<!--<div><b>收款账号：</b><i>6225 8821 1900 9876 9</i></div>-->
+				</div>
+			</div>
+			<div class="gap16"></div>
+			<hr>
+			<h2 class="heading02"><span>发票池变动明细</span></h2>
+			<div class="tablebox" style="height: 38rem;">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<th>时间</th>
+						<th>新增发票金额（元）</th>
+						<th>核销发票金额（元）</th>
+						<th>发票池余额（元）</th>
+						<th>备注</th>
+					</tr>
+				</table>
+			</div>
+			<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;" id="page_ELE">
+				<ul>
+					<li><a class="prev" disabled="disabled" href="javascript:void(0);" id="prev">上一页</a></li>
+					<li><i class="on">1</i></li>
+					<li><a class="next" id="next" href="javascript:void(0);">下一页</a></li>
+					<li>&nbsp;&nbsp;|&nbsp;共1页，到 <input autocomplete="off" type="text" id="inputVlaue"/> 页</li>
+					<li><a id="skip" href="javascript:void(0);">确定</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div id="loading_div" style="display: none;">
+	<div class="loading"></div>
+</div>
+</body>
+</html>
+<script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+<script type="text/javascript" src="webdoc/js/home.js" ></script>
+
+<script src="webdoc/datepicker/js/plugins/moment.min.js"></script>
+<script type="text/javascript" src="webdoc/js/pagination.min.js" ></script>
+<script src="webdoc/datepicker/js/datepicker.all.js"></script>
+<script src="webdoc/js/datepicker.js"></script>
+<script type="text/javascript" src="webdoc/js/pageHTML.js" ></script>
+<script>
+    var moneyNum = document.getElementById("money").innerHTML;
+    document.getElementById("eyes").onclick = function()
+    {
+        if(this.getAttribute("class") == "open")
+        {
+            this.setAttribute("class","close_eye");
+            document.getElementById("money").innerHTML = "****";
+        }
+        else if(this.getAttribute("class") == "close_eye")
+        {
+            this.setAttribute("class","open");
+            document.getElementById("money").innerHTML = moneyNum;
+        }
+	}
+
+let numpage,pages,statusP;//总记录数，每页显示数，总页数
+
+(()=>{
+    PageFUNC();
+})()
+
+let resultData = JSON.parse(sessionStorage.getItem("result")),
+_bankAccountInfo = resultData.bizData.bankAccountInfo;
+$('#companyName').text(resultData.bizData.companyInfo.companyName);
+
+//发票池变动明细
+function PageFUNC(Page,status){
+    if(!Page)
+    {
+        Page = 1
+        pageS = Page;
+    }
+    if(!status)
+    {
+        status = statusP;
+    }
+    statusP = status
+    var _data = {
+        "service": _service(),
+        "version": _version(),
+        "partnerId": _partnerId(),
+        "bizContent":{
+            "requestNo":_requestNo(),
+            "requestTime":formateDateAndTimeToString(),
+            "inputCharset":'utf-8',
+            "signType":'RSA',
+            "sign":'sign',
+            "token":sessionStorage.getItem("token"),
+            "beginDate":null,
+            "endDate":null,
+            "page":Page,
+            "pageSize":10,
+            "extension":null,
+        }
+	}
+	$(loading_div).show();
+    $.ajax({
+        url:_url()+"/invoicePoolQueryPage",
+        type:"POST",
+        async:true,
+        contentType:'application/json',
+        data:JSON.stringify(_data),
+        success:function(result){
+			$(loading_div).hide();
+			debugger
+            if(result.bizData!=null){
+                $("._loanList").remove()
+                var v = 1;
+				var _loanList=String_clear("Arr",result.bizData.list);
+                HTMLappendPage(result.bizData,pageS,numpage,PageFUNC);
+                $("table tr:gt(0)").remove();
+                $.each(_loanList,function(i,res){
+                    $('#money').text(res.currentBalance);
+                    if(res.extension==undefined){
+                        res.extension="--"
+                    }
+                    ApplyRecordList = '<tr class="_loanList">'+
+                        '<td class="_status">'+res.bizDate+'</td>'+
+                        '<td class="_loanAppleDate">'+res.addAmount+'</td>'+
+                        '<td class="_outDate">'+res.cancelAmount+'</td>'+
+                        '<td class="_loanEndDate">'+res.currentBalance+'</td>'+
+                        '<td class="_loanTerm">'+res.extension+'</td></tr>';
+                    $("table").append(ApplyRecordList)
+                })
+            }
+        },
+        // complete:function(){ //生成分页条
+        //     getPageBar(curPage,pageSize,totalPage,total,pages);
+        // }
+    });
+};
+PageFUNC(1);
+//确定选择页数
+function confirmBtn(){
+    var page=$('#toPage').val();
+    if(page==''){
+        page=1;
+    }
+    PageFUNC(page,pageSize);
+};
+</script>

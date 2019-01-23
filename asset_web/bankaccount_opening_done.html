@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta name="robots" content="all" />
+
+<script src="webdoc/js/popimg.js" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<title>溟宗供应链</title>
+<style>
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+.loading {
+	top: 50%;
+}
+.loading:before {
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 2px solid #fff;
+	border-top: 2px solid rgba(0,0,0,.1);
+}
+.Box_centent{
+	width: 100%;
+    height: 40px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+</style>
+</head>
+
+<body>
+<section class="header">
+	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
+	<a class="login" id='SignOut'><img src="webdoc/img/avatar.png"> 退出</a>
+</section>
+
+<section class="sideBar">
+	<ul class="menu">
+		<li><a href="home.html"><p class="basedInfo">基本信息</p></a></li>
+		<li><a href="loan_info.html"><p class="loanInfo">贷款信息</p></a></li>
+		<li class="on"><a href="bankaccount.html"><p class="bankAccount">资金监管专户</p></a></li>
+		<li><a href="invoice.html"><p class="invoice">发票池信息</p></a></li>
+		<li><a href="receivables.html"><p class="receivables">收款账户变更</p></a></li>
+	</ul>
+</section>
+
+<section class="mainBar">
+	<div class="mainBarTop">
+		<div class="innerBox">
+			<ul class="breadCrumbs">
+				<li><a href="home.html">首页</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li><a href="bankaccount.html">资金监管专户</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li class="on"><p>账户开通状态</p></li>
+			</ul>
+		</div>
+	</div>
+	<div class="Box">
+		<h2 class="heading01"><span>账户开通状态</span></h2>
+		<div class="innerBox infobox">
+			<div class="info_icon_done">icon-done</div>
+			<p class="info_heading">审核通过，将进行打款验证</p>
+			<p class="info_txt">打款金额可在企业绑定实体账户查询。</p>
+			<br/>
+			<div class="Box_centent">
+				<div><span>银行账户&nbsp;:&nbsp;&nbsp;</span></div>
+				<div>&nbsp;&nbsp;<span id="bankAccount" style="font-size: 18px;">-</span>&nbsp;&nbsp;</div>
+			</div>
+			<div class="Box_centent">
+				<div><span>打款金额&nbsp;:&nbsp;&nbsp;</span></div>
+				<div><input autocomplete="off" style="margin: -3px 10px 10px;" class="input01" id="money" type="text" placeholder="请输入打款金额(元)"></div>
+			</div>
+			<p class="info_btnbox"><a class="button btn_block_1">提交</a></p>
+			<!--仅供测试：正式环境不应包含以下内容-->
+			<!-- <p class="info_txt">仅供测试：正式环境不应包含以下内容</p>
+			<p class="info_txt"><a href="bankaccount_opening_fail.html">发票贷首页 - 资金监管专户 - 开户失败1</a></p> -->
+		</div>
+	</div>
+</section>
+
+
+<div id="loading_div" style="display: none;">
+	<div class="loading"></div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="module">
+
+	import AJAX from './webdoc/js/api.js';
+	$(function(){
+		(()=>{
+			let data = JSON.parse(sessionStorage.data)
+			data.bizContent.queryContentList = ["BANK_CARD"]
+			$("#loading_div").show()
+			AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
+				$("#loading_div").hide();
+				if(result.requestStatus=="SUCCESS"){
+					debugger
+					$(bankAccount).text(result.bizData.bankCardInfo.accountNo);
+				}else{
+					$("#loading_div").hide()
+					alert("请求失败")
+				}
+			}, err => {
+				$("#loading_div").hide()
+				alert("请求失败")
+			})
+			.catch((error) => {
+				//alert("服务器内部错误")
+			})
+		})()
+
+		$(".btn_block_1").click(function(){
+			var _data = {
+				"service": _service(),
+				"version": _version(),
+				"partnerId": _partnerId(),
+				"bizContent":{
+					"requestNo":_requestNo(),
+					"requestTime":formateDateAndTimeToString(),
+		   			"inputCharset":'utf-8',
+		   			"signType":'RSA',
+		   			"sign":'sign',
+					"token":window.sessionStorage.getItem("token"),
+					"bankAccount":$(bankAccount).text(),
+					"verifyAmount":Number($(money).val())*100,
+					"extension":null,
+				}
+		   	}
+			$(loading_div).show();
+			$.ajax({
+		   		url:_url()+"/openFundAccountAdvance",
+		   		type:"POST",
+		   		async:true,
+		   		contentType:'application/json',
+		   		data:JSON.stringify(_data),
+		   		success:function(result){
+					$(loading_div).hide();
+		   			if(result.requestStatus=="SUCCESS"){
+						window.location.href="bankaccount.html"
+		   			}else{
+						let num = Number(sessionStorage.getItem("remit"))
+						sessionStorage.setItem("remit",num+1)
+		   				window.location.href="bankaccount_opening_fail_1.html"
+		   			}
+				}
+			});
+		})
+	})
+</script>

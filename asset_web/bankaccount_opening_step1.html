@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta name="robots" content="all" />
+
+<script src="webdoc/js/popimg.js" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<title>溟宗供应链</title>
+</head>
+<style>
+#loading_div{
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    top: 0;
+    left: 0;
+    z-index: 111;
+}
+.loading {
+    top: 50%;
+}
+.loading:before {
+	width: 2.5rem;
+    height: 2.5rem;
+	border: 2px solid #fff;
+	border-top: 2px solid rgba(0,0,0,.1);
+}
+.Box .innerBox {
+    min-height: 13rem;
+}
+</style>
+
+<body>
+<section class="header">
+	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
+	<a class="login" id='SignOut'><img src="webdoc/img/avatar.png"> 退出</a>
+</section>
+
+<section class="sideBar">
+	<ul class="menu">
+		<li><a href="home.html"><p class="basedInfo">基本信息</p></a></li>
+		<li><a href="loan_info.html"><p class="loanInfo">贷款信息</p></a></li>
+		<li class="on"><a href="bankaccount.html"><p class="bankAccount">资金监管专户</p></a></li>
+		<li><a href="invoice.html"><p class="invoice">发票池信息</p></a></li>
+		<li><a href="receivables.html"><p class="receivables">收款账户变更</p></a></li>
+	</ul>
+</section>
+
+<section class="mainBar">
+	<div class="mainBarTop">
+		<div class="innerBox">
+			<ul class="breadCrumbs">
+				<li><a href="home.html">首页</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li><a href="bankaccount.html">资金监管专户</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li class="on"><p>资金监管开户流程</p></li>
+			</ul>
+		</div>
+	</div>
+	<form class="companyForm">
+		<div class="Box">
+			<ul class="tabBox">
+				<li class="isChoose">基本信息补充</li>
+				<li>经办人信息</li>
+				<li>绑定实体账户信息</li>
+				<li>信息确认</li>
+			</ul>
+	
+			<h2 class="heading01"><span>企业信息</span><i class="important">必填项</i>
+				<a href="webdoc/js/Account-opening-process.docx" style="font-size: 0.12rem;margin-left: 0.4rem;" download="Account-opening-process.docx">点击下载开户流程图</a></h2>
+			<div class="innerBox">	
+				<ul class="list_info wide01 companyInfo_one">
+					<li>
+						<span>企业名称：</span>
+						<p><input autocomplete="off" class="input01 input02" type="text"  value="" readonly></p>
+						<!--name="companyName"-->
+					</li>
+					<li>
+						<span>营业执照号：</span>
+						<p><input autocomplete="off" class="input01 input02" type="text"  value="" readonly></p>
+						<!--name="licenseNo"-->
+					</li>
+					<!-- <li>
+						<span>组织机构代码：</span>
+						<p><input class="input01 input02" type="text"  value="" readonly></p>
+					</li> -->
+					<!-- <li>
+						<span>税务登记号：</span>
+						<p><input class="input01 input02" type="text"  value="" readonly></p>
+					</li> -->
+					<!-- <li>
+						<span>营业执照副本影印件：</span>
+						<p>
+							<i><img src="webdoc/img/img.svg"></i>
+							<a name="name_show_img" data-img="" href="javascript:void(0);" id="licenseNoPhoto">查看图片</a>
+						</p>
+					</li>
+					<li>
+						<span>税务登记证影印件：</span>
+						<p>
+							<i><img src="webdoc/img/img.svg"></i>
+							<a name="name_show_img" data-img="" href="javascript:void(0);" id="taxNoPhoto">查看图片</a>
+						</p>
+					</li>
+					<li>
+						<span>组织机构代码证影印件：</span>
+						<p>
+							<i><img src="webdoc/img/img.svg"></i>
+							<a name="name_show_img" data-img="" href="javascript:void(0);" id="organizationNoPhoto">查看图片</a>
+						</p>
+					</li>
+					<li>
+						<span>开户许可证影印件：</span>
+						<p>
+							<i><img src="webdoc/img/img.svg"></i>
+							<a name="name_show_img" data-img="" href="javascript:void(0);" id="openingPermitPhoto">查看图片</a>
+						</p>
+					</li> -->
+					<li>
+						<span class="important">企业证件类型：</span>
+						<p>
+							<select class="input01" name='companyIdType' value="2"> 
+							<option value="2">三证合一</option>
+							<option value="1">三证三号</option>
+							<option value="0">个体工商户</option></select>
+						</p>
+					</li>
+					<li>
+						<span>注册地址：</span>
+						<p><input autocomplete="off" class="input01" type="text" name="registerAddress"></p>
+					</li>
+					<li>
+						<span>经营地址：</span>
+						<p><input autocomplete="off" class="input01" type="text" name="licenseAddress"></p>
+					</li>
+					<li>
+						<span>营业期限：</span>
+						<p><input autocomplete="off" class="input01" type="text" name="licenseExpire_date"></p>
+					</li>
+					<li>
+						<span class="important">企业联系电话：</span>
+						<p>
+							<input autocomplete="off" class="input01" type="text" name="telephone">
+							<i class="err-tipBox"><img src="webdoc/img/err.png"/><i>请输入必选项</i></i>
+						</p>
+					</li>
+					<!-- <li>
+						<span>行业类型大类：</span>
+						<p> <input class="input01" type="text" name="industryType"></p>
+							<select class="input01" name='industryType'> 
+							<option value="1">请选择....</option>
+							<option value="1">11</option>
+							<option value="1">22</option>
+							<option value="1">33</option></select></p>
+					</li>
+					<li>
+						<span>企业经济成分：</span>
+						<p> <select class="input01" name='economicSector'> 
+							<option value="">请选择....</option>
+							<option value="201">国有企业</option>
+							<option value="202">集体企业</option>
+							<option value="203">股份合作企业</option>
+							<option value="204">联营企业</option>
+							<option value="205">有限责任公司</option>
+							<option value="206">股份有限公司</option>
+							<option value="207">私营企业</option>
+							<option value="210">个体经营</option>
+							<option value="211">港、澳、台商投资合资经营企业</option>
+							<option value="212">港、澳、台商投资合作经营企业</option>
+							<option value="213">港、澳、台商投资股份有限公司</option>
+							<option value="214">港、澳、台商独资经营企业</option>
+							<option value="215">中外合资经营企业</option>
+							<option value="216">中外合作经营企业</option>
+							<option value="217">外资企业</option>
+							<option value="218">外商投资股份有限公司</option>
+							<option value="299">其他企业</option>
+						</select></p>
+					</li>
+					<li>
+						<span>企业规模：</span>
+						<p> <select class="input01" name='companyScale'> 
+							<option value="">请选择....</option>
+							<option value="CS01">大型企业</option>
+							<option value="CS02">中型企业</option>
+							<option value="CS03">小型企业</option>
+							<option value="CS04">微型企业</option></select></p>
+					</li>
+					<li>
+						<span>纳税人识别号（国税）：</span>
+						<p><input class="input01" type="text" name="countryTaxNo"></p>
+					</li>
+					<li>
+						<span>纳税人识别号（地税）：</span>
+						<p><input class="input01" type="text" name="localTaxNo"></p>
+					</li> -->
+					<li>
+						<span>&nbsp;</span>
+						<p><i class="gap16"></i></p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="Box">
+			<h2 class="heading01"><span>企业法定代表人信息</span><i class="important">必填项</i></h2>
+			<div class="innerBox">
+				<ul class="list_info wide01 LegalPerInfo">
+					<li>
+						<span class="important">法定代表人姓名：</span>
+						<p><input autocomplete="off" class="input01 input02"  type="text"  readonly></p>
+						<!--name="legalPersonName"-->
+					</li>
+					<li>
+						<span class="important">法定代表人身份证号：</span>
+						<p><input autocomplete="off" class="input01 input02" type="text" readonly></p>
+						<!--name="legalPersonId"--> 
+					</li>
+					<!-- <li>
+						<span>法定代表人身份证有效期：</span>
+						<p><input class="input01" type="text" name="legalPersonIdExpire"></p>
+					</li> -->
+					<li>
+						<span class="important">法定代表人身份证正反面影印件：</span>
+						<p>
+							<i><img src="webdoc/img/img.svg" /></i>
+							<a name="name_show_img" data-img="" href="javascript:void(0);" id="legalIdCardPhotoFrontUrl">查看图片</a>
+							<a name="name_show_img" data-img="" href="javascript:void(0);" id="legalIdCardPhotoBehindUrl">查看图片</a>
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+	<div class="submitbox">
+			<ul class="list_info wide01">
+				<li>
+					<span>&nbsp;</span>
+					<button class="button btn_block_2">下一步</button>
+				</li>
+			</ul>
+		</div>
+</section>
+<!--use for function of showImage-->
+<section class="popbox off" id="popbox_1">
+	<div class="img_Pop">
+		<b class="close" id="hideImg01"></b>
+		<div id="imgbox" class="imgbox"><div class="loading"></div></div>
+	</div>
+</section>
+
+<div id="loading_div" style="display: none;">
+	<div class="loading"></div>
+</div>
+
+</body>
+</html>
+
+<script  type="module">
+/////////
+//请注意//
+//1. 触发显示图片功能元素，需要提前给该元素的属性赋值（data-img）
+//2. 所有触发显示图片功能元素的name属性值，必须一致
+//showImage(触发显示图片功能的元素name属性值，关闭图片弹框的ID值，图片弹框的ID值，图片容器的ID值)
+	var name_show_img = new ShowImage;
+	name_show_img.init("name_show_img","hideImg01","popbox_1","imgbox");
+
+
+	import AJAX from './webdoc/js/api.js';
+
+(function(){
+	$(loading_div).show()
+	let data = JSON.parse(sessionStorage.data)
+	data.bizContent.queryContentList = ["COMPANY"]
+	AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
+		$(loading_div).hide()
+		if(result.requestStatus=="SUCCESS"){
+			//公司数据渲染
+			let resultData = JSON.parse(sessionStorage.getItem("result")),
+			_companyMember=String_clear("Object",resultData.bizData.companyInfo);
+			debugger
+			$("#taxNoPhoto").attr("data-img",_companyMember.licenseNoPhoto)
+			$("#organizationNoPhoto").attr("data-img",_companyMember.licenseNoPhoto)
+			$("#openingPermitPhoto").attr("data-img",_companyMember.openingPermitPhoto)
+			$("#legalIdCardPhotoFrontUrl").attr("data-img",_companyMember.legalIdCardPhotoFrontUrl)
+			$("#legalIdCardPhotoBehindUrl").attr("data-img",_companyMember.legalIdCardPhotoBehindUrl)	
+			$("#licenseNoPhoto").attr("data-img",_companyMember.licenseNoPhoto)
+			$(".companyInfo_one").find("input").eq(0).val(_companyMember.companyName)
+			$(".companyInfo_one").find("input").eq(1).val(_companyMember.licenseNo)
+			$(".companyInfo_one").find("input").eq(2).val(_companyMember.organizationNo)
+			$(".companyInfo_one").find("input").eq(3).val(_companyMember.taxNo)
+			$(".LegalPerInfo").find("input").eq(0).val(_companyMember.legalPersonName)
+			$(".LegalPerInfo").find("input").eq(1).val(_companyMember.legalPersonId)	
+			$("input[name='registerAddress']").val(_companyMember.registerAddress);
+			$("input[name='licenseAddress']").val(_companyMember.licenseAddress);
+			$("input[name='licenseExpire_date']").val(_companyMember.licenseExpireDate);
+		}
+	}, err => {
+		$(loading_div).hide()
+		alert("请求失败")
+	})
+	.catch((error) => {
+		//alert("服务器内部错误")
+	})
+})()
+	
+</script>
+<script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="text/javascript" src="webdoc/js/bankaccount_opening_step1.js" ></script>

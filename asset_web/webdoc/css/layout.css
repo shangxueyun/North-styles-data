@@ -1,0 +1,71 @@
+/* CSS Document */
+.logobox {width:100%;height:100vh;font-size:0;}
+.login_bg,
+.login_body {display:inline-block;height:100vh;font-size:0;vertical-align:top;}
+.login_bg {width:67%;}
+.login_body {width:33%;}
+
+
+.header {height:3.75rem;width:100%;position:fixed;z-index:3;left:0;top:0;background:#06123c}
+.sideBar {width:10.625rem;height:calc(100vh - 3.75rem);padding-top:3.75rem;position:fixed;z-index:2;left:0;top:0;overflow-y:auto;background:#fff;box-shadow:0 0 2rem rgba(0,0,0,.15),0 0 .2rem rgba(0,0,0,.15);}
+.mainBar {width:calc(100vw - 10.625rem);height:calc(100vh - 3.75rem);position:fixed;z-index:1;left:10.625rem;top:3.75rem;overflow-x:hidden;overflow-y:auto;background:#f0eff5;}
+.mainBarTop {background:#fff;box-shadow:0 0 2rem rgba(0,0,0,.15),0 0 .2rem rgba(0,0,0,.15);}
+.innerBox {padding:1.5rem;}
+.Box .innerBox {min-height:20rem;}
+.submitbox {padding:0 3rem;margin-bottom:3rem;}
+.Box {background:#fff;margin:1.5rem;border-radius:1pt;}
+.pbox {margin-bottom:1rem;}
+.pbox p {margin-bottom:.5rem;font-size:.875rem;}
+.hr01 {margin:0;border:0;border-bottom:1px solid #e5e5e5;}
+
+.popbox.off {left:-1000vw;}
+.popbox.on {content:"";position:fixed;z-index:99;left:0;top:0;width:100%;height:100vh;background:rgba(255,255,255,.4);}
+.pop {position:fixed;z-index:1000;width:30rem;height:20rem;left:calc((100% - 30rem) / 2);top:calc((100% - 20rem) / 2);background:#fff;border-radius:.1rem;box-shadow:0 0 1.5rem rgba(0,153,255,.2),0 0 .2rem rgba(0,0,0,.1);}
+.popbox:after {content:"";display:block;width:100%;height:100vh;background:rgba(0,0,0,.5);position:absolute;left:0;top:0;}
+.off .confirm_Pop {left:-1000vw;}
+.on .confirm_Pop {position:fixed;z-index:1000;width:13rem;min-height:8rem;left:calc((100% - 13rem) / 2);top:calc((100% - 8rem) / 2);background:#fff;border-radius:.1rem;box-shadow:0 0 1.5rem rgba(0,153,255,.2),0 0 .2rem rgba(0,0,0,.1);padding:1rem;}
+.confirm_Pop .txtbox {min-height:6rem;}
+.confirm_Pop .txtbox .txticon {height:1rem;}
+.off .inputinfo_Pop {left:-1000vw;}
+.on .inputinfo_Pop {position:fixed;z-index:1000;width:20rem;min-height:25rem;left:calc((100% - 20rem) / 2);top:calc((100% - 25rem) / 2);background:#fff;border-radius:.1rem;box-shadow:0 0 1.5rem rgba(0,153,255,.2),0 0 .2rem rgba(0,0,0,.1);}
+.off .img_Pop {left:-1000vw;}
+.on .img_Pop {position:fixed;z-index:1000;width:70vw;height:70vh;left:15vw;top:15vh;background:#fff;border-radius:.1rem;box-shadow:0 0 1.5rem rgba(0,153,255,.2),0 0 .2rem rgba(0,0,0,.1);}
+.img_Pop .imgbox {width:1000px;height:70vh;text-align:center;margin: 0 auto;}
+.img_Pop .imgbox img {width:auto;height:100%;}
+.img_Pop .close {position:absolute;right:0;top:0;width:3rem;height:3rem;background:rgba(0,0,0,.4);border-radius:0 0 0 1rem;}
+.img_Pop .close:before {width:3rem;height:3rem;line-height:3rem;text-align:center;color:#ccc;}
+.img_Pop .close:hover:before {color:#fff;}
+.popbox .heading {border-bottom:1px solid #e5e5e5;line-height:3rem;text-indent:1rem;font-size:1rem;font-weight:normal;position:relative;}
+.popbox .heading em {position:absolute;right:0;top:0;}
+.close {font-size:0;display:block;height:3rem;overflow:hidden;cursor:pointer;}
+.close:before {content:"\e911";font-size:1rem;color:#ccc;display:block;width:3rem;height:3rem;line-height:3rem;cursor:pointer;}
+.close:hover:before {color:#222;}
+.popbox .listbox {margin:1rem;}
+.popbox .listbox b {display:block;font-weight:normal;color:#666;font-size:.8rem;margin-bottom:.5rem;}
+.popbox .listbox .inputbox {border:1px solid #e5e5e5;display:block;font-weight:normal;color:#666;font-size:.8rem;position:relative;}
+.popbox .listbox .inputbox em {position:absolute;right:.4rem;top:.2rem;}
+.popbox .listbox input {border:0;height:1.5rem;line-height:1.5rem;font-size:.8rem;width:100%;}
+.popbox .listbox input.warn {border:1px solid #F03;}
+.popbox .listbox .warntxt {position:absolute;right:0;bottom:-1rem;color:#F03;quotes:none;}
+.popbox .listbox input[type=radio] {display:inline-block;width:auto;}
+.popbox .listbox label {display:inline-block;font-size:.8rem;line-height:1;margin-bottom:.5rem;}
+.popbox .listbox .item {margin-bottom:1rem;}
+.popbox .loading {position:absolute;left:50%;top:50%;}
+.loading {position:relative;text-align:center;padding-top:3rem;}
+.loading:before {content:"";position:absolute;left:50%;top:0;width:1rem;height:1rem;border:2px solid #333;border-top:2px solid rgba(0,0,0,.1);border-radius:100rem;animation:rotate .8s infinite linear;}
+@keyframes 
+rotate 
+{
+	0%   {transform:rotate(0deg);}
+	100% {transform:rotate(360deg);}
+}
+
+
+@media screen and (min-width:0) and (max-width:570px) {
+
+}
+@media screen and (min-width:571) and (max-width:1024px) {
+
+}
+
+

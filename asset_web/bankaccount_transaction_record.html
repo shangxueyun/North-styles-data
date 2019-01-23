@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="cache-control" content="no-cache"/>
+	<meta name="robots" content="all" />
+	<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+	<title>溟宗供应链</title>
+</head>
+
+<body>
+<section class="header">
+	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
+	<a class="login" id='SignOut'><img src="webdoc/img/avatar.png"> 退出</a>
+</section>
+
+<section class="sideBar">
+	<ul class="menu">
+		<li><a href="home.html"><p class="basedInfo">基本信息</p></a></li>
+		<li><a href="loan_info.html"><p class="loanInfo">贷款信息</p></a></li>
+		<li class="on"><a href="bankaccount.html"><p class="bankAccount">资金监管专户</p></a></li>
+		<li><a href="invoice.html"><p class="invoice">发票池信息</p></a></li>
+		<li><a href="receivables.html"><p class="receivables">收款账户变更</p></a></li>
+	</ul>
+</section>
+<style>
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+.loading {
+	top: 50%;
+}
+.loading:before {
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 2px solid #fff;
+	border-top: 2px solid rgba(0,0,0,.1);
+}
+</style>
+<style>
+	#pagination_12{
+		display: flex;
+		justify-content: flex-end;
+		align-items:center;
+		margin-top:1.5rem;
+	}
+	.tablebox table td{
+		text-align: center;
+	}
+	.tablebox table th{
+		text-align: center;
+	}
+	.pageNum li{
+		float: left;
+	height: 32px;
+	line-height: 32px;
+	margin-left: 20px;
+    text-align: center;
+	}
+	.pageNum li:nth-last-child(3){
+		float: left;
+		width: 150px;
+	}
+	.pageNum li a{
+		display: block;
+    width: 80px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+	}
+	.Box .innerBox {
+		min-height: 30rem;
+	}
+	input {
+		text-indent: 4px;
+	}
+</style>
+<section class="mainBar">
+	<div class="mainBarTop">
+		<div class="innerBox">
+			<ul class="breadCrumbs">
+				<li><a href="home.html">首页</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li><a href="bankaccount.html">资金监管专户</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li class="on"><p>交易记录查询</p></li>
+			</ul>
+		</div>
+	</div>
+	<div class="Box">
+		<h2 class="heading01"><span>交易记录</span></h2>
+		<div class="innerBox">
+			<div class="inlineBox box_bg_gray">
+				<div class="pbox inlineBlock_half">
+					<p>
+						<i class="gray">银行账号：</i>
+						<em id="accountNo"></em>
+					</p>
+					<p>
+						<i class="gray">币种：</i>
+						<em>人名币</em>
+					</p>
+					<p>
+						<i class="gray">当前余额：</i>
+						<em id="accountBalance"></em>
+					</p>
+				</div>
+				<div class="pbox inlineBlock_half">
+					<p>
+						<i class="gray">银行账户名称：</i>
+						<em id="accountName"></em>
+					</p>
+					<p>
+						<i class="gray">开户行名称：</i>
+						<em id="bankName">众邦银行E帐通子账户</em>
+					</p>
+					<p>
+						<i class="gray">账户状态：</i>
+						<em id="status"></em>
+					</p>
+				</div>
+			</div>
+			<div class="gap16"></div>
+			<div class="inlineBox alignRight">
+				<div class="inlineBlock">
+					<div class="c-datepicker-date-editor  J-datepicker-range-day mt10">
+						<i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
+						<input autocomplete="off" style="width: 10rem;padding: 7px 0;" type="text" class="c-datepicker-data-input only-date" placeholder="选择日期范围" id="RangeDate">
+					</div>
+				</div>
+				<!--<div class="inlineBlock">-->
+					<!--<i class="txt">摘要：</i><i class="inputbox"><input type="text" name="memo" placeholder="请输入摘要"></i>-->
+				<!--</div>-->
+				<div class="inlineBlock">
+					<i class="txt">对方户名：</i><i class="inputbox"><input autocomplete="off" type="text" name="accountName" placeholder="请输入对方户名"></i>
+				</div>
+				<div class="inlineBlock"><a class="button btn_block_2 magnifier" onclick="PageFUNC(1,10)"  href="javascript:void(0);">查询</a></div>
+			</div>
+			<div class="btnbox btnbox_gap btnbox_align_left">
+				<a class="button btn_hollow_3" id="getAllSelectedId" href="javascript:void(0);">下载以下所有记录</a>
+				<a class="button btn_hollow_unavailable" href="javascript:void(0);">下载以下所有选中记录</a>
+				<a class="button btn_hollow_unavailable" href="javascript:void(0);">批量下载选中凭证</a>
+			</div>
+			<div class="tablebox" style="height: 38rem;">
+				<div class="table_inner">
+					<table border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<th><input type="checkbox" id="allAndNotAll"/></th>
+							<th>序号</th>
+							<th>交易时间</th>
+							<th>收入</th>
+							<th>支出(元)</th>
+							<th>对方户名</th>
+							<th>对方账号</th>
+							<th>记账日</th>
+							<th>交易状态</th>
+							<th>银行回执单</th>
+							<th>备注</th>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;" id="page_ELE">
+				<ul>
+					<li><a class="prev" disabled="disabled" href="javascript:void(0);" id="prev">上一页</a></li>
+					<li><i class="on">1</i></li>
+					<li><a class='page_ELE_CHILD' href="javascript:void(0);">2</a></li>
+					<li><a href="javascript:void(0);">3</a></li>
+					<li><a href="javascript:void(0);">4</a></li>
+					<li><a href="javascript:void(0);">5</a></li>
+					<li><a class="next" id="next" href="javascript:void(0);">下一页</a></li>
+					<li>&nbsp;&nbsp;|&nbsp;共100页，到 <input autocomplete="off" type="text" id="inputVlaue"/> 页</li>
+					<li><a id="skip" href="javascript:void(0);">确定</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div id="loading_div" style="display: none;">
+	<div class="loading"></div>
+</div>
+</body>
+</html>
+<script src="webdoc/js/jquery-3.3.1.min.js"></script>
+<script src="webdoc/laydate/laydate.js"></script>
+<script src="webdoc/js/home.js"></script>
+<script src="webdoc/js/pageHTML.js"></script>
+<script src="webdoc/js/bankaccount_transaction_record.js"></script>
+<script>
+    $(function(){
+        $("#allCheckbox").change(function(e){
+            $(".itemCheckbox").prop("checked",e.currentTarget.checked)
+        })
+
+        $(".itemCheckbox").change(function(){
+            var _notLength = $(".itemCheckbox").filter(":not(:checked)").length
+            var _IsLength = $(".itemCheckbox").filter(":checked").length
+            if(_notLength<=$(".itemCheckbox").length){
+                $("#allCheckbox").prop("checked",false)
+            }
+            if(_IsLength==$(".itemCheckbox").length){
+                $("#allCheckbox").prop("checked",true)
+            }
+        })
+
+        $(".btnbox").find(".button").on("click",function(){
+            $(this).addClass("btn_hollow_3")
+            $(this).removeClass("btn_hollow_unavailable")
+            $(this).siblings("a").removeClass("btn_hollow_3")
+            $(this).siblings("a").addClass("btn_hollow_unavailable")
+        })
+	})
+	lay('#version').html('-v'+ laydate.v);
+	//日期范围
+	laydate.render({
+	  elem: '#RangeDate',
+	  theme: '#2d3f81'
+      ,range: true
+	});
+
+</script>

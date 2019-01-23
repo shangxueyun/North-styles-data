@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta name="robots" content="all" />
+
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<title>溟宗供应链</title>
+</head>
+<style>
+	.tabBox{width:60%;height:60px;line-height: 60px;margin:0 auto;display: flex;justify-content: space-between;}
+	.tabBox li{display: inline-block;padding:0 10px}
+	.isChoose{border-bottom:2px solid #07103b}
+	.no_checked{background: #F1F1F1 !important;color: #2d3f81;}
+	.no_checked:hover{color: #2d3f81;}
+	
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+.loading {
+	top: 50%;
+}
+.loading:before {
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 2px solid #fff;
+	border-top: 2px solid rgba(0,0,0,.1);
+}
+</style>
+<body>
+	
+<section class="header">
+	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
+	<a class="login" id='SignOut'><img src="webdoc/img/avatar.png"> 退出</a>
+</section>
+
+<section class="sideBar">
+	<ul class="menu">
+		<li><a href="home.html"><p class="basedInfo">基本信息</p></a></li>
+		<li><a href="loan_info.html"><p class="loanInfo">贷款信息</p></a></li>
+		<li class="on"><a href="bankaccount.html"><p class="bankAccount">资金监管专户</p></a></li>
+		<li><a href="invoice.html"><p class="invoice">发票池信息</p></a></li>
+		<li><a href="receivables.html"><p class="receivables">收款账户变更</p></a></li>
+	</ul>
+</section>
+
+<section class="mainBar">
+	<div class="mainBarTop">
+		<div class="innerBox">
+			<ul class="breadCrumbs">
+				<li><a href="home.html">首页</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li><a href="bankaccount.html">资金监管专户</a></li>
+				<li><p>&nbsp;/&nbsp;</p></li>
+				<li class="on"><p>资金监管开户流程</p></li>
+			</ul>
+		</div>
+	</div>
+	<div class="Box">
+		<ul class="tabBox">
+			<li>基本信息补充</li>
+			<li>经办人信息</li>
+			<li>绑定实体账户信息</li>
+			<li class="isChoose">信息确认</li>
+		</ul>
+		<h2 class="heading01"><span>企业信息确认</span></h2>
+		<div class="innerBox">
+			<div class="tipbox blue">请确认一下信息是否准确，如果有错误请返回前页进行修改<em class="close"></em></div>
+			<div class="gap16"></div>
+			<ul class="list_info wide02 box_bg_gray">
+				<li>
+					<span>企业名称：</span>
+					<p></p>
+				</li>
+				<li>
+					<span>营业执照号：</span>
+					<p></p>
+				</li>
+				<li>
+					<span>企业联系电话：</span>
+					<p></p>
+				</li>
+				<li>
+					<span>法定代表人姓名：</span>
+					<p></p>
+				</li>
+				<li>
+					<span>法定代表人身份证号：</span>
+					<p></p>
+				</li>
+				<li>
+					<span>经办人姓名：</span>
+					<p></p>
+				</li>
+				<li>
+					<span>经办人手机号：</span>
+					<p></p>
+				</li>
+				<li>
+					<span>经办人邮箱：</span>
+					<p></p>
+				</li>
+				<li>
+					<span>银行账号：</span>
+					<p></p>
+				</li>
+				<li>
+					<span>银行账户名称：</span>
+					<p></p>
+				</li>
+				<li>
+					<span>开户行联行号：</span>
+					<p></p>
+				</li>
+				<li>
+					<span><input style="width:16px;height:16px" type="checkbox" autocomplete="off"/></span>
+					<p>我已阅读并同意 <a class="media" href="webdoc/js/服务协议.pdf">《武汉众邦银行E账通平台子账户服务协议》</a></p>
+				</li>
+				<li>
+					<span>&nbsp;</span>
+					<p>
+						<!--<a class="button btn_hollow_2" href="javascript:void(0);" onclick="history.back(-1);return false;">修改</a>-->
+						<a class="button btn_hollow_2" href="bankaccount_opening_step1.html">修改</a>
+						<a class="button btn_block_2 no_checked" >确认无误</a>
+						<!--href="bankaccount.html"-->
+					</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
+<div id="loading_div" style="display: none;">
+	<div class="loading"></div>
+</div>
+</body>
+</html>
+<script src='webdoc/js/jquery-3.3.1.min.js' language="javascript"></script>
+<script src="webdoc/js/home.js"></script>
+<script type="text/javascript" src="webdoc/js/bankaccount_confirm_info.js" ></script>
