@@ -1,0 +1,358 @@
+/**app.wxss**/
+:before,:after {
+font-family:'icomoon' !important;
+speak:none;
+font-style:normal;
+font-weight:normal;
+font-variant:normal;
+text-transform:none;
+line-height:1;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+} 
+page {font-size:4.2vmin;background:#f0eff5;display:block;min-height:100%;border-bottom:1rpx solid rgba(0,0,0,0);}
+
+.gap {display:block;border-top:5vmin solid #f0eff5;}
+
+.heading,
+.heading01 {display:block;padding:2.5vmin;font-size:4.5vmin;font-weight:bold;vertical-align:middle;}
+
+.heading01 {border-bottom:.5pt solid #e1e1e1;}
+
+.heading02 {color:#222;padding:2.5vmin 5vmin;font-size:4.5vmin;}
+.heading02 .tip {color:#999;font-size:4vmin;margin-left:2vmin;}
+.heading02.warn {background:#fcedeb;color:#f43530;text-align:left;}
+.heading02.warning {color:#fcedeb;background:#f43530;text-align:left;}
+.heading02 .success {background:#c8faaf;color:#0cc725;text-align:left;}
+.heading02.icon_warn:before {content:"";width:6vmin;height:6vmin;display:inline-block;vertical-align:middle;background:url(http://jobnotes.cn/bmimg/warn_red.svg) no-repeat 50% 50% / 6vmin;margin-right:3vmin;}
+
+.heading03 {color:#06123c;padding:4vmin 5vmin;font-size:5vmin;line-height:1;font-weight:bold;}
+.heading04 {color:#06123c;margin:0 5vmin;padding:2vmin 0;font-size:4vmin;line-height:1;border-bottom:1rpx solid #ddd;font-weight:bold;}
+.heading04:before {content:"";border-left:1vmin solid #06123c;margin-right:3vmin;display:inline-block;height:4vmin;vertical-align:bottom;}
+
+.heading_gray {color:#999;padding:2.5vmin 5vmin;font-size:4.5vmin;}
+
+.icon_account {padding-left:13vmin;position:relative;}
+.icon_account:before {content:"";position:absolute;left:5vmin;top:3vmin;background:url(http://jobnotes.cn/bmimg/account.svg) no-repeat 50% 50% / 5.3vmin;width:5.3vmin;height:5.3vmin;}
+.icon_other {padding-left:13vmin;position:relative;}
+.icon_other:before {content:"";position:absolute;left:5vmin;top:3vmin;background:url(http://jobnotes.cn/bmimg/other.svg) no-repeat 50% 50% / 5.3vmin;width:5.3vmin;height:5.3vmin;}
+.icon_bill {padding-left:13vmin;position:relative;}
+.icon_bill:before {content:"";position:absolute;left:5vmin;top:3vmin;background:url(http://jobnotes.cn/bmimg/bill.svg) no-repeat 50% 50% / 5.3vmin;width:5.3vmin;height:5.3vmin;}
+.icon_yen {padding-left:8vmin;position:relative;}
+.icon_yen:before {content:"";position:absolute;left:0;top:1vmin;background:url(http://jobnotes.cn/bmimg/yen.svg) no-repeat 50% 50% / 5.3vmin;width:5.3vmin;height:5.3vmin;}
+
+.topbox {background:#06123c;color:#fff;padding-bottom:5vmin;}
+.topbox text {display:block;font-size:7vmin;margin:0 5vmin;}
+.topbox .top_title {color:rgba(255,255,255,.5);font-size:3vmin;}
+
+.paddingBox {padding:4vmin 5vmin;}
+
+.paragraphBox {padding:4vmin 5vmin;}
+.paragraphBox .text {display:block;line-height:1.8;text-align:justify;}
+
+.iconbox {padding-top:5vmin;text-align:center;}
+.iconbox [class^="icon_"],
+.iconbox [class*=" icon_"] {margin:0;padding:0;}
+
+.txtBox {display:block;margin:5vmin;margin-top:0;}
+
+.stateBox {text-align:center;padding:20vmin 10vmin;}
+.stateTestBox {position:fixed;left:0;bottom:0;width:100%;}
+
+.borderBox {border:1rpx solid #ddd;margin:5vmin;}
+
+.whiteBox {background:#fff;border-bottom:1rpx solid rgba(0,0,0,.0);margin-bottom:4.2vmin;}
+
+.whiteBox_border {border:1rpx solid #e1e1e1;border-left:0;border-right:0;margin-bottom:3vmin;background:#fff;}
+
+.icon_hand_money,
+.icon_card_ok,
+.icon_file_time,
+.icon_money,
+.icon_wallet,
+.icon_settings,
+.icon_lock,
+.icon_phone,
+.icon_mail {padding-left:8vmin;position:relative;}
+.icon_firm,
+.icon_contract {padding-left:13vmin;position:relative;}
+
+.icon_hand_money:before,
+.icon_card_ok:before,
+.icon_file_time:before,
+.icon_money:before,
+.icon_wallet:before,
+.icon_settings:before,
+.icon_lock:before,
+.icon_phone:before,
+.icon_mail:before {content:"";position:absolute;left:0;top:0;width:6vmin;height:6vmin;}
+.icon_firm:before,
+.icon_contract:before {content:"";position:absolute;left:5vmin;top:3vmin;width:6vmin;height:6vmin;}
+.icon_hand_money:before {background:url(http://jobnotes.cn/bmimg/hand_money.svg) no-repeat 50% 50% / 6vmin;}
+.icon_money:before {background:url(http://jobnotes.cn/bmimg/money.svg) no-repeat 50% 50% / 6vmin;}
+.icon_wallet:before {background:url(http://jobnotes.cn/bmimg/wallet.svg) no-repeat 50% 50% / 6vmin;}
+.icon_settings:before {background:url(http://jobnotes.cn/bmimg/settings.svg) no-repeat 50% 50% / 6vmin;}
+.icon_file_time:before {background:url(http://jobnotes.cn/bmimg/file_time.svg) no-repeat 50% 50% / 6vmin;}
+.icon_card_ok:before {background:url(http://jobnotes.cn/bmimg/card_ok.svg) no-repeat 50% 50% / 6vmin;}
+.icon_lock:before {background:url(http://jobnotes.cn/bmimg/lock.svg) no-repeat 50% 50% / 6vmin;}
+.icon_phone:before {background:url(http://jobnotes.cn/bmimg/phone.svg) no-repeat 50% 50% / 6vmin;}
+.icon_mail:before {background:url(http://jobnotes.cn/bmimg/mail.svg) no-repeat 50% 50% / 6vmin;}
+.icon_firm:before {background:url(http://jobnotes.cn/bmimg/firm.svg) no-repeat 50% 50% / 6vmin;}
+.icon_contract:before {background:url(http://jobnotes.cn/bmimg/contract.svg) no-repeat 50% 50% / 6vmin;}
+
+.arrow {width:10vmin;height:6vmin;background:url(http://jobnotes.cn/bmimg/icon_arrow01.svg) no-repeat 100% 50% / 4vmin;}
+
+.icon_ok:before {content:"";width:6vmin;height:6vmin;display:inline-block;vertical-align:middle;margin-top:-1vmin;margin-right:2vmin;background:url(http://jobnotes.cn/bmimg/ok.svg) no-repeat 50% 50% / 6vmin;}
+
+.icon_tip:before {content:"";width:6vmin;height:6vmin;display:inline-block;vertical-align:middle;margin-top:-1vmin;margin-right:2vmin;background:url(http://jobnotes.cn/bmimg/warn.svg) no-repeat 50% 50% / 6vmin;}
+
+.icon_tip_red:before {content:"";width:6vmin;height:6vmin;display:inline-block;vertical-align:middle;margin-top:-1vmin;margin-right:2vmin;background:url(http://jobnotes.cn/bmimg/warn_red.svg) no-repeat 50% 50% / 6vmin;}
+
+.icon_camera:before {content:"";width:6vmin;height:6vmin;display:inline-block;vertical-align:middle;margin-top:-1vmin;margin-right:2vmin;background:url(http://jobnotes.cn/bmimg/camera.png) no-repeat 50% 50% / 6vmin;}
+
+.icon_company:before {content:"";width:6vmin;height:6vmin;display:inline-block;vertical-align:middle;margin-top:-1vmin;margin-right:2vmin;background:url(http://jobnotes.cn/bmimg/company.png) no-repeat 50% 50% / 6vmin;}
+
+.icon_contract:before {content:"";width:6vmin;height:6vmin;display:inline-block;vertical-align:middle;margin-top:-1vmin;margin-right:2vmin;background:url(http://jobnotes.cn/bmimg/contract.png) no-repeat 50% 50% / 6vmin;}
+
+.icon_customer_service {}
+.icon_customer_service:before {content:"";display:inline-block;width:5vmin;height:5vmin;vertical-align:middle;background:url(http://jobnotes.cn/bmimg/customer_service.svg) no-repeat 50% 50% / 5vmin;margin-right:2vmin;}
+
+.icon_time,
+.icon_warn,
+.stateBox .icon_ok {margin-bottom:5vmin;text-align:center;}
+
+.icon_time:before {content:"";width:20vmin;height:20vmin;display:inline-block;vertical-align:middle;background:url(http://jobnotes.cn/bmimg/time.svg) no-repeat 50% 50% / 20vmin;}
+
+.icon_warn:before {content:"";width:20vmin;height:20vmin;display:inline-block;vertical-align:middle;background:url(http://jobnotes.cn/bmimg/warn_red.svg) no-repeat 50% 50% / 20vmin;}
+
+.stateBox .icon_ok:before {content:"";width:20vmin;height:20vmin;display:inline-block;vertical-align:middle;margin-top:0;margin-right:0;background:url(http://jobnotes.cn/bmimg/ok.svg) no-repeat 50% 50% / 20vmin;}
+
+.tabbox {color:#06113b;}
+.tabbox .tabItem_in2 {display:inline-block;width:50%;text-align:center;}
+.tabbox .tabItem_in3 {display:inline-block;width:33.33%;text-align:center;}
+.tabbox .tabItem_in4 {display:inline-block;width:25%;text-align:center;}
+.tabbox .column_line {border-right:1rpx solid #ddd;}
+.tabbox .tabItem_in2 view {text-align:center;}
+.tabbox .tabItem_in2 .tab_menu {display:inline-block;font-size:4.2vmin;padding:3vmin 0;}
+.tabbox .tab_title {font-size:3vmin;text-align:center;}
+.tabbox .title {font-size:5vmin;text-align:center;}
+.tabbox .gray {color:#999;}
+.tabbox .small {font-size:3.5vmin;}
+.tabbox .tabTitleTxt {display:inline-block;}
+.tabbox .tipbox {display:inline-block;position:relative;margin-left:2vmin;}
+.tabbox .tipbox .tip {position:absolute;left:0;top:-7vmin;color:#ff625f;min-width:15vmin;text-align:left;padding:3vmin 0;}
+.tabbox .tipbox .tip:before {content:"";display:inline-block;width:3.5vmin;height:3.5vmin;background:url(http://jobnotes.cn/bmimg/warn_red.svg) no-repeat 50% 50% / 3.5vmin;margin-right:1vmin;vertical-align: middle;margin-top:-1.1vmin;}
+.tabbox .on .tab_menu {border-bottom:6rpx solid #121d44;}
+.tab_bg_dark {background:#121d44;padding:3vmin 0;color:rgba(255,255,255,.5);}
+.tab_bg_white {background:#fff;padding:3vmin 0;color:#121d44;}
+
+.text {display:block;line-height:1.5;}
+.gray {color:#999;}
+.link {color:#2e6bbe;}
+.link_hover {color:#000;}
+.align_r {display:block;text-align:right;}
+.align_c {display:block;text-align:center;}
+
+.avatarbox {padding:4.2vmin;}
+.avatar {display:block;margin:0 auto;width:24vmin;height:24vmin;border-radius:100vmin;overflow:hidden;}
+.avatar {border-radius:100vmin;}
+text.username {text-align:center;font-size:4.2vmin;}
+
+.item_key .big {font-size:8vmin;line-height:1;}
+.item_val {text-align:right;position:absolute;right:0;top:3vmin;}
+.list input {font-size:5vmin;line-height:1;}
+.reddot {display:block;width:4vmin;height:4vmin;margin-top:1.5vmin;background:url(http://jobnotes.cn/bmimg/icon_reddot.svg) no-repeat 50% 50% / 3vmin}
+
+.list {margin:4vmin 5vmin;}
+.list .item {display:block;line-height:1.5;position:relative;}
+.list .item text {line-height:2;}
+.list .border_top {border-top:1rpx solid #e1e1e1;}
+
+.list01 {}
+.list01 .item {position:relative;padding:3vmin 0;margin:0 4.2vmin;border-bottom:1rpx solid #e1e1e1;}
+.list01 .item:last-child {border:0;}
+.list01 .item text {display:block;line-height:1.2;}
+.list01 .item .txt {color:#999;}
+.list01 .item_in2,
+.list01 .item_in3,
+.list01 .item_in4 {display:inline-block;vertical-align:top;color:#343434;}
+.list01 .item_in2 {width:50%;}
+.list01 .item_in3 {width:33.33%;}
+.list01 .item_in4 {width:25%;}
+.list01 .item_in2:last-child,
+.list01 .item_in3:last-child {text-align:right;}
+.list01 .item_in2 text:first-child,
+.list01 .item_in3 text:first-child,
+.list01 .item_in4 text:first-child {font-size:4.2vmin}
+.list01 .item_in2 text:last-child,
+.list01 .item_in3 text:last-child,
+.list01 .item_in4 text:last-child {color:#888;font-size:3.5vmin}
+.list01 .item_val {position:absolute;z-index:10;right:0;top:3vmin;text-align:right;}
+.list01 .item_abs {position:absolute;z-index:10;right:0;top:0;text-align:right;}
+.list01 .item_val.arrow {width:auto;padding-right:2.5vmin;}
+.list01 .item_val text:first-child {font-size:4.2vmin}
+.list01 .item_val text:last-child {color:#888;font-size:3.5vmin}
+.list01 .blue {color:#33b9ff;}
+.list01 .darkblue {color:#16286d;}
+.list01 .green {color:#11ab0f;}
+.list01 .warn {color:#f43530;}
+.list01 .orange {color:#fa9611;}
+.list01 .red {color:#ff6363;}
+.list01 .gray {color:#888;}
+.list01 .checkcode_img {width:25vmin;margin-top:1vmin;}
+.list01 .button_white {margin-top:1vmin}
+
+.list02 {margin:2.5vmin}
+.list02 .item {position:relative;width:50%;display:inline-block;vertical-align:top;}
+.list02 .innerbox {display:block;border:1px solid rgba(0,0,0,.0);margin:2vmin;background:#efeff4;border-radius:1.5vmin;min-height:20vmin;text-align:center;color:#333;padding:4vmin 0;}
+.list02 .important:before {content:"*";color:#f43530;font-weight:bold;}
+.list02 .item text {display:block;font-size:3.8vmin;}
+.list02 .item .icon_plus {margin-bottom:1vmin;}
+.list02 .item .icon_plus:before {content:"";background:url(http://jobnotes.cn/bmimg/plus_gray.svg) no-repeat 50% 50% / 6vmin;display:inline-block;width:6vmin;height:6vmin;}
+.list02 .item image {width:60%;margin-bottom:1vmin;}
+.list02 .item_4 {display:inline-block;vertical-align:bottom;width:25%;text-align:center;}
+.list02 .item_4 text {display:block;}
+.list02 .item_4 image {width:90%;margin-bottom:1vmin;}
+.list02 .item_4 .innerbox {background:#fff;min-height:auto;}
+.list02 .icon_camera {position:absolute;left:calc((100% - 12vmin) / 2);top:25%;}
+.list02 .icon_camera:before {background-size:12vmin;width:12vmin;height:12vmin;}
+
+.item_hover {background:#e6e6eb;color:#000}
+
+.tailbox {margin:5vmin 0;text-align:center;color:#999;font-size:4.2vmin;}
+
+.boxer {margin:5vmin}
+
+.btnbox {margin:5vmin;}
+.button_white {padding:2vmin 3vmin;border:1rpx solid #000;border-radius:2vmin;}
+.button_white_hover {background:rgba(0,0,0,.1);}
+.button_gray {border:0;background:#9196aa;color:#fff;}
+.button_gray_hover {border:0;background:#858a9b;color:#fff;}
+.button_dark {border:0;background:#06123b;color:#fff;}
+.button_dark_hover {border:0;background:#2e6bbe;color:#fff;}
+.check_code_btn {display:block;font-size:4.2vmin;height:7vmin;line-height:7vmin;color:#2e6bbe}
+.check_code_txt {display:block;font-size:4.2vmin;height:7vmin;line-height:7vmin;}
+
+.poper {display:block;width:100vw;height:100vh;background:rgba(0,0,0,.6);position:fixed;z-index:100;left:0;top:0;}
+.poper .popbox {position:absolute;width:80vmin;left:10vmin;bottom:calc((100vh - 80vmin) / 2);border-radius:1vmin;background:#fff;}
+.poper .headingbox {text-align:center;}
+.poper .headingbox .icon_ok {margin-bottom:6vmin;}
+.poper .headingbox .icon_ok:before {content:"";width:6vmin;height:6vmin;margin-top:0;margin-right:3vmin;background:url(http://jobnotes.cn/bmimg/ok.svg) no-repeat 50% 50% / 6vmin;}
+.poper .heading {display:inline-block;border:0;line-height:1;height:5vmin;padding:0;font-size:5vmin;margin:8vmin 0 4vmin 0;}
+.poper .paragraph {display:block;padding:0 8vmin;color:#999;line-height:1.8;}
+.poper .center {text-align:center;}
+.poper .submitbox {border-top:1rpx solid #ddd;margin-top:5vmin;border-radius:0 0 1vmin 1vmin;}
+.poper .submitbox .btn {background:none;font-size:5vmin;border-radius:0;}
+.poper .submitbox .btn_half {display:inline-block;width:50%;background:none;font-size:5vmin;border-radius:0;}
+.poper .submitbox .btn:after,
+.poper .submitbox .btn_half:after {background:none;border:0;margin:0;}
+.poper .submitbox .btn_hover,
+.poper .submitbox .btn_half_hover {background:rgba(0,0,0,.05);}
+.poper .icon_tip_red {margin-bottom:6vmin;}
+.poper .icon_tip_red:before {width:10vmin;height:10vmin;margin-right:0;background:url(http://jobnotes.cn/bmimg/warn_red.svg) no-repeat 50% 50% / 10vmin;}
+.poper .icon_ok {margin-bottom:6vmin;}
+.poper .icon_ok:before {content:"";width:10vmin;height:10vmin;margin-top:0;margin-right:0;background:url(http://jobnotes.cn/bmimg/ok.svg) no-repeat 50% 50% / 10vmin;}
+
+
+.step_tab {background:#06123c;color:rgba(255,255,255,.5);display:block;width:100%;padding:5vmin 0;}
+.step_tab .step_tab_item {display:inline-block;width:33.33%;text-align:center;}
+.step_tab .step_tab_item text {display:block;padding-top:2vmin;line-height:1;font-size:3.5vmin;}
+.step_tab .step_tab_1,
+.step_tab .step_tab_2,
+.step_tab .step_tab_3 {position:relative;}
+.step_tab .step_tab_1:before,
+.step_tab .step_tab_2:before,
+.step_tab .step_tab_3:before {content:"";display:inline-block;width:6vmin;height:6vmin;opacity:.5;}
+.step_tab .step_tab_1:before {background:url(http://jobnotes.cn/bmimg/step_1.svg) no-repeat 50% 50% / 6vmin;}
+.step_tab .step_tab_2:before {background:url(http://jobnotes.cn/bmimg/step_2.svg) no-repeat 50% 50% / 6vmin;}
+.step_tab .step_tab_3:before {background:url(http://jobnotes.cn/bmimg/step_3.svg) no-repeat 50% 50% / 6vmin;}
+.step_tab .step_tab_1:after,
+.step_tab .step_tab_2:after {content:"";border-top:1px solid rgba(255,255,255,.5);display:block;width:70%;position:absolute;right:-35%;top:2.8vmin;}
+.step_tab .on,
+.step_tab .done {color:#fff;}
+.step_tab .on .step_tab_1:before,
+.step_tab .on .step_tab_2:before,
+.step_tab .on .step_tab_3:before {opacity:1;}
+.step_tab .done .step_tab_1:before,
+.step_tab .done .step_tab_2:before,
+.step_tab .done .step_tab_3:before {background:url(http://jobnotes.cn/bmimg/ok_white.svg) no-repeat 50% 50% / 6vmin;opacity:1;}
+
+.step_tab_white {background:#fff;color:rgba(6,17,59,.5);display:block;width:100%;padding:5vmin 0;}
+.step_tab_white .step_tab_item {display:inline-block;width:33.33%;text-align:center;}
+.step_tab_white .step_tab_item text {display:block;padding-top:2vmin;line-height:1;font-size:3.5vmin;}
+.step_tab_white .step_tab_1,
+.step_tab_white .step_tab_2,
+.step_tab_white .step_tab_3 {position:relative;}
+.step_tab_white .step_tab_1:before,
+.step_tab_white .step_tab_2:before,
+.step_tab_white .step_tab_3:before {content:"";display:inline-block;width:6vmin;height:6vmin;opacity:.5;}
+.step_tab_white .step_tab_1:before {background:url(http://jobnotes.cn/bmimg/step_dark_1.svg) no-repeat 50% 50% / 6vmin;}
+.step_tab_white .step_tab_2:before {background:url(http://jobnotes.cn/bmimg/step_dark_2.svg) no-repeat 50% 50% / 6vmin;}
+.step_tab_white .step_tab_3:before {background:url(http://jobnotes.cn/bmimg/step_dark_3.svg) no-repeat 50% 50% / 6vmin;}
+.step_tab_white .step_tab_1:after,
+.step_tab_white .step_tab_2:after {content:"";border-top:1px dotted #06113b;display:block;width:70%;position:absolute;right:-35%;top:2.8vmin;}
+.step_tab_white .on,
+.step_tab_white .done {color:#06113b;}
+.step_tab_white .on .step_tab_1:before,
+.step_tab_white .on .step_tab_2:before,
+.step_tab_white .on .step_tab_3:before {opacity:1;}
+.step_tab_white .done .step_tab_1:before,
+.step_tab_white .done .step_tab_2:before,
+.step_tab_white .done .step_tab_3:before {background:url(http://jobnotes.cn/bmimg/ok_dark.svg) no-repeat 50% 50% / 6vmin;opacity:1;}
+
+.regulation {margin:5vmin;}
+.regulation text {display:block;}
+
+.redTxt {color:#f43530}
+
+.checkbox .wx-checkbox-input{width:4vmin;height:4vmin;border:1px solid #d0d0d0;}
+.checkbox .wx-checkbox-input.wx-checkbox-input-checked {position:relative;background:#fff;border:1px solid #ccc;}
+.checkbox .wx-checkbox-input.wx-checkbox-input-checked:before {content:"";position:absolute;left:1vmin;top:0;width:1.2vmin;height:2.7vmin;border:2px solid #09bb07;border-left:0;border-top:0;transform:rotate(45deg);}
+
+.check_code_box {margin:3vmin 8vmin;padding:0;}
+.check_code_box .iptbox,
+.check_code_box .btnbox {display:inline-block;margin:0;vertical-align:middle;}
+.check_code_box .iptbox {width:60%;}
+.check_code_box .btnbox {width:40%;}
+.check_code_box .iptbox input {border:0;border-bottom:1px solid #ccc;height:9vmin;line-height:9vmin;}
+.check_code_box .btnbox .btn {border:1rpx solid #06113b;color:#06113b;font-size:4vmin;text-align:center;border-radius:1.5vmin;padding:1.5vmin;}
+.check_code_box .btnbox .btn_hover {background:rgba(0,0,0,.1);}
+.check_code_box .check_code_txt {text-align:right;}
+
+.stateBox .heading {text-align:center;border:0;}
+.stateBox .paragraph {color:#888;}
+
+.face_identify_img {width:100%;}
+.face_identify_img image {width:100%;}
+
+
+
+.img-show-bg{margin: 2vmin}
+.img-show{width: 100%!important; height: 28vmin; margin: 0vmin;background:#efeff4; border-radius: 1.5vmin;margin-bottom:0vmin!important}
+.shut-btn{position: absolute; top: 1vmin; right:1vmin; width: 6vmin; height: 6vmin; font-size: 6vmin; text-align: center;color: #fff; background: red; border-radius: 6vmin; font-weight: bold;line-height: 6vmin}
+
+.float_l{float: left}
+.float_r{float: right}
+.picker{min-width: 50px; min-height: 20px}
+
+.authorize{font-size: 14px; width: auto; margin-bottom: 10px}
+
+.color-red{color:red; display: inline-block!important}
+
+.select_input{
+    min-width: 50px; min-height: 20px;
+    margin-right:.2rem;
+    color:#808080;
+}
+.img-show-bg_width{
+    margin:2vmin;
+    text-align:center;
+}
+.img-show_width{
+    height: 28vmin; margin: 0vmin;background:#efeff4; border-radius: 1.5vmin;margin-bottom:0vmin!important
+}
+.img-show_width1{
+    width:182px;
+    height:240px;
+    margin: 0vmin;background:#efeff4; border-radius: 1.5vmin;margin-bottom:0vmin!important
+}

@@ -1,0 +1,20 @@
+<!--pages/mine/loan_accept.wxml-->
+<!--//受理中贷款//-->
+<view class='whiteBox'>
+  <view class='list01'>
+    <view id="{{index}}" class='item' hover-class='item_hover' bindtap='to_LoanAccept_Detail' wx:for="{{datas}}">
+      <view class='item_in2'>
+        <text>{{item.loanAmt}}</text>
+        <text>申请借款</text>
+      </view>
+      <view class='item_in2'>
+        <text class='darkblue'>待签订合同</text>
+        <text>申请日{{item.loanApplyDate}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='tailbox'>{{message}}</view>
+
+

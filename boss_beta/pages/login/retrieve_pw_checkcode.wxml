@@ -1,0 +1,34 @@
+<!--pages/login/retrieve_pw_checkcode.wxml-->
+<!--//找回密码验证码//-->
+<view class='gap'></view>
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_key icon_phone'>
+        <input id="phone" type='number' placeholder='请输入手机号' bindinput='checkCodeChange'/>
+      </view>
+    </view>
+    <!-- <view class='item'>
+      <view class='item_key icon_lock'>
+        <input type='text' placeholder='请输入图片验证码' />
+      </view>
+      <view class='item_abs'>
+        <image class='checkcode_img' src='http://jobnotes.cn/bmimg/checkcode.png' mode="widthFix"></image>
+      </view>
+    </view> -->
+    <view class='item'>
+      <view class='item_key icon_lock'>
+        <input id="checkCode" type='text' placeholder='请输入验证码' bindinput='checkCodeChange'/>
+      </view>
+      <view class='item_val'>
+        <view class='check_code_btn' hidden='{{codeBtnHide}}' bindtap='getCheckCode'>获取验证码</view>
+        <view class='check_code_txt' hidden='{{codeTxtHide}}'>{{getCheckCode_txt}}</view>
+      </view>
+      
+    </view>
+  </view>
+</view>
+
+<view class='btnbox'>
+  <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='to_Retrieve_Pw'>下一步</button>
+</view>

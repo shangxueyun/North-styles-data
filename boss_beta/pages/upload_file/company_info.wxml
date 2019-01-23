@@ -1,0 +1,43 @@
+<!--pages/upload_file/company_info.wxml-->
+<!--//信息确认：填写公司名称//-->
+<view class='step_tab'>
+  <view class='step_tab_item done'>
+    <view class='step_tab_1'></view>
+    <text>上传资料</text>
+  </view>
+  <view class='step_tab_item on'>
+    <view class='step_tab_2'></view>
+    <text>信息确认</text>
+  </view>
+  <view class='step_tab_item'>
+    <view class='step_tab_3'></view>
+    <text>合同签署</text>
+  </view>
+</view>
+
+<view class='heading02'><text class="color-red">*</text>公司名称</view>
+
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_key'>
+        <input id="company" type='text' bindinput='coNameChange' placeholder="请输入完整公司全称" />
+      </view>
+    </view>
+  </view>
+</view>
+<view class='heading02'><text class="color-red">*</text>邮箱</view>
+
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_key'>
+        <input id="email" type='text' bindinput='coNameChange' placeholder="请输入邮箱" />
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='btnbox'>
+  <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='to_CompanyInfo_Step2'>下一步</button>
+</view>

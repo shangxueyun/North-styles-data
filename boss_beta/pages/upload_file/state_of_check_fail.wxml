@@ -1,0 +1,12 @@
+<!--pages/upload_file/state_of_check_fail.wxml-->
+<!--//上传资料状态：审核未通过//-->
+<view class='stateBox'>
+  <view class='icon_warn'></view>
+  <view class='heading'>审核未通过</view>
+  <view class='paragraph'>原因：图片不清晰，可重新提交（次日）</view>
+
+  <!--此按钮只做测试用途，程序开发时请移除-->
+  <view class='stateTestBox'>
+    <button bindtap='to_StateOfCheck_Success'>查看下一个状态</button>
+  </view>
+</view>

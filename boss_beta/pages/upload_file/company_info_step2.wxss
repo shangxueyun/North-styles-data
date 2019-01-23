@@ -1,0 +1,23 @@
+/* pages/upload_file/company_info_step2.wxss */
+.adressDetail{ width: 150px; float: right; text-align: right}
+.adressDetail-bg{
+  float: left;
+  width: 91.6%;
+  background: #fff
+}
+.whiteBox-bg{
+  float: left;
+  margin-top: -4.2vmin
+}
+
+.last-item{
+  border-bottom: 1px solid #e1e1e1!important
+}
+
+.white{
+  color: #fff
+}
+
+.black{
+  color: #000
+}

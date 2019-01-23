@@ -1,0 +1,18 @@
+<!--pages/reg/reg.wxml-->
+<!--//注册//-->
+<view class='gap'></view>
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_key icon_phone'>
+        <input type='number' bindinput='phoneNumChange' placeholder="请输入手机号" placeholder-class='phone_placeholder' />
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='{{warnClass}}'>{{warnTxt}}</view>
+
+<view class='btnbox'>
+  <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='{{btnBind}}'>下一步</button>
+</view>

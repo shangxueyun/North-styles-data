@@ -1,0 +1,72 @@
+<!--pages/upload_file/upload_idcard_controller.wxml-->
+<!--//上传资料：上传身份证——实际控制人//-->
+<view class='step_tab'>
+  <view class='step_tab_item on'>
+    <view class='step_tab_1'></view>
+    <text>上传资料</text>
+  </view>
+  <view class='step_tab_item'>
+    <view class='step_tab_2'></view>
+    <text>信息确认</text>
+  </view>
+  <view class='step_tab_item'>
+    <view class='step_tab_3'></view>
+    <text>合同签署</text>
+  </view>
+</view>
+
+<view class='whiteBox'>
+  <view class='heading02'>请上传实际控制人身份证正面和背面照片</view>
+  <view class='list02'>
+    <view class='item' hover-class='item_hover'>
+      <view class='innerbox' hover-class='item_hover' wx:if="{{!IDN}}" id="IDN" bindtap="onImg">
+        <image src='http://jobnotes.cn/bmimg/id_front.png' mode='widthFix'></image>
+        <icon class='icon_camera'></icon>
+        <text>上传身份证正面</text>
+      </view>
+      <view wx:else class='img-show-bg'>
+        <image id="IDN-img" src="{{IDN}}" class='img-show'  bindtap="previewImage"></image>
+        <view id="IDN-shut" bindtap="closeImg" class='shut-btn'><text>X</text></view>
+      </view> 
+    </view>
+    <view class='item' hover-class='item_hover'>
+      <view class='innerbox' hover-class='item_hover' wx:if="{{!IDS}}" id="IDS" bindtap="onImg">
+        <image src='http://jobnotes.cn/bmimg/id_back.png' mode='widthFix'></image>
+        <text>上传身份证背面</text>
+        <icon class='icon_camera'></icon>
+      </view>
+      <view wx:else class='img-show-bg'>
+        <image id="IDS-img" src="{{IDS}}" class='img-show' bindtap="previewImage"></image>
+        <view id="IDS-shut" bindtap="closeImg" class='shut-btn'><text>X</text></view>
+      </view> 
+    </view>
+  </view>
+</view>
+
+<view class='whiteBox'>
+  <view class='heading02'>身份证照片要求</view>
+  <view class='borderBox'>
+    <view class='list02'>
+      <view class='item_4'>
+        <image src='http://jobnotes.cn/bmimg/idcard_1.png' mode='widthFix'></image>
+        <text>标准</text>
+      </view>
+      <view class='item_4'>
+        <image src='http://jobnotes.cn/bmimg/idcard_2.png' mode='widthFix'></image>
+        <text>边框缺失</text>
+      </view>
+      <view class='item_4'>
+        <image src='http://jobnotes.cn/bmimg/idcard_3.png' mode='widthFix'></image>
+        <text>照片模糊</text>
+      </view>
+      <view class='item_4'>
+        <image src='http://jobnotes.cn/bmimg/idcard_4.png' mode='widthFix'></image>
+        <text>闪光强烈</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='btnbox'>
+    <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='to_CompanyInfo'>下一步</button>
+  </view>
+</view>

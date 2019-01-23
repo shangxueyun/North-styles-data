@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
+<path fill="#6889CF" d="M23,0H3C1.35,0,0,1.35,0,3v26c0,1.65,1.35,3,3,3h17.896C17.993,30.505,16,27.483,16,24H6
+	c-0.552,0-1-0.447-1-1s0.448-1,1-1h10.232c0.913-4.002,4.494-7,8.768-7c0.338,0,0.671,0.022,1,0.059V3C26,1.35,24.65,0,23,0z M6,9h6
+	c0.552,0,1,0.448,1,1s-0.448,1-1,1H6c-0.552,0-1-0.448-1-1S5.448,9,6,9z M18,17H6c-0.552,0-1-0.448-1-1s0.448-1,1-1h12
+	c0.553,0,1,0.448,1,1S18.553,17,18,17z"/>
+<circle fill="#6889CF" cx="25" cy="24" r="7"/>
+<polygon fill="#FFFFFF" points="25,18.169 26.714,21.642 30.546,22.198 27.772,24.901 28.428,28.718 25,26.915 21.572,28.718 
+	22.228,24.901 19.454,22.198 23.286,21.642 "/>
+</svg>

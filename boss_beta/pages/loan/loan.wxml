@@ -1,0 +1,68 @@
+<!--pages/loan/loan.wxml-->
+<!--//申请贷款//-->
+<view>
+  <view class='topbox'>
+    <text class='top_title'>剩余可用额度(元)</text>
+    <text>{{canAmount}}</text>
+  </view>
+</view>
+
+<view class='gap'></view>
+
+<view class='whiteBox_border'>
+  <view class='heading_gray'>本次申请贷款</view>
+  <view class='list'>
+    <view class='item'>
+      <view class='item_key'>
+        <view class='icon_yen'>
+          <input style="float:right;"  bindfocus="focus" bindblur="blur"  class="input-money" id='money' value='{{applyShow}}' bindinput='moneyChange' type='number' placeholder-class="yen_placeholder" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style="clear: both;"></view>
+  <view class='heading_gray'>贷款期限</view>
+  <view class='list'>
+    <view class='item'>
+      <view class='item_key arrow'>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{lengthOfTime}}" range-key="showText">
+          <view class="picker">
+            {{lengthOfTime[index].loanTerm + lengthOfTime[index].loanTermUnitDescription}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='item border_top'>
+      <view class='item_key'>
+        贷款年化利率为：<text class="redTxt">{{loanRate}}%</text>
+      </view>
+       <view class='item_key'>
+        <text>还款方式为：{{modeDesc}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='btnbox'>
+  <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='{{btnBind}}'>下一步</button>
+</view>
+
+<view class='poper' hidden='{{poperHide}}'>
+  <view class='popbox'>
+    <view class="headerTop">提示</view>
+    <view class="header">
+      <text>{{poperHeadtext}}</text>
+    </view>
+    <view class='submitbox'>
+      <button class='btn_half' bindtap='closePoper'>确定</button>
+    </view>
+  </view>
+</view>
+
+<!-- 
+{{poperHeadtext}}
+  <view>
+    <text>输入金额不能超过可用额度</text>
+  </view>
+ -->
+

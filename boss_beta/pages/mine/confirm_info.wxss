@@ -1,0 +1,8 @@
+/* pages/loan/confirm_info.wxss */
+.list .item {
+    display:block;
+    line-height:2.5;
+    position:relative;
+
+}
+    

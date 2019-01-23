@@ -1,0 +1,108 @@
+<!--pages/upload_file/confirm_info.wxml-->
+<!--//上传资料：信息确认//-->
+<view class='step_tab'>
+  <view class='step_tab_item done'>
+    <view class='step_tab_1'></view>
+    <text>上传资料</text>
+  </view>
+  <view class='step_tab_item on'>
+    <view class='step_tab_2'></view>
+    <text>信息确认</text>
+  </view>
+  <view class='step_tab_item'>
+    <view class='step_tab_3'></view>
+    <text>合同签署</text>
+  </view>
+</view>
+
+<view class='heading02'>请核对修改并完善相关信息</view>
+
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_key'>法定代表人姓名</view>
+      <view class='item_val'>
+        <input id="legalPersonName" type='text' placeholder="请输入" bindinput="changeData" value='{{info.legalPersonName}}' />
+      </view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>身份证号</view>
+      <view class='item_val'>
+        <input type='number' id="legalPersonId" bindinput="changeData"  placeholder="请输入" value='{{info.legalPersonId}}' />
+      </view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>身份证有效起始日期</view>
+      <view class='item_val'>
+        <picker mode="date" id="legalPersonIdStart"  value="{{info.legalPersonIdStart}}" start="1700-12-12" end="2100-12-12" bindchange="changeData">
+          <view class="picker">
+            {{info.legalPersonIdStart}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>身份证有效截止日期</view>
+      <view class='item_val'>
+        <picker mode="date" id="legalPersonIdExpire" value="{{info.legalPersonIdExpire}}" start="1700-12-12" end="2100-12-12" bindchange="changeData">
+          <view class="picker">
+            {{info.legalPersonIdExpire}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='item' hover-class='item_hover'>
+      <view class='item_key'>住址</view>
+      <view class='item_val'>
+        <input id="legalPersonIdAddress" type='text'placeholder="请输入" value='{{info.legalPersonIdAddress}}' bindinput="changeData" />
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_key'>实际控制人姓名</view>
+      <view class='item_val'>
+        <input id="controlName" type='text' bindinput="changeData" placeholder="请输入" value='{{info.controlName}}' />
+      </view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>身份证号</view>
+      <view class='item_val'>
+        <input type='number' id="controlIdNo" placeholder="请输入" bindinput="changeData" value='{{info.controlIdNo}}' />
+      </view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>身份证有效起始日期</view>
+      <view class='item_val'>
+        <picker id="controlIdStart" mode="date" value="{{info.controlIdStart}}" start="1900-01-01" end="2057-09-01" bindchange="changeData">
+          <view class="picker">
+            {{info.controlIdStart}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>身份证有效截止日期</view>
+      <view class='item_val'>
+        <picker style="padding-right:6px" id="controlIdExpire" mode="date" value="{{info.controlIdExpire}}" start="1900-01-01" end="2057-09-01" bindchange="changeData">
+          <view class="picker">
+            {{info.controlIdExpire}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='item' hover-class='item_hover'>
+      <view class='item_key'>住址</view>
+      <view class='item_val'>
+        <input id="controlIdAddress" type='text' bindinput="changeData" placeholder="请输入" value='{{info.controlIdAddress}}' />
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='btnbox'>
+  <button class='button_dark' hover-class='button_dark_hover' bindtap='to_RealizeFace'>确认无误</button>
+</view>

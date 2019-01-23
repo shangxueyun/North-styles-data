@@ -1,0 +1,12 @@
+<!--pages/upload_file/state_of_check.wxml-->
+<!--//上传资料状态：审核中//-->
+<view class='stateBox'>
+  <view class='icon_time'></view>
+  <view class='heading'>申请已提交，额度审核中……</view>
+  <view class='paragraph'>额度申请已提交，请耐心等待</view>
+
+  <!--此按钮只做测试用途，程序开发时请移除-->
+  <view class='stateTestBox'>
+    <button bindtap='to_StateOfCheck_Fail'>返回登录</button>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+/* pages/reg/reg.wxss */
+.item {padding:0;}
+.item input {font-size:7vmin;height:10vmin;}
+.phone_placeholder {font-size:5vmin;}
+.icon_phone {padding-left:12vmin;}
+.icon_phone:before {height:10vmin;width:10vmin;background-size:8vmin;}

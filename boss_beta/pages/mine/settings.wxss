@@ -1,0 +1,36 @@
+/* pages/mine/settings.wxss */
+.list01 .Logout{
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    padding:0;
+    margin:0;
+    height:11vmin;
+    margin-bottom:1vmin;
+    line-height:11vmin;
+    background:#fff;
+    color:#1ce81c;
+    
+}
+.Logout .item_key{
+    text-align:center;
+}
+.poper .popbox {
+    bottom:calc((100vh - 40vmin) / 2);
+    }
+    .popbox .headerTop{
+      padding:4vmin;
+      text-align:center;
+      color: limegreen;
+    }
+    .popbox .header{
+      padding:4vmin;
+      text-align:center;
+      font-size:4vmin;
+    }
+    .popbox .footer{
+      padding:4vmin;
+    }
+    .submitbox{
+      text-align: center;
+    }

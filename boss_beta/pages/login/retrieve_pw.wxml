@@ -1,0 +1,17 @@
+<!--pages/login/retrieve_pw.wxml-->
+<!--//找回密码//-->
+<view class='gap'></view>
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_key icon_lock'><input type='password' bindinput='pwChange' placeholder='请输入密码，字数+字母不少于6位' /></view>
+    </view>
+    <view class='item'>
+      <view class='item_key icon_lock'><input bindinput='rePwChange' type='password' placeholder='请再次确认新的密码' /></view>
+    </view>
+  </view>
+</view>
+
+<view class='btnbox'>
+  <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='to_Login'>确认</button>
+</view>

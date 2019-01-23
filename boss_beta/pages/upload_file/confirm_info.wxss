@@ -1,0 +1,4 @@
+/* pages/upload_file/confirm_info.wxss */
+.item_val{
+  width: calc(100vw - 160px)
+}

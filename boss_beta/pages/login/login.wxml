@@ -1,0 +1,35 @@
+<!--pages/login/login.wxml-->
+<!--//登录//-->
+<view>
+  <view class='topbox'>
+    <view class='avatarbox'>
+      <image class='avatar' mode='scaleToFill' src='http://jobnotes.cn/bmimg/avatar.svg'/>
+    </view>
+  </view>
+</view>
+
+<view class='gap'></view>
+
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_key icon_phone'>
+        <input type='number' bindinput='phChange' placeholder='手机号' />
+      </view>
+    </view>
+    <view class='item'>
+      <view class='item_key icon_lock'>
+        <input type='password' bindinput='pwChange' placeholder='密码' />
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='btnbox'>
+  <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='to_Index'>登录</button>
+</view>
+
+<view class='btnbox'>
+  <text class='link float_l' hover-class='link_hover' bindtap='to_Reg'>注册账号</text>
+  <text class='link float_r' hover-class='link_hover' bindtap='to_Retrieve_Pw_CheckCode'>忘记密码？</text>
+</view>

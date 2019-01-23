@@ -1,0 +1,46 @@
+<!--pages/reg/check_phone_num.wxml-->
+<!--//验证手机号码//-->
+<view class='boxer'>
+  <text>手机号码：{{phone}}</text>
+</view>
+
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_key icon_lock'>
+        <input id="password" type='password' bindinput='checkCodeChange' placeholder="字数+字母不少于6位" />
+      </view>
+    </view>
+    <view class='item'>
+      <view class='item_key icon_lock'>
+        <input id="rePassword" bindinput='checkCodeChange' type='password' placeholder="请再次确认密码" />
+      </view>
+    </view>
+    <view class='item'>
+      <view class='item_key icon_mail'>
+        <input id="checkCode" type='number' bindinput='checkCodeChange' placeholder="请输入验证码" />
+      </view>
+      <view class='item_val'>
+        <view class='check_code_btn' hidden='{{codeBtnHide}}' bindtap='getCheckCode'>获取验证码</view>
+        <view class='check_code_txt' hidden='{{codeTxtHide}}'>{{getCheckCode_txt}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='btnbox'>
+  <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='btnClick'>下一步</button>
+</view>
+
+<view class='poper' hidden='{{poperHide}}'>
+  <view class='popbox'>
+    <view class='headingbox'>
+      <text class='heading icon_ok'>验证成功</text>
+    </view>
+    <text class='paragraph'>您接下来所录入或上传的资料和信息将用于收集主体资料、身份验证、审批业务等目的，并有可能披露给第三方；如果您非申请企业及其法定代表人本人或者有权代理人，请立即停止相关操作。</text>
+    <view class='submitbox'>
+      <button class='btn_half' hover-class='btn_half_hover' bindtap='closePoper'>取消</button>
+      <button class='btn_half' hover-class='btn_half_hover' bindtap='to_UploadFile'>确定</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,42 @@
+<!--pages/mine/loan_needtopay.wxml-->
+<!--//待还款贷款//-->
+<view class='tabbox'>
+  <view class='tabItem_in2 {{tabCurrent_expire}}' bindtap='tabbtn_expire'>
+    <text class='tab_menu'>即将到期贷款</text>
+  </view>
+  <view class='tabItem_in2 {{tabCurrent_overdue}}' bindtap='tabbtn_overdue'>
+    <text class='tab_menu'>逾期贷款</text>
+  </view>
+</view>
+
+<view class='whiteBox' hidden='{{tabHide_expire}}'>
+  <view class='list01'>
+    <view id="{{item.agreementId}}" class='item' hover-class='item_hover' bindtap='to_LoanNeedToPay_Detail_expire' wx:for="{{datas}}">
+      <view class='item_in2'>
+        <text>{{item.amount}}</text>
+        <text>应还本金+利息总额</text>
+      </view>
+      <view class='item_in2'>
+        <text class='darkblue'>即将到期</text>
+        <text>到期日{{item.lastRepayDate}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='whiteBox' hidden='{{tabHide_overdue}}'>
+  <view class='list01'>
+    <view id="{{item.agreementId}}" class='item' hover-class='item_hover' bindtap='to_LoanNeedToPay_Detail_overdue' wx:for="{{datas1}}">
+      <view class='item_in2'>
+        <text>{{item.amount}}</text>
+        <text>应还本金+利息总额</text>
+      </view>
+      <view class='item_in2'>
+        <text class='darkblue'>逾期</text>
+        <text>到期日{{item.lastRepayDate}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='tailbox'>没有更多了</view>

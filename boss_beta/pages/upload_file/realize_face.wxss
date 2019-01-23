@@ -1,0 +1,26 @@
+/* pages/upload_file/realize_face.wxss */
+page {background:#fff;}
+.img-show-realize_face{
+  width: 100%
+}
+.canvas{
+  width:250px;
+  height:310px;
+  position: absolute;
+  border-radius:1.5vmin;
+  z-index: 1;
+}
+.positionA{
+  z-index: 111;
+  width:250px;
+  height:310px;
+}
+.poper{
+  position: fixed;
+  z-index:1111111;
+}
+.poper .popbox {
+  width:80vmin;
+  left:10vmin;
+  bottom:calc((100vh - 50vmin) / 2);
+}

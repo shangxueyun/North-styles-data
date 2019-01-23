@@ -1,0 +1,111 @@
+<!--pages/upload_file/upload_file.wxml-->
+<!--//上传资料：上传证照//-->
+<view class='step_tab'>
+  <view class='step_tab_item on'>
+    <view class='step_tab_1'></view>
+    <text>上传资料</text>
+  </view>
+  <view class='step_tab_item'>
+    <view class='step_tab_2'></view>
+    <text>信息确认</text>
+  </view>
+  <view class='step_tab_item'>
+    <view class='step_tab_3'></view>
+    <text>合同签署</text>
+  </view>
+</view>
+
+<view class='heading02'>上传证件材料<text class='tip'>(*为必须上传)</text></view>
+
+<view class='list02'>
+  <view class='item'>
+    <view class='innerbox' hover-class='item_hover' wx:if="{{!YYZZ}}" id="YYZZ" bindtap="onImg">
+      <view class='icon_plus'></view>
+      <text class='important'>上传营业执照</text>
+    </view>
+    <view wx:else class='img-show-bg_width'>
+      <image id="YYZZ-img" bindtap="previewImage" src="{{YYZZ}}" class='img-show_width'></image>
+      <view id="YYZZ-shut" bindtap="closeImg" class='shut-btn'><text>X</text></view>
+    </view> 
+  </view>
+
+  <view class='item'>
+    <view class='innerbox' hover-class='item_hover' wx:if="{{!KHXK}}" id="KHXK" bindtap="onImg">
+      <view class='icon_plus'></view>
+      <text class='important'>上传开户许可证</text>
+    </view>
+    <view wx:else class='img-show-bg_width'>
+      <image id="KHXK-img" bindtap="previewImage" src="{{KHXK}}" class='img-show_width'></image>
+      <view id="KHXK-shut" bindtap="closeImg" class='shut-btn'><text>X</text></view>
+    </view> 
+  </view>
+
+  <view class='item'>
+    <view class='innerbox' hover-class='item_hover' wx:if="{{!JGXY}}" id="JGXY" bindtap="onImg">
+      <view class='icon_plus'></view>
+      <text class='important'>上传机构信用代码</text>
+    </view>
+    <view wx:else class='img-show-bg_width'>
+      <image id="JGXY-img" bindtap="previewImage" src="{{JGXY}}" class='img-show_width'></image>
+      <view id="JGXY-shut" bindtap="closeImg" class='shut-btn'><text>X</text></view>
+    </view>
+  </view>
+
+  <view class='item'>
+    <view class='innerbox' hover-class='item_hover' wx:if="{{!FRHK}}" id="FRHK" bindtap="onImg">
+      <view class='icon_plus'></view>
+      <text class='important'>上传法人户口簿</text>
+    </view>
+    <view wx:else class='img-show-bg_width'>
+      <image id="FRHK-img" bindtap="previewImage" src="{{FRHK}}" class='img-show_width'></image>
+      <view id="FRHK-shut" bindtap="closeImg" class='shut-btn'><text>X</text></view>
+    </view>
+  </view>
+  <view class='item'>
+  <view class='innerbox' hover-class='item_hover' wx:if="{{!FRPO}}" id="FRPO" bindtap="onImg">
+      <view class='icon_plus'></view>
+      <text>上传法人配偶</text>
+      <text>身份证件扫描</text>
+    </view>
+    <view wx:else class='img-show-bg_width'>
+      <image id="FRPO-img" bindtap="previewImage" src="{{FRPO}}" class='img-show_width'></image>
+      <view id="FRPO-shut" bindtap="closeImg" class='shut-btn'><text>X</text></view>
+    </view>
+  </view>
+  <view class='item'>
+    <view class='innerbox' hover-class='item_hover' wx:if="{{!FRJH}}" id="FRJH" bindtap="onImg">
+      <view class='icon_plus'></view>
+      <text>上传法人结婚证</text>
+    </view>
+    <view wx:else class='img-show-bg_width'>
+      <image id="FRJH-img" bindtap="previewImage" src="{{FRJH}}" class='img-show_width'></image>
+      <view id="FRJH-shut" bindtap="closeImg" class='shut-btn'><text>X</text></view>
+    </view>
+  </view>
+
+  <view class='item'>
+    <view class='innerbox' hover-class='item_hover' wx:if="{{!SJKZ}}" id="SJKZ" bindtap="onImg">
+      <view class='icon_plus'></view>
+      <text>上传实际控制</text>
+      <text>个人征信查询授权书</text>
+    </view>
+    <view wx:else class='img-show-bg_width'>
+      <image id="SJKZ-img" bindtap="previewImage" src="{{SJKZ}}" class='iimg-show_width'></image>
+      <view id="SJKZ-shut" bindtap="closeImg" class='shut-btn'><text>X</text></view>
+    </view>
+  </view>
+  <view class='item'>
+    <view class='innerbox' hover-class='item_hover' wx:if="{{!YYZZ2}}" id="YYZZ2" bindtap="onImg">
+      <view class='icon_plus'></view>
+      <text>其他照片</text>
+    </view>
+    <view wx:else class='img-show-bg_width'>
+      <image id="YYZZ2-img" bindtap="previewImage" src="{{YYZZ2}}" class='img-show_width'></image>
+      <view id="YYZZ2-shut" bindtap="closeImg" class='shut-btn'><text>X</text></view>
+    </view>
+  </view>
+</view>
+
+<view class='btnbox'>
+  <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='to_UploadIdcard'>下一步</button>
+</view>

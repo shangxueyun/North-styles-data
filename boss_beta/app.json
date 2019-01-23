@@ -1,0 +1,123 @@
+{
+  "pages": [
+    "pages/login/auth",
+    "pages/mine/personal_info",
+    "pages/upload_file/confirm_info",
+    "pages/upload_file/upload_idcard",
+   
+    "pages/upload_file/sign_contract",
+   
+    
+    
+    "pages/mine/loan_wait",
+    
+    "pages/loan/loan",
+    
+    
+    
+    
+    "pages/upload_file/company_info_step2",
+    
+    "pages/mine/confirm_info",
+    
+    "pages/upload_file/realize_face",
+    
+    
+    
+    "pages/upload_file/company_info",
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    "pages/upload_file/state_of_check",
+    
+    "pages/index/index",
+    
+    
+    "pages/upload_file/sign",
+    
+    
+    "pages/login/login",
+    
+    "pages/upload_file/upload_idcard_controller",
+    
+    "pages/upload_file/upload_file",
+    "pages/reg/reg",
+    
+    
+    
+  
+    "pages/mine/loan_needtopay",
+   
+    "pages/mine/mine",
+
+    
+  
+    
+    "pages/login/retrieve_pw_checkcode",
+    "pages/login/retrieve_pw",
+    "pages/login/modify_pw",
+    "pages/mine/settings",
+  
+    "pages/mine/loan_payoff",
+    "pages/mine/loan_notpass",
+    "pages/mine/loan_notpass_detail",
+    "pages/mine/loan_waiting",
+    "pages/mine/loan_accept",
+    
+
+    "pages/reg/check_phone_num",
+    
+    "pages/upload_file/state_of_check_fail",
+    "pages/upload_file/state_of_check_success",
+    
+    "pages/loan/state_of_check",
+    "pages/loan/confirm_info",
+    
+    "pages/mine/aboutus",
+  
+    "pages/mine/loan_needtopay_detail_overdue",
+    "pages/mine/loan_needtopay_detail_expire",
+    "pages/mine/loan_payoff_detail",
+    "pages/mine/loan_accept_detail",
+    
+    "pages/mine/loan_waiting_detail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#06123c",
+    "navigationBarTitleText": "首页",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#818287",
+    "selectedColor": "#06123c",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首 页",
+        "iconPath": "images/tabbar_index_off.png",
+        "selectedIconPath": "images/tabbar_index_on.png"
+      },
+      {
+        "pagePath": "pages/loan/loan",
+        "text": "申请贷款",
+        "iconPath": "images/tabbar_loan_off.png",
+        "selectedIconPath": "images/tabbar_loan_on.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我 的",
+        "iconPath": "images/tabbar_mine_off.png",
+        "selectedIconPath": "images/tabbar_mine_on.png"
+      }
+    ]
+  }
+}

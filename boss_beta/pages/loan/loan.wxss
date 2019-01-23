@@ -1,0 +1,42 @@
+/* pages/loan/loan.wxss */
+.border_top {margin-top:4vmin;padding-top:3vmin;}
+.icon_yen {padding-left:10vmin;}
+.icon_yen:before {width:8vmin;height:8vmin;background-size:6vmin;vertical-align:top;}
+.icon_yen input {height:10vmin;line-height:10vmin;font-size:8vmin;vertical-align:top;}
+.yen_placeholder {font-size:5vmin;}
+.item_key {width:100%;}
+picker {width:100%;}
+.input-money{
+  display: inline-block;
+  width:9rem;
+  text-align:right;
+}
+.input-after{
+  font-size:8vmin;
+  line-height:10vmin!important;
+
+}
+.poper .popbox {
+bottom:calc((100vh - 50vmin) / 2);
+}
+.popbox .headerTop{
+  padding:4vmin;
+  text-align:center;
+  color: limegreen;
+}
+.popbox .header{
+  padding:4vmin;
+  text-align:center;
+  font-size:4vmin;
+}
+.popbox .footer{
+  padding:4vmin;
+}
+.submitbox{
+  text-align: center;
+}
+.input-money {
+  width:100%;
+  text-align:left;
+}
+  

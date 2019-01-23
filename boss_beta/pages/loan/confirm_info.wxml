@@ -1,0 +1,85 @@
+<!--pages/loan/confirm_info.wxml-->
+<!--//信息确认//-->
+<view>
+  <view class='topbox'>
+    <text class='top_title'>借款本金金额</text>
+    <text>{{applyAmount}}</text>
+  </view>
+  <view class='tabbox tab_bg_white'>
+      <view class='tabItem_in4'>
+        <view class='column_line'>
+          <view class='title'>{{date}}</view>
+          <text class='small gray'>借款期限</text>
+        </view>
+      </view>
+      <view class='tabItem_in4'>
+        <view class='column_line'>
+          <view class='title'>{{rate}}%</view>
+          <text class='small gray'>年化利率</text>
+        </view>
+      </view>
+      <view class='tabItem_in4'>
+        <view class='column_line'>
+          <view class='title'>{{returnAmount}}</view>
+          <text class='small gray'>应还总额</text>
+        </view>
+      </view>
+      <view class='tabItem_in4'>
+        <view class='title'>{{serverMount}}</view>
+        <text class='small gray'>服务费用</text>
+      </view>
+    </view>
+</view>
+<view class='gap'></view>
+<view class='whiteBox'>
+  <text class='heading01 icon_firm'>企业注册信息</text>
+  <view class='list'>
+    <view class='item'>
+      <text class='gray'>企业名称：</text>
+      <text>{{companyName}}</text>
+    </view>
+    <view class='item'>
+      <text class='gray'>法定代表人名称：</text>
+      <text>{{legalPersonName}}</text>
+    </view>
+    <view class='item'>
+      <text class='gray'>法定代表人手机号：</text>
+      <text>{{phone}}</text>
+    </view>
+    <view class='item'>
+      <text class='gray'>资金监管专户账号：</text>
+      <text>{{accountNo}}</text>
+    </view>
+  </view>
+</view>
+
+
+<view class='btnbox'>
+  <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='showPoper'>确认无误，申请贷款</button>
+</view>
+
+<view class='paddingbox'>
+  <text class='gray align_c'>信息不可修改，修改请联系客服人员</text>
+  <view class='icon_customer_service align_c' bindtap='makePhoneCall'>{{phoneNum}}</view>
+</view>
+<view class='gap'></view>
+
+<view class='poper' hidden='{{poperHide}}'>
+  <view class='popbox'>
+    <view class='headingbox'>
+      <text class='heading icon_tip'>提示</text>
+    </view>
+    <text class='paragraph'>向法人手机{{phoneRe}}发送验证码。</text>
+    <view class='check_code_box'>
+      <view class='iptbox'><input bindinput='changeInput' type='number' placeholder="请输入验证码" /></view>
+      <view class='btnbox'>
+        <view class='btn' hover-class='btn-hover' hidden='{{codeBtnHide}}' bindtap='getCheckCode'>获取验证码</view>
+        <view class='check_code_txt' hidden='{{codeTxtHide}}'>{{getCheckCode_txt}}</view>
+      </view>
+    </view>
+    <view class='submitbox'>
+      <button class='btn_half' hover-class='btn_half_hover' bindtap='closePoper'>取消</button>
+      <button class='btn_half' hover-class='btn_half_hover' bindtap='to_StateOfCheck'>确定</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,68 @@
+<!--pages/mine/loan_waiting_detail.wxml-->
+<!--//待放款贷款详情//-->
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_in2 gray'>状态</view>
+      <view class='item_in2'>待放款</view>
+    </view>
+    <!-- 
+    <view class='item'>
+      <view class='item_in2 gray'>资金方</view>
+      <view class='item_in2'>招商银行</view>
+    </view>    
+     -->
+    <view class='item'>
+      <view class='item_in2 gray'>应还本金</view>
+      <view class='item_in2'>{{loanAmt}}元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>贷款利率</view>
+      <view class='item_in2'>{{loanRate}}%</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>应还利息</view>
+      <view class='item_in2'>{{interest}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>应还总额</view>
+      <view class='item_in2'>{{Total}}元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>发起申请日</view>
+      <view class='item_in2'>{{loanApplyDate}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>贷款起始日</view>
+      <view class='item_in2'>{{outDate}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>贷款到期日</view>
+      <view class='item_in2'>{{loanEndDate}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>贷款期限</view>
+      <view class='item_in2'>{{loanTerm}}天</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>服务费率</view>
+      <view class='item_in2'>{{feeRate}}%</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>服务费金额</view>
+      <view class='item_in2'>{{feeAmt}}元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>服务费支付方式</view>
+      <view class='item_in2'>{{feeMode}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>逾期罚息日利率</view>
+      <view class='item_in2'>逾期金额的每日{{delayRate}}</view>
+    </view>
+    <view class='item' hover-class='item_hover'>
+      <view class='item_in2 gray'>借款合同</view>
+      <view class='item_in2'>《借款合同》</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,11 @@
+<!--wxml-->
+<!-- 如果只是展示用户头像昵称，可以使用 <open-data /> 组件 -->
+<view class='avatarbox title-bg'>
+  <image class='avatar title-icon' mode='scaleToFill' src='../../images/app-icon.png'/>
+</view>
+
+<!-- 需要使用 button 来授权登录 -->
+<view class='btnbox btn-style' wx:if="{{canIUse}}">
+  <button class='button_dark' hover-class='button_dark_hover' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+</view>
+<view wx:else>请升级微信版本</view>

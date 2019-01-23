@@ -1,0 +1,50 @@
+<!--pages/mine/loan_accept_detail.wxml-->
+<!--//受理中贷款详情//-->
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_in2 gray'>状态</view>
+      <view class='item_in2'>受理中</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>申请贷款金额(应还本金)</view>
+      <view class='item_in2'>{{loanAmt}}元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>贷款利率</view>
+      <view class='item_in2'>{{loanRate}}%</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>应还利息</view>
+      <view class='item_in2'>元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>贷款期限</view>
+      <view class='item_in2'>{{loanTerm}}天</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>发起申请日</view>
+      <view class='item_in2'>{{loanApplyDate}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>应还总额</view>
+      <view class='item_in2'>元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>逾期罚息日利率</view>
+      <view class='item_in2'>逾期金额的每日{{delayRate}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>服务费率</view>
+      <view class='item_in2'>%</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>服务费金额</view>
+      <view class='item_in2'>元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>服务费支付方式</view>
+      <view class='item_in2'></view>
+    </view>
+  </view>
+</view>

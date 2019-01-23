@@ -1,0 +1,12 @@
+<!--pages/upload_file/state_of_check_success.wxml-->
+<!--//上传资料状态：审核通过//-->
+<view class='stateBox'>
+  <view class='icon_ok'></view>
+  <view class='heading'>审核通过</view>
+  <view class='paragraph'>请在PC端安装发票采集控件，授权我公司进行相关信息采集，同时在PC端登录账户（网址：www.com），登录名和密码与小程序的登录手机号和密码相同，登录成功后需进行资金监管专户的开户和应收账款回款账户变更，变更完成之前申请贷款可能会受到拒绝。</view>
+
+  <!--此按钮只做测试用途，程序开发时请移除-->
+  <view class='stateTestBox'>
+    <button bindtap='to_Home'>下一个页面</button>
+  </view>
+</view>

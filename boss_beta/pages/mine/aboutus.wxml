@@ -1,0 +1,19 @@
+<!--pages/mine/aboutus.wxml-->
+<!--//关于我们//-->
+<view class='whiteBox'>
+  <view class='heading03'>上海溟宗供应链管理有限公司</view>
+
+  <view class='heading04'>公司介绍</view>
+
+  <view class='paragraphBox'>
+  <text class='text'>上海溟宗供应链管理有限公司成立于2018年8月，为上海北溟数据科技有限公司子公司，公司依托北溟集团丰富的数据资源和强大的技术力量，通过搭建中小微企业交易金融管理平台，致力于实现中小微企业与金融机构（即资产和资金）在线高效、安全、便捷的需求匹配对接。通过对中小微企业供应链信息流、物流、资金流等实时信息的掌控和在线分析，从而实现“帮好的企业找到更便宜的钱”的战略愿景！</text>
+  </view>
+
+  <view class='heading04'>联系我们</view>
+
+  <view class='paddingBox'>
+    <text class='text' bindtap='makePhoneCall'>联系电话：<text class='link'>{{phoneNum}}</text>
+    </text>
+    <text class='text'>地址：上海市浦东新区东方路3539号</text>
+  </view>
+</view>

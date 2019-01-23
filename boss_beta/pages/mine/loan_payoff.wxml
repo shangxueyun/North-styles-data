@@ -1,0 +1,19 @@
+<!--pages/mine/loan_payoff.wxml-->
+<!--//已还款贷款//-->
+<view class='whiteBox'>
+  <view class='list01'>
+    <view id="{{index}}" class='item' hover-class='item_hover' bindtap='to_LoanAccept_Detail' wx:for="{{datas}}">
+      <view class='item_key'>
+        <text>{{item.loanAmt}}</text>
+        <text>应还本金+利息总额</text>
+      </view>
+      <view class='item_val'>
+        <text class='green'>已还款</text>
+        <text>到期日{{item.loanEndDate}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='tailbox'>{{message}}</view>
+

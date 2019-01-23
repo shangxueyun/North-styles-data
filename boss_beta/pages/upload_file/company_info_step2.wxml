@@ -1,0 +1,91 @@
+<!--pages/upload_file/company_info_step2.wxml-->
+<!--//信息确认：公司信息确认//-->
+<view class='step_tab'>
+  <view class='step_tab_item done'>
+    <view class='step_tab_1'></view>
+    <text>上传资料</text>
+  </view>
+  <view class='step_tab_item on'>
+    <view class='step_tab_2'></view>
+    <text>信息确认</text>
+  </view>
+  <view class='step_tab_item'>
+    <view class='step_tab_3'></view>
+    <text>合同签署</text>
+  </view>
+</view>
+
+<view class='heading02'>请核对修改并完善公司信息</view>
+
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_key'>公司名称</view>
+      <view class='item_val'>{{info.companyName}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>统一社会信用代码</view>
+      <view class='item_val'>{{info.licenseNo}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>经营状态</view>
+      <view class='item_val'>{{info.entStatus}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>公司类型</view>
+      <view class='item_val'>{{info.unitType}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>成立日期</view>
+      <view class='item_val'>{{info.licenseBeginDate}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>营业期限</view>
+      <view class='item_val'>{{info.licenseExpireDate}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>注册资本</view>
+      <view class='item_val'>{{info.regCap}}万元</view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>法定代表人</view>
+      <view class='item_val'>{{info.legalPersonName}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_key'>控股股东</view>
+      <view class='item_val'>{{controlName}}</view>
+    </view>
+    <view class='item last-item'>
+      <view class='item_key'>控股股东出资额</view>
+      <view class='item_val'>{{subContribution}}万元</view>
+    </view>
+  </view>
+</view>
+
+<view class='whiteBox whiteBox-bg'>
+  <view class='list01'>
+    <view class='item adressDetail-bg'>
+      <view class="float_l">公司注册地址</view>
+      <view class='adressDetail'>{{info.registerAddress}}</view>
+    </view>
+    <view class='item adressDetail-bg'>
+      <view class='item_key'><text class="color-red">*</text>实际经营城市</view>
+      <view class='item_val arrow'>
+        <picker class="{{pickerClass}}" mode="region" bindchange="bindRegionChange" value="{{region}}">
+          <view class="select_input">
+            {{region}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='item adressDetail-bg'>
+      <view class='item_key'><text class="color-red">*</text>实际经营详细地址</view>
+      <view class='item_val'><input type='text' bindinput='addressChange' placeholder='请输入'/></view>
+    </view>
+  </view>
+</view>
+
+
+<view class='btnbox'>
+  <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='{{btnBind}}'>确认无误</button>
+</view>

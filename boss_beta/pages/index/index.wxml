@@ -1,0 +1,75 @@
+<!--index.wxml-->
+<!--//首页//-->
+<view>
+  <view class='topbox'>
+    <text class='top_title'>授信额度</text>
+    <text>{{creditAmount}}</text>
+  </view>
+  <view class='tabbox tab_bg_dark'>
+      <view class='tabItem_in2'>
+        <view class="tab_title">
+          <view class='tabTitleTxt'>可用额度</view>
+          <view class='tipbox' bindtap='showPoper'>
+            <view class='tip'>提醒</view>
+          </view>
+        </view>
+        <text>{{canAmount}}</text>
+      </view>
+      <view class='tabItem_in2'>
+        <view class="tab_title">已用额度</view>
+        <text>{{useAmount}}</text>
+      </view>
+    </view>
+</view>
+
+<view class='whiteBox'>
+  <text class='heading01 icon_account'>资金账户信息</text>
+  <view class='paddingBox'>
+    <text class='text'>账户余额：{{accountBalance}}</text>
+    <text class='text'>冻结余额：{{freezeBalance}}</text>
+    <text class='text'>可提现余额：{{withdrewBalance}}</text>
+  </view>
+</view>
+
+<view class='whiteBox'>
+  <text class='heading01 icon_bill'>发票池信息</text>
+  <view class='paddingBox'>
+    <text class='text'>发票池实时余额：{{currentBalance}}</text>
+    <text class='text'>上月核销发票金额：{{cancelAmount}}</text>
+    <text class='text'>上月新增发票金额：{{addAmount}}</text>
+  </view>
+</view>
+
+<view class='whiteBox'>
+  <text class='heading icon_other'>还款账单</text>
+  <view class='list01'>
+    <!-- <view class='item'>
+      <text class='item_key'>贷款年化利率</text>
+      <text class='item_val'>30.0%</text>
+    </view>
+    <view class='item'>
+      <text class='item_key'>服务费率</text>
+      <text class='item_val'>30.0%</text>
+    </view> -->
+    <view class='item' hover-class='item_hover' bindtap='to_NeedToPay'>
+      <text class='item_key'>即将到期贷款列表</text>
+      <text class='item_val arrow'></text>
+    </view>
+    <view class='item' hover-class='item_hover' bindtap='to_NeedToPay'>
+      <text class='item_key'>逾期贷款列表</text>
+      <text class='item_val arrow'></text>
+    </view>
+  </view>
+</view>
+
+<view class='poper' hidden='{{poperHide}}'>
+  <view class='popbox'>
+    <view class='headingbox'>
+      <text class='heading icon_tip'></text>
+    </view>
+    <text class='paragraph center'>可用额度处提醒：若您有部分应收账款付款方的回款账户未作变更，或者已用额度大于0，可用额度将低于预授信额度。</text>
+    <view class='submitbox'>
+      <button class='btn' hover-class='btn_hover' bindtap='closePoper'>确定</button>
+    </view>
+  </view>
+</view>

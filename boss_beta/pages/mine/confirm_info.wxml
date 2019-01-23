@@ -1,0 +1,87 @@
+<!--pages/loan/confirm_info.wxml-->
+<!--//待签订合同详情页//-->
+<view>
+  <view class='topbox'>
+    <text class='top_title'>借款本金金额</text>
+    <text>{{applyAmount}}</text>
+  </view>
+  <view class='tabbox tab_bg_white'>
+      <view class='tabItem_in4'>
+        <view class='column_line'>
+          <view class='title'>{{date}}</view>
+          <text class='small gray'>借款期限</text>
+        </view>
+      </view>
+      <view class='tabItem_in4'>
+        <view class='column_line'>
+          <view class='title'>{{rate}}%</view>
+          <text class='small gray'>年化利率</text>
+        </view>
+      </view>
+      <view class='tabItem_in4'>
+        <view class='column_line'>
+          <view class='title'>{{returnAmount}}</view>
+          <text class='small gray'>应还总额</text>
+        </view>
+      </view>
+      <view class='tabItem_in4'>
+        <view class='title'>{{serverMount}}</view>
+        <text class='small gray'>服务费用</text>
+      </view>
+    </view>
+</view>
+<view class='gap'></view>
+
+
+<view class='whiteBox'>
+  <text class='heading01 icon_contract'>合同文本</text>
+  <view class='list'>
+    <button class='authorize' bindtap='showPoper'>点击进行电子签章授权及验证</button>
+    <view id="LOAN" class='item' hover-class='item_hover' bindtap='regClick'>
+      <text class='link'>《借款合同》</text>
+    </view>
+    <view id="GUARANTEE" class='item' hover-class='item_hover' bindtap='regClick'>
+      <text class='link'>《担保合同》</text>
+    </view>
+    <view class='item' hover-class='item_hover'>
+      <view class='item_key txt'>
+        <checkbox-group bindchange="checkboxChange">
+            <label class='checkbox'>
+              <checkbox value="" checked="" />
+              我已经详细阅读并确认以上协议及信息
+            </label>
+        </checkbox-group>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='btnbox'>
+  <button class='button_dark' hover-class='button_gray_hover' bindtap='to_StateOfCheck'>确认提交</button>
+</view>
+
+<view class='paddingbox'>
+  <text class='gray align_c'>信息不可修改，修改请联系客服人员</text>
+  <view class='icon_customer_service align_c' bindtap='makePhoneCall'>{{phoneNum}}</view>
+</view>
+<view class='gap'></view>
+
+<view class='poper' hidden='{{poperHide}}'>
+  <view class='popbox'>
+    <view class='headingbox'>
+      <text class='heading icon_tip'>提示</text>
+    </view>
+    <text class='paragraph'>向法人手机{{phoneRe}}发送验证码。</text>
+    <view class='check_code_box'>
+      <view class='iptbox'><input bindinput='getCode' type='number' placeholder="请输入验证码" /></view>
+      <view class='btnbox'>
+        <view class='btn' hover-class='btn-hover' hidden='{{codeBtnHide}}' bindtap='getCheckCode'>获取验证码</view>
+        <view class='check_code_txt' hidden='{{codeTxtHide}}'>{{getCheckCode_txt}}</view>
+      </view>
+    </view>
+    <view class='submitbox'>
+      <button class='btn_half' hover-class='btn_half_hover' bindtap='closePoper'>取消</button>
+      <button class='btn_half' hover-class='btn_half_hover' bindtap='shortMess'>确定</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,21 @@
+<!--pages/login/modify_pw.wxml-->
+<!--//修改密码//-->
+<view class='gap'></view>
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_key icon_phone'>
+        <input type='number' bindinput='phoneChange' placeholder='请输入法定代表人手机号' />
+      </view>
+    </view>
+    <view class='item'>
+      <view class='item_key icon_lock'>
+        <input type='password' bindinput='pwChange' placeholder='请输入现有密码' />
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='btnbox'>
+  <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='to_RetrievePw'>确认</button>
+</view>

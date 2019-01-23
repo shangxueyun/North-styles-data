@@ -1,0 +1,39 @@
+<!--pages/mine/personal_info.wxml-->
+<!--//个人信息//-->
+
+<view class='gap'></view>
+
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_in2 gray' style='width: 40%'>企业名称</view>
+      <view class='item_in2' style='width: 60%'>{{companyName}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>统一社会信用代码</view>
+      <view class='item_in2'>{{licenseNo}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>法定代表人姓名</view>
+      <view class='item_in2'>{{legalPersonName}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>法定代表人身份证号</view>
+      <view class='item_in2'>{{legalPersonId}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>法定代表人手机号</view>
+      <view class='item_in2'>{{legalPersonPhone}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>企业经营地址</view>
+      <view class='item_in2'>{{address}}</view>
+    </view>
+  </view>
+</view>
+
+<view class='paddingbox'>
+  <text class='gray align_c'>信息不可修改，修改请联系客服人员</text>
+  <view class='icon_customer_service align_c' bindtap='makePhoneCall'>{{phoneNum}}</view>
+</view>
+<view class='gap'></view>

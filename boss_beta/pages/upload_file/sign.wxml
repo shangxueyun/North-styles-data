@@ -1,0 +1,6 @@
+<!--pages/upload_file/company_info.wxml-->
+<!--//信息确认：填写公司名称//-->
+<view>
+  <web-view src="{{url}}"></web-view>
+</view>
+

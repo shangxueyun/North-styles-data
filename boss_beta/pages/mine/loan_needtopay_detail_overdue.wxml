@@ -1,0 +1,85 @@
+<!--pages/mine/loan_needtopay_detail_overdue.wxml-->
+<!--//待还款贷款详情：已逾期//-->
+<view class='whiteBox'>
+  <view class='list01'>
+    <view class='item'>
+      <view class='item_in2 gray'>状态</view>
+      <view class='item_in2'>已逾期</view>
+    </view>
+<!-- 
+    <view class='item'>
+      <view class='item_in2 gray'>资金方</view>
+      <view class='item_in2'>无</view>
+    </view>
+ -->
+    <view class='item'>
+      <view class='item_in2 gray'>应还本金</view>
+      <view class='item_in2'>{{data.loanAmt}}元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>贷款利率</view>
+      <view class='item_in2'>{{data.loanRate}}%</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>应还利息</view>
+      <view class='item_in2'>{{data.interest}}元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>发起申请日(放款日期)</view>
+      <view class='item_in2'>{{data.loanStartDate}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>贷款起始日</view>
+      <view class='item_in2'>{{data.loanStartDate +"-"+data.loanEndDate}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>贷款到期日</view>
+      <view class='item_in2'>{{data.loanEndDate}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>贷款期限</view>
+      <view class='item_in2'>{{data.loanTerm}}{{data.termUnit}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>已逾期天数</view>
+      <view class='item_in2'>{{data.delayDay}}天</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>逾期罚息日利率</view>
+      <view class='item_in2'>逾期金额的每日万分之{{data.delayRate*100}}</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>已还金额</view>
+      <view class='item_in2'>{{data.repayAmt}}元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>逾期金额</view>
+      <view class='item_in2'>{{data.delayAmt}}元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>已产生罚息总额</view>
+      <view class='item_in2'>{{data.interestPenalty}}元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>剩余应还总额</view>
+      <view class='item_in2'>{{data.awaitRepayAmt}}元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>服务费率</view>
+      <view class='item_in2'>{{data.feeRate}}%</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>服务费金额</view>
+      <view class='item_in2'>{{data.feeAmt}}元</view>
+    </view>
+    <view class='item'>
+      <view class='item_in2 gray'>服务费支付方式</view>
+      <view class='item_in2'>{{data.feeMode}}</view>
+    </view>
+    <view class='item' hover-class='item_hover'>
+      <view class='item_in2 gray'>借款合同</view>
+      <view class='item_in2'>《借款合同》</view>
+    </view>
+  </view>
+</view>
+

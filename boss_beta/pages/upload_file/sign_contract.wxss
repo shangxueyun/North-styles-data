@@ -1,0 +1,6 @@
+/* pages/upload_file/sign_contract.wxss */
+.link {
+    color:#2e6bbe;
+    padding-top: 10px;
+}
+    
