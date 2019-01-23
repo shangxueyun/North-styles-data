@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta name="robots" content="all" />
+
+<script src="webdoc/js/settime.js"></script>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<title>贷后管理</title>
+<style>
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+#loading_div .loading{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1.5rem;
+    border: 2px solid transparent;
+    border-top: 2px solid #0000008f;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+	transform:rotate(0deg);
+	animation:myfirst .5s both infinite;
+	-moz-animation:myfirst .5s both infinite; 
+	-webkit-animation:myfirst .5s both infinite; 
+	-o-animation:myfirst .5s both infinite; 
+}
+
+@keyframes myfirst
+{
+0%   {transform:rotate(0deg);}
+25%  {transform:rotate(72deg);}
+50%  {transform:rotate(144deg);}
+75% {transform:rotate(230deg);}
+100% {transform:rotate(360deg);}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+	0%   {transform:rotate(0deg);}
+25%  {transform:rotate(72deg);}
+50%  {transform:rotate(144deg);}
+75% {transform:rotate(230deg);}
+100% {transform:rotate(360deg);}
+}
+
+
+.list_icon li span{
+    display: inherit;
+}
+</style>
+</head>
+
+<body>
+<section class="header">
+	<div class="underwear">
+		<a class="home" href="home.html">
+			<div class="header_item">
+				<em><img src="webdoc/img/logo.svg"></em>
+				<h1>中小微企业<span>交易金融管理平台</span></h1>
+			</div>
+			<div class="header_item">
+				<b>金融机构管理系统</b>
+				<i id="time">正在获取...</i>
+				<script>
+				SetTime("time");
+				</script>
+			</div>
+		</a>
+		<div id="user_info" class="logout">
+			</div>
+	</div>
+</section>
+
+<section class="BodyBox">
+	<section class="BodyLeft">
+		<div class="underwear">
+			<ul class="nav" id="menu">
+				<li><p class="home"><a href="home.html">我的工作台</a></p></li>
+				<li><p class="customer"><a href="customers.html">客户管理</a></p></li>
+				<li class="on"><p class="loan"><a href="loan.html">贷后管理</a></p></li>
+				<li><p class="contract"><a href="contract.html">合同管理</a></p></li>
+				<li><p class="products"><a href="products.html">产品信息</a></p></li>
+				<li><p class="settings"><a href="settings.html">账户设置</a></p></li>
+			</ul>
+		
+			<section class="foot">
+				<p>&copy; 溟宗</p>
+			</section>
+		</div>
+	</section>
+	<section class="BodyRight">
+		<div class="underwear">
+			<div class="gapBoxVH">
+				<fieldset class="fieldset01">
+					<legend><i class="heading">还款管理</i></legend>
+					<div class="columnBox">
+						<ul class="list_icon">
+							<li class="item_1in3">
+								<a class="columnLine refund_status">
+									<span><img src="webdoc/img/wallet_waiting.svg" /><i class="waitRepayCount">3</i></span>
+									<p>待还款</p>
+								</a>
+							</li>
+							<li class="item_1in3">
+								<a class="columnLine refund_status">
+									<span><img src="webdoc/img/wallet_done.svg" /><i class="alreadyRepayCount">3</i></span>
+									<p>已还款</p>
+								</a>
+							</li>
+							<li class="item_1in3">
+								<a class="columnLine refund_status">
+									<span><img src="webdoc/img/wallet_overdue.svg" /><i class="overdueRepayCount">3</i></span>
+									<p>已逾期</p>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</fieldset>
+				<fieldset class="fieldset01">
+					<legend><i class="heading">还款统计</i></legend>
+					<div class="columnBox">
+						<ul class="list_icon">
+							<li class="item_1in3 ">
+								<div class="loan_02 columnLine">
+									<i>&yen; <span class="waitRepayAmount">-</span></i>
+									<p>待还款总额</p>
+								</div>
+							</li>
+							<li class="item_1in3">
+								<div class="loan_02 columnLine">
+									<i>&yen; <span class="alreadyRepayAmount">-</span></i>
+									<p>已还款总额</p>
+								</div>
+							</li>
+							<li class="item_1in3">
+								<div class="loan_02">
+									<i>&yen; <span class="overdueRepayAmount">-</span></i>
+									<p>逾期还款总额</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</section>
+</section>
+
+<div id="loading_div" style="display:none">
+	<div class="loading"></div>
+</div>
+
+<script type="module">
+		import AJAX from './webdoc/js/api.js'
+		(()=>{
+			$(loading_div).show()
+			AJAX.AjaxAPI('repayment/stat','POST',{fundMemberId:sessionStorage.getItem("fundMemberId")},'application/json')
+				.then(function(response){
+				$(loading_div).hide()
+				if(response.message=="处理成功"){
+					$(".waitRepayAmount").text(response.waitRepayAmount)
+					$(".alreadyRepayAmount").text(response.alreadyRepayAmount)
+					$(".overdueRepayAmount").text(response.overdueRepayAmount)
+					$(".waitRepayCount").text(response.waitRepayCount)
+					$(".alreadyRepayCount").text(response.alreadyRepayCount)
+					$(".overdueRepayCount").text(response.overdueRepayCount)
+				}else{
+					alert(response.message)
+				}
+
+			}, err => {
+				alert("请求失败")
+			})
+			.catch((error) => {
+				//alert("服务器内部错误")
+			})
+		})()
+
+		$(".refund_status").click(fn=>{
+			let className = $(fn.currentTarget.children[0]).children("i").get(0).className
+			if(className == "waitRepayCount")
+			window.location.href = "loan_repayment.html?AR"
+				else if(className == "alreadyRepayCount")
+				window.location.href = 'loan_repayment.html?RF'
+						else
+						window.location.href = 'loan_repayment.html?RETL'
+		})
+		$("#user_info").load('user.html');
+	</script>
+</body>
+</html>

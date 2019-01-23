@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta name="robots" content="all" />
+<script src="webdoc/js/settime.js"></script>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<title>我的工作台</title>
+<style>
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+#loading_div .loading{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1.5rem;
+    border: 2px solid transparent;
+    border-top: 2px solid #0000008f;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+	transform:rotate(0deg);
+	animation:myfirst .5s both infinite;
+	-moz-animation:myfirst .5s both infinite; 
+	-webkit-animation:myfirst .5s both infinite; 
+	-o-animation:myfirst .5s both infinite; 
+}
+
+@keyframes myfirst
+{
+0%   {transform:rotate(0deg);}
+25%  {transform:rotate(72deg);}
+50%  {transform:rotate(144deg);}
+75% {transform:rotate(230deg);}
+100% {transform:rotate(360deg);}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+	0%   {transform:rotate(0deg);}
+25%  {transform:rotate(72deg);}
+50%  {transform:rotate(144deg);}
+75% {transform:rotate(230deg);}
+100% {transform:rotate(360deg);}
+}
+
+</style>
+</head>
+
+<body>
+<section class="header">
+	<div class="underwear">
+		<a class="home" href="home.html">
+			<div class="header_item">
+				<em><img src="webdoc/img/logo.svg"></em>
+				<h1>中小微企业<span>交易金融管理平台</span></h1>
+			</div>
+			<div class="header_item">
+				<b>金融机构管理系统</b>
+				<i id="time">正在获取...</i>
+				<script>
+				SetTime("time");
+				</script>
+			</div>
+		</a>
+		<div id="user_info" class="logout">
+			</div>
+	</div>
+</section>
+
+<section class="BodyBox">
+	<section class="BodyLeft">
+		<div class="underwear">
+			<ul class="nav" id="menu">
+				<li class="on"><p class="home"><a href="home.html">我的工作台</a></p></li>
+				<li><p class="customer"><a href="customers.html">客户管理</a></p></li>
+				<li><p class="loan"><a href="loan.html">贷后管理</a></p></li>
+				<li><p class="contract"><a href="contract.html">合同管理</a></p></li>
+				<li><p class="products"><a href="products.html">产品信息</a></p></li>
+				<li><p class="settings"><a href="settings.html">账户设置</a></p></li>
+			</ul>
+		
+			<section class="foot">
+				<p>&copy; 溟宗</p>
+			</section>
+		</div>
+	</section>
+	<section class="BodyRight">
+		<div class="underwear">
+			<div class="columnBox">
+				<div class="item_1in2">
+					<div class="gapBoxHV">
+						<fieldset class="fieldset01">
+							<legend>
+								<i class="heading">业务统计</i>
+								<a href="index_statistics.html">查看历史记录</a>
+							</legend>
+							<div class="index001">
+								<i>本月累计放款额</i>
+								<p>&yen; <span class="currentMonthOutAmountTotal">0.00</span></p>
+							</div>
+							<hr>
+							<div class="columnBox index04">
+								<div class="item_1in2">
+									<div class="index002">
+										<i class="currentMonthApplyCount">0</i>
+										<p>本月申请客户数（个）</p>
+									</div>
+								</div>
+								<div class="item_1in2">
+									<div class="index002">
+										<i class="currentMonthOutAmountCount">0</i>
+										<p>本月放款客户数（个）</p>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset class="fieldset01">
+							<legend>
+								<i class="heading">订单管理</i>
+							</legend>
+							<div class="Order">
+								<ul class="list_icon">
+									<li class="item_1in4">
+										<a href="index_order.html?I00">
+											<span><img src="webdoc/img/contract_need_examine.svg" /><i class="operatorAudit">999</i></span>
+											<p>待审核</p>
+										</a>
+									</li>
+									<li class="item_1in4">
+										<a href="index_order.html?I1">
+											<span><img src="webdoc/img/contract_sign.svg" /><i class="fundAudit">3</i></span>
+											<p>审核通过</p>
+										</a>
+									</li>
+									<li class="item_1in4">
+										<a  href="index_order.html?F">
+											<span><img src="webdoc/img/contract_examine.svg" /><i class="fail">88</i></span>
+											<p>已拒绝</p>
+										</a>
+									</li>
+									<li class="item_1in4">
+										<a href="index_order.html?I3">
+											<span><img src="webdoc/img/contract_money.svg" /><i class="waitOutAmout">3</i></span>
+											<p>合同已签待放款</p>
+										</a>
+									</li>
+									<li class="item_1in4">
+										<a href="index_order.html?S">
+											<span><img src="webdoc/img/contract_money_yes.svg" /><i class="success">3</i></span>
+											<p>放款成功</p>
+										</a>
+									</li>
+									<li class="item_1in4">
+										<a href="index_order.html?I4">
+											<span><img src="webdoc/img/contract_money_failed.svg" /><i class="outAmountFail">3</i></span>
+											<p>放款失败</p>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+				<div class="item_1in2">
+					<div class="gapBoxHV">
+						<fieldset class="fieldset01">
+							<legend>
+								<i class="heading">授信批复</i>
+								<a href="customers.html">查看已授信客户列表</a>
+							</legend>
+							<div class="Credit">
+								<ul class="list_icon">
+									<li class="item_1in4">
+										<a href="index_givecredit.html?0" class="Status">
+											<span><img src="webdoc/img/credit_waiting.svg" /><i class="waitAudit">3</i></span>
+											<p>待平台审核</p>
+										</a>
+									</li>
+									<li class="item_1in4">
+										<a href="index_givecredit.html?1" class="Status">
+											<span><img src="webdoc/img/credit_yes.svg" /><i class="credit">3</i></span>
+											<p>待批复</p>
+										</a>
+									</li>
+									<li class="item_1in4">
+										<a href="index_givecredit.html?1A" class="Status">
+											<span><img src="webdoc/img/credit_yes.svg" /><i class="auditPass">3</i></span>
+											<p>批复通过</p>
+										</a>
+									</li>
+									<li class="item_1in4">
+										<a href="index_givecredit.html?2" class="Status">
+											<span><img src="webdoc/img/credit_refused.svg" /><i class="auditReject">3</i></span>
+											<p>已拒绝</p>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</fieldset>
+						<fieldset class="fieldset01">
+							<legend>
+								<i class="heading">最近5笔待还款订单</i>
+								<a href="loan_repayment.html?AR">查看全部</a>
+							</legend>
+							<div id="Outstanding_order15">
+								<ul class="index003">
+									<li><a href="index_recent_order.html">
+										<p>
+											<q>上海溟宗供应链有限公司</q>
+											<i>应还金额：&yen;1,000,000.00</i>
+											<i>应还日期：2018-11-13</i>
+										</p>
+										<em>查看详情</em>
+									</a></li>
+									<li><a href="index_recent_order.html">
+										<p>
+											<q>上海溟宗供应链有限公司</q>
+											<i>应还金额：&yen;1,000,000.00</i>
+											<i>应还日期：2018-11-13</i>
+										</p>
+										<em>查看详情</em>
+									</a></li>
+									<li><a href="index_recent_order.html">
+										<p>
+											<q>上海溟宗供应链有限公司</q>
+											<i>应还金额：&yen;1,000,000.00</i>
+											<i>应还日期：2018-11-13</i>
+										</p>
+										<em>查看详情</em>
+									</a></li>
+									<li><a href="index_recent_order.html">
+										<p>
+											<q>上海溟宗供应链有限公司</q>
+											<i>应还金额：&yen;1,000,000.00</i>
+											<i>应还日期：2018-11-13</i>
+										</p>
+										<em>查看详情</em>
+									</a></li>
+									<li><a href="index_recent_order.html">
+										<p>
+											<q>上海溟宗供应链有限公司</q>
+											<i>应还金额：&yen;1,000,000.00</i>
+											<i>应还日期：2018-11-13</i>
+										</p>
+										<em>查看详情</em>
+									</a></li>
+								</ul>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</section>
+
+<div id="loading_div" style="display:none">
+	<div class="loading"></div>
+</div>
+
+<script type="module">
+	import AJAX from './webdoc/js/api.js'
+	window.onload = fn=>{
+		if(sessionStorage.getItem("fundMemberId"))
+			return false
+		else
+			window.location.href = "login.html"
+	}
+	(()=>{
+		$(loading_div).show()
+		AJAX.AjaxAPI('companyMember/stat','POST',{fundMemberId:null,extention:null},'application/json')
+			.then(function(response){
+			$(loading_div).hide()
+			if(response.message=="处理成功"){
+				$(".Credit .waitAudit").text(response.waitAudit)
+				$(".Credit .auditPass").text(response.credit)
+				$(".Credit .credit").text(response.auditPass)
+				$(".Credit .auditReject").text(response.auditReject)
+
+				$(loading_div).show()
+				AJAX.AjaxAPI('loanApplyOrder/stat','POST',{fundMemberId:sessionStorage.getItem("fundMemberId"),extention:null},'application/json')
+					.then(function(response){
+					$(loading_div).hide()
+					if(response.message=="处理成功"){
+						$(".Order .operatorAudit").text(response.operatorAudit)
+						$(".Order .fundAudit").text(response.fundAudit)
+						$(".Order .fail").text(response.fail)
+						$(".Order .waitOutAmout").text(response.outAmountProcess)
+						$(".Order .success").text(response.success)
+						$(".Order .outAmountFail").text(response.outAmountFail)
+						$(loading_div).show()
+						AJAX.AjaxAPI('loanApplyOrder/businessStat','POST',{fundMemberId:sessionStorage.getItem("fundMemberId"),extention:null},'application/json')
+							.then(function(response){
+							$(loading_div).hide()
+							if(response.message=="处理成功"){
+								$(".currentMonthOutAmountTotal").text(response.currentMonthOutAmountTotal)
+								$(".currentMonthApplyCount").text(response.currentMonthApplyCount)
+								$(".currentMonthOutAmountCount").text(response.currentMonthOutAmountCount)
+
+							}else{
+								alert(response.message)
+							}
+						}, err => {
+							$(loading_div).hide()
+							alert("请求失败")
+						})
+					}else{
+						alert(response.message)
+					}
+				}, err => {
+					$(loading_div).hide()
+					alert("请求失败")
+				})
+			}else{
+				$(loading_div).hide()
+				alert(response.message)
+			}
+		}, err => {
+			$(loading_div).hide()
+			alert("请求失败")
+		})
+		.catch((error) => {
+			//alert("服务器内部错误")
+		})
+
+		$(loading_div).show()
+		AJAX.AjaxAPI('repayment/list','POST',
+		{
+			fundMemberId:sessionStorage.getItem("fundMemberId"),
+			status:"AR",
+			currentPage:1,
+			pageSize:5,
+			isFifteenMaturity:true,
+			extention:null
+		},'application/json')
+			.then(function(response){
+			$(loading_div).hide()
+			if(response.message=="处理成功"){
+				let HTML = "",data = response.page.records;;
+				HTML += "<ul class='index003'>"
+				data.forEach((v,i)=>{
+					HTML += "<li><a class='index_recent_order'><p>"
+					HTML += "<q>"+v.companyName+"</q>"
+					HTML += "<i>应还金额：&yen; "+v.shouldRePayAmount+"</i>"
+					HTML += "<i>应还日期："+v.loanEndDate+"</i></p>"
+					HTML += "<em>查看详情</em></a></li>"
+				})
+				HTML += "</ul>"
+				$(Outstanding_order15).empty();
+				$(Outstanding_order15).append(HTML)
+				$(".index_recent_order").click(fn=>{
+					window.location.href = "index_recent_order.html?AR"
+				})
+
+			}else{
+				alert(response.message)
+			}
+		}, err => {
+			$(loading_div).hide()
+			alert("请求失败")
+		})
+	})()
+	$("#user_info").load('user.html');
+</script>
+<script>
+
+</script>
+</body>
+</html>

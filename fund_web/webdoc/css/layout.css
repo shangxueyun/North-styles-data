@@ -1,0 +1,12 @@
+/* CSS Document */
+@import url(layout_init.css);
+
+.header {height:4rem;}
+.BodyBox {font-size:0;width:100%;height:calc(100vh - 4rem);}
+.BodyLeft {display:inline-block;width:9rem;height:100%;vertical-align:top;}
+.BodyRight {display:inline-block;width:calc(100% - 9rem);height:100%;vertical-align:top;overflow-y:scroll;overflow-x:hidden;}
+.underwear {font-size:1rem;display:block;}
+.gapBoxH {padding:0 1rem;}
+.gapBoxV {padding:1rem 0;}
+.gapBoxVH,
+.gapBoxHV {padding:1rem;font-size:1rem;}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta name="robots" content="all" />
+<link rel="stylesheet" type="text/css" href="webdoc/css/login.css">
+<title>金融机构管理系统</title>
+<style>
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+#loading_div .loading{
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 1.5rem;
+	border: 2px solid transparent;
+	border-top: 2px solid #0000008f;
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	transform:rotate(0deg);
+	animation:myfirst .5s both infinite;
+	-moz-animation:myfirst .5s both infinite; 
+	-webkit-animation:myfirst .5s both infinite; 
+	-o-animation:myfirst .5s both infinite; 
+}
+
+@keyframes myfirst
+{
+0%   {transform:rotate(0deg);}
+25%  {transform:rotate(72deg);}
+50%  {transform:rotate(144deg);}
+75% {transform:rotate(230deg);}
+100% {transform:rotate(360deg);}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+	0%   {transform:rotate(0deg);}
+25%  {transform:rotate(72deg);}
+50%  {transform:rotate(144deg);}
+75% {transform:rotate(230deg);}
+100% {transform:rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+<section class="loginBox">
+	<div class="avatar"><img src="webdoc/img/logo.svg"></div>
+	<h1 class="heading">金融机构管理系统</h1>
+	
+	<div class="false" id="false"><p>错误信息！</p></div>
+	
+	<ul class="loginList">
+		<li class="user"><p class="inputFrame"><input id="userName" type="text" placeholder="用户名"></p></li>
+		<li class="password"><p class="inputFrame"><input id="password" type="password" placeholder="密码"></p></li>
+		<li><p class="button"><a id="submit" class="btnType_L btnType_capsule btnLooks_gradient" href="javascript:void(0);">登录</a></p></li>
+		<!--<li class="getBackOfPw"><p><a href="javascript:void(0);">找回密码</a></p></li>-->
+	</ul>
+</section>
+
+<div id="loading_div" style="display:none">
+	<div class="loading"></div>
+</div>
+</body>
+<script src="webdoc/js/jquery-3.3.1.min.js"></script>
+</html>
+<script type="module">
+import AJAX from './webdoc/js/api.js'
+//Funciton of Show/Hide information
+function falseInfo()
+{
+	this.show = function(id,result)
+	{
+		document.getElementById(id).getElementsByTagName("p").item(0).innerHTML = result;
+		document.getElementById(id).style.display = "";
+	};
+	this.hide = function(id)
+	{
+		document.getElementById(id).style.display = "none";
+	}
+}
+
+//The login return information that coming from Background System
+var result;
+
+//Instantiate the function of falseInfo
+var _falseInfo = new falseInfo();
+	_falseInfo.hide("false");
+
+
+//When the input element that named username was on blur
+document.getElementById("userName").onblur = function(e)
+{   
+	_falseInfo.hide("false");
+}
+
+//When the input element that named submit was on click
+document.getElementById("submit").onclick = function()
+{
+	RequestLogin(document.getElementById("userName").value,document.getElementById("password").value)
+	//window.location.href = "index.html";
+}
+
+//When the input element that named user was on keydown
+document.getElementById("userName").onkeydown = function(e)
+{   
+	var ev = document.all ? window.event : e; 
+	 
+	if(ev.keyCode==13) {  
+		document.getElementById("password").focus();
+	}  
+}
+
+//When the input element that named pw was on keydown
+document.getElementById("password").onkeydown = function(e)
+{   
+	var ev = document.all ? window.event : e; 
+	 
+	if(ev.keyCode==13) {  
+		document.getElementById("submit").click();
+	}  
+}
+
+function RequestLogin(name,password){
+	$(loading_div).show();
+	AJAX.AjaxBank('login','POST',{
+		loginIdentity:name,
+		memberType:"3",
+		identityType:"PHONE_NO",
+		verifyType:"PASSWORD",
+		loginVoucher:password,
+		extention:null,
+	},'application/json')
+	.then(function(response){
+		$(loading_div).hide();
+		if(response.responseMessage=="处理成功"){
+			//数据存储
+			if(!response.fundMemberName)
+			sessionStorage.setItem("companyName",'')
+			else
+			sessionStorage.setItem("companyName",response.fundMemberName)
+			sessionStorage.setItem("managerName",response.managerName)
+			sessionStorage.setItem("fundMemberId",response.memberId)
+			sessionStorage.setItem("token",response.token)
+			window.location.href = "home.html";
+		}else{
+			alert(response.responseMessage)
+		}
+	}, err => {
+		$(".warnIcon").hide()
+		alert("请求失败")
+	})
+	.catch((error) => {
+		//alert("服务器内部错误")
+	})
+}
+
+
+
+</script>

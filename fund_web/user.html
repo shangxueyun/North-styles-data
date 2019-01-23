@@ -1,0 +1,39 @@
+
+<div class="header_item">
+    <a id="Logout">退出</a>
+</div>
+<div class="header_item">
+    <span><i class="managerName">用户：上海银行李亮</i></span>
+    <span><i class="fundMemberName">机构：上海银行股份有限公司</i></span>
+</div>
+
+<script type="module">
+    import AJAX from './webdoc/js/api.js'
+    $(".managerName").text("用户："+sessionStorage.getItem("managerName"));
+    $(".fundMemberName").text("用户："+sessionStorage.getItem("companyName"));
+
+    $("#Logout").click(fn=>{
+		$(loading_div).show();
+		AJAX.AjaxBank('logout','POST',{
+			token:sessionStorage.getItem("token"),
+			extention:null,
+		},'application/json')
+		.then(function(response){
+			$(loading_div).hide();
+			if(response.responseMessage=="处理成功"){
+				sessionStorage.removeItem("companyName")
+				sessionStorage.removeItem("fundMemberId")
+			    sessionStorage.removeItem("managerName")
+				sessionStorage.removeItem("token")
+				window.location.href = "index.html";
+			}else{
+				alert(response.responseMessage)
+			}
+		}, err => {
+			alert("请求失败")
+		})
+		.catch((error) => {
+			//alert("服务器内部错误")
+		})
+	});
+</script>

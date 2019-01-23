@@ -1,0 +1,31 @@
+/* CSS Document */
+.btn_hollow {
+-webkit-touch-callout:none; /* iOS Safari */
+-webkit-user-select:none; /* Chrome/Safari/Opera */
+-khtml-user-select:none; /* Konqueror */
+-moz-user-select:none; /* Firefox */
+-ms-user-select:none; /* Internet Explorer/Edge */
+user-select:none; /* Non-prefixed version, currently
+not supported by any browser */
+cursor:pointer;
+
+border:1px solid rgba(15,18,51,.5);color:rgba(15,18,51,.9);border-radius:.35rem;padding:.35rem .5rem;font-size:.75rem;line-height:1;display:inline-block;vertical-align:middle;background:#fff;
+}
+.btn_hollow:hover {border:1px solid #2e77e6;color:#2e77e6;background:rgba(15,18,51,.02)}
+
+.btn_solid {
+-webkit-touch-callout:none; /* iOS Safari */
+-webkit-user-select:none; /* Chrome/Safari/Opera */
+-khtml-user-select:none; /* Konqueror */
+-moz-user-select:none; /* Firefox */
+-ms-user-select:none; /* Internet Explorer/Edge */
+user-select:none; /* Non-prefixed version, currently
+not supported by any browser */
+cursor:pointer;
+
+border:1px solid rgba(0,0,0,.0);background:rgba(15,18,51,.8);color:#fff;border-radius:.5rem;padding:.35rem .5rem;font-size:.75rem;line-height:1;display:inline-block;vertical-align:middle;}
+.btn_solid:hover {background:#3a7fe6;color:#fff;}
+
+
+.btn_solid_gray {background:rgba(15,18,51,.4);border:1px solid rgba(15,18,51,0);color:#fff;border-radius:.3rem;padding:.35rem .5rem;font-size:.75rem;line-height:1;display:inline-block;vertical-align:middle;}
+.btn_solid_gray:hover {background:#2e77e6;color:#fff;border:1px solid #2e77e6;}
