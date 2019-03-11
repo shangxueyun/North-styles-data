@@ -7,8 +7,8 @@
 <meta name="format-detection" content="telephone=no" />
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 
-<script src="webdoc/js/popimg.js" language="javascript"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
 <title>溟宗供应链</title>
 </head>
@@ -187,7 +187,6 @@
 <!--use for function of showImage-->
 <section class="popbox off" id="popbox_1">
 	<div class="img_Pop">
-		<b class="close" id="hideImg01"></b>
 		<div id="imgbox" class="imgbox"><div class="loading"></div></div>
 	</div>
 </section>
@@ -200,15 +199,47 @@
 <script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
 <script type="text/javascript" src="webdoc/js/home.js" ></script>
 <script type="text/javascript" src="webdoc/js/BANK_CODE.js" ></script>
-<script type="text/javascript" src="webdoc/js/bankaccount_opening_step3.js" ></script>
 <script>
-/////////
-//请注意//
-//1. 触发显示图片功能元素，需要提前给该元素的属性赋值（data-img）
-//2. 所有触发显示图片功能元素的name属性值，必须一致
-//showImage(触发显示图片功能的元素name属性值，关闭图片弹框的ID值，图片弹框的ID值，图片容器的ID值)
-    var name_show_img = new ShowImage;
-	name_show_img.init("name_show_img","hideImg01","popbox_1","imgbox");
+var BANK_CARD;
+</script>
+<script type="text/javascript" src="webdoc/js/bankaccount_opening_step3.js" ></script>
+<script  type="module">
+		
+import AJAX from './webdoc/js/api.js';
+
+(function(){
+	$(loading_div).show()
+	let data = JSON.parse(sessionStorage.data)
+	data.bizContent.queryContentList = ["BANK_CARD"]
+	AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
+		$(loading_div).hide()
+		if(result.requestStatus=="SUCCESS"){
+			//公司数据渲染
+			BANK_CARD = result.bizData.bankCardInfo
+			if(BANK_CARD.bankName)
+			{
+				$("input[name='bankName']").val(BANK_CARD.bankName);
+				$("input[name='bankNo']").val(BANK_CARD.bankNo);
+				$("input[name='branchName']").val(BANK_CARD.branchName);
+				$("input[name='branchCode']").val(BANK_CARD.branchCode);
+				$("input[name='bankCode']").val(BANK_CARD.bankCode);
+				$("input[name='bankCode']").val(BANK_CARD.bankCode);
+				$("input[name='accountName']").val(BANK_CARD.accountName);
+				$("input[name='accountNo']").val(BANK_CARD.accountNo);
+				$("input[name='province']").val(BANK_CARD.province);
+				$("input[name='city']").val(BANK_CARD.city);
+			}
+		}else{
+			alert(result.returnMessage)
+		}
+	}, err => {
+		$(loading_div).hide()
+		alert("请求失败")
+	})
+	.catch((error) => {
+		//alert("服务器内部错误")
+	})
+})()
 </script>
 <style>
 	#input-button{

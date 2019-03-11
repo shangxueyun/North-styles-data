@@ -7,8 +7,8 @@
 <meta name="format-detection" content="telephone=no" />
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 
-<script src="webdoc/js/popimg.js" language="javascript"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
 <title>溟宗供应链</title>
 </head>
@@ -30,6 +30,9 @@
 	height: 2.5rem;
 	border: 2px solid #fff;
 	border-top: 2px solid rgba(0,0,0,.1);
+}
+.list_info p .input01[disabled='disabled']{
+	background: #eee;
 }
 </style>
 <body>
@@ -156,7 +159,6 @@
 <!--use for function of showImage-->
 <section class="popbox off" id="popbox_1">
 	<div class="img_Pop">
-		<b class="close" id="hideImg01"></b>
 		<div id="imgbox" class="imgbox"><div class="loading"></div></div>
 	</div>
 </section>
@@ -168,17 +170,62 @@
 </body>
 </html>
 <script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+<script src="webdoc/js/popimg.js" language="javascript"></script>
 <script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script>
+var TRANSACTOR;
+let Base64Obj = {};
+</script>
 <script type="text/javascript" src="webdoc/js/lrz.bundle.js" ></script>
 <script type="text/javascript" src="webdoc/js/bankaccount_opening_step2.js" ></script>
-<script>
-/////////
-//请注意//
-//1. 触发显示图片功能元素，需要提前给该元素的属性赋值（data-img）
-//2. 所有触发显示图片功能元素的name属性值，必须一致
-//showImage(触发显示图片功能的元素name属性值，关闭图片弹框的ID值，图片弹框的ID值，图片容器的ID值)
-	var name_show_img = new ShowImage;
-	name_show_img.init("name_show_img","hideImg01","popbox_1","imgbox");
+<script  type="module">
+
+var name_show_img = new ShowImage;
+name_show_img.init("name_show_img","hideImg01","popbox_1","imgbox");
+
+import AJAX from './webdoc/js/api.js';
+
+
+
+(function(){
+	$(loading_div).show()
+	let data = JSON.parse(sessionStorage.data)
+	data.bizContent.queryContentList = ["TRANSACTOR"]
+	AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
+		$(loading_div).hide()
+		if(result.requestStatus=="SUCCESS"){
+			//公司数据渲染
+			TRANSACTOR = result.bizData.transactorInfo
+			if(TRANSACTOR)
+			{
+				$("input[name='operatorName']").val(TRANSACTOR.operatorName);
+				$("input[name='operatorCertId']").val(TRANSACTOR.operatorCertId);
+				$("input[name='operatorEmail']").val(TRANSACTOR.operatorEmail);
+				$("input[name='operatorPhone']").val(TRANSACTOR.operatorPhone);
+				$(".idCardPhotoFront_img").attr("data-img",TRANSACTOR.idCardPhotoFrontUrl);
+				$(".idCardPhotoFront_img").text("查看图片");
+				$(".idCardPhotoBehind_img").attr("data-img",TRANSACTOR.idCardPhotoBehindUrl);
+				$(".idCardPhotoBehind_img").text("查看图片");
+				$(".arrestPhotoUrl_img").attr("data-img",TRANSACTOR.arrestPhotoUrl);
+				$(".arrestPhotoUrl_img").text("查看图片");
+				$(".companyAuthorizationFilePath_img").attr("data-img",TRANSACTOR.companyAuthorizationFilePath);
+				$(".companyAuthorizationFilePath_img").text("查看图片");
+				Base64Obj["arrestPhotoUrl"] = TRANSACTOR.arrestPhotoUrl
+				Base64Obj["companyAuthorizationFilePath"] = TRANSACTOR.companyAuthorizationFilePath
+				Base64Obj["idCardPhotoBehindUrl"] = TRANSACTOR.idCardPhotoBehindUrl
+				Base64Obj["idCardPhotoFrontUrl"] = TRANSACTOR.idCardPhotoFrontUrl
+			}
+		}else{
+			alert(result.returnMessage)
+		}
+	}, err => {
+		$(loading_div).hide()
+		alert("请求失败")
+	})
+	.catch((error) => {
+		//alert("服务器内部错误")
+	})
+})()
 </script>
 <style>
 	#input-button{

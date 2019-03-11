@@ -7,8 +7,8 @@
 <meta name="format-detection" content="telephone=no" />
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 
-<script src="webdoc/js/popimg.js" language="javascript"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
 <title>溟宗供应链</title>
 </head>
@@ -74,7 +74,7 @@
 			</ul>
 	
 			<h2 class="heading01"><span>企业信息</span><i class="important">必填项</i>
-				<a href="webdoc/js/Account-opening-process.docx" style="font-size: 0.12rem;margin-left: 0.4rem;" download="Account-opening-process.docx">点击下载开户流程图</a></h2>
+				<a href="webdoc/js/kaihuliucheng.pdf"  target="_blank" style="font-size: 0.12rem;margin-left: 0.4rem;">点击下载开户流程图</a></h2>
 			<div class="innerBox">	
 				<ul class="list_info wide01 companyInfo_one">
 					<li>
@@ -249,7 +249,6 @@
 <!--use for function of showImage-->
 <section class="popbox off" id="popbox_1">
 	<div class="img_Pop">
-		<b class="close" id="hideImg01"></b>
 		<div id="imgbox" class="imgbox"><div class="loading"></div></div>
 	</div>
 </section>
@@ -281,9 +280,7 @@
 		$(loading_div).hide()
 		if(result.requestStatus=="SUCCESS"){
 			//公司数据渲染
-			let resultData = JSON.parse(sessionStorage.getItem("result")),
-			_companyMember=String_clear("Object",resultData.bizData.companyInfo);
-			debugger
+			let _companyMember=result.bizData.companyInfo;
 			$("#taxNoPhoto").attr("data-img",_companyMember.licenseNoPhoto)
 			$("#organizationNoPhoto").attr("data-img",_companyMember.licenseNoPhoto)
 			$("#openingPermitPhoto").attr("data-img",_companyMember.openingPermitPhoto)
@@ -299,6 +296,9 @@
 			$("input[name='registerAddress']").val(_companyMember.registerAddress);
 			$("input[name='licenseAddress']").val(_companyMember.licenseAddress);
 			$("input[name='licenseExpire_date']").val(_companyMember.licenseExpireDate);
+			$("input[name='telephone']").val(_companyMember.telephone);
+		}else{
+			alert(result.returnMessage)
 		}
 	}, err => {
 		$(loading_div).hide()
@@ -311,5 +311,6 @@
 	
 </script>
 <script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+<script src="webdoc/js/popimg.js" language="javascript"></script>
 <script type="text/javascript" src="webdoc/js/home.js" ></script>
 <script type="text/javascript" src="webdoc/js/bankaccount_opening_step1.js" ></script>

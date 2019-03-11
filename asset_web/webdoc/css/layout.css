@@ -29,17 +29,14 @@
 .off .inputinfo_Pop {left:-1000vw;}
 .on .inputinfo_Pop {position:fixed;z-index:1000;width:20rem;min-height:25rem;left:calc((100% - 20rem) / 2);top:calc((100% - 25rem) / 2);background:#fff;border-radius:.1rem;box-shadow:0 0 1.5rem rgba(0,153,255,.2),0 0 .2rem rgba(0,0,0,.1);}
 .off .img_Pop {left:-1000vw;}
-.on .img_Pop {position:fixed;z-index:1000;width:70vw;height:70vh;left:15vw;top:15vh;background:#fff;border-radius:.1rem;box-shadow:0 0 1.5rem rgba(0,153,255,.2),0 0 .2rem rgba(0,0,0,.1);}
-.img_Pop .imgbox {width:1000px;height:70vh;text-align:center;margin: 0 auto;}
+.on .img_Pop {position:fixed;z-index:1000;width:70vw;height:70vh;left:15vw;top:15vh;}
+.img_Pop .imgbox {
+    width: inherit;
+    height: 70vh;
+    text-align: center;
+    margin: 0 auto;
+}
 .img_Pop .imgbox img {width:auto;height:100%;}
-.img_Pop .close {position:absolute;right:0;top:0;width:3rem;height:3rem;background:rgba(0,0,0,.4);border-radius:0 0 0 1rem;}
-.img_Pop .close:before {width:3rem;height:3rem;line-height:3rem;text-align:center;color:#ccc;}
-.img_Pop .close:hover:before {color:#fff;}
-.popbox .heading {border-bottom:1px solid #e5e5e5;line-height:3rem;text-indent:1rem;font-size:1rem;font-weight:normal;position:relative;}
-.popbox .heading em {position:absolute;right:0;top:0;}
-.close {font-size:0;display:block;height:3rem;overflow:hidden;cursor:pointer;}
-.close:before {content:"\e911";font-size:1rem;color:#ccc;display:block;width:3rem;height:3rem;line-height:3rem;cursor:pointer;}
-.close:hover:before {color:#222;}
 .popbox .listbox {margin:1rem;}
 .popbox .listbox b {display:block;font-weight:normal;color:#666;font-size:.8rem;margin-bottom:.5rem;}
 .popbox .listbox .inputbox {border:1px solid #e5e5e5;display:block;font-weight:normal;color:#666;font-size:.8rem;position:relative;}
@@ -53,6 +50,15 @@
 .popbox .loading {position:absolute;left:50%;top:50%;}
 .loading {position:relative;text-align:center;padding-top:3rem;}
 .loading:before {content:"";position:absolute;left:50%;top:0;width:1rem;height:1rem;border:2px solid #333;border-top:2px solid rgba(0,0,0,.1);border-radius:100rem;animation:rotate .8s infinite linear;}
+.img_div{    position: fixed;
+    left: 40%;
+    top: 30%;}
+.close1{position: fixed;background: rgba(51, 51, 51, .5)}
+.close1:before {width:3rem;height:3rem;line-height:3rem;text-align:center;color:#ccc;}
+.close1:hover:before {color:#fff;}
+.close1 {font-size:0;display:block;height:3rem;overflow:hidden;cursor:pointer;}
+.close1:before {content:"\e911";font-size:1rem;color:#ccc;display:block;width:3rem;height:3rem;line-height:3rem;cursor:pointer;}
+.close1:hover:before {color:#222;}
 @keyframes 
 rotate 
 {

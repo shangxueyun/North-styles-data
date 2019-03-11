@@ -1,7 +1,5 @@
 
-$(function () {
 
-		let Base64Obj = {};
 		
 //		经办人身份证正、反面影印件：
 //		1)状态默认隐藏
@@ -18,7 +16,6 @@ $(function () {
 		$(operatorName).focus();
 //		2）上传
 	   	$("#idCardPhotoFrontUrl").on("change",function(e){
-
 			let NameObj = e.currentTarget.files[0];
 			
 			if(NameObj)
@@ -42,12 +39,10 @@ $(function () {
 			{
 				$('.idCardPhotoFront_i').show();
 			}
-
 		})
 	
 		$("#idCardPhotoBehindUrl").on("change",function(e){
-
-			let reader=new FileReader(),NameObj = e.currentTarget.files[0];
+			let NameObj = e.currentTarget.files[0];
 			
 			if(NameObj)
 			{	
@@ -71,7 +66,6 @@ $(function () {
 			{
 				$(this).siblings(".err-tipBox").show()
 			}
-
 		})
 		
 //	   	法人委托授权书影印：
@@ -99,11 +93,11 @@ $(function () {
 			{
 				$(this).siblings(".err-tipBox").hide()
 			}
-		})
+			})
 		
 //	   	企业授权书影印：
 		$("#companyAuthorizationFilePath").on("change",function(e){
-			let reader=new FileReader(),NameObj = e.currentTarget.files[0];
+			let NameObj = e.currentTarget.files[0];
 			
 			if(NameObj)
 			{
@@ -131,7 +125,7 @@ $(function () {
 //      表单提交
 		$(".err-tipBox").css("color","red")
 		$(".err-tipBox").hide()
-        $('#input-button').click(function () {
+    $('#input-button').click(function () {
 			let _dataInfo={"bizContent":{'transactorInfo':{}}},dataObj = $('#operatorForm').serializeArray();
 			
 			for(var i in dataObj){
@@ -173,6 +167,7 @@ $(function () {
 				}
 			});
 		});
+
 		function FlaseShow(parent,str){
 			if(parent == ""){
 				$("input[name='"+str+"']").siblings("i").text("请输入必选项");
@@ -214,4 +209,3 @@ $(function () {
 				}
 			})
 		}
-    });

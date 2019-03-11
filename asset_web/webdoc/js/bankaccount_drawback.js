@@ -29,11 +29,23 @@ function _queryAcount(){
                 if(bankAccountInfo!=null){
                     $(".list_info").find("p").eq(0).text(bankAccountInfo.accountName);
                     $(".list_info").find("p").eq(1).text(bankAccountInfo.accountNo);
-                    $(".list_info").find("p").eq(2).text(Number(bankAccountInfo.accountBalance)/100+' 元');
-                    $(".list_info").find("p").eq(3).text(Number(bankAccountInfo.freezeBalance)/100+' 元');
-                    $(".list_info").find("p").eq(4).text(Number(bankAccountInfo.withdrewBalance)/100+' 元');
+                    if(bankAccountInfo.accountBalance=="-")
+                    $(".list_info").find("p").eq(2).text(stringDispose(bankAccountInfo.accountBalance.toString())+' 元');
+                    else
+                    $(".list_info").find("p").eq(2).text(stringDispose(((Number(bankAccountInfo.accountBalance)/100).toFixed(2)).toString())+' 元');
+                    if(bankAccountInfo.freezeBalance=="-")
+                    $(".list_info").find("p").eq(3).text(bankAccountInfo.freezeBalance+' 元');
+                    else
+                    $(".list_info").find("p").eq(3).text(stringDispose(((Number(bankAccountInfo.freezeBalance)/100).toFixed(2)).toString())+' 元');
+                    if(bankAccountInfo.withdrewBalance=="-")
+                    $(".list_info").find("p").eq(4).text(bankAccountInfo.freezeBalance+' 元');
+                    else
+                    $(".list_info").find("p").eq(4).text(stringDispose(((Number(bankAccountInfo.withdrewBalance)/100).toFixed(2)).toString())+' 元');
                     $('#withdrewBalance').val(bankAccountInfo.withdrewBalance);
                 };
+            }
+            if(result.requestStatus=="SUCCESS"){}else{
+                alert(result.returnMessage)
             }
         },
         error:function(){
@@ -78,7 +90,7 @@ function withdrawal(){
         success:function(result){
             $(loading_div).hide();
             if(result.requestStatus=="SUCCESS"){
-                window.location.href='bankaccount.html'
+                window.location.href='bankaccount_transaction_record.html'
             }else{
 //		   	$('input[type="password"]').addClass("err_border")
 //		   	$(".warntxt").show()
@@ -92,7 +104,7 @@ function withdrawal(){
 function inputAmount(){
     var withdrewBalance=$('#withdrewBalance').val();
     var _applyAmount=$('#_applyAmount').val();
-    if(_applyAmount>withdrewBalance){
+    if(Number(_applyAmount)>Number(withdrewBalance)){
         $('#amountError').css("display","block");
         return;
     }else {

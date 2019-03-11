@@ -7,6 +7,7 @@
 <meta name="format-detection" content="telephone=no" />
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 
 <script src="webdoc/js/popimg.js" language="javascript"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
@@ -33,9 +34,12 @@
 .Box_centent{
 	width: 100%;
     height: 40px;
-    display: flex;
-    align-content: center;
-    justify-content: center;
+	text-align: center
+}
+.input01::before{
+	content: "最多可提交三次";
+	width: 10rem;
+	height: 10rem;
 }
 </style>
 </head>
@@ -76,14 +80,15 @@
 			<p class="info_txt">打款金额可在企业绑定实体账户查询。</p>
 			<br/>
 			<div class="Box_centent">
-				<div><span>银行账户&nbsp;:&nbsp;&nbsp;</span></div>
-				<div>&nbsp;&nbsp;<span id="bankAccount" style="font-size: 18px;">-</span>&nbsp;&nbsp;</div>
+				<div><span>银行账户&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<span id="bankAccount" style="font-size: 18px;">-</span>&nbsp;&nbsp;</span></div>
+				<div></div>
 			</div>
 			<div class="Box_centent">
-				<div><span>打款金额&nbsp;:&nbsp;&nbsp;</span></div>
-				<div><input autocomplete="off" style="margin: -3px 10px 10px;" class="input01" id="money" type="text" placeholder="请输入打款金额(元)"></div>
+				<div><span>打款金额&nbsp;:&nbsp;&nbsp;<input autocomplete="off" style="margin: -3px 10px 10px;" class="input01" id="money" type="text" placeholder="请输入打款金额(元)"></span></div>
+				<div></div>
 			</div>
-			<p class="info_btnbox"><a class="button btn_block_1">提交</a></p>
+
+			<p class="info_btnbox"><a style="margin-left: 7rem;" class="button btn_block_1">提交</a><span style="color: #1976d3;font-size: 14px">(最多可提交三次)</span></p>
 			<!--仅供测试：正式环境不应包含以下内容-->
 			<!-- <p class="info_txt">仅供测试：正式环境不应包含以下内容</p>
 			<p class="info_txt"><a href="bankaccount_opening_fail.html">发票贷首页 - 资金监管专户 - 开户失败1</a></p> -->
@@ -110,7 +115,6 @@
 			AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
 				$("#loading_div").hide();
 				if(result.requestStatus=="SUCCESS"){
-					debugger
 					$(bankAccount).text(result.bizData.bankCardInfo.accountNo);
 				}else{
 					$("#loading_div").hide()
@@ -126,6 +130,11 @@
 		})()
 
 		$(".btn_block_1").click(function(){
+			if($(money).val()=="")
+			{
+				alert("打款金额不能为空")
+				return false
+			}
 			var _data = {
 				"service": _service(),
 				"version": _version(),
@@ -152,6 +161,7 @@
 		   		success:function(result){
 					$(loading_div).hide();
 		   			if(result.requestStatus=="SUCCESS"){
+						window.localStorage.setItem("Account_status","1");
 						window.location.href="bankaccount.html"
 		   			}else{
 						let num = Number(sessionStorage.getItem("remit"))

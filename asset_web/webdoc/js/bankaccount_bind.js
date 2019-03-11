@@ -27,6 +27,8 @@ $(function(){
                 $(".pbox").find("em").eq(1).html(_bankCardInfo.accountNo)
                 $(".pbox").find("em").eq(2).html(_bankCardInfo.branchName)
                 $(".pbox").find("em").eq(3).html(_bankCardInfo.bankNo)
+            }else{
+                alert(result.returnMessage)
             }
         }
     });

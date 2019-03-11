@@ -29,7 +29,7 @@ $(function(){
     });
 });
 
-let numpage,pages;//总记录数，每页显示数，总页数
+let numpage,pages,result_status;//总记录数，每页显示数，总页数
 
 (()=>{
     PageFUNC();
@@ -41,7 +41,7 @@ function PageFUNC(Page){
     {
         Page = 1
         pageS = Page;
-    }
+    }else{pageS = Page}
     let RangeDateval = $("#RangeDate").val(),beginDate = RangeDateval.substr(0,RangeDateval.indexOf(" ")),
     endDate = RangeDateval.substr(RangeDateval.lastIndexOf(" ")+1,RangeDateval.length);
     $("._loanList").remove();
@@ -74,11 +74,25 @@ function PageFUNC(Page){
         contentType:'application/json',
         data:JSON.stringify(_data),
         success:function(result){
-            $(loading_div).hide()
+            if(result_status==1)
+            $(loading_div).hide();
             if(result.bizData!=null){
                 var v = 1;
                 var _loanList=String_clear("Arr",result.bizData.list);
-                HTMLappendPage(result.bizData,pageS,numpage,PageFUNC);
+				if(result.bizData.list == 0)
+				result.bizData.pages = 0;
+				$(".pageHTMLtotal").remove();
+				$('.pageHTML').pagination({
+					pageCount: result.bizData.pages,
+					mode:"fixed",
+					current:Page,
+					jump: true,
+					count:99,
+					callback: function (api) {
+						PageFUNC(api.getCurrent())
+					}
+				});
+				$('.pageHTML').append("<span style='white-space:pre;' class='pageHTMLtotal'>共" + result.bizData.pages +"页  共"+result.bizData.total+"条记录</span>") 
                 $("table tr:gt(0)").remove();
                 $.each(_loanList,function(i,res){
                     var status;
@@ -96,19 +110,23 @@ function PageFUNC(Page){
                     if(res.crdrFlg == "出金")
                     {
                         ApplyRecordList +=    '<td class="_loanAppleDate">--</td>';//收入
-                        ApplyRecordList +=    '<td class="_outDate">'+res.applyAmount+'</td>'; //支出
+                        ApplyRecordList +=    '<td class="_outDate">'+stringDispose(res.applyAmount.toString())+'</td>'; //支出
                     }
                     else{
-                        ApplyRecordList +=    '<td class="_loanAppleDate">'+res.applyAmount+'</td>';//收入
+                        ApplyRecordList +=    '<td class="_loanAppleDate">'+stringDispose(res.applyAmount.toString())+'</td>';//收入
                         ApplyRecordList +=    '<td class="_outDate">--</td>'; //支出
                     }
                     ApplyRecordList +=    '<td class="_outDate">'+res.accountName+'</td>';
                     ApplyRecordList +=    '<td class="_outDate">'+res.accountNo+'</td>';
                     //'<td class="_outDate">'+formatDateToString(res.accountingDate)+'</td>'+
                     ApplyRecordList +=   '<td class="_outDate">'+res.tradeTime+'</td>';
+                    
                     ApplyRecordList +=   '<td class="_outDate">'+status+'</td>';
                     // '<td class="_outDate">'+res.memo+'</td>'+
-                    ApplyRecordList +=   '<td class="_outDate"><a applyNo="'+res.applyNo+'" class="generate" download>下载</a></td>'; //交易凭证
+                    if(status=="成功")
+                    ApplyRecordList +=   '<td class="_outDate"><a applyNo="'+res.applyNo+'" class="generate" target="html" download>下载</a></td>'; //交易凭证
+                    else
+                    ApplyRecordList +=   '<td class="_outDate">-</td>'; 
                     ApplyRecordList +=    '<td class="_outDate">'+res.memo+'</td>';
                     ApplyRecordList +=    '</td></tr>';
                     $("table").append(ApplyRecordList)
@@ -121,6 +139,9 @@ function PageFUNC(Page){
                         generate(fn)
                     }
                 }
+            }
+            if(result.requestStatus=="SUCCESS"){}else{
+                alert(result.returnMessage)
             }
         },
         // complete:function(){ //生成分页条
@@ -141,13 +162,14 @@ $.ajax({
     contentType:'application/json',
     data:data_C,
     success:function(result){
-        $(loading_div).hide()
+        $(loading_div).hide();
+        result_status = 1
         if(result.requestStatus=="SUCCESS"){
             bankAccountInfo = result.bizData.bankAccountInfo,
             bankCardInfo = result.bizData.bankCardInfo;
             
             if(bankAccountInfo!=null){
-                $('#accountBalance').text(Number(bankAccountInfo.accountBalance)/100);
+                $('#accountBalance').text((Number(bankAccountInfo.accountBalance)/100).toFixed(2)+" ");
                 if(bankAccountInfo.status=='0'){
                     $("#status").text("未开通");
                 }
@@ -161,6 +183,8 @@ $.ajax({
                 $('#accountNo').text(bankAccountInfo.accountNo);
                 $('#accountName').text(bankAccountInfo.accountName);
             }
+        }else{
+            alert(result.returnMessage)
         }
     },
     // error:function(){
@@ -174,8 +198,9 @@ function generate(fn){
         let data_C = JSON.parse(sessionStorage.data),applyNo = fn.currentTarget.attributes[0].value;
         delete data_C.bizContent.queryContentList
         data_C.bizContent.applyNo = applyNo;
-        generateELE = $(fn.currentTarget)
-        $(loading_div).show()
+        generateELE = $(fn.currentTarget);
+        $(loading_div).show();
+        var newWindow = window.open('loading.html');
         $.ajax({
             url:_url()+"/receiptCreate",
             type:"POST",
@@ -186,9 +211,10 @@ function generate(fn){
                 $(loading_div).hide()
                 if(result.requestStatus=="SUCCESS"){
                     //result.bizDate;download
-                    generateELE.attr("href",result.bizData);
-                    generateELE.attr("download",result.bizData.substr(result.bizData.lastIndexOf("/")+1,result.bizData.length));
-                    window.location.href = result.bizData
+                    setTimeout(()=>{
+                        newWindow.location = result.bizData;
+                        window.location.h
+                    },500);
                     return false
                 }
             },

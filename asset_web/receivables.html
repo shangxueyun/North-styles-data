@@ -7,13 +7,11 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta http-equiv="cache-control" content="no-cache"/>
 	<meta name="robots" content="all" />
+	<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 
-	<script src="webdoc/js/popbox.js" language="javascript"></script>
 	<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
 
-	<link rel="stylesheet" type="text/css" href="webdoc/datepicker/css/datepicker.css">
-	<link rel="stylesheet" href="webdoc/css/pagination.css" />
-	<script src="webdoc/js/popimg.js" language="javascript"></script>
+	<link rel="stylesheet" href="./webdoc/css/pagination.css" />
 	<title>溟宗供应链</title>
 </head>
 <style>
@@ -130,6 +128,11 @@
 		float: right;
 		margin-top: -4px;
 	}
+	.close {font-size:0;display:block;height:3rem;overflow:hidden;cursor:pointer;}
+.close:before {content:"\e911";font-size:1rem;color:#ccc;display:block;width:3rem;height:3rem;line-height:3rem;cursor:pointer;}
+.close:hover:before {color:#222;}
+.popbox .heading {border-bottom:1px solid #e5e5e5;line-height:3rem;text-indent:1rem;font-size:1rem;font-weight:normal;position:relative;}
+.popbox .heading em {position:absolute;right:0;top:0;}
 	</style>
 <body>
 <section class="header">
@@ -171,17 +174,12 @@
 						<th>结算方式</th>
 						<th>上一年度客户开票额</th>
 						<th>回款变更凭证</th>
+						<th>状态</th>
 					</tr>
 				</table>
 			</div>
-			<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;" id="page_ELE">
-				<ul>
-					<li><a class="prev" disabled="disabled" href="javascript:void(0);" id="prev">上一页</a></li>
-					<li><i class="on">1</i></li>
-					<li><a class="next" id="next" href="javascript:void(0);">下一页</a></li>
-					<li>&nbsp;&nbsp;|&nbsp;共1页，到 <input autocomplete="off" type="text" id="inputVlaue"/> 页</li>
-					<li><a id="skip" href="javascript:void(0);">确定</a></li>
-				</ul>
+			<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;width: 50%;">
+				<div class="m-style pageHTML"></div>
 			</div>
 		</div>
 	</div>
@@ -194,7 +192,7 @@
 			<div class="listbox">
 				<div class="item">
 					<b>商户名称：</b>
-					<i class="inputbox"><input autocomplete="off" class="warn" type="text" name="invoiceTitle" id="invoiceTitle" placeholder="请输入商户名称">
+					<i class="inputbox"><input autocomplete="off" type="text" name="invoiceTitle" id="invoiceTitle" placeholder="请输入商户名称">
 						<q class="warntxt">请正确输入商户名称</q>
 					</i>
 				</div>
@@ -231,9 +229,8 @@
 </section>
 <section class="popbox off" id="popbox_1">
 	<div class="img_Pop">
-		<b class="close" id="hideImg01"></b>
 		<div id="imgbox" class="imgbox">
-			<img id="recImg" src="" style="width: 100%;height:680px ">
+			<img id="recImg" src="" style="width: 100%;height:100% ">
 		</div>
 	</div>
 </section>
@@ -244,15 +241,15 @@
 
 </body>
 </html>
+<script src="webdoc/js/highlight.min.js" language="javascript"></script>
 <script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
-<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script src="webdoc/js/popimg.js" language="javascript"></script>
+<script type="text/javascript" src="webdoc/js/jquery.pagination.js" ></script>
+<script src="webdoc/js/popbox.js"></script>
+<script type="text/javascript" src="webdoc/js/home.js?2019221" ></script>
 <script type="text/javascript" src="webdoc/js/pageHTML.js" ></script>
-<script type="text/javascript" src="webdoc/js/receivables.js"></script>
+<script type="text/javascript" src="webdoc/js/receivables.js?2019221"></script>
 
-<script src="webdoc/datepicker/js/plugins/moment.min.js"></script>
-<script type="text/javascript" src="webdoc/js/pagination.min.js" ></script>
-<script src="webdoc/datepicker/js/datepicker.all.js"></script>
-<script src="webdoc/js/datepicker.js"></script>
 
 <script>
     var name_show_img = new ShowImage;
@@ -260,7 +257,6 @@
     //PopBox(触发按钮的ID值，弹框的ID值)
     var popbox = new PopBox();
     popbox.hide("btn_hollow","popbox");
-    popbox.hide("btn02","popbox");
     popbox.hide("closePopbox","popbox");
     popbox.show("btn03","popbox");
 
@@ -283,5 +279,5 @@
             $(this).siblings('div').removeClass('selected');  // 删除其他兄弟元素的样式
             $(this).css("","");
         });
-    });
+	});
 </script>

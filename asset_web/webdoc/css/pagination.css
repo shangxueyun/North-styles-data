@@ -1,400 +1,260 @@
-@charset "UTF-8";
 
+
+/* reset.css */
+@charset "utf-8";
 /**
- * @version: v1.7
- * @author: xgc-whj
- * @date: 2018-05-25 21:40:00
- * @license: MIT license release
- * @jq22 address: http://www.jq22.com/jquery-info17548
- * @GitHub: https://github.com/w0624/jquery-pagination
- * @description: jQuery分页插件，可自定义样式，默认有五套样式，可自定义插件选项，简单方便，兼容IE8
- */
-
-/*ccs-1*/
-.whj_jqueryPaginationCss-1 {
-    display: inline-block;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+reset css
+*/
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section{
+    margin: 0;
+    padding: 0;
+}
+ul,ol{
+    list-style: none;
+}
+img{
+    border:0;
+    -ms-interpolation-mode: bicubic; 
+    vertical-align: middle;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-style: normal;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+    font-size: 100%;
+}
+abbr,acronym {
+    border: 0;
+    font-variant: normal;
+}
+/* highlight.min.css */
+.hljs{display:block;overflow-x:auto;padding:0.5em;background:#F0F0F0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888888}.hljs-keyword,.hljs-attribute,.hljs-selector-tag,.hljs-meta-keyword,.hljs-doctag,.hljs-name{font-weight:bold}.hljs-type,.hljs-string,.hljs-number,.hljs-selector-id,.hljs-selector-class,.hljs-quote,.hljs-template-tag,.hljs-deletion{color:#880000}.hljs-title,.hljs-section{color:#880000;font-weight:bold}.hljs-regexp,.hljs-symbol,.hljs-variable,.hljs-template-variable,.hljs-link,.hljs-selector-attr,.hljs-selector-pseudo{color:#BC6060}.hljs-literal{color:#78A960}.hljs-built_in,.hljs-bullet,.hljs-code,.hljs-addition{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}
+/* common.css */
+body {
+    word-wrap: break-word;
+    background: #fff;
 }
 
-.whj_jqueryPaginationCss-1 div {
-    display: inline-block;
-    vertical-align: bottom;
-    height: 30px;
-    width:20px;
-    line-height: 30px;
-    border-radius: 5px;
-    text-align: center;
+h1 {
+    font-size: 40px;
 }
 
-.whj_jqueryPaginationCss-1 .whj_padding {
-    padding: 1px 9px;
+p,
+pre {
+    margin: 10px 0;
 }
 
-.whj_jqueryPaginationCss-1 .whj_bgc {
-    background-color: #fff;
-    color: #666666;
+::selection {
+    background: #000;
+    color: #fff;
 }
 
-.whj_jqueryPaginationCss-1 .whj_border {
-    border: 1px solid #e5e5e5;
-/*    width:40px;*/
+.wrapper {
+    margin: 0 auto;
+    width: 960px;
+    height: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-.whj_jqueryPaginationCss-1 .whj_color {
-    color: #333333;
-    width:60px;
-    height:30px;
-    border-radius: 5px;
+
+/*底部版权*/
+
+footer {
+    margin: 100px 0 50px 300px;
+    padding: 0 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-.whj_jqueryPaginationCss-1 .whj_hover:hover {
-    background-color: #f5f5f5;
-    color: #333;
-    cursor: pointer;
-    border: 1px solid #333;
-}
-
-.whj_jqueryPaginationCss-1 .whj_checked {
-    background-color: #f5f5f5;
-    color: #333;
-     border: 1px solid #333;
-}
-
-.whj_jqueryPaginationCss-1 .whj_hoverDisable {
-    opacity: 0.5;
+footer p {
+    border-top: 1px solid #ebebeb;
+    opacity: .5;
     filter: alpha(opacity=50);
+    text-align: right;
+    font-size: 12px;
+    line-height: 3;
+    font-family: "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", tahoma, arial, simsun, "\5B8B\4F53";
 }
 
-.whj_jqueryPaginationCss-1 select {
-    height: 34px;
-    vertical-align: bottom;
-    padding: 0px;
-    outline: none;
-    border-radius: 5px;
+footer p a {
+    color: #000;
 }
 
-.whj_jqueryPaginationCss-1 input {
-    padding: 0px;
-    height: 26px;
-    outline: none;
+footer p .spe {
+    padding: 0 5px;
+}
+
+.right-bg {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    margin-top: -215px;
+    width: 215px;
+    height: 430px;
+    background: url('../../image/right_bg.png') no-repeat;
+}
+
+
+/*组件样式*/
+
+/* table {
+    width: 100%;
+    border: 1px solid #CAD3DA;
+}
+
+table td {
+    padding: 10px;
+    width: 150px;
+    border: 1px solid #CAD3DA;
+}
+
+table thead tr {
+    height: 40px;
+    line-height: 40px;
     text-align: center;
-    width: 60px;
-    vertical-align: bottom;
+    border-bottom: 1px solid #CAD3DA;
 }
 
-.whj_jqueryPaginationCss-1 div, .whj_jqueryPaginationCss-1 input, .whj_jqueryPaginationCss-1 select {
-    margin: 2px;
-}
-.confirmBtn{
-    width:40px !important;
-}
-/*只有设置显示总页数时，该样式才生效*/
-.whj_jqueryPaginationCss-1 .whj_totalSizeSingle {
-    margin-left: -8px;
+table thead td {
+    padding: 0;
+    border-left: 1px solid #CAD3DA;
+    background: #DFEBFB;
 }
 
-/*ccs-2*/
-.whj_jqueryPaginationCss-2 {
-    display: inline-block;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+table .explain {
+    width: 500px;
 }
 
-.whj_jqueryPaginationCss-2 div {
-    display: inline-block;
-    vertical-align: bottom;
-    height: 24px;
-    line-height: 24px;
-    color: #666;
+table tbody tr:nth-child(even) {
+    background: #E7EFF9;
 }
 
-.whj_jqueryPaginationCss-2 .whj_padding {
-    padding: 1px 9px;
+.hljs, .hljs-subst {
+    padding: 10px;
+    font-family: Monaco, Consolas, "Courier New";
 }
 
-.whj_jqueryPaginationCss-2 .whj_bgc {
-    background-color: #5194ca;
-    color: #fff;
+.method {
+    font-family: Monaco, Consolas, "Courier New";
 }
 
-.whj_jqueryPaginationCss-2 .whj_border {
-    border: 1px solid #5194ca;
+.eg {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px dashed #bdbdbd;
+    background: #f9f9f9;
 }
 
-.whj_jqueryPaginationCss-2 .whj_color {
-    color: #333;
+.update-log .title {
+    margin: 0;
+    font-size: 20px;
 }
 
-.whj_jqueryPaginationCss-2 .whj_hover:hover {
-    background-color: #d4f1ff;
-    color: #5194ca;
-    cursor: pointer;
+.update-log ul li {
+    margin: 5px 0;
 }
 
-.whj_jqueryPaginationCss-2 .whj_checked {
-    background-color: #d4f1ff;
-    color: #5194ca;
-}
-
-.whj_jqueryPaginationCss-2 .whj_hoverDisable {
-    opacity: 0.7;
-    filter: alpha(opacity=70);
-}
-
-.whj_jqueryPaginationCss-2 select {
-    height: 28px;
-    vertical-align: bottom;
-    padding: 0px;
-    outline: none;
-}
-
-.whj_jqueryPaginationCss-2 input {
-    padding: 0px;
-    height: 26px;
-    outline: none;
+.bad {
+    padding: 0 0 0 10px;
+    border: 1px dashed #bdbdbd;
+    color: #757575;
+    background: #f9f9f9;
+    font-family: Monaco, Consolas, "Courier New";
+} */
+/* pagination.css */
+.m-style {
+    position: relative;
     text-align: center;
-    width: 60px;
-    vertical-align: bottom;
+    zoom: 1;
 }
 
-.whj_jqueryPaginationCss-2 div, .whj_jqueryPaginationCss-2 input, .whj_jqueryPaginationCss-2 select {
-    margin: 2px;
+.m-style:before,
+.m-style:after {
+    content: "";
+    display: table;
 }
 
-/*只有设置显示总页数时，该样式才生效*/
-.whj_jqueryPaginationCss-2 .whj_totalSizeSingle {
-    margin-left: -8px;
+.m-style:after {
+    clear: both;
+    overflow: hidden;
 }
 
-/*ccs-3*/
-.whj_jqueryPaginationCss-3 {
-    display: inline-block;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+.m-style span {
+    float: left;
+    line-height: 38px;
+    color: #bdbdbd;
+    font-size: 14px;
 }
 
-.whj_jqueryPaginationCss-3 div {
-    display: inline-block;
-    vertical-align: bottom;
-    height: 24px;
-    line-height: 24px;
-}
-
-.whj_jqueryPaginationCss-3 .whj_padding {
-    padding: 1px 9px;
-}
-
-.whj_jqueryPaginationCss-3 .whj_bgc {
-    background-color: #7a7b7b;
+.m-style .active {
+    float: left;
+    margin: 0 5px;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    background: #465db7;
     color: #fff;
+    font-size: 14px;
+    border: 1px solid #465db7;
+    border-radius: 6px;
 }
 
-.whj_jqueryPaginationCss-3 .whj_border {
-    border: 1px solid #929292;
+.m-style a {
+    float: left;
+    margin: 0 5px;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    color: #bdbdbd;
+    font-size: 14px;
+    border-radius: 6px;
 }
 
-.whj_jqueryPaginationCss-3 .whj_color {
-    color: #929292;
+.m-style a:hover {
+    color: #fff;
+    background: #465db7;
 }
 
-.whj_jqueryPaginationCss-3 .whj_hover:hover {
-    background-color: #e0dddd;
-    color: #7a7b7b;
-    cursor: pointer;
+.m-style .next,
+.m-style .prev {
+    font-family: "Simsun";
+    font-size: 16px;
+    font-weight: bold;
 }
 
-.whj_jqueryPaginationCss-3 .whj_checked {
-    background-color: #e0dddd;
-    color: #7a7b7b;
+.now,
+.count {
+    padding: 0 5px;
+    color: #f00;
 }
 
-.whj_jqueryPaginationCss-3 .whj_hoverDisable {
-    opacity: 0.5;
-    filter: alpha(opacity=50);
+.eg img {
+    max-width: 800px;
+    min-height: 500px;
 }
 
-.whj_jqueryPaginationCss-3 select {
-    height: 28px;
-    vertical-align: bottom;
-    padding: 0px;
-    outline: none;
-}
-
-.whj_jqueryPaginationCss-3 input {
-    padding: 0px;
-    height: 26px;
-    outline: none;
+.pageHTML input {
+    float: left;
+    margin: 0 5px;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
     text-align: center;
-    width: 60px;
-    vertical-align: bottom;
-}
-
-.whj_jqueryPaginationCss-3 div, .whj_jqueryPaginationCss-3 input, .whj_jqueryPaginationCss-3 select {
-    margin: 2px;
-}
-
-/*只有设置显示总页数时，该样式才生效*/
-.whj_jqueryPaginationCss-3 .whj_totalSizeSingle {
-    margin-left: -8px;
-}
-
-/*ccs-4*/
-.whj_jqueryPaginationCss-4 {
-    display: inline-block;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-}
-
-.whj_jqueryPaginationCss-4 div {
-    display: inline-block;
-    vertical-align: bottom;
-    height: 24px;
-    line-height: 24px;
-}
-
-.whj_jqueryPaginationCss-4 .whj_padding {
-    padding: 1px 9px;
-}
-
-.whj_jqueryPaginationCss-4 .whj_bgc {
-    background-color: #f5f5f5;
-    color: #907272;
-}
-
-.whj_jqueryPaginationCss-4 .whj_border {
-    border: 1px solid #907272;
-}
-
-.whj_jqueryPaginationCss-4 .whj_color {
-    color: #907272;
-}
-
-.whj_jqueryPaginationCss-4 .whj_hover:hover {
-    background-color: #afacac;
-    color: #fff;
-    cursor: pointer;
-}
-
-.whj_jqueryPaginationCss-4 .whj_checked {
-    background-color: #afacac;
-    color: #fff;
-}
-
-.whj_jqueryPaginationCss-4 .whj_hoverDisable {
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-}
-
-.whj_jqueryPaginationCss-4 select {
-    height: 28px;
-    vertical-align: bottom;
-    padding: 0px;
+    background: #fff;
+    border: 1px solid #ebebeb;
     outline: none;
-}
-
-.whj_jqueryPaginationCss-4 input {
-    padding: 0px;
-    height: 26px;
-    outline: none;
-    text-align: center;
-    width: 60px;
-    vertical-align: bottom;
-}
-
-.whj_jqueryPaginationCss-4 div, .whj_jqueryPaginationCss-4 input, .whj_jqueryPaginationCss-4 select {
-    margin: 2px;
-}
-
-/*只有设置显示总页数时，该样式才生效*/
-.whj_jqueryPaginationCss-4 .whj_totalSizeSingle {
-    margin-left: -8px;
-}
-
-/*ccs-5*/
-.whj_jqueryPaginationCss-5 {
-    display: inline-block;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-}
-
-.whj_jqueryPaginationCss-5 div {
-    display: inline-block;
-    vertical-align: bottom;
-    height: 24px;
-    line-height: 24px;
-}
-
-.whj_jqueryPaginationCss-5 .whj_padding {
-    padding: 1px 9px;
-}
-
-.whj_jqueryPaginationCss-5 .whj_bgc {
-    background-color: #199eaf;
-    color: #fff;
-}
-
-.whj_jqueryPaginationCss-5 .whj_border {
-    border: 1px solid #199eaf;
-}
-
-.whj_jqueryPaginationCss-5 .whj_color {
-    color: #199eaf;
-}
-
-.whj_jqueryPaginationCss-5 .whj_hover:hover {
-    background-color: #d4f1ff;
-    color: #199eaf;
-    cursor: pointer;
-}
-
-.whj_jqueryPaginationCss-5 .whj_checked {
-    background-color: #d4f1ff;
-    color: #199eaf;
-}
-
-.whj_jqueryPaginationCss-5 .whj_hoverDisable {
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-}
-
-.whj_jqueryPaginationCss-5 select {
-    height: 28px;
-    vertical-align: bottom;
-    padding: 0px;
-    outline: none;
-}
-
-.whj_jqueryPaginationCss-5 input {
-    padding: 0px;
-    height: 26px;
-    outline: none;
-    text-align: center;
-    width: 60px;
-    vertical-align: bottom;
-}
-
-.whj_jqueryPaginationCss-5 div, .whj_jqueryPaginationCss-5 input, .whj_jqueryPaginationCss-5 select {
-    margin: 2px;
-}
-
-/*只有设置显示总页数时，该样式才生效*/
-.whj_jqueryPaginationCss-5 .whj_totalSizeSingle {
-    margin-left: -8px;
-}
-
-.whj_jqueryPaginationCss-1 .whj_bg{
-    border: 1px solid #333;
-    color: #333;
-    background: #f5f5f5;
+    color: #bdbdbd;
+    font-size: 14px;
 }

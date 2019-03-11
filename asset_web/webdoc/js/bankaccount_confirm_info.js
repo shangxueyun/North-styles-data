@@ -40,11 +40,13 @@ $(function () {
 				}
 
 				var  _bankCardInfo = result.bizData.bankCardInfo
-				$(".list_info").find("p").eq(8).text(_bankCardInfo.accountNo)
-				$(".list_info").find("p").eq(9).text(_bankCardInfo.bankName)
+				$(".list_info").find("p").eq(9).text(_bankCardInfo.accountNo)
+				$(".list_info").find("p").eq(8).text(_bankCardInfo.accountName)
 				$(".list_info").find("p").eq(10).text(_bankCardInfo.bankNo)
 
-			}
+            }else{
+                alert(result.returnMessage)
+            }
 		}
 	});
 	$("input[type='checkbox']").change(function(e){
@@ -61,5 +63,9 @@ $(function () {
 		}else{
 			return
 		}
+	})
+
+	$(Modify).click(fn=>{
+		window.location.href = "bankaccount_opening_step1.html?Modify"
 	})
 });

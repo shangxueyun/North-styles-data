@@ -15,18 +15,19 @@ $("#lending").mouseover(function(){
 });
 
 function PageFUNC(Page,status){
-    debugger
     if(!Page)
     {
         Page = 1
         pageS = Page;
-    }
+    }else{pageS = Page}
     if(!status)
     {
         status = statusP;
     }
     statusP = status
     $('#reimbursement').css("background","#2d3f81");
+    let queryRangeDate = $("#queryRangeDate").val(),queryBeginDate = queryRangeDate.substr(0,queryRangeDate.indexOf(" ")),
+    queryEndDate = queryRangeDate.substr(queryRangeDate.lastIndexOf(" ")+1,queryRangeDate.length);
     var _data = {
         "service": _service(),
         "version": _version(),
@@ -44,6 +45,8 @@ function PageFUNC(Page,status){
             "beforeRepayLastDay":$('#beforeRepayLastDay').val(),
             "page":Page,
             "pageSize":10,
+            "beginDate":formatDate(queryBeginDate),
+            "endDate":formatDate(queryEndDate),
             "extension": null
         }
     }
@@ -59,28 +62,60 @@ function PageFUNC(Page,status){
             if(result.bizData!=null){
                 var v = 1;
                 var _loanList=String_clear("Arr",result.bizData.list);
-                HTMLappendPage(result.bizData,pageS,numpage,PageFUNC);
+				if(result.bizData.list == 0)
+				result.bizData.pages = 0;
+				$(".pageHTMLtotal").remove();
+				$('.pageHTML').pagination({
+					pageCount: result.bizData.pages,
+					mode:"fixed",
+					current:Page,
+					jump: true,
+					count:99,
+					callback: function (api) {
+						PageFUNC(api.getCurrent())
+					}
+				});
+				$('.pageHTML').append("<span style='white-space:pre;' class='pageHTMLtotal'>共" + result.bizData.pages +"页  共"+result.bizData.total+"条记录</span>") 
                 $("table tr:gt(0)").remove();
                 $.each(_loanList,function(i,res){
-                    if(res.status=="AR" || res.status=="AWAIT_REPAY"){
+                    if(res.status=="AC" || res.status=="AWAIT_COMPARE")
+                        res.status="待对账"
+                    else if(res.status=="AR" || res.status=="AWAIT_REPAY")
                         res.status="待还款"
-                    }
-                    if(res.status=="RF" || res.status=="REPAY_FINISH"){
+                    else if(res.status=="RF" || res.status=="REPAY_FINISH")
                         res.status="已还清"
-                    }
-                    if(res.status=="RETL" || res.status=="REPAY_EXCEED_THE_TIME_LIMIT"){
+                    else if(res.status=="RETL" || res.status=="REPAY_EXCEED_THE_TIME_LIMIT")
                         res.status="已逾期"
-                    }
+                    else if(res.status=="RP" || res.status=="REPAY_PART")
+                        res.status="已还部分"
+                    else if(res.status=="RD" || res.status=="REPAY_DELAY")
+                        res.status="已展期"
                     ApplyRecordList = '<tr class="_loanList"><td class="_index">'+ Number(1+i)+'</td>'+
                         '<td>'+res.status+'</td>'+
-                        '<td>'+res.amount+'</td>'+
-                        '<td>'+res.principal+'</td>'+
-                        '<td>'+res.interest+'</td>'+
-                        '<td>'+res.payFine+'</td>'+
+                        '<td>'+stringDispose(res.amount.toString())+'</td>'+
+                        '<td>'+stringDispose(res.principal.toString())+'</td>'+
+                        '<td>'+stringDispose(res.interest.toString())+'</td>'+
+                        '<td>'+stringDispose(res.payFine.toString())+'</td>'+
                         '<td>'+res.lastRepayDate+'</td>'+
                         '</tr>';
                     $("table").append(ApplyRecordList)
                 })
+            }else
+            {
+                 $("table tr:gt(0)").remove();
+                 $('.pageHTMLtotal').remove();
+                 $('.pageHTML').pagination({
+                     pageCount: 0,
+                     mode:"fixed",
+                     jump: true,
+                     callback: function (api) {
+                         PageFUNC(api.getCurrent())
+                     }
+                 });       
+            }
+
+            if(result.requestStatus=="SUCCESS"){}else{
+                alert(result.returnMessage)
             }
         },
         // complete:function(){ //生成分页条

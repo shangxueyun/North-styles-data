@@ -7,6 +7,7 @@
 <meta name="format-detection" content="telephone=no" />
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
 <title>溟宗供应链</title>
@@ -111,26 +112,26 @@
 					<p></p>
 				</li>
 				<li>
-					<span>银行账号：</span>
+					<span>绑定企业银行名称：</span>
 					<p></p>
 				</li>
 				<li>
-					<span>银行账户名称：</span>
+					<span>绑定企业银行账号：</span>
 					<p></p>
 				</li>
 				<li>
-					<span>开户行联行号：</span>
+					<span>绑定企业银行联行号：</span>
 					<p></p>
 				</li>
 				<li>
 					<span><input style="width:16px;height:16px" type="checkbox" autocomplete="off"/></span>
-					<p>我已阅读并同意 <a class="media" href="webdoc/js/服务协议.pdf">《武汉众邦银行E账通平台子账户服务协议》</a></p>
+					<p>我已阅读并同意 <a class="media" href="webdoc/js/Service_Agreement.pdf">《武汉众邦银行E账通平台子账户服务协议》</a></p>
 				</li>
 				<li>
 					<span>&nbsp;</span>
 					<p>
 						<!--<a class="button btn_hollow_2" href="javascript:void(0);" onclick="history.back(-1);return false;">修改</a>-->
-						<a class="button btn_hollow_2" href="bankaccount_opening_step1.html">修改</a>
+						<a class="button btn_hollow_2" id="Modify" >修改</a>
 						<a class="button btn_block_2 no_checked" >确认无误</a>
 						<!--href="bankaccount.html"-->
 					</p>
@@ -145,5 +146,10 @@
 </body>
 </html>
 <script src='webdoc/js/jquery-3.3.1.min.js' language="javascript"></script>
+<script>
+$(".close").click(fn=>{
+	$(".blue").hide()
+})
+</script>
 <script src="webdoc/js/home.js"></script>
 <script type="text/javascript" src="webdoc/js/bankaccount_confirm_info.js" ></script>

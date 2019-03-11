@@ -39,7 +39,7 @@ let PageFUNCEvent = (ele,str,pageS,numpage,fnC)=>{
         }
         else if(str == "page_ELE_CHILD")
         {
-            let page = fn.currentTarget.text;
+            let page = Number(fn.currentTarget.text);
             fnC(page)
         }
     })
@@ -48,7 +48,7 @@ let PageFUNCEvent = (ele,str,pageS,numpage,fnC)=>{
 let HTMLappendPage = (response,pageS,numpage,PageFUNC) =>{
     if(!response)
     return false
-    let PageHTML = '',PageData = response.total,actions = response.pageNum;pageS=actions;numpage = response.pages;
+    let PageHTML = '',PageData = response.total,actions = pageS;numpage = response.pages;
     PageHTML += "<ul>";
         if((PageData - 10)<0)
         {

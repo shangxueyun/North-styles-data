@@ -7,9 +7,9 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta http-equiv="cache-control" content="no-cache"/>
 	<meta name="robots" content="all" />
+	<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-	<link rel="stylesheet" type="text/css" href="webdoc/datepicker/css/datepicker.css">
-	<link rel="stylesheet" href="webdoc/css/pagination.css" />
+	<link rel="stylesheet" href="./webdoc/css/pagination.css" />
 	<script src="webdoc/js/order_toggle.js"></script>
 	<title>溟宗供应链</title>
 </head>
@@ -109,6 +109,35 @@
 	input {
 		text-indent: 4px;
 	}
+	input {
+     float: inherit; 
+    margin: 0;
+    width: initial;
+    height: initial;
+    line-height: 38px;
+    text-align: left;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    outline: none;
+    color: #bdbdbd;
+    font-size: 14px;
+}
+.jump-ipt {
+	float: left;
+    margin: 0 5px;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    outline: none;
+    color: #bdbdbd;
+    font-size: 14px;
+}
+.inlineBlock .inputbox {
+    padding:0;
+}
 	</style>
 <body>
 <section class="header">
@@ -141,7 +170,7 @@
 		<div class="innerBox">
 			<div class="inlineBox alignRight">
 				<div class="inlineBlock">
-					<i class="txt">最后还款日：</i><i class="inputbox"><input autocomplete="off" type="text" id="beforeRepayLastDay" name="beforeRepayLastDay" placeholder="请输入天数"></i>
+					<i class="txt">最后还款日：</i><i class="inputbox"><input autocomplete="off" style="width: 10rem" type="text" class="c-datepicker-data-input only-date" placeholder="选择日期范围" id="queryRangeDate"></i>
 				</div>
 				<div class="inlineBlock"><a class="button btn_block_2 magnifier" href="javascript:void(0)">查询</a></div>
 			</div>
@@ -173,18 +202,8 @@
 					</tr>
 				</table>
 			</div>
-			<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;" id="page_ELE">
-				<ul>
-					<li><a class="prev" disabled="disabled" href="javascript:void(0);" id="prev">上一页</a></li>
-					<li><i class="on">1</i></li>
-					<li><a class='page_ELE_CHILD' href="javascript:void(0);">2</a></li>
-					<li><a href="javascript:void(0);">3</a></li>
-					<li><a href="javascript:void(0);">4</a></li>
-					<li><a href="javascript:void(0);">5</a></li>
-					<li><a class="next" id="next" href="javascript:void(0);">下一页</a></li>
-					<li>&nbsp;&nbsp;|&nbsp;共100页，到 <input autocomplete="off" type="text" id="inputVlaue"/> 页</li>
-					<li><a id="skip" href="javascript:void(0);">确定</a></li>
-				</ul>
+			<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;width: 50%;">
+				<div class="m-style pageHTML"></div>
 			</div>
 		</div>
 	</div>
@@ -227,9 +246,19 @@
 </script>
 </body>
 </html>
-<script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js" ></script>
-<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script src="webdoc/js/highlight.min.js" language="javascript"></script>
+<script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+<script type="text/javascript" src="webdoc/js/jquery.pagination.js" ></script>
+<script type="text/javascript" src="webdoc/js/home.js?2019221" ></script>
 <script type="text/javascript" src="webdoc/js/pageHTML.js" ></script>
-<script type="text/javascript" src="webdoc/js/reimbursement.js" ></script>
-<script src="webdoc/datepicker/js/plugins/moment.min.js"></script>
-<script type="text/javascript" src="webdoc/js/pagination.min.js" ></script>
+<script type="text/javascript" src="webdoc/js/reimbursement.js?2019221" ></script>
+<script src="webdoc/laydate/laydate.js"></script>
+<script>
+	lay('#version').html('-v'+ laydate.v);
+	//日期范围
+	laydate.render({
+	  elem: '#queryRangeDate',
+	  theme: '#2d3f81'
+      ,range: true
+    });
+</script>

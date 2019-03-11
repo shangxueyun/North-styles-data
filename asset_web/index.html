@@ -1,5 +1,4 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
@@ -7,42 +6,282 @@
 <meta name="format-detection" content="telephone=no" />
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
+<title>融资企业管理后台</title>
+<style>
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+#loading_div .loading{
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 1.5rem;
+	border: 2px solid transparent;
+	border-top: 2px solid #0000008f;
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	transform:rotate(0deg);
+	animation:myfirst .5s both infinite;
+	-moz-animation:myfirst .5s both infinite; 
+	-webkit-animation:myfirst .5s both infinite; 
+	-o-animation:myfirst .5s both infinite; 
+}
 
-<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-<title>溟宗供应链金融系统</title>
+@keyframes myfirst
+{
+0%   {transform:rotate(0deg);}
+25%  {transform:rotate(72deg);}
+50%  {transform:rotate(144deg);}
+75% {transform:rotate(230deg);}
+100% {transform:rotate(360deg);}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+0%   {transform:rotate(0deg);}
+25%  {transform:rotate(72deg);}
+50%  {transform:rotate(144deg);}
+75% {transform:rotate(230deg);}
+100% {transform:rotate(360deg);}
+}
+
+
+html,body{
+	width: 100%;
+    height: 100%;
+margin:0;padding:0;border:0
+}
+.main{
+    width: 100%;
+    height: 100%;
+}
+.main .module{
+    width: 100%;
+    height: auto;
+}
+.main .header{
+	font-style: italic;
+    background: #06113B;
+    color: #ffffff;
+    display: flex;
+	height: 18%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.header h3{
+    padding-left: 14rem;
+    font-size: 2.6rem;
+}
+.header h3::before{
+    content: " ";
+    width: 100px;
+    height: 90px;
+    position: absolute;
+    margin: -1rem 0 0 -8rem;
+    background: url("./webdoc/img/search.png") no-repeat;
+    background-size: 100% 100%;
+}
+.main .section{
+    height: 77.8%;
+    background: #f5f5f6 url(./webdoc/img/bg.svg) repeat 0 0 / .7rem;;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.section .section-module{
+    width: 45%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.left{
+    padding-right: 6rem;
+}
+.left h1{
+    font-size: 2.6rem;
+}
+.left .img{
+	width: 18rem;
+    height: 12rem;
+	background: url("./webdoc/img/logo.png") no-repeat;
+	background-size: 100% 100%;
+}
+.right{
+    height: auto;
+    text-align: center;
+    margin-top: -7rem;
+}
+.right_c{
+    text-align: left;
+    border: 1px solid #333;
+    background: #ffffff;
+	padding: 0 1.5rem 0 1.5rem;
+}
+.right_c_login{
+    width: 80%;
+    margin: 0 auto;
+    text-align: right;
+}
+.right_c_login span{    
+    margin-right: .8rem;
+    font-size: 20px;
+    font-weight: 400;
+    color: #7C828F;
+    }
+.right_c_login input{
+    width: 85%;
+    outline: 0;
+    border: 1px solid #ccc;
+	margin-top: 1rem;
+    height: 2.5rem;
+    text-indent: .5rem;
+    background: #fff;
+    font-size: 14px;
+    border-radius: .1rem;
+}
+.right_c_login button{
+    margin-top: 2rem;
+    width: 85%;
+    outline: 0;
+    border: 0;
+    height: 52px;
+    background: #06113B;
+    color: #fff;
+    font-size: 18px;
+    border-radius: .3rem;
+    margin-bottom: 2.5rem;
+}
+.footer{
+	height: 4%;
+	text-align: center;
+	display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+@media screen and (min-width:0) and (max-width:1260px) {
+	.left {
+    padding-right: 0rem;
+}
+}
+@media screen and (min-width:0) and (max-width:1078px) {
+	.left .img{
+		width: 14rem;
+		height: 10rem;
+	}
+	.left h1 {
+    font-size: 1.8em;
+}
+	.header h3{
+		font-size: 1.8em;
+	}
+	.right_c_login {
+		width: 93%;
+	}
+	.right_c_login input {
+		width: 82%;
+	}
+	.right_c_login button{
+		width: 82%;
+	}
+	.right_c_login button{
+		margin-top: 1.5rem;
+	}
+	.right {
+		width: 50%;
+	}
+}
+@media screen and (min-width:0) and (max-width:814px) {
+	.right_c_login input {
+		width: 80%;
+	}
+}
+@media screen and (min-width:0) and (max-width:740px) {
+	.left .img{
+		width: 10rem;
+    	height: 6rem;
+	}
+	.left h1 {
+		font-size: 1.4em;
+	}
+	.header h3{
+		font-size: 1.4em;
+	}
+	.right_c_login button{
+		margin-top: 1rem;
+	}
+	.right_c_login input {
+		width: 76%;
+	}
+	.right_c_login {
+		width: 98%;
+	}
+}
+</style>
 </head>
 
 <body>
-<section class="logobox">
-	<section class="login_bg" id="login_bg" data-img="webdoc/img/cityphoto.jpg">
-		<div><i>Welcome!</i>
-		<p>—————溟宗供应链金融系统</p></div>
-	</section>
-	<!--18029083223-->
-	<!--13918936191-->
-	<section class="login_body">
-		<dl>
-			<dt><img src="webdoc/img/logo_icon.svg"></dt>
-			<dd>
-				<ul>
-					<!--18029083223 123456-->
-					<li class="phone"><p><input autocomplete="off" type="text" placeholder="手机号" required='required' autocomplete="off"></p></li>
-					<li class="clock"><p><input autocomplete="off" type="password" placeholder="密码" required='required' autocomplete="off"></p></li>
-					<li><span class='warnIcon'></span><span class="warntxt"></span></li>
-					<li><button class="button btn_block_1">登录</button></li>
-				</ul>
-			</dd>
-		</dl>
-	</section>
-</section>
-</body>
-</html>
-<script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+    <div class="main">
+        <div class="module header">
+            <h3>帮好的企业找到更便宜的钱！</h3>
+        </div>
+        <div class="module section">
+            <div class="section-module left">
+                <div class="img"></div>
+                <h1>溟宗供应链交易金融系统</h1>
+            </div>
+            <div class="right">
+                <h3 style="font-size: 26px;">融资企业管理后台</h3>
+                <div class="right_c">
+                    <h3 style="font-size: 22px;">用户登录</h3>
+                    <div class="right_c_login">
+                        <span>账号:</span><input name="account" id="account" type="text" />
+                        <span>密码:</span><input name="password" id="password" type="password" />
+                        <button id="login" onclick="">登录</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="module footer"> <span style="margin-top: 1rem;">Copyright©2018上海溟宗供应链管理有限公司版权所有. 沪ICP备18039172号-2</span>    </div>
+    </div>
 
-<script  type="module">
-	import AJAX from './webdoc/js/api.js';
-    //获取当前时间
-    function formateDateAndTimeToString(){
+
+
+    <div id="loading_div" style="display:none">
+        <div class="loading"></div>
+    </div>
+</body>
+    <script src="webdoc/js/jquery-3.3.1.min.js"></script>
+    <script type="module">
+    import AJAX from './webdoc/js/api.js'
+    
+	$(password).keydown(fn=>{
+
+	})
+
+	$(login).click(()=>{
+		if($(account).val() == "")
+		{
+			alert("账号不能为空!")
+		}
+		else if($(password).val() == ""){
+			alert("密码不能为空!")
+		}
+		else
+		RequestLogin($(account).val(),$(password).val())
+	})
+	//获取当前时间
+	function formateDateAndTimeToString(){
         var date = new Date();
         var year = date.getFullYear();
         var month = date.getMonth()+1;
@@ -61,69 +300,43 @@
         secs = secs.toString()
         return year+month+day+hours+mins+secs;
     }
-	var img = new Image;
-	img.src = document.getElementById("login_bg").getAttribute("data-img");
-	img.onload = function()
-	{
-		if(img.width < img.height)
-		{
-			img.style.cssText = "width:100%";
-		}
-		else if(img.width >=  img.height)
-		{
-			img.style.cssText = "height:100%";
-		}
-		img.id = "bgimg";
-		document.getElementById("login_bg").appendChild(img);
-		setTimeout(function(){
-			document.getElementById("bgimg").className = "on";
-		},50)
-	}
-	$(function () {
-		$(".warnIcon").hide()
-		$(".button").click(()=>{
-			if($(".phone").find("input").val()!=''&&$(".clock").find("input").val()!=''){
-				var _data = {
-	       			"service":'member_register',
-    				"version":'1.0',
-    				"partnerId": '111111111111',
-	       			"bizContent":{
-	       				"requestNo":'S20181012199',
-	       				"requestTime":formateDateAndTimeToString(),
-		       			"inputCharset":'utf-8',
-		       			"signType":'RSA',
-		       			"sign":'sign',
-		       			"client":'PC',
-		       			"identityType":'PHONE_NO',
-	       			    "loginIdentity":$(".phone").find("input").val(),
-	       			    "loginVoucher":$(".clock").find("input").val(),
-	       			    "extension": null,
-                        "verifyType":'PASSWORD',
-                    }
-		       	}
-			
-				AJAX.AjaxResult('memberLogin','POST',_data,'application/json').then(function(response){
-					if(response.requestStatus=="SUCCESS"){
-						$(".warnIcon").hide()
-						window.location.href = "home.html";
-						window.sessionStorage.setItem("token",response.bizData.token)
-					}else{
-						$(".warnIcon").hide()
-						alert(response.returnMessage)
-					}
-				}, err => {
-					$(".warnIcon").hide()
-		       		alert("请求失败")
-				})
-				.catch((error) => {
-					//alert("服务器内部错误")
-				})
+	function RequestLogin(name,password){
+		var _data = {
+			"service":'member_register',
+			"version":'1.0',
+			"partnerId": '111111111111',
+			"bizContent":{
+				"requestNo":'S20181012199',
+				"requestTime":formateDateAndTimeToString(),
+				"inputCharset":'utf-8',
+				"signType":'RSA',
+				"sign":'sign',
+				"client":'PC',
+				"identityType":'PHONE_NO',
+				"loginIdentity":name,
+				"loginVoucher":password,
+				"extension": null,
+				"verifyType":'PASSWORD',
 			}
-			else{
-				$(".warntxt").html("请正确填写信息")
-				$(".warnIcon").show()
+		}
+		$(loading_div).show();
+		AJAX.AjaxResult('memberLogin','POST',_data,'application/json').then(function(response){
+			$(loading_div).hide();
+			if(response.requestStatus=="SUCCESS"){
+				if(response.bizData.companyInfo.companyName){
+					window.sessionStorage.setItem("token",response.bizData.token)
+					window.location.href = "home.html";					
+				}else
+				alert("账户不存在，请从新输入")
+			}else{
+				alert(response.returnMessage)
 			}
+		}, err => {
+			alert("请求失败")
 		})
-	});
-
-</script>
+		.catch((error) => {
+			//alert("服务器内部错误")
+		})
+	}
+    </script>
+</html>

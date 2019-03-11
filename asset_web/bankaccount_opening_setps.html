@@ -7,6 +7,7 @@
 <meta name="format-detection" content="telephone=no" />
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 
 <script src="webdoc/js/popimg.js" language="javascript"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
@@ -127,10 +128,11 @@ import AJAX from './webdoc/js/api.js';
 					AJAX.AjaxResult('openFundAccount','POST',data,'application/json').then(function(result){
 						$(loading_div).hide()
 						if(result.requestStatus=="SUCCESS"){
+							window.localStorage.setItem("Account_status",result.requestStatus);
 							window.location.href="bankaccount_opening_done.html"
 						}else{
 							$(loading_div).hide()
-							alert("请求失败")
+							alert(result.returnMessage)
 						}
 					}, err => {
 						$(loading_div).hide()
@@ -141,7 +143,7 @@ import AJAX from './webdoc/js/api.js';
 					})
 			   	}else{
 					$(loading_div).hide()
-					alert("请求失败")
+					alert(result.returnMessage)
 				}
 			}, err => {
 				$(loading_div).hide()

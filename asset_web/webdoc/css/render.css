@@ -105,7 +105,7 @@ not supported by any browser */
 .companybox .opening {color:#465db7;line-height:1;position:relative;}
 .companybox .opening:before {content:"\e913";color:#06113b;margin-right:.3rem;line-height:1;}
 
-.tablebox {width:100%;overflow-x:auto;}
+.tablebox {width:100%;overflow-x:auto;height: 38rem;}
 .tablebox table {width:100%;}
 .tablebox table th {background:#f3f6fd;color:#333;border-bottom:1px solid #e5e5e5;padding:.8rem;font-size:.875rem;text-align:left;}
 .tablebox table td {background:#fff;color:#555;border-bottom:1px solid #e5e5e5;padding:1rem;font-size:.875rem;text-align:left;}

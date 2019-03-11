@@ -7,6 +7,7 @@
 <meta name="format-detection" content="telephone=no" />
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 
 <script src="webdoc/js/popimg.js" language="javascript"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
@@ -47,7 +48,7 @@
 			<div class="info_icon_warn">icon-warn</div>
 			<p class="info_heading">验证失败</p>
 			<p class="info_txt">原因：打款认证失败</p>
-			<p class="info_btnbox"><a class="button btn_block_1" href="bankaccount_opening_done.html">重新认证</a></p>
+			<p class="info_btnbox"><a class="button btn_block_1" >重新认证</a></p>
 		</div>
 	</div>
 </section>
@@ -58,7 +59,20 @@
 		let num = Number(sessionStorage.getItem("remit"))
 		if(num == 3)
 		{
-			window.location.href="bankaccount_opening_step1.html"
+			$(".info_icon_warn").hide();
+			$(".info_heading").hide();
+			$(".info_txt").text("认证次数已超过三次,请点击确认从新开户");
+			$(".info_txt").attr("class","info_heading");
+			$(".info_heading").css("margin","4rem auto 1rem auto")
+			$(".btn_block_1").text("确认");
+			$(".btn_block_1").click(fn=>{
+				sessionStorage.removeItem("remit");
+				window.location.href="bankaccount_opening_step1.html"
+			})
+		}else{
+			$(".btn_block_1").click(fn=>{
+				window.location.href="bankaccount_opening_done.html"
+			})
 		}
 	}
 </script>

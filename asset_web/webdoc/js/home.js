@@ -1,7 +1,7 @@
 $(function(){
     //token失效跳回登录页
     if(window.sessionStorage.getItem("token")==null){
-        window.location='index.html';
+        window.location.href='index.html';
     }
     $("#SignOut").click(function(){
         let data = JSON.parse(sessionStorage.data)
@@ -19,8 +19,8 @@ $(function(){
                         window.location.href="index.html";
                         window.sessionStorage.removeItem("token");
                    }else{
-                    alert(result.returnMessage)
-                }
+                        alert(result.returnMessage)
+                    }
             }
         });
     })
@@ -218,4 +218,41 @@ sessionStorage.data = JSON.stringify
         "queryContentList":[],
 
     }
-}) 
+});
+
+let stringDispose = (str)=>{
+    let strLe = str.length,newstr = "",fig = parseInt(strLe/3),g=3,arr = str.split("").reverse();
+    if(str.indexOf(".")>=0)
+    {
+        arr = (str.substr(0,str.indexOf("."))).split("").reverse();
+        var arr1 = (str.substr(str.indexOf("."),str.length)).split("").reverse()
+        for(var s = 0;s<fig;s++)
+        {
+            arr.forEach((v,i)=>{
+            if(i==g)
+            {
+                arr.splice(g,0," ")            
+            }
+            });
+            g = g +4
+        }
+        arr = arr.reverse();
+        var newarr1 = arr1.reverse();
+        arr = arr.concat(newarr1)
+    }else
+    {
+        for(var s = 0;s<fig;s++)
+        {
+            arr.forEach((v,i)=>{
+            if(i==g)
+            {
+                arr.splice(g,0," ")            
+            }
+            });
+            g = g +4   
+        }
+        arr = arr.reverse()
+    }
+    newstr = arr.toString().replace(/,/g,"").replace(/ /g,",")
+    return newstr
+  }

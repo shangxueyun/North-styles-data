@@ -7,11 +7,10 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta http-equiv="cache-control" content="no-cache"/>
 	<meta name="robots" content="all" />
+	<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 
 	<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-
-	<link rel="stylesheet" type="text/css" href="webdoc/datepicker/css/datepicker.css">
-	<link rel="stylesheet" href="webdoc/css/pagination.css" />
+	<link rel="stylesheet" href="./webdoc/css/pagination.css" />
 	<title>溟宗供应链</title>
 </head>
 <style>
@@ -177,14 +176,8 @@
 					</tr>
 				</table>
 			</div>
-			<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;" id="page_ELE">
-				<ul>
-					<li><a class="prev" disabled="disabled" href="javascript:void(0);" id="prev">上一页</a></li>
-					<li><i class="on">1</i></li>
-					<li><a class="next" id="next" href="javascript:void(0);">下一页</a></li>
-					<li>&nbsp;&nbsp;|&nbsp;共1页，到 <input autocomplete="off" type="text" id="inputVlaue"/> 页</li>
-					<li><a id="skip" href="javascript:void(0);">确定</a></li>
-				</ul>
+			<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;width: 50%;">
+				<div class="m-style pageHTML"></div>
 			</div>
 		</div>
 	</div>
@@ -195,16 +188,13 @@
 </div>
 </body>
 </html>
+<script src="webdoc/js/highlight.min.js" language="javascript"></script>
 <script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+<script type="text/javascript" src="webdoc/js/jquery.pagination.js" ></script>
 <script type="text/javascript" src="webdoc/js/home.js" ></script>
 
-<script src="webdoc/datepicker/js/plugins/moment.min.js"></script>
-<script type="text/javascript" src="webdoc/js/pagination.min.js" ></script>
-<script src="webdoc/datepicker/js/datepicker.all.js"></script>
-<script src="webdoc/js/datepicker.js"></script>
 <script type="text/javascript" src="webdoc/js/pageHTML.js" ></script>
 <script>
-    var moneyNum = document.getElementById("money").innerHTML;
     document.getElementById("eyes").onclick = function()
     {
         if(this.getAttribute("class") == "open")
@@ -214,12 +204,15 @@
         }
         else if(this.getAttribute("class") == "close_eye")
         {
-            this.setAttribute("class","open");
-            document.getElementById("money").innerHTML = moneyNum;
+			this.setAttribute("class","open");
+			if(moneyD)
+			document.getElementById("money").innerHTML = moneyD;
+			else
+			document.getElementById("money").innerHTML = "";
         }
 	}
 
-let numpage,pages,statusP;//总记录数，每页显示数，总页数
+let numpage,pages,statusP,moneyD;//总记录数，每页显示数，总页数
 
 (()=>{
     PageFUNC();
@@ -235,7 +228,7 @@ function PageFUNC(Page,status){
     {
         Page = 1
         pageS = Page;
-    }
+    }else{pageS = Page}
     if(!status)
     {
         status = statusP;
@@ -268,26 +261,42 @@ function PageFUNC(Page,status){
         data:JSON.stringify(_data),
         success:function(result){
 			$(loading_div).hide();
-			debugger
             if(result.bizData!=null){
                 $("._loanList").remove()
                 var v = 1;
 				var _loanList=String_clear("Arr",result.bizData.list);
-                HTMLappendPage(result.bizData,pageS,numpage,PageFUNC);
+				if(result.bizData.list == 0)
+				result.bizData.pages = 0;
+				$(".pageHTMLtotal").remove();
+				$('.pageHTML').pagination({
+					pageCount: result.bizData.pages,
+					mode:"fixed",
+					current:Page,
+					jump: true,
+					count:99,
+					callback: function (api) {
+						PageFUNC(api.getCurrent())
+					}
+				});
+				$('.pageHTML').append("<span style='white-space:pre;' class='pageHTMLtotal'>共" + result.bizData.pages +"页  共"+result.bizData.total+"条记录</span>") 
                 $("table tr:gt(0)").remove();
                 $.each(_loanList,function(i,res){
-                    $('#money').text(res.currentBalance);
+					moneyD = res.currentBalance
+                    $('#money').text(stringDispose(res.currentBalance.toString()));
                     if(res.extension==undefined){
                         res.extension="--"
                     }
                     ApplyRecordList = '<tr class="_loanList">'+
                         '<td class="_status">'+res.bizDate+'</td>'+
-                        '<td class="_loanAppleDate">'+res.addAmount+'</td>'+
-                        '<td class="_outDate">'+res.cancelAmount+'</td>'+
-                        '<td class="_loanEndDate">'+res.currentBalance+'</td>'+
+                        '<td class="_loanAppleDate">'+stringDispose(res.addAmount.toString())+'</td>'+
+                        '<td class="_outDate">'+stringDispose(res.writeOffAmount.toString())+'</td>'+
+                        '<td class="_loanEndDate">'+stringDispose(res.currentBalance.toString())+'</td>'+
                         '<td class="_loanTerm">'+res.extension+'</td></tr>';
                     $("table").append(ApplyRecordList)
                 })
+			}
+			if(result.requestStatus=="SUCCESS"){}else{
+                alert(result.returnMessage)
             }
         },
         // complete:function(){ //生成分页条

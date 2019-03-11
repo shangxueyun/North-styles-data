@@ -7,8 +7,8 @@
 <meta name="format-detection" content="telephone=no" />
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 
-<script src="webdoc/js/popimg.js" language="javascript"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
 <title>溟宗供应链</title>
 </head>
@@ -70,6 +70,10 @@
 						<p class="open_p">
 							<i class="red">您还未开通资金监管账户</i>
 							<a class="open_btn">&raquo;点击开通</a>
+						</p>
+						<p class="open_p1">
+							<a >资金监管账户开通中></a>
+							<a class="open_btn">点击打款验证</a>
 						</p>
 					</div>
 					
@@ -143,7 +147,6 @@
 <!--use for function of showImage-->
 <section class="popbox off" id="popbox_1">
 	<div class="img_Pop">
-		<b class="close" id="hideImg01"></b>
 		<div id="imgbox" class="imgbox"><div class="loading"></div></div>
 	</div>
 </section>
@@ -154,6 +157,7 @@
 </body>
 </html>
 <script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+<script src="webdoc/js/popimg.js" language="javascript"></script>
 <script type="text/javascript" src="webdoc/js/home.js" ></script>
 <script type="module">
 /////////
@@ -172,19 +176,32 @@ $(function(){
 	AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
 		$("#loading_div").hide()
 		if(result.requestStatus=="SUCCESS"){
-			_result=result;sessionStorage.setItem('result',JSON.stringify(result));
+			var imgurl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550467935343&di=33e8eb3e45ec318dccff86574af9ff70&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180731%2F865308976a824f9d9d7768a4a9140d53.jpeg"
+			sessionStorage.setItem('result',JSON.stringify(result));
 			var _companyMember=String_clear("Object",result.bizData.companyInfo);
-				var _bankAccountInfo = result.bizData.bankAccountInfo
+				var _bankAccountInfo = result.bizData.bankAccountInfo;
+				let Account_status = window.localStorage.getItem("Account_status");
 				$(".companybox").find("h3").text(_companyMember.companyName)
 				if(_bankAccountInfo.status==null){
-					$(".open_p").show()
-				}else if(_bankAccountInfo.status==0){
-					$(".open_p").show()
+					if(Account_status=="SUCCESS"){
+						//openFundAccountAdvance
+						$(".open_p1").show();
+						$(".open_p").hide();
+						$(".open_btn").attr("href","bankaccount_opening_done.html")
+					}else if(Account_status=="1"){
+						$("._accountBalance").html(stringDispose(((Number(obj.accountBalance)/100).toFixed(2)).toString()))
+						$("._withdrewBalance").html(stringDispose(((Number(obj.withdrewBalance)/100).toFixed(2)).toString()))
+						$(".open_p").hide()
+						$(".open_p1").hide()
+					}else{
+						$(".open_p1").hide();
+						$(".open_p").show();
+					}
 				}else if(_bankAccountInfo.status==1){
-					$("._accountBalance").html(Number(_bankAccountInfo.accountBalance)/100)
-					$("._withdrewBalance").html(Number(_bankAccountInfo.withdrewBalance)/100)
+					$("._accountBalance").html(stringDispose(((Number(obj.accountBalance)/100).toFixed(2)).toString()))
+					$("._withdrewBalance").html(stringDispose(((Number(obj.withdrewBalance)/100).toFixed(2)).toString()))
 					$(".open_p").hide()
-					//$(".open_p").show()
+					$(".open_p1").hide()
 				}
 				$(".companyInfo").find("em").eq(0).html(_companyMember.companyName)
 				$(".companyInfo").find("em").eq(1).html(_companyMember.licenseNo)
@@ -192,44 +209,49 @@ $(function(){
 				$(".LegalPerInfo").find("em").eq(0).html(_companyMember.legalPersonName)
 				$(".LegalPerInfo").find("em").eq(1).html(_companyMember.legalPersonPhone)
 				$(".LegalPerInfo").find("em").eq(2).html(_companyMember.legalPersonId);
-				if(_companyMember.licenseNoPhoto!=null){
+				if(_companyMember.licenseNoPhoto!="-"){
 					$("#licenseNoPhoto").attr("data-img",_companyMember.licenseNoPhoto);
 				}else {
-					$("#licenseNoPhoto").attr("data-img","http://jobnotes.cn/images/micdesign2014120412.jpg")
+					$("#licenseNoPhoto").attr("data-img",imgurl)
 				}
-				if(_companyMember.legalIdCardPhotoFrontUrl!=null){
+				if(_companyMember.legalIdCardPhotoFrontUrl!="-"){
 					$("#legalIdCardPhotoFrontUrl").attr("data-img",_companyMember.legalIdCardPhotoFrontUrl)
 				}else {
-					$("#legalIdCardPhotoFrontUrl").attr("data-img","http://jobnotes.cn/images/micdesign2014120412.jpg")
+					$("#legalIdCardPhotoFrontUrl").attr("data-img",imgurl)
 				}
-				if(_companyMember.legalIdCardPhotoBehindUrl!=null){
+				if(_companyMember.legalIdCardPhotoBehindUrl!="-"){
 					$("#legalIdCardPhotoBehindUrl").attr("data-img",_companyMember.legalIdCardPhotoBehindUrl)
 				}else {
-					$("#legalIdCardPhotoBehindUrl").attr("data-img","http://jobnotes.cn/images/micdesign2014120412.jpg")
+					$("#legalIdCardPhotoBehindUrl").attr("data-img",imgurl)
 				}
 		}else{
 			$("#loading_div").hide()
-			alert("请求失败")
+			alert(result.returnMessage)
 		}
 	}, err => {
 		$("#loading_div").hide()
 		alert("请求失败")
 	})
 	.catch((error) => {
-		//alert("服务器内部错误")
+
 	})
-//		根据接口返回信息,跳转到相应的开户步骤页面
+//根据接口返回信息,跳转到相应的开户步骤页面
 	$(".open_btn").click(function(){
-		if(_result.bizData.bankCardInfo.bankCode){
-			window.location.href='bankaccount_confirm_info.html'
-		} 
-		else if(_result.bizData.transactorInfo){
-			window.location.href='bankaccount_opening_step3.html'
-		}else if(_result.bizData.companyInfo.telephone){
+		var resultData = JSON.parse(sessionStorage.getItem("result"));
+		if(resultData.bizData.companyInfo.telephone)
+		{
+			if(resultData.bizData.transactorInfo)
+			{
+				if(resultData.bizData.bankCardInfo.bankCode)
+				{
+					window.location.href='bankaccount_confirm_info.html'
+				}else
+				window.location.href='bankaccount_opening_step3.html'
+			}else
 			window.location.href='bankaccount_opening_step2.html'
-		}else{
-			window.location.href='bankaccount_opening_step1.html'
 		}
+		else
+		window.location.href='bankaccount_opening_step1.html'
 	})
 	
 });

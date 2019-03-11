@@ -7,6 +7,7 @@
 <meta name="format-detection" content="telephone=no" />
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
 <title>溟宗供应链</title>
@@ -45,11 +46,11 @@
 		<div class="innerBox">
 			<div class="pbox">
 				<p style="padding-top: 3rem">
-					<span class="">银行账号：</span>
+					<span class="">银行账户名称：</span>
 					<em></em>
 				</p>
 				<p style="padding-top: 3rem">
-					<span class="">银行账户名称：</span>
+					<span class="">银行账号：</span>
 					<em></em>
 				</p>
 				<p style="padding-top: 3rem">
@@ -69,8 +70,8 @@
 <script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js" ></script>
 <script type="text/javascript" src="webdoc/js/home.js" ></script>
 <script type="text/javascript">
-	let resultData = JSON.parse(sessionStorage.getItem("result")),
-	_bankCardInfo = resultData.bizData.bankCardInfo;
+	let resultData = JSON.parse(sessionStorage.getItem("result"));
+	var _bankCardInfo=String_clear("Object",resultData.bizData.bankCardInfo);
 	$(".pbox").find("em").eq(0).html(_bankCardInfo.accountName)
 	$(".pbox").find("em").eq(1).html(_bankCardInfo.accountNo)
 	$(".pbox").find("em").eq(2).html(_bankCardInfo.bankName+_bankCardInfo.branchName)

@@ -7,6 +7,7 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta http-equiv="cache-control" content="no-cache"/>
 	<meta name="robots" content="all" />
+	<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 
 	<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
 	<title>溟宗供应链</title>
@@ -85,7 +86,7 @@
 						<h3>某某科技公司</h3>
 						<p>
 							<i class="closed">未开通</i>
-							<a >去开通 &raquo;</a>
+							<a class="closed1">去开通 &raquo;</a>
 						</p>
 					</div>
 				</div>
@@ -103,7 +104,7 @@
 						<h3>某某科技公司</h3>
 						<p>
 							<i class="opening">开通中</i>
-							<a id="OpenAccount_course" href="bankaccount_opening_being_processed.html">查看进程 &raquo;</a>
+							<a id="OpenAccount_course" href="bankaccount_drawback.html">点击打款验证 &raquo;</a>
 						</p>
 					</div>
 				</div>
@@ -163,59 +164,45 @@ import AJAX from './webdoc/js/api.js';
 		
 		if(result.requestStatus=="SUCCESS"){
 			sessionStorage.setItem('result',JSON.stringify(result));
-			var _bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
-
-			if(_bankAccountInfo.status==null){
-				StatusSWich($(".companybox02"),_bankAccountInfo,result.bizData.companyInfo.companyName)
-				$(".companybox02").show();
-				if(result.bizData.bankCardInfo.bankCode){
-					$(".companybox02 a").attr("href","bankaccount_confirm_info.html");
-				} 
-				else if(result.bizData.transactorInfo){
-					$(".companybox02 a").attr("href","bankaccount_opening_step3.html");
-				}else if(result.bizData.companyInfo.telephone){
-					$(".companybox02 a").attr("href","bankaccount_opening_step2.html");
+			let Account_status = window.localStorage.getItem("Account_status");
+			if(result.bizData.bankAccountInfo.status==null){
+				if(Account_status=="SUCCESS"){
+					//openFundAccountAdvance
+					var _bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
+					StatusSWich($(".companybox03"),_bankAccountInfo,result.bizData.companyInfo.companyName)
+					$(".companybox03").show();
+					$(OpenAccount_course).attr("href","bankaccount_opening_done.html")
+				}else if(Account_status=="1"){
+					var _bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
+						StatusSWich($(".companybox01"),_bankAccountInfo,result.bizData.companyInfo.companyName)
+						$(".companybox01").show()
 				}else{
-					$(".companybox02 a").attr("href","bankaccount_opening_step1.html");
+						var _bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
+						StatusSWich($(".companybox02"),_bankAccountInfo,result.bizData.companyInfo.companyName)
+						$(".companybox02").show();
+						if(result.bizData.bankCardInfo.bankCode){
+							$(".companybox02 .closed1").attr("href","bankaccount_confirm_info.html");
+						} 
+						else if(result.bizData.transactorInfo){
+							$(".companybox02 .closed1").attr("href","bankaccount_opening_step3.html");
+						}else if(result.bizData.companyInfo.telephone){
+							$(".companybox02 .closed1").attr("href","bankaccount_opening_step2.html");
+						}else{
+							$(".companybox02 .closed1").attr("href","bankaccount_opening_step1.html");
+						}
 				}
-			}else if(_bankAccountInfo.status==0){
-				//openFundAccountAdvance
-				StatusSWich($(".companybox03"),_bankAccountInfo,result.bizData.companyInfo.companyName)
-				$(".companybox03").show();
-				$(loading_div).show()
-				AJAX.AjaxResult('openFundAccountAdvance','POST',JSON.parse(sessionStorage.data),'application/json').then(function(result){
-					$(loading_div).hide()
-					if(result.requestStatus=="SUCCESS"){
-						let status = result.bizData.status,OpenAccount_course = $(OpenAccount_course)
-						//S成功，I:处理中 F:失败
-						if(status = "S")
-							OpenAccount_course.attr("href","bankaccount_opening_done.html")
-						else if(status = "I")
-							OpenAccount_course.attr("href","bankaccount_opening_setps.html")
-						else if(status = "F")
-							OpenAccount_course.attr("href","bankaccount_opening_fail.html")
-						else
-							OpenAccount_course.attr("href","bankaccount_opening_being_processed.html");
-					}else{
-						$(loading_div).hide()
-						alert("请求失败")
-					}
-				}, err => {
-					$(loading_div).hide()
-					alert("请求失败")
-				})
-				.catch((error) => {
-					//alert("服务器内部错误")
-				})
-			}else if(_bankAccountInfo.status==1){
+
+				
+			}else if(result.bizData.bankAccountInfo.status==1){
+				var _bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
 					StatusSWich($(".companybox01"),_bankAccountInfo,result.bizData.companyInfo.companyName)
 					$(".companybox01").show()
 			}
-			$(".pbox").find("em").eq(0).html(_bankAccountInfo.accountName)
-			$(".pbox").find("em").eq(1).html(_bankAccountInfo.accountNo)
+			$(".pbox").find("em").eq(0).html(result.bizData.bankAccountInfo.accountName)
+			$(".pbox").find("em").eq(1).html(result.bizData.bankAccountInfo.accountNo)
 		}else{
 			$(loading_div).hide()
-			alert("请求失败")
+			alert(result.returnMessage)
 		}
 	}, err => {
 		$(loading_div).hide()
@@ -247,9 +234,20 @@ function StatusSWich(ele,obj,name){
 			else if(Balancechildren[i].className == "_withdrewBalance")
 			withdrewBalance = $(Balancechildren[i])
 	}
-	freezeBalance.text(Number(obj.freezeBalance)/100+" ")			
+	if(obj.freezeBalance == "-")
+	freezeBalance.text(obj.freezeBalance+" ")
+	else
+	freezeBalance.text(stringDispose(((Number(obj.freezeBalance)/100).toFixed(2)).toString())+" ")
+
+	if(obj.accountBalance == "-")
+	accountBalanceEle.text(obj.accountBalance+" ")
+	else
+	accountBalanceEle.text(stringDispose(((Number(obj.accountBalance)/100).toFixed(2)).toString())+" ")
+	
+	if(obj.withdrewBalance == "-")
+	withdrewBalance.text(obj.withdrewBalance+" ")
+	else
+	withdrewBalance.text(stringDispose(((Number(obj.withdrewBalance)/100).toFixed(2)).toString())+" ")
 	h3ele.text(name)
-	accountBalanceEle.text(Number(obj.accountBalance)/100+" ");
-	withdrewBalance.text(Number(obj.withdrewBalance)/100+" ");
 }
 </script>
