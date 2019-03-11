@@ -1,5 +1,7 @@
 
+import './highlight.min.js';
 import './jquery-3.3.1.min.js';
+import './jquery.pagination.js';
 
 let serverUrl = 'http://47.99.170.54:9020/rest/'  //业务代码
 let serverUrlLogin = 'https://www.china-mz.cn/'//登录代码
@@ -150,10 +152,80 @@ export function PageFUNCEvent(ele,str,pageS,numpage,fnC){
     })
 }
 
+export function stringDispose(str){
+    let strLe = str.length,newstr = "",fig = parseInt(strLe/3),g=3,arr = str.split("").reverse();
+    if(str.indexOf(".")>=0)
+    {
+        arr = (str.substr(0,str.indexOf("."))).split("").reverse();
+        var arr1 = (str.substr(str.indexOf("."),str.length)).split("").reverse()
+        for(var s = 0;s<fig;s++)
+        {
+            arr.forEach((v,i)=>{
+            if(i==g)
+            {
+                arr.splice(g,0," ")            
+            }
+            });
+            g = g +4
+        }
+        arr = arr.reverse();
+        var newarr1 = arr1.reverse();
+        arr = arr.concat(newarr1)
+    }else
+    {
+        for(var s = 0;s<fig;s++)
+        {
+            arr.forEach((v,i)=>{
+            if(i==g)
+            {
+                arr.splice(g,0," ")            
+            }
+            });
+            g = g +4   
+        }
+        arr = arr.reverse()
+    }
+    newstr = arr.toString().replace(/,/g,"").replace(/ /g,",")
+    return newstr
+}
+
+export function customer_informationF(url,id,type){
+    let typeS,data;
+    $(loading_div).show();
+    if(type == "png")
+    typeS = "image/"
+    else
+    typeS = "application/"
+    var xhr = new XMLHttpRequest();    
+    xhr.open("get", url+id+'.'+type, true);
+    xhr.responseType = "blob";
+    xhr.onload = function() {
+        if (this.status == 200) {
+            var blob=new Blob([this.response],{type:typeS+type}); 
+            const url = window.URL || window.webkitURL || window.moxURL
+            const downloadHref = url.createObjectURL(blob)
+            let downloadLink = document.createElement('a')
+            downloadLink.href = downloadHref
+            downloadLink.download = id+'.'+type;
+            // 触发点击事件执行下载
+            $(loading_div).hide()
+            reader.onload = function (e) {
+               data = e.currentTarget.result.replace(/[\r\n]/g,"");
+               window.localStorage.setItem("iframe",data);
+               window.location.href = "iframeFile.html"
+            }
+            reader.readAsDataURL(blob);
+        }
+    };
+    xhr.send();
+}
+
 export default{
     AjaxAPI,
     AjaxLogin,
     AjaxBank,
     AjaxUpload,
-    PageFUNCEvent
+    PageFUNCEvent,
+    stringDispose,
+    customer_informationF
 }

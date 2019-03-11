@@ -1,16 +1,60 @@
-
-<div class="header_item">
-    <a id="Logout">退出</a>
+<div class="header_item container">
+	<div class="Icon_div">
+	</div>
+	<div class="info_div">
+		<span><i class="managerName">用户：上海银行李亮</i></span>
+		<span><i class="fundMemberName">机构：上海银行股份有限公司</i></span>	
+	</div>
+	<div class="function">
+		<ul>
+			<li class="info">个人资料</li>
+			<li class="password">修改密码</li>
+			<hr>
+			<li id="Logout">安全退出</li>
+		</ul>
+	</div>
 </div>
-<div class="header_item">
-    <span><i class="managerName">用户：上海银行李亮</i></span>
-    <span><i class="fundMemberName">机构：上海银行股份有限公司</i></span>
-</div>
-
+<style>
+.container{
+	position: relative;
+}
+.container li{
+	line-height: 24px;
+    color: #989898;
+    font-size: 14px;
+}
+.Icon_div{
+	width: 46px;
+    height: 46px;
+    background: url("./webdoc/img/avatar.png") no-repeat;
+    border-radius: 4px;
+    margin-top: -6px;
+    position: relative;
+    float: left;
+	background-size: 100% 100%;
+}
+.info_div{
+	float: right;
+    margin-top: 4px;
+    margin-left: 6px;
+}
+.function{
+	display: none;
+    position: absolute;
+    bottom: -5.5rem;
+    width: 134px;
+    height: 76px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-top: .3rem;
+	text-align: center;
+}
+</style>
 <script type="module">
     import AJAX from './webdoc/js/api.js'
     $(".managerName").text("用户："+sessionStorage.getItem("managerName"));
-    $(".fundMemberName").text("用户："+sessionStorage.getItem("companyName"));
+    $(".fundMemberName").text("机构："+sessionStorage.getItem("companyName"));
 
     $("#Logout").click(fn=>{
 		$(loading_div).show();
@@ -36,4 +80,31 @@
 			//alert("服务器内部错误")
 		})
 	});
+	let nextElementSibling;
+	$(".container").click(function(event){
+		nextElementSibling = $(event.currentTarget).find(".function");
+		event.stopPropagation();
+		$(nextElementSibling).show();
+	})
+
+	$(document).click(function(e){
+		var target = $(e.target);
+		if(e.target.parentElement.className != "ContractClick_div")
+		{
+			$(nextElementSibling).hide();
+		}
+	})
+	$(".function li").click(fn=>{
+		if(fn.currentTarget.className=="info")
+		window.location.href = "info.html"
+		else if(fn.currentTarget.className=="password")
+		window.location.href = "password.html"
+	});
+	window.onload = fn =>{
+		let token = sessionStorage.getItem("token")
+		if(!token)
+		{
+			window.location.href = "./"
+		}
+	}
 </script>

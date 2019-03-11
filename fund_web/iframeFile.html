@@ -1,0 +1,22 @@
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+    }
+    iframe{
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+</style>
+
+<body>
+    <iframe id="iframe" src="" frameborder="0"></iframe>
+    <script>
+        window.onload = fn =>{
+            var iframe = document.getElementById("iframe")
+            iframe.src = window.localStorage.getItem("iframe")
+        }
+    </script>
+</body>

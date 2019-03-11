@@ -8,8 +8,10 @@
 <meta name="robots" content="all" />
 
 <script src="webdoc/js/settime.js"></script>
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 <script src="webdoc/js/popbox.js"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<link rel="stylesheet" type="text/css" href="./webdoc/css/pagination.css">
 <title>我的工作台 - 订单管理</title>
 <style>
 #loading_div{
@@ -58,7 +60,7 @@
 .pageNum li {
 	margin-left: .5rem
 }
-a{
+.loanNo{
 	color: #333;
 }
 #dataList_ELE tr a{
@@ -70,6 +72,17 @@ a{
 .tablebox {
     height: 38rem;
 }
+.table01 tr:hover td{
+	background: #f9f9f9;
+}
+.checkbox{
+	display: block;
+    width: 80px;
+}
+#dataList_ELE tr .checkbox_{
+	width: 4rem;
+	display: block;
+}
 </style>
 </head>
 
@@ -79,10 +92,10 @@ a{
 		<a class="home" href="home.html">
 			<div class="header_item">
 				<em><img src="webdoc/img/logo.svg"></em>
-				<h1>中小微企业<span>交易金融管理平台</span></h1>
+				<h1>溟宗供应链<span>交易金融系统</span></h1>
 			</div>
 			<div class="header_item">
-				<b>金融机构管理系统</b>
+				<b>金融机构管理后台</b>
 				<i id="time">正在获取...</i>
 				<script>
 				SetTime("time");
@@ -132,58 +145,11 @@ a{
 				<div class="tablebox">
 					<table class="table01" id="table01" width="100%" border="0" cellpadding="0" cellspacing="0">
 						<tbody id="dataList_ELE">
-								<tr>
-										<th>序号</th>
-										<th>客户名称</th>
-										<th>客户已有授信总额度</th>
-										<th>可用总额度</th>
-										<th>已用总额度</th>
-										<th>监管账户余额</th>
-										<th>发票池余额</th>
-										<th>本次申请贷款金额</th>
-										<th>申请贷款期限</th>
-										<th>利率</th>
-										<th>还款方式</th>
-										<th>申请时间</th>
-										<th>处理时间</th>
-										<th>当前状态</th>
-										<th>批注</th>
-										<th>操作</th>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>上海溟宗供应链管理有限公司</td>
-										<td>1200万</td>
-										<td>1000万</td>
-										<td>700万</td>
-										<td>300万</td>
-										<td></td>
-										<td></td>
-										<td>100万</td>
-										<td>一年</td>
-										<td>年化7%</td>
-										<td>按月付息到期还款</td>
-										<td>2018/11/26</td>
-										<td></td>
-										<td>待审核</td>
-										<td>--</td>
-										<td><a data-name="上海溟宗供应链管理有限公司-1111" href="javascript:void(0);">审核</a></td>
-									</tr>
 						</tbody>
 					</table>
 				</div>
-				<div class="pageNum gapBoxV" style="padding-top: 2rem" id="page_ELE">
-					<ul>
-						<li><a class="prev" disabled="disabled" href="javascript:void(0);" id="prev">上一页</a></li>
-						<li><i class="on">1</i></li>
-						<li><a class='page_ELE_CHILD' href="javascript:void(0);">2</a></li>
-						<li><a href="javascript:void(0);">3</a></li>
-						<li><a href="javascript:void(0);">4</a></li>
-						<li><a href="javascript:void(0);">5</a></li>
-						<li><a class="next" id="next" href="javascript:void(0);">下一页</a></li>
-						<li>&nbsp;&nbsp;|&nbsp;共100页，到 <input type="text" id="inputVlaue"/> 页</li>
-						<li><a id="skip" href="javascript:void(0);">确定</a></li>
-					</ul>
+				<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;width: 100%;">
+					<div class="m-style pageHTML"></div>
 				</div>
 			</div>
 		</div>
@@ -244,7 +210,7 @@ a{
 		window.onload = fn =>{
 			Status_select.value = status
 		}
-		let pageS,numpage,popboxer,status,loanNo
+		let pageS,numpage,popboxer,status,loanNo,numpageData
 		
 		(()=>{
 			status = window.location.search.replace("?","")
@@ -268,11 +234,12 @@ a{
 				},'application/json')
 				.then(function(response){
 				$(loading_div).hide()
-				if(response.message=="处理成功"){
-					HTMLappendPage(response,AJAX,pageS,numpage,PageFUNC);
+				if(response.code=="0"){
+					numpageData = response.page.total
+					responsepageHTML(response,PageFUNC,Page,numpageData)
 					let data = response.page.records,HTML = "";
-					HTML += "<tr><th>序号</th><th>订单编号</th><th>客户名称</th><th>客户已有授信总额度</th><th>可用总额度</th><th>已用总额度</th><th>监管账户余额</th>";
-					HTML += "<th>发票池余额</th><th>本次申请贷款金额</th><th>申请贷款期限</th><th>利率(年化)</th><th>还款方式</th><th>申请时间</th>";
+					HTML += "<tr><th><a class='checkbox_'><input id='checkbox_F' type='checkbox' /></a></th><th>订单编号</th><th>客户名称</th><th>客户已有授信总额度(元)</th><th>可用总额度(元)</th><th>已用总额度(元)</th><th>监管账户余额(元)</th>";
+					HTML += "<th>发票池余额(元)</th><th>本次申请贷款金额(元)</th><th>申请贷款期限</th><th>利率(年化)</th><th>还款方式</th><th>申请时间</th>";
 					HTML += "<th>处理时间</th><th>当前状态</th><th>批注</th><th>操作</th></tr>";
 					var v1 = 0;
 					data.forEach((v,i)=>{
@@ -281,6 +248,8 @@ a{
 						status = "待审核"
 						else if(v.status=="I1")
 						status = "审核通过"
+						else if(v.status=="I0")
+						status = "已发送"
 						else if(v.status=="F")
 						status = "已拒绝"
 						else if(v.status=='I3')
@@ -290,32 +259,32 @@ a{
 						else if(v.status=='I4')
 						status = "放款失败"
 						var time;
-						if(v.loanTermUnit == "M")
-						time = "月"
-						else
+						if(v.loanTermUnit == "")
 						time = ""
+						else
+						time = "月"
 						if(v.loanRate == "")
 						v.loanRate = ""
 						else
 						v.loanRate = v.loanRate + "%"
 						v1++
-						HTML += "<tr>";loanNo
-							HTML += "<td>"+v1+"</td>";
-							HTML += "<td><a>"+v.loanNo+"</a></td>";
+						HTML += "<tr class='checkbox_flg'>";
+							HTML += "<td><a class='checkbox_'><input type='checkbox' /></a></td>";
+							HTML += "<td><a class='loanNo'>"+v.loanNo+"</a></td>";
 							HTML += "<td>"+v.companyName+"</td>";
-							HTML += "<td>"+v.creditAmount+"</td>";
-							HTML += "<td>"+v.availableAmount+"</td>";
-							HTML += "<td>"+v.useAmount+"</td>";
+							HTML += "<td>"+AJAX.stringDispose(v.creditAmount.toString())+"</td>";
+							HTML += "<td>"+AJAX.stringDispose(v.availableAmount.toString())+"</td>";
+							HTML += "<td>"+AJAX.stringDispose(v.useAmount.toString())+"</td>";
 							HTML += "<td></td>";
-							HTML += "<td>"+v.invoiceBalance+"</td>";
-							HTML += "<td>"+v.applyAmount+"</td>";
+							HTML += "<td>"+AJAX.stringDispose(v.invoiceBalance.toString())+"</td>";
+							HTML += "<td>"+AJAX.stringDispose(v.applyAmount.toString())+"</td>";
 							HTML += "<td>"+v.loanTerm+" "+time+"</td>";
 							HTML += "<td>"+v.loanRate+"</td>";
 							HTML += "<td>"+v.repayMode+"</td>";
 							HTML += "<td>"+v.gmtCreate+"</td>";
 							HTML += "<td>"+v.gmtModified+"</td>";
 							HTML += "<td>"+status+"</td>";
-							HTML += "<td>"+v.memo+"</td>";
+							HTML += "<td></td>";
 							if(v.status=="I00")
 							HTML += "<td><a class='AUDIT' loanNo='"+v.loanNo+"' status='"+status+"' data_name='"+v.companyName+"' href='javascript:void(0);'>审核</a></td>";
 							else if(v.status=="I3")
@@ -325,70 +294,9 @@ a{
 						HTML += "</tr>";
 					})
 					$(dataList_ELE).empty();
-					$(dataList_ELE).append(HTML)
-
-					$(".AUDIT").click(fn=>{
-						$(popBox_heading).text(fn.currentTarget.attributes.data_name.value);
-						loanNo = fn.currentTarget.attributes.loanNo.value
-						$(".Credit_adjustment_box_status").text(fn.currentTarget.attributes.status.value);
-						let html = "";
-						if(fn.currentTarget.attributes.status.value == "待审核")
-						{
-							html += "<option value=''>请选择</option><option value='Y'>审核通过</option><option value='N'>已拒绝</option>";
-							$(state_change).empty();
-							$(state_change).append(html);
-						}
-						else if(fn.currentTarget.attributes.status.value == "合同已签待放款")
-						{
-							html += "<option value=''>请选择</option><option value='Y'>放款成功</option><option value='N'>放款失败</option>";
-							$(state_change).empty();
-							$(state_change).append(html);
-						}
-						popboxer = new popbox("Credit_adjustment_box");
-						$(".So").hide();
-						$(pop_Cancel).click(fn=>{
-							popboxer.CloseBox();
-							$(".textarea").val("")
-						})
-						$(".poper_close").click(fn=>{
-							$(".textarea").val("")
-							popboxer.CloseBox();
-						})
-						$(pop_Submit).unbind("click");
-						$(pop_Submit).click(fn=>{
-							let status = $(state_change).val();
-							$(loading_div).show()
-							AJAX.AjaxAPI('loanApplyOrder/audit','POST',{
-								loanNo:loanNo,
-								flag:status,
-								extention:null
-								},'application/json')
-								.then(function(response){
-								$(loading_div).hide()
-								if(response.message=="处理成功"){
-									$(".textarea").val("")
-									window.location.reload()
-								}else{
-									alert(response.message)
-								}
-							}, err => {
-								$(loading_div).hide()
-								alert("请求失败")
-							})
-						})
-						$(state_change).change(fn=>{
-							let value = fn.currentTarget.value;
-							if(value == "F")
-							{
-								$(".So").show();
-							}
-							else
-							{
-								$(".So").hide();
-							}
-						})
-					})
-
+					$(dataList_ELE).append(HTML);
+					checkbox_Func();
+					AUDIT();
 					$(".page_text").text("共"+response.page.total+"条记录")
 				}else{
 					alert(response.message)
@@ -402,6 +310,72 @@ a{
 			status = fn.currentTarget.value;
 			PageFUNC(null)
 		});
+		
+		let AUDIT = () =>{
+		
+		$(".AUDIT").click(fn=>{
+			$(popBox_heading).text(fn.currentTarget.attributes.data_name.value);
+			loanNo = fn.currentTarget.attributes.loanNo.value
+			$(".Credit_adjustment_box_status").text(fn.currentTarget.attributes.status.value);
+			let html = "";
+			if(fn.currentTarget.attributes.status.value == "待审核")
+			{
+				html += "<option value=''>请选择</option><option value='Y'>审核通过</option><option value='N'>已拒绝</option>";
+				$(state_change).empty();
+				$(state_change).append(html);
+			}
+			else if(fn.currentTarget.attributes.status.value == "合同已签待放款")
+			{
+				html += "<option value=''>请选择</option><option value='Y'>放款成功</option><option value='N'>放款失败</option>";
+				$(state_change).empty();
+				$(state_change).append(html);
+			}
+			popboxer = new popbox("Credit_adjustment_box");
+			$(".So").hide();
+			$(pop_Cancel).click(fn=>{
+				popboxer.CloseBox();
+				$(".textarea").val("")
+			})
+			$(".poper_close").click(fn=>{
+				$(".textarea").val("")
+				popboxer.CloseBox();
+			})
+			$(pop_Submit).unbind("click");
+			$(pop_Submit).click(fn=>{
+				let status = $(state_change).val();
+				debugger
+				$(loading_div).show()
+				AJAX.AjaxAPI('loanApplyOrder/audit','POST',{
+					loanNo:loanNo,
+					flag:status,
+					extention:null
+					},'application/json')
+					.then(function(response){
+					$(loading_div).hide()
+					if(response.code=="0"){
+						$(".textarea").val("")
+						window.location.reload()
+					}else{
+						alert(response.message)
+					}
+				}, err => {
+					$(loading_div).hide()
+					alert("请求失败")
+				})
+			})
+			$(state_change).change(fn=>{
+				let value = fn.currentTarget.value;
+				if(value == "N")
+				{
+					$(".So").show();
+				}
+				else
+				{
+					$(".So").hide();
+				}
+			})
+		})
+		}
 		$("#user_info").load('user.html');
 </script>
 </body>

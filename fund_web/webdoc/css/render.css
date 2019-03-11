@@ -179,12 +179,11 @@ background:#fff;position:relative;z-index:99;}
 .list_form .c-datepicker-date-editor input {display:inline-block;vertical-align:middle;border:0;height:1.5rem;line-height:1.5rem;}
 .list_form .c-datepicker-date-editor input {width:auto;}
 
-.tablebox {display:block;width:100%;overflow-x:auto;height: 25rem;}
+.tablebox {display:block;width:100%;overflow-x:auto;height: 28rem;}
 
 .table01 {}
 .table01 th {background:rgba(15,18,51,.04);border-bottom:1px solid rgba(15,18,51,.07);padding:.5rem;font-size:.8rem;white-space:nowrap;color:rgba(15,18,51,.6);font-weight:normal;}
 .table01 td {text-align:center;border-bottom:1px solid rgba(15,18,51,.1);padding:.5rem;white-space:nowrap;font-size:.9rem;background:#fff;transition:all .25s;transition-timing-function:cubic-bezier(0,.5,.5,1);}
-.table01 tr:hover td {background:rgba(15,18,51,.03);}
 .table01 img {height:1rem;}
 .table01 a {padding:0 1rem;}
 

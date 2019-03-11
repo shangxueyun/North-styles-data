@@ -7,6 +7,7 @@
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
 
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 <script src="webdoc/js/settime.js"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
 <title>账户设置</title>
@@ -53,6 +54,9 @@
 75% {transform:rotate(230deg);}
 100% {transform:rotate(360deg);}
 }
+hr{
+	background: #eee;
+}
 </style>
 </head>
 
@@ -62,10 +66,10 @@
 		<a class="home" href="home.html">
 			<div class="header_item">
 				<em><img src="webdoc/img/logo.svg"></em>
-				<h1>中小微企业<span>交易金融管理平台</span></h1>
+				<h1>溟宗供应链<span>交易金融系统</span></h1>
 			</div>
 			<div class="header_item">
-				<b>金融机构管理系统</b>
+				<b>金融机构管理后台</b>
 				<i id="time">正在获取...</i>
 				<script>
 				SetTime("time");
@@ -101,19 +105,19 @@
 				<div class="gapBoxV">
 					您还未设置资方账户信息，<a href="settings_new.html">点击设置 &raquo;</a>
 				</div>
-				<hr>
+				<hr class='hr'>
 				<ul id="list_form" class="list_form">
 					<li>
 						<span>账户名称 :</span>
-						<p>账户名称</p>
+						<p>-</p>
 					</li>
 					<li>
 						<span>账号 :</span>
-						<p>账号</p>
+						<p>-</p>
 					</li>
 					<li>
-						<span>开户银行</span>
-						<p>开户银行</p>
+						<span>开户行</span>
+						<p>-</p>
 					</li>
 					<li class="upload_file">
 						<span>凭证</span>
@@ -130,7 +134,9 @@
 <div id="loading_div" style="display:none">
 	<div class="loading"></div>
 </div>
-
+<script>
+var reader = new FileReader();
+</script>
 <script type="module">
 		import AJAX from './webdoc/js/api.js'
 		window.onload = ()=>{
@@ -149,35 +155,31 @@
 				},'application/json')
 				.then(function(response){
 				$(loading_div).hide()
-				let arr = ["银行卡号","账户类型","银行账户名称","银行编码","银行名称","开户行所在省份","开户行所在城市","开户行支行名称","银行联行号","凭证信息"],
+				let arr = ["账号","账户名称","银行编码","开户行","开户行所在省份","开户行所在城市","开户行支行名称","凭证信息"],
 					arr_data = [],HTML = "";
 					let obj = response,extention;//对象数据
 					for(var i in obj)
 					{
 						if(i!="responseCode"&&i!="responseMessage"&&i!="token"&&i!="status"&&i!="bankID")
 						{
+
+							if(i=="accountName")
+							arr_data.push(obj[i])
 							if(i=="accountNo")
-							arr_data.push(obj[i])
-							else if(i=="accountType"){
-								if(obj[i] == "0")
-								arr_data.push("实体卡")
-								else
-								arr_data.push("二类账户")
+							{
+								arr_data.push(obj[i])
+								$(".gapBoxV").hide();
+								$(".hr").css("marginTop","1.5rem")
 							}
-							else if(i=="accountName")
-							arr_data.push(obj[i])
 							else if(i=="bankCode")
 							arr_data.push(obj[i])
 							else if(i=="bankName")
 							arr_data.push(obj[i])
 							else if(i=="province")
 							arr_data.push(obj[i])
-							else if(i=="city")
-							arr_data.push(obj[i])
 							else if(i=="bankNo")
 							{
 								if(obj[i] != null)
-								$(".gapBoxV").hide();
 								arr_data.push(obj[i])
 							}
 							else if(i=="branchName")
@@ -190,16 +192,29 @@
 					arr.forEach((v,i)=>{
 						arr_data.forEach((v1,i1)=>{
 							if(i1 == i){
-								if(v == "凭证信息")
-								HTML += "<li><span>"+v+" :</span><p><a href='"+v1+"'>点击预览</a></p></li>";
-								else
-								HTML += "<li><span>"+v+" :</span><p>"+v1+"</p></li>";
+								if(v == "凭证信息"){
+									if(v1)
+									{
+										HTML += "<li><span>"+v+" :</span><p><a data_img='"+v1+"' href='javascript:void(0);' id='preview'>点击预览</a></p></li>";
+									}
+								}
+								else{
+									if(v1)
+									{
+										HTML += "<li><span>"+v+" :</span><p>"+v1+"</p></li>";
+									}
+								}
+
 							}
 						});
 					});
 
 					$(list_form).empty();
 					$(list_form).append(HTML);
+					$(preview).click(fn=>{
+						let url = fn.currentTarget.attributes.data_img.value;
+						AJAX.customer_informationF(url,"","png")
+					});
 			}, err => {
 				$(loading_div).hide()
 				alert("请求失败")

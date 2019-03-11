@@ -7,6 +7,7 @@
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
 
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 <script src="webdoc/js/settime.js"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
 <title>贷后管理</title>
@@ -67,10 +68,10 @@
 		<a class="home" href="home.html">
 			<div class="header_item">
 				<em><img src="webdoc/img/logo.svg"></em>
-				<h1>中小微企业<span>交易金融管理平台</span></h1>
+				<h1>溟宗供应链<span>交易金融系统</span></h1>
 			</div>
 			<div class="header_item">
-				<b>金融机构管理系统</b>
+				<b>金融机构管理后台</b>
 				<i id="time">正在获取...</i>
 				<script>
 				SetTime("time");
@@ -108,19 +109,19 @@
 						<ul class="list_icon">
 							<li class="item_1in3">
 								<a class="columnLine refund_status">
-									<span><img src="webdoc/img/wallet_waiting.svg" /><i class="waitRepayCount">3</i></span>
+									<span><img src="webdoc/img/wallet_waiting.svg" /><i class="waitRepayCount">-</i></span>
 									<p>待还款</p>
 								</a>
 							</li>
 							<li class="item_1in3">
 								<a class="columnLine refund_status">
-									<span><img src="webdoc/img/wallet_done.svg" /><i class="alreadyRepayCount">3</i></span>
+									<span><img src="webdoc/img/wallet_done.svg" /><i class="alreadyRepayCount">-</i></span>
 									<p>已还款</p>
 								</a>
 							</li>
 							<li class="item_1in3">
 								<a class="columnLine refund_status">
-									<span><img src="webdoc/img/wallet_overdue.svg" /><i class="overdueRepayCount">3</i></span>
+									<span><img src="webdoc/img/wallet_overdue.svg" /><i class="overdueRepayCount">-</i></span>
 									<p>已逾期</p>
 								</a>
 							</li>
@@ -168,7 +169,7 @@
 			AJAX.AjaxAPI('repayment/stat','POST',{fundMemberId:sessionStorage.getItem("fundMemberId")},'application/json')
 				.then(function(response){
 				$(loading_div).hide()
-				if(response.message=="处理成功"){
+				if(response.code=="0"){
 					$(".waitRepayAmount").text(response.waitRepayAmount)
 					$(".alreadyRepayAmount").text(response.alreadyRepayAmount)
 					$(".overdueRepayAmount").text(response.overdueRepayAmount)

@@ -85,6 +85,25 @@
     color: red;
     right: 1.2rem;
 }
+.fieldset01 .Icon_div1{
+    margin: 1rem;
+    line-height: 84px;
+    width: 32%;
+    position: relative;
+}
+.fieldset01 .Icon_div1 div{
+    width: 110px;
+    height: 110px;
+    position: absolute;
+    left: 24%;
+    top: -1rem;
+    background: url("./webdoc/img/avatar.png") no-repeat;
+	background-size: 100%;
+    border-radius: 65px;
+}
+input[disabled]{
+    background: #eee
+}
 </style>
 </head>
 
@@ -131,53 +150,49 @@
 			<div class="underwear">
 				<fieldset class="fieldset01">
 					<legend>
-						<i class="heading">添加收款账户信息</i>
-					</legend>
-					<form id="FORM_INFO">
-						<ul class="list_form">
-							<li>
-								<span class="FLG">账户名称</span>
-								<p>
-									<input type="text" name="accountName" placeholder="必须是有效的账户名称">
-									<em class="icon_false">请输入正确信息</em>
-								</p>
-							</li>
-							<li>
-								<span class="FLG">账号</span>
-								<p>
-									<input name="accountNo" type="text" placeholder="必须是正确的银行卡号">
-									<em class="icon_false">请输入正确信息</em>
-								</p>
-							</li>
-							<li>
-								<span class="FLG">开户行</span>
-								<p>
-									<input name="bankName" type="text" placeholder="请输入正确的银行名称">
-									<em class="icon_false">请输入正确信息</em>
-								</p>
-							</li>
-							<li class="upload_file">
-								<span>上传凭证</span>
-							</li>
-							<li class="upload_file">
-								<span>&nbsp;</span>
-								<p>
-									<input type="file" id="upLoadFile" title="或者你可以通过这里修改成你要的文字">
-									<a href="javascript:void(0);" class="btn_hollow" id="upLoadBtn">选择图片文件</a>
-									<br>
-									<a style="display: none" class="preview">点击预览</a>
-								</p>
-							</li>
-							<li class="upload_file">
-								<span>&nbsp;</span>
-								<p><s>要求：文件小于2MB，格式仅限于：jpg, jpeg, png, gif</s></p>
-							</li>
-							<li class="submit">
-								<a href="javascript:void(0);" class="btn_hollow">返回</a>
-								<a href="javascript:void(0);" id="btn_submit" class="btn_solid">提交</a>
-							</li>
-						</ul>
-					</form>
+						<i class="heading">个人信息</i>
+                    </legend>
+                    <div class="Icon_div1">
+                        <span>头像</span>
+                        <div></div>
+                    </div>
+                    <ul class="list_form">
+                        <li>
+                            <span>登录账户号</span>
+                            <p>
+                                <input disabled name="accountNo" type="text" placeholder="请输入">
+                            </p>
+                        </li>
+                        <li>
+                            <span>姓名</span>
+                            <p>
+                                <input disabled name="name" type="text" placeholder="请输入">
+                            </p>
+                        </li>
+                        <li>
+                            <span>职位</span>
+                            <p>
+                                <input name="bankName" type="text" placeholder="请输入">
+                                <em class="icon_false">请输入正确信息</em>
+                            </p>
+                        </li>
+                        <li>
+                            <span>联系方式</span>
+                            <p>
+                                <input name="bankNo" type="text" placeholder="请输入">
+                                <em class="icon_false">请输入正确信息</em>
+                            </p>
+                        </li>
+                        <li>
+                            <span>机构名称</span>
+                            <p>
+                                <input disabled name="companyName" type="text" placeholder="请输入">
+                            </p>
+                        </li>
+                        <li class="submit" style="width: 32%;text-align: center">
+                            <a href="javascript:void(0);" id="btn_submit" class="btn_solid">确认</a>
+                        </li>
+                    </ul>
 				</fieldset>
 			</div>
 		</div>
@@ -192,44 +207,6 @@
 		import AJAX from './webdoc/js/api.js'
 
 		let FileStr;
-
-		$("#FORM_INFO input[type='text']").blur(fn=>{
-			let Obj_data = $(FORM_INFO).serializeArray(),
-			name = fn.currentTarget.name;
-			if(name == 'accountNo' || name == 'accountName' || name == 'bankName'){
-				if(Reg(name,fn.currentTarget.value)){
-					$(fn.currentTarget).siblings().hide();
-					return
-				}
-				else
-				{
-					$(fn.currentTarget).siblings().show()
-					$(fn.currentTarget).focus();
-					return
-				}
-			}
-		})
-
-		let Reg = (name,value) =>{
-			let reg;
-			switch (name) {
-				case "accountNo"://银行卡号
-					reg = /\d{15}|\d{19}/;
-					return reg.test(value)
-					break;
-				case "accountName"://银行账户名称
-					reg = /[\u4E00-\u9FA5]/;
-					return reg.test(value)
-					break;
-				case "bankName"://银行名称
-					reg = /[\u4E00-\u9FA5]/;
-					return reg.test(value)
-					break;
-				default:
-					return true
-					break;
-			}
-		}
 
 		$(btn_submit).click(fn=>{
 			let Obj_data = $(FORM_INFO).serializeArray(),data ={};
@@ -264,26 +241,17 @@
 				$(loading_div).hide()
 				alert("请求失败")
 			})
-		})
+		});
+
+        (()=>{
+            let sessionStorage = window.sessionStorage;
+            $("input[name='companyName']").val(sessionStorage.companyName)
+            $("input[name='name']").val(sessionStorage.managerName)
+            $("input[name='accountNo']").val(sessionStorage.accountNo)
+        })()
 
 		$(".btn_hollow").click(fn =>{
 			window.location.href = "settings.html";
-		})
-		$(upLoadFile).change(fn=>{
-			let file = fn.currentTarget.files[0],
-			formData = new FormData();
-			formData.append("file",file);
-			$(loading_div).show();
-			AJAX.AjaxUpload('uploadFile','POST',formData,'multipart/form-data')
-			.then(function(response){
-				$(loading_div).hide();
-				$(".preview").attr("href","http://47.99.170.57:9008/ufs/query/"+response);
-				$(".preview").show();
-				FileStr = response;
-			}, err => {
-				$(loading_div).hide()
-				alert("请求失败")
-			})
 		})
 		$("#user_info").load('user.html');
 </script>

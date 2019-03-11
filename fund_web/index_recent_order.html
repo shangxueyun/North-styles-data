@@ -8,6 +8,7 @@
 <meta name="robots" content="all" />
 
 <script src="webdoc/js/settime.js"></script>
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
 <title>我的工作台 - 最近15天之内到期订单列表</title>
 <style>
@@ -66,10 +67,10 @@
 		<a class="home" href="home.html">
 			<div class="header_item">
 				<em><img src="webdoc/img/logo.svg"></em>
-				<h1>中小微企业<span>交易金融管理平台</span></h1>
+				<h1>溟宗供应链<span>交易金融系统</span></h1>
 			</div>
 			<div class="header_item">
-				<b>金融机构管理系统</b>
+				<b>金融机构管理后台</b>
 				<i id="time">正在获取...</i>
 				<script>
 				SetTime("time");
@@ -123,42 +124,6 @@
 				<div class="tablebox">
 					<table class="table01" width="100%" border="0" cellpadding="0" cellspacing="0">
 						<tbody id="dataList_ELE">
-							<tr>
-								<th>公司名称</th>
-								<th>贷款合同编号</th>
-								<th>贷款申请日</th>
-								<th>贷款开始日期</th>
-								<th>贷款到期日</th>
-								<th>距离贷款到期日天数</th>
-								<th>贷款期限</th>
-								<th>贷款期限单位</th>
-								<th>应还金额</th>
-								<th>已还金额</th>
-								<th>监管账户余额</th>
-								<th>发票池金额</th>
-								<th>逾期罚息</th>
-								<th>逾期天数</th>
-								<th>状态</th>
-								<th>操作</th>
-							</tr>
-							<!-- <tr>
-								<td>3</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>已逾期</td>
-								<td><a href="javascript:void(0);">清账</a></td>
-							</tr> -->
 						</tbody>
 					</table>
 				</div>
@@ -217,10 +182,10 @@
 				},'application/json')
 				.then(function(response){
 				$(loading_div).hide()
-				if(response.message=="处理成功"){
+				if(response.code=="0"){
 					
 					HTMLappendPage(response,AJAX,pageS,numpage,PageFUNC);
-					HTMLappendTable(response,true);
+					HTMLappendTable(response,AJAX,true);
 					$(".page_text").text("共"+response.page.total+"条记录")
 				}else{
 					alert(response.message)

@@ -7,9 +7,11 @@
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
 
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 <script src="webdoc/js/settime.js"></script>
 <script src="webdoc/js/popbox.js"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<link rel="stylesheet" type="text/css" href="./webdoc/css/pagination.css">
 <title>客户管理</title>
 <style>
 #loading_div{
@@ -58,7 +60,18 @@
 .pageNum li {
 	margin-left: .5rem
 }
-.list_form span {width: 9rem;}
+.list_form span {width: 10rem;}
+.table01 tr:hover td{
+	background: #f9f9f9;
+}
+.checkbox{
+	display: block;
+    width: 80px;
+}
+#dataList_ELE tr .checkbox_{
+	width: 4rem;
+	display: block;
+}
 </style>
 </head>
 
@@ -68,10 +81,10 @@
 		<a class="home" href="home.html">
 			<div class="header_item">
 				<em><img src="webdoc/img/logo.svg"></em>
-				<h1>中小微企业<span>交易金融管理平台</span></h1>
+				<h1>溟宗供应链<span>交易金融系统</span></h1>
 			</div>
 			<div class="header_item">
-				<b>金融机构管理系统</b>
+				<b>金融机构管理后台</b>
 				<i id="time">正在获取...</i>
 				<script>
 				SetTime("time");
@@ -110,60 +123,20 @@
 				<hr>
 			</div>
 			<div class="gapBoxH">
-				<a href="javascript:void(0);" class="btn_hollow">客户信息详情</a>
-				<a href="javascript:void(0);" class="btn_hollow">信用评估报告</a>
-				<a href="javascript:void(0);" class="btn_hollow">企业实时运营情况</a>
+				<a href="javascript:void(0);" class="btn_hollow" id="customer_information">客户信息详情</a>
+				<a href="javascript:void(0);" class="btn_hollow">发票数据分析报告</a>
 				<a href="javascript:void(0);" class="btn_hollow">相关证照</a>
 			</div>
 			<div class="gapBoxVH">
 				<div class="tablebox">
 					<table class="table01" id="table01" width="100%" border="0" cellpadding="0" cellspacing="0">
 							<tbody id="dataList_ELE">
-								<tr>
-										<th>序号</th>
-										<th>客户名称</th>
-										<th>客户已有授信总额度</th>
-										<th>可用额度</th>
-										<th>已用额度</th>
-										<th>其中我方授信额度</th>
-										<th>我方授信批复时间</th>
-										<th>其中我方已用额度</th>
-										<th>我方剩余额度</th>
-										<th>客户监管账户余额</th>
-										<th>客户发票池余额</th>
-										<th>授信调整记录</th>
-										<th>操作</th>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>上海溟宗供应链管理有限公司</td>
-										<td>&yen;1000,000,000.00</td>
-										<td>&yen;1000,000,000.00</td>
-										<td>&yen;1000,000,000.00</td>
-										<td>&yen;1000,000,000.00</td>
-										<td>2018-10-10</td>
-										<td>&yen;1000,000,000.00</td>
-										<td>&yen;1000,000,000.00</td>
-										<td>&yen;1000,000,000.00</td>
-										<td>&yen;1000,000,000.00</td>
-										<td><a href="javascript:void(0);">查看</a></td>
-										<td><a class="Credit_adjustment" data_name="上海溟宗供应链管理有限公司-1111" href="javascript:void(0);">授信调整</a></td>
-									</tr>
+
 							</tbody>
 					</table>
 				</div>
-				<div class="pageNum gapBoxV" style="padding-top: 2rem" id="page_ELE">
-					<ul>
-						<li><a class="prev" disabled="disabled" href="javascript:void(0);" id="prev">上一页</a></li>
-						<li><i class="on">1</i></li>
-						<li><a class='page_ELE_CHILD' href="javascript:void(0);">2</a></li>
-						<li><a href="javascript:void(0);">3</a></li>
-						<li><a href="javascript:void(0);">4</a></li>
-						<li><a href="javascript:void(0);">5</a></li>
-						<li><a class="next" id="next" href="javascript:void(0);">下一页</a></li>
-						<li>&nbsp;&nbsp;|&nbsp;共100页，到 <input type="text" id="inputVlaue"/> 页</li>
-						<li><a id="skip" href="javascript:void(0);">确定</a></li>
-					</ul>
+				<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;width: 100%;">
+					<div class="m-style pageHTML"></div>
 				</div>
 			</div>
 		</div>
@@ -184,21 +157,22 @@
 					<p id="popBox_heading"></p>
 				</li>
 				<li>
-					<span>我方当前授信额度:</span>
+					<span>我方当前授信额度(元):</span>
 					<p class="CreditAmount">
 						
 					</p>
 				</li>
 				<li>
-					<span>已用额度:</span>
+					<span>已用额度(元):</span>
 					<p class="useAmount">
 						
 					</p>
 				</li>
 				<li>
-					<span>调整后额度:</span>
+					<span style="width: 7rem;">调整后额度(元):</span>
+					<span class="updateCreditAmountspan" style="width: 2rem;text-align: center;"></span>
 					<p class="updateCreditAmount">
-						<input type="text" >
+						<input type="text" id="updateCreditAmountinput">
 					</p>
 					<span class="msgS" style="color: red;padding-left: 150px;width: 14rem;">调整后额度不能小于已用额度</span>
 				</li>
@@ -214,11 +188,13 @@
 <div id="loading_div" style="display:none">
 	<div class="loading"></div>
 </div>
-
+<script>
+var reader = new FileReader();
+</script>
 <script src="./webdoc/js/HTML.js"></script>
 <script type="module">
 		import AJAX from './webdoc/js/api.js'
-		let pageS,numpage,popboxer,fundMemberId;
+		let pageS,numpage,popboxer,fundMemberId,numpageData;
 		
 		(()=>{
 			PageFUNC();
@@ -237,62 +213,58 @@
 				fundMemberId:sessionStorage.getItem("fundMemberId"),
 				companyName:companyName,
 				currentPage:Page,
-				status:null,
+				status:"1A",
 				pageSize:10,
 				extention:null
 				},'application/json')
 				.then(function(response){
 				$(loading_div).hide()
-				if(response.message=="处理成功"){
+				if(response.code=="0"){
+					numpageData = response.page.total
+					responsepageHTML(response,PageFUNC,Page,numpageData)
+					HTMLappendTable(response,AJAX,false);
+					
+					$(customer_information).click(fn=>{
+						let checkbox_ChengArr = document.getElementsByClassName("checkbox_Cheng"),arr = [],ele;
+						for(var i in checkbox_ChengArr)
+						{
+							if(checkbox_ChengArr[i].checked == true)
+							{
 
-					HTMLappendPage(response,AJAX,pageS,numpage,PageFUNC);
-					HTMLappendTable(response,false);
-					$(".page_text").text("共"+response.page.total+"条记录")
+								arr.push(checkbox_ChengArr[i])
+								if(arr.length==1)
+								{
+									ele = checkbox_ChengArr[i]
+								}
+							}
+						}
+						if(arr.length>1)
+						{
+							alert("不能选择多条记录")
+						}else if(arr.length==0){
+							alert("请选择一条记录进行操作")
+						}else{
+							AJAX.customer_informationF("http://47.99.170.54:9020/rest/companyMember/tCompanyMember_photo/",arr[0].attributes.data_memberid.value,"pdf")
+						}
+					})
+					checkbox_Func();
 					$(".Credit_adjustment").click(fn=>{
 						$(popBox_heading).text(fn.currentTarget.attributes.data_name.value);
-						$(".CreditAmount").text(fn.currentTarget.attributes.Credit_adjustment.value)
-						$(".useAmount").text(fn.currentTarget.attributes.useAmount.value)
+						$(".CreditAmount").text(AJAX.stringDispose(fn.currentTarget.attributes.Credit_adjustment.value));
+						$(".useAmount").text(AJAX.stringDispose(fn.currentTarget.attributes.useAmount.value));
 						fundMemberId = fn.currentTarget.attributes.fundMemberId.value
 						popboxer = new popbox("Credit_adjustment_box");
 						$(pop_Cancel).click(fn=>{
+							$(".updateCreditAmountspan").text(" ");
 							$(".updateCreditAmount input").val(" ");
 							popboxer.CloseBox();
 						})
 						$(".poper_close").click(fn=>{
+							$(".updateCreditAmountspan").text(" ");
 							$(".updateCreditAmount input").val(" ");
 							popboxer.CloseBox();
 						})
 						$(".msgS").hide();
-						$(pop_Submit).unbind("click");
-						$(pop_Submit).click(fn=>{
-							let updateCreditAmount = Number($(".updateCreditAmount input").val()),
-							Amount = Number($(".useAmount").text()),num = updateCreditAmount-Amount;
-							if(num<0)
-							{
-								$(".msgS").show();
-								return
-							}
-							else
-							$(".msgS").hide();
-							$(loading_div).show()
-							AJAX.AjaxAPI('companyMember/creditAmountUpdate','POST',{
-								memberId:fundMemberId,
-								updateCreditAmount:updateCreditAmount,
-								extention:null
-								},'application/json')
-								.then(function(response){
-								$(loading_div).hide()
-								if(response.message=="处理成功"){
-									$(".textarea").val("")
-									window.location.reload()
-								}else{
-									alert(response.message)
-								}
-							}, err => {
-								$(loading_div).hide()
-								alert("请求失败")
-							})
-						})
 					})
 				}else{
 					alert(response.message)
@@ -302,6 +274,37 @@
 				alert("请求失败")
 			})
 		}
+
+		$(pop_Submit).unbind("click");
+		$(pop_Submit).click(fn=>{
+			let updateCreditAmount = Number($(".updateCreditAmount input").val()),
+			Amount = Number($(".useAmount").text()),num = updateCreditAmount-Amount;
+			if(num<0)
+			{
+				$(".msgS").show();
+				return
+			}
+			else
+			$(".msgS").hide();
+			$(loading_div).show()
+			AJAX.AjaxAPI('companyMember/creditAmountUpdate','POST',{
+				memberId:fundMemberId,
+				updateCreditAmount:updateCreditAmount,
+				extention:null
+				},'application/json')
+				.then(function(response){
+				$(loading_div).hide()
+				if(response.code=="0"){
+					$(".textarea").val("")
+					window.location.reload()
+				}else{
+					alert(response.message)
+				}
+			}, err => {
+				$(loading_div).hide()
+				alert("请求失败")
+			})
+		})
 		
 		$(search).click(fn=>{
 			let value = $(customer_search).val();
@@ -312,6 +315,12 @@
 				PageFUNC(1,value)
 			}
 		})
+
+		$(updateCreditAmountinput).keyup(fn=>{
+			let arr = ["个","十","百","千","万","十万","百万","千万","亿","十亿","百亿","千亿"];
+			$(".updateCreditAmountspan").text(arr[fn.currentTarget.value.length-1]);
+		})
+
 		$("#user_info").load('user.html');
 </script>
 </body>

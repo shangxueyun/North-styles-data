@@ -6,8 +6,10 @@
 <meta name="format-detection" content="telephone=no" />
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 <script src="webdoc/js/settime.js"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<link rel="stylesheet" type="text/css" href="./webdoc/css/pagination.css">
 <title>产品信息</title>
 <style>
 #loading_div{
@@ -100,6 +102,17 @@ a{
 	padding-top: 3rem;
     text-align: center;
 }
+.table01 tr:hover td{
+	background: #f9f9f9;
+}
+.checkbox{
+	display: block;
+    width: 80px;
+}
+#dataList_ELE tr .checkbox_{
+	width: 4rem;
+	display: block;
+}
 </style>
 </head>
 
@@ -109,10 +122,10 @@ a{
 		<a class="home" href="home.html">
 			<div class="header_item">
 				<em><img src="webdoc/img/logo.svg"></em>
-				<h1>中小微企业<span>交易金融管理平台</span></h1>
+				<h1>溟宗供应链<span>交易金融系统</span></h1>
 			</div>
 			<div class="header_item">
-				<b>金融机构管理系统</b>
+				<b>金融机构管理后台</b>
 				<i id="time">正在获取...</i>
 				<script>
 				SetTime("time");
@@ -149,39 +162,11 @@ a{
 				<div class="tablebox">
 					<table class="table01" width="100%" border="0" cellpadding="0" cellspacing="0">
 						<tbody id="dataList_ELE">
-							<tr>
-									<th>产品</th>
-									<th>利率</th>
-									<th>期限</th>
-									<th>额度</th>
-									<th>申请条件</th>
-									<th>还款方式</th>
-									<th>备注</th>
-								</tr>
-								<tr>
-									<td>发票贷</td>
-									<td>年化6%</td>
-									<td>1年</td>
-									<td>500万</td>
-									<td>年销售额不低于1000万，且公司成立两年以上。</td>
-									<td>按月付息到期还本</td>
-									<td><a href="products_detail.html">产品详情</a></td>
-								</tr>
 						</tbody>
 					</table>
 				</div>
-				<div class="pageNum gapBoxV" style="padding-top: 2rem" id="page_ELE">
-					<ul>
-						<li><a class="prev" disabled="disabled" href="javascript:void(0);" id="prev">上一页</a></li>
-						<li><i class="on">1</i></li>
-						<li><a class='page_ELE_CHILD' href="javascript:void(0);">2</a></li>
-						<li><a href="javascript:void(0);">3</a></li>
-						<li><a href="javascript:void(0);">4</a></li>
-						<li><a href="javascript:void(0);">5</a></li>
-						<li><a class="next" id="next" href="javascript:void(0);">下一页</a></li>
-						<li>&nbsp;&nbsp;|&nbsp;共100页，到 <input type="text" id="inputVlaue"/> 页</li>
-						<li><a id="skip" href="javascript:void(0);">确定</a></li>
-					</ul>
+				<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;width: 100%;">
+					<div class="m-style pageHTML"></div>
 				</div>
 			</div>
 		</div>
@@ -202,7 +187,7 @@ a{
 <script src="./webdoc/js/HTML.js"></script>
 <script type="module">
 		import AJAX from './webdoc/js/api.js'
-		let pageS,numpage,popboxer
+		let pageS,numpage,popboxer,numpageData
 		
 		(()=>{
 			PageFUNC();
@@ -223,10 +208,11 @@ a{
 				},'application/json')
 				.then(function(response){
 				$(loading_div).hide()
-				if(response.message=="处理成功"){
-					HTMLappendPage(response,AJAX,pageS,numpage,PageFUNC);
+				if(response.code=="0"){
+					numpageData = response.page.total
+					responsepageHTML(response,PageFUNC,Page,numpageData)
 					let data = response.page.records,HTML = "";
-					HTML += "<tr><th>序号</th><th>产品</th><th>利率(年化)</th><th>期限</th><th>额度(万元)</th><th>展期天数</th><th>逾期罚息(元)</th><th>可提前还款</th><th>是否需授信</th>";
+					HTML += "<tr><th><a class='checkbox_'><input id='checkbox_F' type='checkbox' /></a></th><th>产品</th><th>利率(年化)</th><th>期限</th><th>额度(万元)</th><th>展期天数</th><th>可提前还款</th><th>是否需授信</th>";
 					HTML += "<th>还款方式</th><th>申请条件</th><th>产品描述</th></tr>";
 					var v1 = 0;
 					data.forEach((v,i)=>{
@@ -240,19 +226,17 @@ a{
 						Is = "是"
 						var IsS;
 						if(v.needCredit == "N")
-						IsS = "不要"
+						IsS = "否"
 						else
-						IsS = "要"
+						IsS = "是"
 						v1++
-						HTML += "<tr>";
-							debugger
-							HTML += "<td>"+v1+"</td>";
+						HTML += "<tr class='checkbox_flg'>";
+                    		HTML += "<td><a class='checkbox_'><input type='checkbox' /></a></td>";
 							HTML += "<td>"+v.productName+"</td>";
 							HTML += "<td>"+v.loanRate+"%</td>";
 							HTML += "<td>"+v.loanTerm+" "+time+"</td>";
 							HTML += "<td>"+(v.loanMinAmt)/10000+"-"+(v.loanMaxAmt)/10000+"</td>";
 							HTML += "<td>"+v.delayDays+"</td>";
-							HTML += "<td>"+v.repayMode+"</td>";
 							HTML += "<td>"+Is+"</td>";
 							HTML += "<td>"+IsS+"</td>";
 							HTML += "<td>"+v.repayMode+"</td>";
@@ -263,6 +247,7 @@ a{
 					$(dataList_ELE).empty();
 					$(dataList_ELE).append(HTML)
 
+					checkbox_Func();
 					$(".productDesc").click(fn=>{
 						$(message_text).text(fn.currentTarget.innerText)
 						$(message).show();

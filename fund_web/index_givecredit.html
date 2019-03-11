@@ -8,8 +8,10 @@
 <meta name="robots" content="all" />
 
 <script src="webdoc/js/settime.js"></script>
+<link rel="shortcut icon" href="webdoc/img/favicon.ico">
 <script src="webdoc/js/popbox.js"></script>
 <link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<link rel="stylesheet" type="text/css" href="./webdoc/css/pagination.css">
 <title>我的工作台 - 授信批复</title>
 <style>
 #loading_div{
@@ -58,19 +60,30 @@
 .pageNum li {
 	margin-left: .5rem
 }
+.table01 tr:hover td{
+	background: #f9f9f9;
+}
+.checkbox{
+	display: block;
+    width: 80px;
+}
+#dataList_ELE tr .checkbox_{
+	width: 4rem;
+	display: block;
+}
 </style>
 </head>
 
-<body>
+<body id="imgcontainer">
 <section class="header">
 	<div class="underwear">
 		<a class="home" href="home.html">
 			<div class="header_item">
 				<em><img src="webdoc/img/logo.svg"></em>
-				<h1>中小微企业<span>交易金融管理平台</span></h1>
+				<h1>溟宗供应链<span>交易金融系统</span></h1>
 			</div>
 			<div class="header_item">
-				<b>金融机构管理系统</b>
+				<b>金融机构管理后台</b>
 				<i id="time">正在获取...</i>
 				<script>
 				SetTime("time");
@@ -109,71 +122,26 @@
 						<option value="">全部</option>
 						<option value="0">待平台审核</option>
 						<option value="1">待批复</option>
-						<option value="1A">已批复</option>
+						<option value="1A">批复通过</option>
 						<option value="2">已拒绝</option>
 					</select>
 				</div>
 			</div>
 			<hr>
 			<div class="btnbox">
-				<a href="javascript:void(0);" class="btn_hollow">客户信息详情</a>
-				<a href="javascript:void(0);" class="btn_hollow">信用评估报告</a>
-				<a href="javascript:void(0);" class="btn_hollow">企业实时运营情况</a>
+				<a href="javascript:void(0);" class="btn_hollow" id="customer_information">客户信息详情</a>
+				<a href="javascript:void(0);" class="btn_hollow">发票数据分析报告</a>
 				<a href="javascript:void(0);" class="btn_hollow">相关证照</a>
 			</div>
 			<div class="gapBoxH">
 				<div class="tablebox">
 					<table class="table01" id="table01" width="100%" border="0" cellpadding="0" cellspacing="0">
 						<tbody id="dataList_ELE">
-							<tr>
-								<th>序号</th>
-								<th>客户名称</th>
-								<th>所属区域</th>
-								<th>所属行业</th>
-								<th>成立时间</th>
-								<th>注册资本</th>
-								<th>有效发票金额</th>
-								<th>建议授信额度</th>
-								<th>其他资方已批复额度</th>
-								<th>申请状态</th>
-								<th>申请时间</th>
-								<th>处理时间</th>
-								<th>批复额度</th>
-								<th>批注</th>
-								<th>操作</th>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>上海溟宗供应链管理有限公司</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>800万</td>
-								<td>200</td>
-								<td>待审核</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td><a data-name="上海溟宗供应链管理有限公司-0000" href="javascript:void(0);">审核</a></td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
-				<div class="pageNum gapBoxV" style="padding-top: 2rem" id="page_ELE">
-					<ul>
-						<li><a class="prev" disabled="disabled" href="javascript:void(0);" id="prev">上一页</a></li>
-						<li><i class="on">1</i></li>
-						<li><a class='page_ELE_CHILD' href="javascript:void(0);">2</a></li>
-						<li><a href="javascript:void(0);">3</a></li>
-						<li><a href="javascript:void(0);">4</a></li>
-						<li><a href="javascript:void(0);">5</a></li>
-						<li><a class="next" id="next" href="javascript:void(0);">下一页</a></li>
-						<li>&nbsp;&nbsp;|&nbsp;共100页，到 <input type="text" id="inputVlaue"/> 页</li>
-						<li><a id="skip" href="javascript:void(0);">确定</a></li>
-					</ul>
+				<div class="pageNum gapBoxV" style="padding-top: 2rem;height: 50px;width: 100%;">
+					<div class="m-style pageHTML"></div>
 				</div>
 			</div>
 		</div>
@@ -190,11 +158,11 @@
 		<div class="gapBoxHV">
 			<ul class="list_form">
 				<li>
-					<span>客户名称</span>
+					<span>客户名称:</span>
 					<p id="popBox_heading"></p>
 				</li>
 				<li>
-					<span>平台预授信金额</span>
+					<span>平台预授信金额(元):</span>
 					<p class="Preliminary_credit">
 						
 					</p>
@@ -210,9 +178,10 @@
 					</p>
 				</li>
 				<li class="Amount">
-					<span>批复额度</span>
+					<span style="width: 7rem;">批复额度(元):</span>
+					<span class="updateCreditAmountspan" style="width: 2rem;text-align: center;"></span>
 					<p>
-						<input  type="text" placeholder="金额">
+						<input id="updateCreditAmountinput" type="text" placeholder="金额">
 					</p>
 					<span class="msgS" style="color: red;padding-left: 140px;">请输入批复额度</span>
 				</li>
@@ -236,13 +205,16 @@
 </div>
 
 <script src="./webdoc/js/HTML.js"></script>
+<script>
+var reader = new FileReader();
+</script>
 <script type="module">
 		import AJAX from './webdoc/js/api.js'
 		window.onload = fn =>{
 			Status_select.value = window.location.search.replace("?","")
 		}
-		let pageS,numpage,popboxer,status,parameter = {},preCreditAmount;
-		
+		let pageS,numpage,popboxer,status,parameter = {},numpageData
+
 		(()=>{
 			status = window.location.search.replace("?","")
 			PageFUNC();
@@ -265,20 +237,23 @@
 				},'application/json')
 				.then(function(response){
 				$(loading_div).hide()
-				if(response.message=="处理成功"){
-
-					HTMLappendPage(response,AJAX,pageS,numpage,PageFUNC);
+				if(response.code=="0"){
+					numpageData = response.page.total
+					responsepageHTML(response,PageFUNC,Page,numpageData)
 					let data = response.page.records,HTML = "";
-					HTML += "<tr><th><input type='checkbox' /></th><th>客户名称</th><th>所属区域</th><th>所属行业</th><th>注册资本</th><th>月平均开票金额</th>";
-					HTML += "<th>建议授信额度</th><th>其他资方已批复额度</th><th>当前状态</th><th>申请时间</th><th>处理时间</th><th>批复额度</th>";
-					HTML += "<th>操作</th></tr>";
+					HTML += "<tr><th><a class='checkbox_'><input id='checkbox_F' type='checkbox' /></a></th><th>客户名称</th><th>所属区域</th><th>所属行业</th><th>注册资本</th><th>年开票总金额(元)</th>";
+					HTML += "<th>平台预授信额度(元)</th><th>其他资方已批复额度(元)</th><th>当前状态</th><th>申请时间</th>";
+					if(status == "0")
+					HTML += "</tr>";
+					else
+					HTML += "<th>处理时间</th><th>批复额度(元)</th><th>操作</th></tr>";
 					var v1 = 0;
 					data.forEach((v,i)=>{
 						var status;
 						if(v.status==0 || v.status=='0')
-						status = "待审核"
+						status = "待平台审核"
 						else if(v.status==1 || v.status=='1')
-						status = "批复中"
+						status = "待批复"
 						else if(v.status==2 || v.status=='2')
 						status = "已拒绝"
 						else if(v.status=="1A")
@@ -287,35 +262,72 @@
 						if(v.licenseCity=="")
 						adder = v.licenseCity
 						else
-						adder = v.licenseCity.split(",")[0]+v.licenseCity.split(",")[1]
+						{
+							if(v.licenseCity.split(",")[1] == v.licenseCity.split(",")[0])
+							adder = v.licenseCity.split(",")[0]
+							else
+							adder = v.licenseCity.split(",")[0]+v.licenseCity.split(",")[1]
+						}
 						v1++
-						HTML += "<tr>";
-							HTML += "<td><input type='checkbox' /></td>";
+						HTML += "<tr class='checkbox_flg'>";
+                    		HTML += "<td><a class='checkbox_'><input data_memberId='"+v.memberId+"' type='checkbox' class='checkbox_Cheng'/></a></td>";
 							HTML += "<td>"+v.companyName+"</td>";
 							HTML += "<td>"+adder+"</td>";
 							HTML += "<td>"+v.industryType+"</td>";
-							HTML += "<td>"+v.regCap+"</td>";
-							HTML += "<td>"+v.currentBalance+"</td>";
-							HTML += "<td>"+v.adviceAmount+"</td>";
-							HTML += "<td>"+v.repayMode+"</td>";
-							HTML += "<td>"+status+"</td>";
-							HTML += "<td>"+v.gmtCreate+"</td>";
-							HTML += "<td>"+v.gmtModified+"</td>";
-							HTML += "<td>"+v.creditAmount+"</td>";
-							if(v.status==2 || v.status=="1A"||v.status==0 || v.status=='0')
+							if(v.regCap=="")
 							HTML += "<td></td>";
 							else
-							HTML += "<td><a class='AUDIT' status='"+status+"' creditAmount fundMemberId='"+v.memberId+"' data_name='"+v.companyName+"' href='javascript:void(0);'>审核</a></td>";
+							HTML += "<td>"+AJAX.stringDispose(v.regCap.toString())+"万元</td>";
+							HTML += "<td>"+AJAX.stringDispose(v.currentBalance.toString())+"</td>";
+							HTML += "<td>"+AJAX.stringDispose(v.preCreditAmount.toString())+"</td>";
+							HTML += "<td>"+AJAX.stringDispose(v.repayMode.toString())+"</td>";
+							HTML += "<td>"+status+"</td>";
+							HTML += "<td>"+v.gmtCreate+"</td>";
+							if(status == "待平台审核"){}
+							else
+							{
+								HTML += "<td>"+v.gmtModified+"</td>";
+								HTML += "<td>"+AJAX.stringDispose(v.creditAmount.toString())+"</td>";
+								if(v.status==2 || v.status=="1A"||v.status==0 || v.status=='0')
+								HTML += "<td></td>";
+								else
+								HTML += "<td><a class='AUDIT' status='"+status+"' preCreditAmount='"+v.preCreditAmount+"' creditAmount fundMemberId='"+v.memberId+"' data_name='"+v.companyName+"' href='javascript:void(0);'>审核</a></td>";
+							}
 						HTML += "</tr>";
 					})
 					$(dataList_ELE).empty();
 					$(dataList_ELE).append(HTML)
 
+					$(customer_information).click(fn=>{
+						let checkbox_ChengArr = document.getElementsByClassName("checkbox_Cheng"),arr = [],ele;
+						for(var i in checkbox_ChengArr)
+						{
+							if(checkbox_ChengArr[i].checked == true)
+							{
+
+								arr.push(checkbox_ChengArr[i])
+								if(arr.length==1)
+								{
+									ele = checkbox_ChengArr[i]
+								}
+							}
+						}
+						if(arr.length>1)
+						{
+							alert("不能选择多条记录")
+						}else if(arr.length==0){
+							alert("请选择一条记录进行操作")
+						}else{
+							AJAX.customer_informationF("http://47.99.170.54:9020/rest/companyMember/tCompanyMember_photo/",arr[0].attributes.data_memberid.value,"pdf")
+						}
+					})
+					checkbox_Func();
 					$(".AUDIT").click(fn=>{
 						parameter.companyName = fn.currentTarget.attributes.data_name.value;
 						parameter.memberId = fn.currentTarget.attributes.fundMemberId.value;
 						parameter.status = fn.currentTarget.attributes.status.value;
-						AUDIT_D(parameter.memberId);
+						parameter.preCreditAmount = fn.currentTarget.attributes.preCreditAmount.value;
+						AUDIT_F(parameter.preCreditAmount)
 					})
 					$(".page_text").text("共"+response.page.total+"条记录")
 				}else{
@@ -331,65 +343,42 @@
 			PageFUNC(null)
 		})
 
-		let AUDIT_D = (id)=>{
-			$(loading_div).show()
-			AJAX.AjaxAPI('companyMember/creditAccountQuery','POST',{
-				memberId:"10201901141702006",
-			},'application/json')
-			.then(function(response){
-				$(loading_div).hide();
-				preCreditAmount = response.creditAccount.preCreditAmount;
-				if(Number(preCreditAmount)>0)
-				AUDIT_F()
-				else
-				confirm("无法批复，错误")
-			}, err => {
-				$(loading_div).hide()
-				alert("请求失败")
-			})
-		}
-
-		let AUDIT_F = ()=>{
+		let AUDIT_F = (preCreditAmount)=>{
 			$(popBox_heading).text(parameter.companyName);
-			$(".Preliminary_credit").text(preCreditAmount);
+			$(".Preliminary_credit").text(AJAX.stringDispose(preCreditAmount.toString()));
 			popboxer = new popbox("Credit_adjustment_box");
 			let html = "";
-			if(parameter.status == "待审核")
-			{	
-				html += "<option value=''>请选择</option><option value=1>批复中</option><option value=2'>已拒绝</option>";
-				$(state_change).empty();
-				$(state_change).append(html);
-				$(".Amount").hide()
-			}
-			else if(parameter.status == "批复中")
-			{
-				html += "<option value=''>请选择</option><option value='1A'>批复通过</option><option value=2>已拒绝</option>";
-				$(state_change).empty();
-				$(state_change).append(html);
-				$(".Amount").show()
-				$(state_change).change(fn=>{
-					let value = fn.currentTarget.value;
-					if(value == "1A")
-					{
-						$(".Amount").show();
-						$(".cause").hide();
-					}
-					else
-					{
-						$(".Amount").hide();
-						$(".cause").show();
-					}
-				})
-			}
+			html += "<option value=''>请选择</option><option value='1A'>批复通过</option><option value=2>已拒绝</option>";
+			$(state_change).empty();
+			$(state_change).append(html);
+			$(".Amount").show()
+			$(state_change).change(fn=>{
+				let value = fn.currentTarget.value;
+				if(value == "1A")
+				{
+					$(".Amount").show();
+					$(".updateCreditAmountspan").text("");
+					$(".cause").hide();
+				}
+				else
+				{
+					$(".Amount").hide();
+					$(".updateCreditAmountspan").text("");
+					$(".cause").show();
+				}
+			})
 			$(".Amount").hide();
 			$(".cause").hide();
 			$(".msgS").hide();
+			$(".updateCreditAmountspan").text("");
 			$(pop_Cancel).click(fn=>{
 				popboxer.CloseBox();
+				$(".updateCreditAmountspan").text("");
 				$(".textarea").val("")
 				$(".Amount input").val("")
 			})
 			$(".poper_close").click(fn=>{
+				$(".updateCreditAmountspan").text("");
 				$(".textarea").val("")
 				$(".Amount input").val("")
 				popboxer.CloseBox();
@@ -407,13 +396,10 @@
 					}
 					else
 					{
-						$(".msgS").text("批复金额不能大于预授信金额");
-						if(Number(Amount) <= preCreditAmount)
+						if(Amount == "0")
 						{
-							$(".msgS").hide();
-						}else{
+							$(".msgS").text("批复额度必须大于0");
 							$(".msgS").show();
-							return
 						}
 					}
 				}
@@ -429,7 +415,7 @@
 					},'application/json')
 					.then(function(response){
 					$(loading_div).hide();
-					if(response.message=="处理成功"){
+					if(response.code=="0"){
 						$(".textarea").val("")
 						$(".Amount input").val("")
 						window.location.reload()
@@ -442,6 +428,10 @@
 				})
 			});
 		}
+		$(updateCreditAmountinput).keyup(fn=>{
+			let arr = ["个","十","百","千","万","十万","百万","千万","亿","十亿","百亿","千亿"];
+			$(".updateCreditAmountspan").text(arr[fn.currentTarget.value.length-1]);
+		})
 		$("#user_info").load('user.html');
 </script>
 </body>
