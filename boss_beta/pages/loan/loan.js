@@ -1,5 +1,5 @@
 // pages/loan/loan.js
-import { ajax, showModal } from '../../utils/util.js'
+import { ajax, showModal,stringDispose } from '../../utils/util.js'
 Page({
 
   /**
@@ -18,13 +18,14 @@ Page({
     modeDesc: '',
     applyAmount: '',
     applyShow: '0(元)',
-    isShow: true
-
+    isShow: true,
+    hintVlaue:"　",
   },
   focus:function () {
     this.setData({
       isShow: false,
       applyShow: "",
+      hintVlaue:"　"
     });
 
   },
@@ -36,6 +37,7 @@ Page({
       this.setData({
         isShow: true,
         applyShow: "0(元)",
+        hintVlaue:"　"
       });
     }else{
       let reg = /^[0-9]*$/;
@@ -48,11 +50,12 @@ Page({
           this.setData({
             isShow: true,
             applyShow: "0(元)",
+            hintVlaue:"　"
           });
         }else{
+          this.data.canAmount = this.data.canAmount.replace(/,/g,"");
           if(Number(this.data.canAmount)- Number(newvalue)>=0){
-            if(newvalue.length>4)
-            newvalue = this.stringDispose(newvalue)
+            newvalue = stringDispose(Number(newvalue).toString())
             this.setData({
               isShow: true,
               applyAmount: "￥"+newvalue,
@@ -85,6 +88,19 @@ Page({
         })
     }
   },
+  moneyChange:function(e){
+    let content = e.detail.value;
+    if(content!=""){
+      this.setData({
+        hintVlaue:this.hintChange(content)
+      })      
+    }else{
+      this.setData({
+        hintVlaue:"　"
+      })  
+    }
+
+  },
   //贷款期限
   bindPickerChange: function (e) {
     let index = e.detail.value;
@@ -99,15 +115,18 @@ Page({
   //跳转到：信息确认
   to_ConfirmInfo:function()
   {
-    let serverAmount = this.data.lengthOfTime[this.data.index].feeConfigList[0];
+    let serverAmount = this.data.lengthOfTime[this.data.index].feeConfigList[0],
+    productCode = this.data.lengthOfTime[this.data.index].productCode,
+    num = this.data.lengthOfTime[this.data.index].loanTerm,
+    unit = this.data.lengthOfTime[this.data.index].loanTermUnitDescription,
+    serverMountvalue = "-";
+    if(serverAmount.ruleValue){
+      serverMountvalue = parseFloat(Number(this.data.applyShow.replace(/,/g, '')).toFixed(2) * ((this.data.lengthOfTime[this.data.index].feeRate)/100));
+    }
     wx.navigateTo({
-      url: 'confirm_info?productCode=' + this.data.lengthOfTime[this.data.index].productCode + '&applyAmount=' + this.data.applyAmount + '&num=' + this.data.lengthOfTime[this.data.index].loanTerm + '&unit=' + this.data.lengthOfTime[this.data.index].loanTermUnitDescription + '&loanRate=' + this.data.loanRate + '&serverMount=' + (serverAmount.feeRules === 'FINAL' ? serverAmount.ruleValue : serverAmount.feeRules === 'RATIO' ? parseFloat(this.data.applyShow.replace(/,/g, '')).toFixed(2) * serverAmount.ruleValue : 0 )
-      //url: '../mine/loan_accept'
-    });
-    this.setData({
-      isShow: true,
-      applyShow: "0(元)",
-      applyAmount: "0",
+      url: 'confirm_info?productCode=' + productCode + '&applyAmount=' + this.data.applyAmount + '&num=' + num + 
+      '&unit=' + unit + '&loanRate=' + this.data.loanRate + 
+      '&serverMount=' + serverMountvalue
     });
   },
   outputdollars:function(number) {
@@ -149,22 +168,8 @@ Page({
       poperHide: false,
       poperHeadtext:text,
       applyShow:"0(元)",
+      hintVlaue:"　"
     })
-  },
-  stringDispose:function(str){
-    let strLe = str.length,newstr = "",fig = parseInt(strLe/3),g=3,arr = str.split("");
-    for(var s = 0;s<fig;s++)
-    {
-      arr.forEach((v,i)=>{
-        if(i==g)
-        {
-          arr.splice(g,0," ")
-        }
-      });
-      g = g +4   
-    }
-    newstr = arr.toString().replace(/,/g,"").replace(/ /g,",")
-    return newstr
   },
   /**
    * 生命周期函数--监听页面加载
@@ -190,6 +195,9 @@ Page({
       this.setData({
         lengthOfTime: [{showText:''}],
         index: 0,
+        btnClass: "button_gray",
+        btnHoverClass: "button_gray_hover",
+        btnBind: ""
       });
       this.setData({
         lengthOfTime: data.map(it => {
@@ -200,23 +208,34 @@ Page({
       this.setData({
         loanRate:(data[0].loanRate).toString(),
         modeDesc:data[0].repayMode.modeDesc
+      });
+
+      ajax('memberInfoQuery', {
+        queryContentList:["CREDIT_ACCOUNT"]
+      }).then(data => {
+        let canAmount = stringDispose((data.creditAccountInfo.creditAmount - data.creditAccountInfo.useAmount).toString());
+        this.setData({
+          canAmount: canAmount
+        })
       })
     })
 
-    ajax('memberInfoQuery', {
-    }).then(data => {
-      let canAmount = data.creditAccountInfo.creditAmount - data.creditAccountInfo.useAmount;
-      this.setData({
-        canAmount: canAmount
-      })
-    })
   },
 
+  hintChange:function(num){
+    let arr = ["个","十","百","千","万","十万","百万","千万","亿","十亿","百亿","千亿"];
+    return arr[num.length-1];
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.setData({
+      isShow: true,
+      applyShow: "0(元)",
+      applyAmount: "0",
+      hintVlaue:"　"
+    });
   },
 
   /**

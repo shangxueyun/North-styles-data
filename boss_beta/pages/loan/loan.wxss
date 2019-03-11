@@ -39,4 +39,16 @@ bottom:calc((100vh - 50vmin) / 2);
   width:100%;
   text-align:left;
 }
+.list {
+  margin:0vmin 5vmin 4vmin 5vmin;
+  padding-bottom:8vmin;
+}
+.hint{
+  margin-left:16vmin;
+  color:#999;
+  font-size:3.5vmin;
+}
+.hintDisplay{
+  display: none;
+}
   

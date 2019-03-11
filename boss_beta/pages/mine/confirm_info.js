@@ -1,12 +1,12 @@
 // pages/loan/confirm_info.js
-import { ajax, isBtnClick, showModal } from '../../utils/util.js'
+import { ajax, isBtnClick, showModal,stringDispose,FileLook } from '../../utils/util.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    phoneNum:"021-00009999",
+    phoneNum:"021-68888083",
     poperHide: true,
     getCheckCode_txt: "秒重发",
     time: 11,
@@ -27,11 +27,11 @@ Page({
     phoneRe: '',
     verifyCode: '',
     productCode: '',
-    
     shortMessage: '',
     shortMes: false,
     agree: false,
     phone: '',
+    shortMes_text:'',
     company: '',
     'LOAN': '0',
     'GUARANTEE': '0',
@@ -43,7 +43,7 @@ Page({
       loanTerm: '',
       fundSideId: ''
     },
-    loanNo: ''
+    loanNo: '',
   },
   //关闭弹窗
   closePoper: function () {
@@ -84,57 +84,59 @@ Page({
       })
     }
     else {
-      ajax('signStatusQuery', {
-        applyNo: this.data['LOAN'],
-        onlineSignType: 'LOAN'
-      }, false, 'POST', true).then(data => {
-        if (data.signStatus === '1' || data.signStatus === '3') {
-          ajax('signStatusQuery', {
-            applyNo: this.data['GUARANTEE'],
-            onlineSignType: 'GUARANTEE'
-          }, false, 'POST', true).then(data => {
-            if (data.signStatus === '1' || data.signStatus === '3') {
-                  if (this.data.agree) {
-                    ajax('modifyStatus', {
-                      loanApplyNo: this.data.loanNo,
-                      status: 'FUND_OUT_PROCESSING'
-                    }).then(data => {
-                      wx.navigateTo({
-                        url: '/pages/loan/state_of_check',
-                      })
+        ajax('signStatusQuery', {
+          applyNo: this.data["GUARANTEE"],
+          loanApplyNo:this.data.loanNo,
+          onlineSignType: "GUARANTEE",
+          updateStep: '/pages/upload_file/state_of_check'
+        }, false, 'POST', true).then(data => {
+          if (data.signStatus === '1' || data.signStatus === '3') {
+            ajax('signStatusQuery', {
+              applyNo: this.data["LOAN"],
+              loanApplyNo:this.data.loanNo,
+              onlineSignType: "LOAN",
+              updateStep: '/pages/upload_file/state_of_check'
+            }, false, 'POST', true).then(data => {
+              if (data.signStatus === '1' || data.signStatus === '3') {
+                if (this.data.agree) {
+                  ajax('modifyStatus', {
+                    loanApplyNo: this.data.loanNo,
+                    status: 'FUND_OUT_PROCESSING'
+                  }).then(data => {
+                    wx.navigateTo({
+                      url: '/pages/loan/state_of_check',
                     })
-                  }
-                  else {
-                    showModal({
-                      content: '请确认详细阅读协议信息'
-                    })
-                  }
+                  })
                 }
                 else {
                   showModal({
-                    content: '请进行担保合同签章'
+                    content: '请勾选确认详细阅读协议信息'
                   })
                 }
-              }).catch(() => {
+              }else{
                 showModal({
-                  content: '请进行担保合同签章'
+                  content: '借款合同尚未签章'
                 })
-              })
-            }
-            else {
+              }
+            }).catch(() => {
               showModal({
                 content: '请进行借款合同签章'
               })
-            }
-          }).catch(() => {
-            showModal({
-              content: '请进行借款合同签章'
             })
-          })  
+          }else{
+            showModal({
+              content: '担保合同尚未签章'
+            })
+          }
+        }).catch(() => {
+          showModal({
+            content: '请进行担保合同签章'
+          })
+        })
     }
   },
   //会员注册协议
-  regClick: function (e) {
+  regClick: function(e) {
     if (!this.data.shortMes) {
       showModal({
         content: '请进行电子签章授权验证'
@@ -142,20 +144,37 @@ Page({
     }
     else {
       let type = e.currentTarget.id || target.id;
-      ajax('signApply', Object.assign({}, {
-        onlineSignType: type
-      }, this.data.info)).then(data => {
-        let link = data.link;
-        let res = {};
-        res[type] = data.applyNo
-        console.log('sign?url=' + link.substring(0, link.indexOf('?')) + '&' + link.substring(link.indexOf('?') + 1))
-        this.setData(res, function () {
-          wx.navigateTo({
-            url: '/pages/upload_file/sign?url=' + link.substring(0, link.indexOf('?')) + '&' + link.substring(link.indexOf('?') + 1)
-          })
+
+      ajax('signStatusQuery', {
+        applyNo: this.data[type],
+        onlineSignType: type,
+        loanApplyNo: this.data.loanNo,
+        updateStep: '/pages/upload_file/state_of_check'
+      }, false, 'POST', true).then(data => {
+        if (data.signStatus === '1' || data.signStatus === '3') {
+          FileLook(this.data.loanNo,type)
+        }else{
+          this.app_ajax(type);
+        }
+      }).catch(() => {
+        this.app_ajax(type);
+      })
+
+   }
+  },
+  app_ajax:function(type){
+    ajax('signApply', Object.assign({}, {
+      onlineSignType: type
+    }, this.data.info)).then(data => {
+      let link = data.link;
+      let res = {};
+      res[type] = data.applyNo
+      this.setData(res, function () {
+        wx.navigateTo({
+          url: '/pages/upload_file/sign?url=' + link.substring(0, link.indexOf('?')) + '&' + link.substring(link.indexOf('?') + 1)
         })
       })
-    }
+    })
   },
   //输入框获取
   getCode: function (e) {
@@ -257,12 +276,14 @@ Page({
     ajax('queryApplyRecordDetail', {
       loanApplyNo: options.loanNo,
     }).then(data => {
+      let returnAmount = this.NumberS(data.awaitRepayAmt),
+      serverMount = this.NumberS(data.feeAmt);
       this.setData({
-        applyAmount: data.loanAmt,
+        applyAmount: stringDispose(data.loanAmt.toString()),
         date: data.loanTerm + data.termUnit,
         rate: data.loanRate,
-        returnAmount: data.awaitRepayAmt,
-        serverMount: data.feeAmt,
+        returnAmount: returnAmount,
+        serverMount: serverMount,
         loanNo: options.loanNo,
         info: {
           contractNo: data.contractNo,
@@ -274,9 +295,15 @@ Page({
         }
       })
       
-    })
+    });
   },
-
+  NumberS:function(num){
+    if(num.toString().indexOf(".")>=0)
+    {
+      return num
+    }else
+    return num.toFixed(2)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

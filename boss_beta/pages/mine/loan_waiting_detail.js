@@ -1,31 +1,46 @@
 // pages/mine/loan_waiting_detail.js
+import { ajax, FileLook } from '../../utils/util.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    loanAmt: '',
-    loanRate: '',
-    loanTerm: '',
-    loanApplyDate: '',
-    delayRate: '',
-    outDate: '',
-    loanEndDate: ''
+    data:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let res = {},Total = Number(options.loanAmt)+Number(options.interest);
-    for (let i in this.data) {
-      res[i] = options[i]
-    }
-    res.Total =Total;
-    this.setData(res)
+    ajax('queryApplyRecordDetail', {
+      loanApplyNo: options.id,
+    }).then(data => {
+      if(data.delayDay == undefined || data.delayDay == null)
+        data.delayDay = ""
+        if(data.delayAmt == null || data.delayAmt == undefined)
+          data.delayAmt = ""
+
+    if(data.termUnit == "M")
+    data.loanTerm = data.loanTerm + " 月"
+        else if(data.termUnit == "Y")
+        data.loanTerm = data.loanTerm + " 年"
+            else if(data.termUnit == "D")
+            data.loanTerm = data.loanTerm + " 日"
+      let Total = Number(data.loanAmt)+Number(data.interest);
+      let interestPenalty = data.delayAmt*data.delayRate*Number(data.delayDay);
+      data.interestPenalty = interestPenalty;
+      data.Total = Total;
+      this.setData({
+        data: data
+      })
+    })
   },
 
+  ContractClick:function(e){
+    let type = e.currentTarget.id || target.id;
+    FileLook(this.data.data.loanNo,type);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

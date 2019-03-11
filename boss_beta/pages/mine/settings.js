@@ -31,8 +31,8 @@ Page({
     ajax('memberLogout', {}).then(data => {
       wx.removeStorageSync('token');
       wx.removeStorageSync('phone');
-      wx.navigateTo({
-        url: '/pages/login/login',
+      wx.reLaunch({
+        url: '/pages/login/login'
       })
     })
   },

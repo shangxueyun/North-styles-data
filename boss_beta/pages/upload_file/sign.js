@@ -12,7 +12,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      url: options.url + '?sign=' + options.sign + '&signNo=' + options.signNo + '&ts=' + options.ts
+      url: options.url = options.url + '?sign=' + options.sign + '&signNo=' + options.signNo + '&ts=' + options.ts + '&backUrl=https%3a%2f%2fchina-mz.cn%2ffile_info.html'
     })
   },
 

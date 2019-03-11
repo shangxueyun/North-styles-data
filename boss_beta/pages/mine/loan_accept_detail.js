@@ -1,4 +1,5 @@
 // pages/mine/loan_accept_detail.js
+import { ajax, showModal } from '../../utils/util.js'
 Page({
 
   /**
@@ -10,17 +11,32 @@ Page({
     loanTerm: '',
     loanApplyDate: '',
     delayRate: '',
+    interest:"",
+    awaitRepayAmt:"",
+    feeRate:"",
+    feeAmt:"",
+    feeMode:"",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let res = {};
-    for(let i in this.data) {
-      res[i] = options[i]
-    }
-    this.setData(res)
+    ajax('queryApplyRecordDetail', {
+      loanApplyNo: options.loanNo,
+    }).then(data => {
+      if(data.delayDay == undefined || data.delayDay == null)
+        data.delayDay = ""
+        if(data.delayAmt == null || data.delayAmt == undefined)
+          data.delayAmt = ""
+      let interestPenalty = data.delayAmt*data.delayRate*Number(data.delayDay);
+      data.interestPenalty = interestPenalty;
+      let Total = Number(data.loanAmt)+Number(data.interest);
+      data.Total = Total;
+      this.setData({
+        data: data
+      })
+    })
   },
 
   /**

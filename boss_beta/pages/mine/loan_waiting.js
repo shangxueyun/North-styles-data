@@ -12,7 +12,7 @@ Page({
   },
   to_LoanAccept_Detail: function (e) {
     wx.navigateTo({
-      url: 'loan_waiting_detail?' + getUrlData(this.data.datas[e.currentTarget.id]),
+      url: 'loan_waiting_detail?id='+e.currentTarget.id,
     })
   },
   /**

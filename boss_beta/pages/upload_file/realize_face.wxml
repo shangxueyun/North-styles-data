@@ -4,13 +4,16 @@
 
 <view class='item' hover-class='item_hover'>
       <view class='innerbox' hover-class='item_hover' wx:if="{{!IDN}}" id="IDN" bindtap="onImg">
-        <image class='img-show-realize_face' src='http://jobnotes.cn/bmimg/realize_face.png' mode='widthFix'></image>
+        <image class='img-show-realize_face' src='https://china-mz.cn/bmimg/realize_face.png' mode='widthFix'></image>
       </view>
       <view wx:else class='img-show-bg_width'>
         <view>
         <image id="IDN-img" src="{{IDN}}" class='img-show_width1 positionA'  bindtap="previewImage"></image>
         <!-- 压缩后图片 -->
-        <canvas class='img-show_width1' bindtap="previewImage" style="top:{{canvas_top}};left:{{canvas_left}}" canvas-id="attendCanvasId" class="canvas"></canvas>
+        <view  class='{{canvaspoperHide_1}}'>
+         <canvas class='img-show_width1' bindtap="previewImage" style="top:{{canvas_top}};left:{{canvas_left}}" canvas-id="attendCanvasId" class="canvas"></canvas>
+        </view>
+       
         </view>
 
         <view id="IDN-shut" bindtap="closeImg" class='shut-btn'><text>X</text></view>

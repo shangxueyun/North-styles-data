@@ -1,18 +1,20 @@
 // pages/mine/loan_needtopay_detail_overdue.js
-import { ajax, showModal } from '../../utils/util.js'
+import { ajax, showModal,FileLook } from '../../utils/util.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    data: {}
+    data: {},
+    amount:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({amount:options.interest})
     ajax('queryApplyRecordDetail', {
       agreementId: options.id,
     }).then(data => {
@@ -22,12 +24,17 @@ Page({
           data.delayAmt = ""
       let interestPenalty = data.delayAmt*((data.delayRate*100)/10000)*Number(data.delayDay);
       data.interestPenalty = interestPenalty;
+      data.amount = this.data.amount;
       this.setData({
         data: data
       })
     })
   },
 
+  ContractClick:function(e){
+    let type = e.currentTarget.id || target.id;
+    FileLook(this.data.data.loanNo,type);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

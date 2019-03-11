@@ -5,4 +5,12 @@
     position:relative;
 
 }
-    
+.tabbox .tabItem_in4 {
+    width: 19%;
+}
+.tabbox .width1 {
+    width: 32%;
+}
+.tabbox .width2 {
+    width: 27%;
+}

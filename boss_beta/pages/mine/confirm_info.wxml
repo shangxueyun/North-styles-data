@@ -2,7 +2,7 @@
 <!--//待签订合同详情页//-->
 <view>
   <view class='topbox'>
-    <text class='top_title'>借款本金金额</text>
+    <text class='top_title'>借款本金金额(元)</text>
     <text>{{applyAmount}}</text>
   </view>
   <view class='tabbox tab_bg_white'>
@@ -18,15 +18,15 @@
           <text class='small gray'>年化利率</text>
         </view>
       </view>
-      <view class='tabItem_in4'>
+      <view class='tabItem_in4 width1'>
         <view class='column_line'>
           <view class='title'>{{returnAmount}}</view>
-          <text class='small gray'>应还总额</text>
+          <text class='small gray'>应还总额(元)</text>
         </view>
       </view>
-      <view class='tabItem_in4'>
+      <view class='tabItem_in4 width2'>
         <view class='title'>{{serverMount}}</view>
-        <text class='small gray'>服务费用</text>
+        <text class='small gray'>服务费用(元)</text>
       </view>
     </view>
 </view>

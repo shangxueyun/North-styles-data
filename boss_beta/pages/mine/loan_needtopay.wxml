@@ -11,7 +11,7 @@
 
 <view class='whiteBox' hidden='{{tabHide_expire}}'>
   <view class='list01'>
-    <view id="{{item.agreementId}}" class='item' hover-class='item_hover' bindtap='to_LoanNeedToPay_Detail_expire' wx:for="{{datas}}">
+    <view id="{{item.agreementId}}" data-id="{{item.id}}" class='item' hover-class='item_hover' bindtap='to_LoanNeedToPay_Detail_expire' wx:for="{{datas}}">
       <view class='item_in2'>
         <text>{{item.amount}}</text>
         <text>应还本金+利息总额</text>
@@ -26,7 +26,7 @@
 
 <view class='whiteBox' hidden='{{tabHide_overdue}}'>
   <view class='list01'>
-    <view id="{{item.agreementId}}" class='item' hover-class='item_hover' bindtap='to_LoanNeedToPay_Detail_overdue' wx:for="{{datas1}}">
+    <view id="{{item.agreementId}}" data-id="{{item.id}}" class='item' hover-class='item_hover' bindtap='to_LoanNeedToPay_Detail_overdue' wx:for="{{datas1}}">
       <view class='item_in2'>
         <text>{{item.amount}}</text>
         <text>应还本金+利息总额</text>

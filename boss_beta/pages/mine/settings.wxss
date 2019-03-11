@@ -34,3 +34,6 @@
     .submitbox{
       text-align: center;
     }
+    .red{
+      color: #ff3333;
+    }

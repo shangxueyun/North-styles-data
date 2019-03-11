@@ -13,7 +13,7 @@ Page({
   },
   to_LoanAccept_Detail: function (e) {
     wx.navigateTo({
-      url: 'loan_payoff_detail?' + getUrlData(this.data.datas[e.currentTarget.id]),
+      url: 'loan_payoff_detail?id='+e.currentTarget.id,
     })
   },
   /**
@@ -24,29 +24,38 @@ Page({
   },
   //获取数据
   getLists: function () {
-    ajax('queryApplyRecord', {
+    ajax('queryRepayPlan', {
       orderType: 'LOAN',
-      status: 'I',
+      status: 'RF',
       page: this.data.num,
       pageSize: 20
     }).then(data => {
-      if (data.loanList.length === 0) {
+      if(data){
+        if (data.list.length === 0) {
+          this.setData({
+            message: '没有更多了'
+          })
+        }
+        else if (data.list.length < 20) {
+          this.setData({
+            message: '没有更多了',
+            datas: [...this.data.datas, ...data.list],
+          })
+        }
+        else {
+          this.setData({
+            datas: [...this.data.datas, ...data.list],
+            num: (this.data.num + 1)
+          })
+        }        
+      }
+      else
+      {
         this.setData({
           message: '没有更多了'
         })
       }
-      else if (data.loanList.length < 20) {
-        this.setData({
-          message: '没有更多了',
-          datas: [...this.data.datas, ...data.loanList],
-        })
-      }
-      else {
-        this.setData({
-          datas: [...this.data.datas, ...data.loanList],
-          num: (this.data.num + 1)
-        })
-      }
+
     })
   },
   /**

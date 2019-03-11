@@ -1,5 +1,5 @@
 //index.js
-import { ajax, showModal } from '../../utils/util.js'
+import { ajax, showModal,stringDispose } from '../../utils/util.js'
 Page({
   data: {
     poperHide: true,
@@ -11,9 +11,9 @@ Page({
     withdrewBalance: 0,
     currentBalance: 0,
     cancelAmount: 0,
-    addAmount: 0
+    addAmount: 0,
 
-
+    btnClass:""
   },
   //关闭弹窗
   closePoper: function () {
@@ -37,21 +37,43 @@ Page({
     ajax('memberInfoQuery', {
     }).then(data => {
       let res = {};
-      res.creditAmount = "￥"+ data.creditAccountInfo.creditAmount;
-      res.useAmount = "￥"+ data.creditAccountInfo.useAmount;
-      res.canAmount = "￥"+(data.creditAccountInfo.creditAmount - data.creditAccountInfo.useAmount);
+      if(data.creditAccountInfo.creditAmount==0)
+      {
+        this.setData({
+          btnClass:"btnClass"
+        })
+        res.creditAmount = "批复中..."
+      }
+      else
+      {
+        this.setData({
+          btnClass:""
+        })
+        res.creditAmount = stringDispose(data.creditAccountInfo.creditAmount.toString()); 
+      }
+
+      res.useAmount = stringDispose(data.creditAccountInfo.useAmount.toString());
+      res.canAmount = stringDispose((data.creditAccountInfo.creditAmount - data.creditAccountInfo.useAmount).toString());
       wx.setStorageSync('canAmount', res.canAmount)
-      res.accountBalance = this.string(data.bankAccountInfo.accountBalance);
-      res.freezeBalance = this.string(data.bankAccountInfo.freezeBalance);
-      res.withdrewBalance = this.string(data.bankAccountInfo.withdrewBalance);
-      
-      res.currentBalance = data.invoicePoolInfo.currentBalance;
-      res.cancelAmount = data.invoicePoolInfo.cancelAmount;
-      res.addAmount = data.invoicePoolInfo.addAmount;
+      res.accountBalance = this.string(data.bankAccountInfo.accountBalance/100);
+      res.freezeBalance = this.string(data.bankAccountInfo.freezeBalance/100);
+      res.withdrewBalance = this.string(data.bankAccountInfo.withdrewBalance/100);
+      if(data.invoicePoolInfo)
+      {
+        res.currentBalance = this.string(data.invoicePoolInfo.currentBalance);
+        res.cancelAmount = this.string(data.invoicePoolInfo.cancelAmount);
+        res.addAmount = this.string(data.invoicePoolInfo.addAmount);
+      }
+      else
+      {
+        res.currentBalance = this.string(0);
+        res.cancelAmount = this.string(0);
+        res.addAmount = this.string(0);
+      }
       wx.setStorageSync('loanMes', {
         companyName: data.companyInfo.companyName,
         legalPersonName: data.companyInfo.legalPersonName,
-        accountNo: data.bankAccountInfo.accountNo
+        accountNo: this.string(data.bankAccountInfo.accountNo)
       })
       this.setData(res)
     })
@@ -68,5 +90,7 @@ Page({
       hasUserInfo: true
     })
   },
-  string:function(str){if(str==null){return "-"}else{str+".00元"}}
+  string:function(str){if(str==null){return "-"}else{
+    return Number(str).toFixed(2)
+  }},
 })

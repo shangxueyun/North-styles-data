@@ -34,7 +34,7 @@ Page({
   to_Index: function () {
     var that = this;
     
-    // let str = '15801932833',mm='fxd123456';
+    // let str = '13122156670',mm='sxy123456';
     // that.data.phone = str
     // that.data.password = mm
     
@@ -47,11 +47,35 @@ Page({
         identityType: 'PHONE_NO',
         client: 'APP'
       }).then(data => {
-        wx.setStorageSync('token', data.token);
-        wx.setStorageSync('phone', that.data.phone);
-        wx.switchTab({ //关闭当前页面，跳转到应用内的某个页面
-          url: "/pages/index/index"
-        })
+        if(data.updateStep == "/pages/upload_file/state_of_check")
+        {
+          wx.setStorageSync('token', data.token);
+          wx.setStorageSync('phone', that.data.phone);
+          wx.switchTab({ //关闭当前页面，跳转到应用内的某个页面
+            url: "/pages/index/index"
+          });
+        }
+        else if(data.updateStep == null)
+        {
+          wx.setStorageSync('token', data.token);  
+          wx.setStorageSync('phone', that.data.phone);       
+          wx.navigateTo({
+            url: "/pages/upload_file/upload_file",
+          });
+        }
+        else{
+          wx.setStorageSync('phone', that.data.phone);
+          wx.setStorageSync('token', data.token);
+          wx.setStorageSync('memberId', data.memberId);
+          wx.navigateTo({
+            url: data.updateStep,
+          });
+        }
+        // wx.setStorageSync('token', data.token);
+        // wx.setStorageSync('phone', that.data.phone);
+        // wx.switchTab({ //关闭当前页面，跳转到应用内的某个页面
+        //   url: "/pages/index/index"
+        // });
       })
     }
     else {
@@ -72,8 +96,20 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function () {
+    // 查看是否授权
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+        }
+        else
+        {
+          wx.redirectTo({
+            url: './auth',
+          })
+        }
+      }
+    })
   },
 
   /**

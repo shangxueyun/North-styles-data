@@ -1,5 +1,5 @@
 // pages/upload_file/sign_contract.js
-import { ajax, isBtnClick, showModal } from '../../utils/util.js'
+import { ajax, isBtnClick, showModal,FileLook } from '../../utils/util.js'
 Page({
 
   /**
@@ -14,8 +14,12 @@ Page({
     shortMessage: '',
     shortMes: false,
     agree: false,
+    shortMes_text:'',
     phone: '',
     company: '',
+    REGISTER_STATUS:"0",
+    PERSON_CREDIT_QUERY_STATUS:"0",
+    COMPANY_CREDIT_QUERY_STATUS:"0",
     'REGISTER': '0',
     'PERSON_CREDIT_QUERY': '0',
     'COMPANY_CREDIT_QUERY': '0'
@@ -62,88 +66,118 @@ Page({
       })   
     }
     else{
-      ajax('signStatusQuery', {
-        applyNo: this.data['REGISTER'],
-        onlineSignType: 'REGISTER'
-      }, false, 'POST', true).then(data => {
-        if (data.signStatus === '1' || data.signStatus === '3') {
-          ajax('signStatusQuery', {
-            applyNo: this.data['PERSON_CREDIT_QUERY'],
-            onlineSignType: 'PERSON_CREDIT_QUERY'
-          }, false, 'POST', true).then(data => {
-            if (data.signStatus === '1' || data.signStatus === '3') {
-              ajax('signStatusQuery', {
-                applyNo: this.data['COMPANY_CREDIT_QUERY'],
-                onlineSignType: 'COMPANY_CREDIT_QUERY'
-              }, false, 'POST', true).then(data => {
-                if (data.signStatus === '1' || data.signStatus === '3') {
-                  if (this.data.agree) {
-                    wx.navigateTo({
-                      url: 'state_of_check',
-                    })
-                  }
-                  else {
-                    showModal({
-                      content: '请确认详细阅读协议信息'
-                    })
-                  }
-                }
-                else {
-                  showModal({
-                    content: '请进行企业数据授权书签章'
-                  })
-                }
-              }).catch(() => {
-                showModal({
-                  content: '请进行企业数据授权书签章'
-                })
-              })
-            }
-            else {
-              showModal({
-                content: '请进行个人信息授权书签章'
-              })
-            }
-          }).catch(() => {
-            showModal({
-              content: '请进行个人信息授权书签章'
-            })
-          })
-        }
-        else {
-          showModal({
-            content: '请进行会员注册协议签章'
-          }) 
-        }
-      }).catch(() => {
+
+      if(this.data.REGISTER != "0" && this.data.PERSON_CREDIT_QUERY != "0" && this.data.COMPANY_CREDIT_QUERY != "0"){
+        this.Query_function("REGISTER",this.showModalCh,this.Query);
+      }else{
+        let content;
+        if(this.data.REGISTER=="0")
+        content = '会员注册协议尚未签章'
+        else if(this.data.PERSON_CREDIT_QUERY=="0")
+        content = '个人信息授权书尚未签章'
+        else if(this.data.COMPANY_CREDIT_QUERY=="0")
+        content = '企业数据授权书尚未签章'
         showModal({
-          content: '请进行会员注册协议签章'
-        })  
-      })
+          content: content
+        })
+      }
     }
+  },
+  Query:function(string,type){
+    if(type=="REGISTER")
+    this.Query_function("PERSON_CREDIT_QUERY",this.showModalCh,this.Query);
+    else if(type=="PERSON_CREDIT_QUERY")
+    this.Query_function("COMPANY_CREDIT_QUERY",this.showModalCh,this.Query);
+    if(type=="COMPANY_CREDIT_QUERY")
+    {
+      if (this.data.agree) {
+        wx.navigateTo({
+          url: 'state_of_check'
+        })
+      }else {
+          showModal({
+            content: '请勾选确认详细阅读协议信息'
+          })
+      }
+    }
+  },
+  Query_function:function(type,appModalCh,fn){
+    ajax('signStatusQuery', {
+      applyNo: this.data[type],        
+      onlineSignType: type,
+      updateStep: '/pages/upload_file/state_of_check'
+    }, false, 'POST', true).then(data => {
+      if (data.signStatus === '1' || data.signStatus === '3') {
+        fn(wx.getStorageSync('memberId'),type)
+      }else{
+        appModalCh(type,true);
+      }
+    }).catch(() => {
+      appModalCh(type,false);
+    })
+  },
+  showModalCh:function(type,ble){
+    let content;
+    if(type=="REGISTER"){
+      if(ble)
+      content = "会员注册协议尚未签章";
+      else
+      content = "请进行会员注册协议签章";
+    }else if(type=="PERSON_CREDIT_QUERY"){
+      if(ble)
+      content = "个人信息授权书尚未签章";
+      else
+      content = "请进行个人信息授权书签章";
+    }else if(type=="COMPANY_CREDIT_QUERY"){
+      if(ble)
+      content = "企业数据授权书尚未签章";
+      else
+      content = "请进行企业数据授权书签章";
+    }
+    showModal({
+      content: content
+    })
   },
   //会员注册协议
   regClick: function(e) {
     if (!this.data.shortMes) {
       showModal({
         content: '请进行电子签章授权验证'
-      })
-    }
-    else {
+      })   
+    }else{
       let type = e.currentTarget.id || target.id;
-      ajax('signApply', {
-        onlineSignType: type,
-      }).then(data => {
-        let link = data.link;
-        let res = {};
-        res[type] = data.applyNo
-        this.setData(res, function () {
-          wx.navigateTo({
-            url: 'sign?url=' + link.substring(0, link.indexOf('?')) + '&' + link.substring(link.indexOf('?') + 1)
-          })
+      
+      if(type=="REGISTER"){
+        if(this.data.REGISTER!="0")
+          this.Query_function(type,this.app_ajax,FileLook)
+        else
+          this.app_ajax(type)        
+      }else if(type=="PERSON_CREDIT_QUERY"){
+        if(this.data.PERSON_CREDIT_QUERY != "0")
+          this.Query_function(type,this.app_ajax,FileLook)
+        else
+          this.app_ajax(type)        
+      }else if(type=="COMPANY_CREDIT_QUERY"){
+        if(this.data.COMPANY_CREDIT_QUERY != "0")
+          this.Query_function(type,this.app_ajax,FileLook)
+        else
+          this.app_ajax(type)
+      }      
+    }
+  },
+  app_ajax:function(type,ble){
+    ajax('signApply', {
+      onlineSignType: type,
+    }).then(data => {
+      let link = data.link;
+      let res = {};
+      res[type] = data.applyNo
+      this.setData(res, function () {
+        wx.navigateTo({
+          url: '/pages/upload_file/sign?url=' + link.substring(0, link.indexOf('?')) + '&' + link.substring(link.indexOf('?') + 1)
         })
       })
-    }
+    })
   },
   //输入框获取
   getCode: function(e) {
@@ -242,9 +276,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      phone: wx.getStorageSync('phone'),
-      company: wx.getStorageSync('company')
+    ajax('memberInfoQuery', {
+    }).then(data => {
+      this.setData({
+        phone: data.companyInfo.legalPersonPhone,
+        company: data.companyInfo.companyName
+      })
     })
   },
 

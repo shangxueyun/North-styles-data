@@ -88,8 +88,7 @@ Page({
   //页面跳转：验证手机号
   check_phone_num: function () {
     var that = this;
-    console.log(that.data.phone)
-    wx.navigateTo({
+    wx.redirectTo({
       url: 'check_phone_num?phone=' + that.data.phone,
     })
   },

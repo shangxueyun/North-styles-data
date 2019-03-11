@@ -1,1 +1,21 @@
 /* pages/mine/mine.wxss */
+.list01 .text_color{
+    width:3vmin;
+    height:3vmin;
+    background:#FC4A2D;
+    left:30vmin;
+    border-radius:3vmin;
+    text-align:center;
+    line-height:3vmin;
+    top:4.5vmin;
+    color:#fff;
+    font-size:4vmin;
+    position:absolute;
+    
+}
+.list01 .display{
+    display: none; 
+}
+.position1{
+    position: relative !important;
+}

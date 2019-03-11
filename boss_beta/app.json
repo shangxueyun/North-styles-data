@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/login/auth",
     "pages/mine/personal_info",
     "pages/upload_file/confirm_info",
@@ -43,8 +44,6 @@
     
     "pages/upload_file/sign",
     
-    
-    "pages/login/login",
     
     "pages/upload_file/upload_idcard_controller",
     

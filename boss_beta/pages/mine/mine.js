@@ -1,10 +1,12 @@
 // pages/mine/mine.js
+import { ajax, showModal } from '../../utils/util.js'
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    account: ''
+    account: '',
+    waittextcolor:'',
   },
   //页面跳转：个人信息
   to_PersonalInfo:function()
@@ -49,20 +51,41 @@ Page({
       url: 'settings',
     })
   },
+  //页面跳转：合同
   to_wait: function () {
     wx.navigateTo({
       url: 'loan_wait',
     })
   },
   /**
-   * 生命周期函数--监听页面加载
+   * 生命周期函数--监听页面加载count
    */
   onLoad: function (options) {
     this.setData({
       account: wx.getStorageSync('loanMes').companyName
-    })
+    });
   },
 
+  loadAjax:function(status){
+    ajax('queryApplyRecord', {
+      orderType: 'LOAN',
+      status: status,
+      page: "1",
+      pageSize: 999
+    }).then(data => {
+      if(data.count==0)
+      {
+        this.setData({
+          waittextcolor: "display",
+        })  
+      }else{
+        this.setData({
+          waittextcolor: "",
+        })
+      }
+
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -74,7 +97,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.loadAjax("I1");
   },
 
   /**

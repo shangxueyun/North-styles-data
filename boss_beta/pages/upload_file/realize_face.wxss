@@ -22,5 +22,22 @@ page {background:#fff;}
 .poper .popbox {
   width:80vmin;
   left:10vmin;
-  bottom:calc((100vh - 50vmin) / 2);
+  bottom:calc((100vh - 60vmin) / 2);
+  position: fixed;
+  z-index:1111111;
 }
+.poper .icon_ok {
+  margin-bottom:2vmin;
+  padding-top:2vmin;
+
+}
+.poper .submitbox {
+  margin-top:0vmin;
+}
+.poper .center {
+  padding-bottom:1vmin;
+}
+.Hides{
+  display: none;
+}
+  

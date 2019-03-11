@@ -31,9 +31,10 @@ Page({
           legalSpouseIdPhotoUrl: this.data.FRPO,
           legalMarriageCertificatePhotoUrl: this.data.FRJH,
           letterOfQuiryPhotoUrl: this.data.SJKZ,
-          otherPhotoUrl: this.data.YYZZ2
+          otherPhotoUrl: this.data.YYZZ2,          
+          token:this.data.token,
+          updateStep: "/pages/upload_file/upload_idcard"
         },
-        updateStep: "/pages/upload_file/upload_idcard"
       }).then(data => {
         wx.navigateTo({ //关闭当前页面，跳转到应用内的某个页面
           url: "/pages/upload_file/upload_idcard"

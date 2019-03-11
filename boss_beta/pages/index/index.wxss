@@ -1,1 +1,5 @@
 /**index.wxss**/
+.topbox .btnClass{
+    font-size: 3vmin;
+    margin-top:5px;
+}

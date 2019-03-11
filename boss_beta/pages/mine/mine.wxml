@@ -3,7 +3,7 @@
 <view>
   <view class='topbox' bindtap='to_PersonalInfo'>
     <view class='avatarbox'>
-      <image class='avatar' mode='scaleToFill' src='http://jobnotes.cn/bmimg/avatar.svg'/>
+      <image class='avatar' mode='scaleToFill' src='https://china-mz.cn/bmimg/avatar.svg'/>
     </view>
     <text class='username'>{{account}}</text>
   </view>
@@ -13,8 +13,9 @@
 
 <view class='whiteBox'>
   <view class='list01'>
-    <view class='item' hover-class='item_hover' bindtap='to_wait'>
+    <view class='item position1' hover-class='item_hover' bindtap='to_wait'>
       <view class='item_key icon_file_time'>待签订合同</view>
+      <view class='item_key text_color {{waittextcolor}}'></view>
       <view class='item_val arrow'></view>
     </view>
   </view>

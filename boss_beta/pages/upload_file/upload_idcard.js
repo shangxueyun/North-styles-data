@@ -81,7 +81,7 @@ Page({
     let that = this;
         ajax('uploadPicture', {
           front: this.data.IDN,
-          behind: this.data.IDS,
+          behind: this.data.IDS,          
           who: '2',
           updateStep: "/pages/upload_file/company_info"
         }).then(data => {
@@ -96,7 +96,7 @@ Page({
     let that = this;
         ajax('uploadPicture', {
           front: this.data.IDN,
-          behind: this.data.IDS,
+          behind: this.data.IDS,         
           who: '0',
           updateStep: "/pages/upload_file/upload_idcard_controller"
         }).then(data => {

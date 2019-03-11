@@ -5,7 +5,7 @@
   <view class='heading'>审核中</view>
   <view class='paragraph'>
     <text class='align_c'>温馨提示</text>
-    <text>您的贷款申请已经受理，我们将尽快进行审核。你可以在“我的”查询审核状态和批复结果</text>
+    <text>您的贷款合同已签署，将在资金方审批通过后进行放款，您可以在“我的”相应列表查询审核状态及放款结果。</text>
   </view>
 
   <view class='gap'></view>

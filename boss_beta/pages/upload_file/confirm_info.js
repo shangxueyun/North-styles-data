@@ -27,11 +27,12 @@ Page({
   },
   //跳转到人脸识别
   to_RealizeFace: function () {
+    let info = this.data.info
+    info.updateStep = "/pages/upload_file/realize_face"
     ajax('companyModify', {
       companyInfo: this.data.info,
-      updateStep: "/pages/upload_file/realize_face"
     }).then(data => {
-      wx.navigateTo({ //关闭当前页面，跳转到应用内的某个页面
+      wx.reLaunch({ //关闭当前页面，跳转到应用内的某个页面
         url: "/pages/upload_file/realize_face"
       })
     })

@@ -11,8 +11,8 @@ Page({
     legalPersonName: '',
     legalPersonId: '',
     legalPersonPhone: '',
-    address: ''
-
+    address: '',
+    phoneNum:'021-68888083',
   },
 
   //点击打电话

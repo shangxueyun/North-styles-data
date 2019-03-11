@@ -11,6 +11,7 @@
 
 <view class='whiteBox_border'>
   <view class='heading_gray'>本次申请贷款</view>
+  <view  decode="{{true}}" class='hint {{hintDisplay}}'>{{hintVlaue}}</view>
   <view class='list'>
     <view class='item'>
       <view class='item_key'>

@@ -10,7 +10,7 @@ Page({
   //跳转到：下一个状态
   to_StateOfCheck_Fail: function ()
   {
-    wx.redirectTo({ //关闭当前页面，跳转到应用内的某个页面
+    wx.reLaunch({ //关闭当前页面，跳转到应用内的某个页面
       url: "/pages/login/login"
     })
   },

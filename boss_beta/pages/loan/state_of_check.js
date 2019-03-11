@@ -11,7 +11,7 @@ Page({
   to_Home:function()
   {
     wx.switchTab({
-      url: '/pages/index/index',
+      url: '/pages/mine/mine',
     })
   },
   /**

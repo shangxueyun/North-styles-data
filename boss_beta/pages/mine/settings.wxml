@@ -15,7 +15,7 @@
       <view class='item_val arrow'></view>
     </view>
     <view class='item Logout' hover-class='item_hover' bindtap='showPoper'>
-      <view class='item_key'>安全退出</view>
+      <view class='item_key red'>安全退出</view>
     </view>
   </view>
 </view>

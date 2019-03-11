@@ -38,7 +38,7 @@ Page({
         phoneNo: that.data.phone,
         bizType: 'RESET_PASSWORD'
       }).then(data => {
-        console.log(data)
+
       })
       that.setData({
         getCheckCode_txt: that.data.time + "秒重发"

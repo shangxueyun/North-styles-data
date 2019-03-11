@@ -16,6 +16,7 @@ Page({
     height: "",
     canvas_top: "",
     canvas_left: "",
+    canvaspoperHide_1:"",
     resURL: "",
     MAX_SIZE: 300,
     compress_pictures:"",
@@ -30,7 +31,8 @@ Page({
       sourceType: ['album', 'camera'],
       success(res) {
         that.setData({
-          resURL: res
+          resURL: res,
+          canvaspoperHide_1: ""
         })
         wx.getFileSystemManager().readFile({
           filePath: res.tempFilePaths[0], //选择图片返回的相对路径
@@ -139,7 +141,8 @@ Page({
         updateStep: "/pages/upload_file/sign_contract"
       }).then(data => {
         this.setData({
-          poperHide_1: false
+          poperHide_1: false,
+          canvaspoperHide_1: "Hides"
         })
       })
     }

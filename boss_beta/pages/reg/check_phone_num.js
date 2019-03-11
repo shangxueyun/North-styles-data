@@ -49,7 +49,7 @@ Page({
       phoneNo: that.data.phone,
       bizType: 'REGISTER'
     }, true).then(data => {
-      console.log(data)
+      //console.log(data)
     })
     that.setData({
       getCheckCode_txt: that.data.time + "秒重发"
@@ -137,6 +137,7 @@ Page({
             if (data.token) {
               wx.setStorageSync('token', data.token);
               wx.setStorageSync('phone', phone);
+              wx.setStorageSync('memberId', data.memberId);
             }
             this.showPoper()
           })
@@ -147,7 +148,7 @@ Page({
   //跳转至：上传证件资料，upload_file/upload_file
   to_UploadFile:function()
   {
-    wx.navigateTo({
+    wx.reLaunch({
       url: "/pages/upload_file/upload_file"
     })
   },

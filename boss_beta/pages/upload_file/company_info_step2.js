@@ -25,7 +25,7 @@ Page({
       registerAddress: '',
       unitType: '',
       entStatus: '',
-      email: ''
+      email: '',
     },
   },
   //省市区 onchange
@@ -83,13 +83,17 @@ Page({
   },
   //跳转到：信息确认，法定代表人
   to_ConfirmInfo: function () {
+    let obj = this.data.info;
+    obj.updateStep = '/pages/upload_file/confirm_info'
+    this.setData({
+      info: obj
+    })
     ajax('companyModify', {
       companyInfo: Object.assign({}, this.data.info, {
         licenseAddress: this.data.adress,
         licenseCity: this.data.region.toString(),
-        legalPersonPhone: wx.getStorageSync('phone')
+        legalPersonPhone: wx.getStorageSync('phone'),
       }),
-      updateStep: "/pages/upload_file/confirm_info"
     }).then(data => {
       wx.navigateTo({
         url: "confirm_info"
@@ -102,7 +106,6 @@ Page({
   onLoad: function (options) {
     let res = {};
     for(let i in this.data.info) {
-      console.log(options.email)
       if (options[i] !== 'null') {
         if (i === 'regCap' || i === 'subContribution') {
           res[i] = parseFloat(options[i])

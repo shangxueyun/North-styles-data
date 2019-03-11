@@ -10,25 +10,15 @@
       <view class='item_in2 gray'>申请贷款金额</view>
       <view class='item_in2'>{{loanAmt}}元</view>
     </view>
-    <view class='item'>
-      <view class='item_in2 gray'>放款金额</view>
-      <view class='item_in2'>0元</view>
-    </view>
+
     <view class='item'>
       <view class='item_in2 gray'>未通过金额</view>
       <view class='item_in2'>{{loanAmt}}元</view>
     </view>
-    <view class='item'>
-      <view class='item_in2 gray'>贷款期限</view>
-      <view class='item_in2'>{{loanTerm}}天</view>
-    </view>
+
     <view class='item'>
       <view class='item_in2 gray'>发起申请日</view>
       <view class='item_in2'>{{loanApplyDate}}</view>
-    </view>
-    <view class='item'>
-      <view class='item_in2 gray'>贷款起始日</view>
-      <view class='item_in2'>{{outDate}}</view>
     </view>
   </view>
 </view>

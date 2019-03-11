@@ -20,7 +20,7 @@
   <view class='list02'>
     <view class='item' hover-class='item_hover'>
       <view class='innerbox' hover-class='item_hover' wx:if="{{!IDN}}" id="IDN" bindtap="onImg">
-        <image src='http://jobnotes.cn/bmimg/id_front.png' mode='widthFix'></image>
+        <image src='https://china-mz.cn/bmimg/id_front.png' mode='widthFix'></image>
         <icon class='icon_camera'></icon>
         <text>上传身份证正面</text>
       </view>
@@ -31,7 +31,7 @@
     </view>
     <view class='item' hover-class='item_hover'>
       <view class='innerbox' hover-class='item_hover' wx:if="{{!IDS}}" id="IDS" bindtap="onImg">
-        <image src='http://jobnotes.cn/bmimg/id_back.png' mode='widthFix'></image>
+        <image src='https://china-mz.cn/bmimg/id_back.png' mode='widthFix'></image>
         <text>上传身份证背面</text>
         <icon class='icon_camera'></icon>
       </view>
@@ -48,19 +48,19 @@
   <view class='borderBox'>
     <view class='list02'>
       <view class='item_4'>
-        <image src='http://jobnotes.cn/bmimg/idcard_1.png' mode='widthFix'></image>
+        <image src='https://china-mz.cn/bmimg/idcard_1.png' mode='widthFix'></image>
         <text>标准</text>
       </view>
       <view class='item_4'>
-        <image src='http://jobnotes.cn/bmimg/idcard_2.png' mode='widthFix'></image>
+        <image src='https://china-mz.cn/bmimg/idcard_2.png' mode='widthFix'></image>
         <text>边框缺失</text>
       </view>
       <view class='item_4'>
-        <image src='http://jobnotes.cn/bmimg/idcard_3.png' mode='widthFix'></image>
+        <image src='https://china-mz.cn/bmimg/idcard_3.png' mode='widthFix'></image>
         <text>照片模糊</text>
       </view>
       <view class='item_4'>
-        <image src='http://jobnotes.cn/bmimg/idcard_4.png' mode='widthFix'></image>
+        <image src='https://china-mz.cn/bmimg/idcard_4.png' mode='widthFix'></image>
         <text>闪光强烈</text>
       </view>
     </view>

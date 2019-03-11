@@ -123,12 +123,85 @@ const getUrlData = function (obj) {
   return res.substring(1)
 }
 
+//全局字符串位数处理
+const stringDispose = (str)=>{
+  let strLe = str.length,newstr = "",fig = parseInt(strLe/3),g=3,arr = str.split("").reverse();
+  if(str.indexOf(".")>=0)
+  {
+      arr = (str.substr(0,str.indexOf("."))).split("").reverse();
+      var arr1 = (str.substr(str.indexOf("."),str.length)).split("").reverse()
+      for(var s = 0;s<fig;s++)
+      {
+          arr.forEach((v,i)=>{
+          if(i==g)
+          {
+              arr.splice(g,0," ")            
+          }
+          });
+          g = g +4
+      }
+      arr = arr.reverse();
+      var newarr1 = arr1.reverse();
+      arr = arr.concat(newarr1)
+  }else
+  {
+      for(var s = 0;s<fig;s++)
+      {
+          arr.forEach((v,i)=>{
+          if(i==g)
+          {
+              arr.splice(g,0," ")            
+          }
+          });
+          g = g +4   
+      }
+      arr = arr.reverse()
+  }
+  newstr = arr.toString().replace(/,/g,"").replace(/ /g,",")
+  return newstr
+}
 
+const FileLook = (loanNo,type) =>{
+  let data = "https://china-mz.cn/" + loanNo + "-" + type + ".pdf";
+  wx.getSystemInfo({
+    success: function (res) {
+      if(res.system.indexOf("iOS")>=0)
+      {
+        wx.navigateTo({
+          url: '/pages/upload_file/sign?url=' +data
+        })
+      }
+      else
+      {
+        wx.showLoading({title: '加载中...',mask: true})
+        wx.downloadFile({
+          url: data,
+          success(res) {
+            let filePath = res.tempFilePath;
+            wx.showLoading({title: '文件打开中...',mask: true})
+            wx.openDocument({
+              filePath: filePath,
+              fileType: "pdf",
+              success(res) {
+                wx.hideLoading()
+              },
+              fail:function(res){
+                wx.hideLoading()
+              }
+            })
+          }
+        })
+      }
+    }
+  })
+}
 
 module.exports = {
   formatTime: formatTime,
   ajax: ajax,
   isBtnClick: isBtnClick,
   showModal: showModal,
-  getUrlData: getUrlData
+  getUrlData: getUrlData,
+  stringDispose:stringDispose,
+  FileLook:FileLook,
 }

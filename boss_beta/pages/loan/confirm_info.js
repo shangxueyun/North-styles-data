@@ -64,9 +64,10 @@ Page({
   //跳转到：审核中
   to_StateOfCheck:function()
   {
+    let applyAmount = this.data.applyAmount.replace("￥","").replace(/,/g,"");
     ajax('loanApply', {
       productCode: this.data.productCode,
-      applyAmount: parseFloat(this.data.applyAmount),
+      applyAmount: applyAmount,
       verifyCode: this.data.verifyCode,
       contractNo: new Date().getTime()
     }).then(data => {
@@ -83,7 +84,7 @@ Page({
       phoneNo: that.data.phone,
       bizType: 'LOAN_APPLY'
     }).then(data => {
-      console.log(data)
+
     })
     that.init(that);          //这步很重要，没有这步，重复点击会出现多个定时器
     that.setData({
@@ -154,10 +155,10 @@ Page({
     let returnAmount = applyAmount_ * options.loanRate / 100 / (options.unit === '月' ? 12 : options.unit === 'YEAR' ? 1 : options.unit === 'DAY' ? 365 : 0) * options.num ;
     let phone = wx.getStorageSync('phone');
     this.setData({
-      applyAmount: options.applyAmount,
+      applyAmount: options.applyAmount.replace("￥",""),
       date: options.num + options.unit,
       rate: options.loanRate,
-      returnAmount: (parseFloat(returnAmount.toFixed(2)) + parseFloat(applyAmount_)),
+      returnAmount: (Number(returnAmount) + Number(applyAmount_)).toFixed(2),
       companyName: wx.getStorageSync('loanMes').companyName,
       legalPersonName: wx.getStorageSync('loanMes').legalPersonName,
       phone: phone,

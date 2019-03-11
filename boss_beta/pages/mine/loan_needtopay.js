@@ -36,12 +36,12 @@ Page({
   },
   to_LoanNeedToPay_Detail_expire: function (e) {
     wx.navigateTo({
-      url: 'loan_needtopay_detail_expire?id=' + e.currentTarget.id,
+      url: 'loan_needtopay_detail_expire?id=' + e.currentTarget.id+"&interest="+this.arrFor(this.data.datas,e.currentTarget.dataset.id).amount,
     })
   },
   to_LoanNeedToPay_Detail_overdue: function (e) {
     wx.navigateTo({
-      url: 'loan_needtopay_detail_overdue?id=' + e.currentTarget.id,
+      url: 'loan_needtopay_detail_expire?id=' + e.currentTarget.id+"&interest="+this.arrFor(this.data.datas,e.currentTarget.dataset.id).amount,
     })
   },
   /**
@@ -49,7 +49,10 @@ Page({
    */
   onLoad: function (options) {
     ajax('queryRepayPlan', {
+      orderType: 'LOAN',
       status: 'AR',
+      page: 1,
+      pageSize: 999
     }).then(data => {
       if(data){
         this.setData({
@@ -58,7 +61,10 @@ Page({
       }
     })
     ajax('queryRepayPlan', {
+      orderType: 'LOAN',
       status: 'RETL',
+      page: 1,
+      pageSize: 999
     }).then(data => {
       if(data){
         this.setData({
@@ -68,6 +74,20 @@ Page({
     })
   },
 
+
+  arrFor:function(arr,id){
+    let arr1
+    arr.forEach((v,i)=>{
+      for(var j in v)
+      {
+        if(v.id == id)
+        {
+          arr1 = v
+        }
+      }
+    })
+    return arr1
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

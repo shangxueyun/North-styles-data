@@ -3,7 +3,7 @@
 <view>
   <view class='topbox'>
     <view class='avatarbox'>
-      <image class='avatar' mode='scaleToFill' src='http://jobnotes.cn/bmimg/avatar.svg'/>
+      <image class='avatar' mode='scaleToFill' src='https://china-mz.cn/bmimg/avatar.svg'/>
     </view>
   </view>
 </view>
