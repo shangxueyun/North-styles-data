@@ -73,9 +73,9 @@ Page({
         }
         // wx.setStorageSync('token', data.token);
         // wx.setStorageSync('phone', that.data.phone);
-        // wx.switchTab({ //关闭当前页面，跳转到应用内的某个页面
-        //   url: "/pages/index/index"
-        // });
+        //   wx.switchTab({ //关闭当前页面，跳转到应用内的某个页面
+        //     url: "/pages/index/index"
+        //   });
       })
     }
     else {

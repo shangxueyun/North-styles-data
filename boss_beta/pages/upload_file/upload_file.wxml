@@ -109,3 +109,13 @@
 <view class='btnbox'>
   <button class='{{btnClass}}' hover-class='{{btnHoverClass}}' bindtap='to_UploadIdcard'>下一步</button>
 </view>
+
+<view class='poper {{poperHide_1}}'>
+  <view class='popbox'>
+    <view class='iconbox icon_tip_red'></view>
+    <text class='paragraph center'>{{hintMsg}}</text>
+    <view class='submitbox'>
+      <button class='btn' hover-class='btn_hover' bindtap='hintMsgF'>确定</button>
+    </view>
+  </view>
+</view>

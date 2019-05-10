@@ -1,2 +1,8 @@
 /* pages/upload_file/upload_idcard_controller.wxss */
 .img-show{height:34vmin}
+.poper .popbox {
+    bottom:calc((100vh - 40vmin) / 2);
+    }
+     .poperHideS{
+         display: none;
+     } 

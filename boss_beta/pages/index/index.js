@@ -37,7 +37,7 @@ Page({
     ajax('memberInfoQuery', {
     }).then(data => {
       let res = {};
-      if(data.creditAccountInfo.creditAmount==0)
+      if(Number(data.creditAccountInfo.creditAmount)==0)
       {
         this.setData({
           btnClass:"btnClass"
@@ -49,11 +49,11 @@ Page({
         this.setData({
           btnClass:""
         })
-        res.creditAmount = stringDispose(data.creditAccountInfo.creditAmount.toString()); 
+        res.creditAmount = stringDispose(Number(data.creditAccountInfo.creditAmount).toString()); 
       }
 
-      res.useAmount = stringDispose(data.creditAccountInfo.useAmount.toString());
-      res.canAmount = stringDispose((data.creditAccountInfo.creditAmount - data.creditAccountInfo.useAmount).toString());
+      res.useAmount = stringDispose(Number(data.creditAccountInfo.useAmount).toString());
+      res.canAmount = stringDispose((Number(data.creditAccountInfo.creditAmount) - Number(data.creditAccountInfo.useAmount)).toString());
       wx.setStorageSync('canAmount', res.canAmount)
       res.accountBalance = this.string(data.bankAccountInfo.accountBalance/100);
       res.freezeBalance = this.string(data.bankAccountInfo.freezeBalance/100);

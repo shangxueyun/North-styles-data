@@ -3,3 +3,9 @@ page {background:#fff;}
 .img-show-bg{margin: 2vmin}
 .img-show{width: 100%!important; height: 28vmin; margin: 0vmin;background:#efeff4; border-radius: 1.5vmin;margin-bottom:0vmin!important}
 .shut-btn{position: absolute; top: 1vmin; right:1vmin; width: 6vmin; height: 6vmin; font-size: 6vmin; text-align: center;color: #fff; background: red; border-radius: 6vmin; font-weight: bold;line-height: 6vmin}
+.poper .popbox {
+bottom:calc((100vh - 30vmin) / 2);
+}
+ .poperHideS{
+     display: none;
+ }   
