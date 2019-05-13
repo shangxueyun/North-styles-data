@@ -9,7 +9,7 @@
 
 <link rel="shortcut icon" href="webdoc/img/favicon.ico">
 <script src="webdoc/js/settime.js"></script>
-<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css?201903120900">
 <title>账户设置</title>
 <style>
 #loading_div{
@@ -138,7 +138,7 @@ hr{
 var reader = new FileReader();
 </script>
 <script type="module">
-		import AJAX from './webdoc/js/api.js'
+		import AJAX from './webdoc/js/api.js?201903140921'
 		window.onload = ()=>{
 			let status = window.location.search.replace("?","");
 			if(status == "true")
@@ -155,7 +155,7 @@ var reader = new FileReader();
 				},'application/json')
 				.then(function(response){
 				$(loading_div).hide()
-				let arr = ["账号","账户名称","银行编码","开户行","开户行所在省份","开户行所在城市","开户行支行名称","凭证信息"],
+				let arr = ["账号","账户名称","开户行","凭证信息"],
 					arr_data = [],HTML = "";
 					let obj = response,extention;//对象数据
 					for(var i in obj)
@@ -171,18 +171,7 @@ var reader = new FileReader();
 								$(".gapBoxV").hide();
 								$(".hr").css("marginTop","1.5rem")
 							}
-							else if(i=="bankCode")
-							arr_data.push(obj[i])
 							else if(i=="bankName")
-							arr_data.push(obj[i])
-							else if(i=="province")
-							arr_data.push(obj[i])
-							else if(i=="bankNo")
-							{
-								if(obj[i] != null)
-								arr_data.push(obj[i])
-							}
-							else if(i=="branchName")
 							arr_data.push(obj[i])
 							else if(i=="extention")
 							extention = obj[i]
@@ -211,9 +200,9 @@ var reader = new FileReader();
 
 					$(list_form).empty();
 					$(list_form).append(HTML);
-					$(preview).click(fn=>{
+					$(preview).one("click",fn=>{
 						let url = fn.currentTarget.attributes.data_img.value;
-						AJAX.customer_informationF(url,"","png")
+						AJAX.customer_informationF(url,"","png","preview")
 					});
 			}, err => {
 				$(loading_div).hide()

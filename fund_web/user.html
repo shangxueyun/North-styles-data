@@ -52,7 +52,7 @@
 }
 </style>
 <script type="module">
-    import AJAX from './webdoc/js/api.js'
+    import AJAX from './webdoc/js/api.js?201903120900'
     $(".managerName").text("用户："+sessionStorage.getItem("managerName"));
     $(".fundMemberName").text("机构："+sessionStorage.getItem("companyName"));
 
@@ -69,6 +69,7 @@
 				sessionStorage.removeItem("fundMemberId")
 			    sessionStorage.removeItem("managerName")
 				sessionStorage.removeItem("token")
+				window.localStorage.removeItem("iframe");
 				window.location.href = "index.html";
 			}else{
 				alert(response.responseMessage)
@@ -106,5 +107,6 @@
 		{
 			window.location.href = "./"
 		}
+		Status_select.value = window.location.search.replace("?","")
 	}
 </script>

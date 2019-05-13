@@ -7,10 +7,10 @@
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
 <link rel="shortcut icon" href="webdoc/img/favicon.ico">
-<script src="webdoc/js/settime.js"></script>
-<script src="webdoc/js/popbox.js"></script>
-<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-<link rel="stylesheet" type="text/css" href="./webdoc/css/pagination.css">
+<script src="webdoc/js/settime.js?201903120900"></script>
+<script src="webdoc/js/popbox.js?201903120900"></script>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css?201903120900">
+<link rel="stylesheet" type="text/css" href="./webdoc/css/pagination.css?201903120900">
 <title>合同管理</title>
 <style>
 #loading_div{
@@ -266,12 +266,12 @@ a{
 	<div class="loading"></div>
 </div>
 
-<script src="./webdoc/js/HTML.js"></script>
+<script src="./webdoc/js/HTML.js?201903120900"></script>
 <script>
 let GlobalData;
 </script>
 <script type="module">
-		import AJAX from './webdoc/js/api.js'
+		import AJAX from './webdoc/js/api.js??201903120900'
 		let pageS,numpage,popboxer,FileStr,numpageData,nextElementSibling,fig=0,fig1=0;
 		
 		(()=>{
@@ -340,8 +340,6 @@ let GlobalData;
 					let data = response.page.records,HTML = "";
 					GlobalData = data;
 					HtmlFunc(HTML,data);
-					checkbox_Func();
-
 					$(".ContractClick").click(function(event){
 						nextElementSibling = event.currentTarget.nextElementSibling
 						event.stopPropagation();
@@ -359,23 +357,24 @@ let GlobalData;
 							if(fig%2==0)
 							{
 								let HTML = "",dataS = sort_(GlobalData,"reverse","gmtModified")
-								HtmlFunc(HTML,dataS);
+								funcDom(HTML,dataS);
 							}else{
 								let HTML = "",dataS = sort_(GlobalData,"sort","gmtModified")
-								HtmlFunc(HTML,dataS);
+								funcDom(HTML,dataS);
 							}
 						}else if(e.target.id=="id02"){
 							fig1= fig1 + 1
 							if(fig1%2==0)
 							{
 								let HTML = "",dataS = signStatus(GlobalData)
-								HtmlFunc(HTML,dataS);
+								funcDom(HTML,dataS);
 							}else{
 								let HTML = "",dataS = signStatus(GlobalData,true)
-								HtmlFunc(HTML,dataS);
+								funcDom(HTML,dataS);
 							}
 						}
 					});
+					checkbox_Func();
 
 				}else{
 					alert(response.message)
@@ -393,6 +392,16 @@ let GlobalData;
 			else
 			PageFUNC(null,value);
 		})
+
+		function funcDom(HTML,dataS){
+			HtmlFunc(HTML,dataS);
+			checkbox_Func();
+			$(".ContractClick").click(function(event){
+				nextElementSibling = event.currentTarget.nextElementSibling
+				event.stopPropagation();
+				$(nextElementSibling).show();
+			})
+		}
 
 		$(btn_upload).click(fn=>{
 			$(".icon_false").hide();
@@ -498,6 +507,7 @@ let GlobalData;
 		}
 
 		function HtmlFunc(HTML,data){
+			debugger
 			HTML += "<tr><th><a class='checkbox_'><input id='checkbox_F' type='checkbox' /></a></th><th>合同编号</th><th>合同主体</th><th>合同金额(元)</th><th><i id='id01' class='icon_filter_down'>处理日期</i></th>";
 			HTML += "<th><i id='id02' class='icon_filter_down'>状态</i></th><th>操作</th></tr>";
 			data.forEach((v,i)=>{

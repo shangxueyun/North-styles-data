@@ -1,7 +1,7 @@
 
-import './highlight.min.js';
-import './jquery-3.3.1.min.js';
-import './jquery.pagination.js';
+import './highlight.min.js??201903120900';
+import './jquery-3.3.1.min.js??201903120900';
+import './jquery.pagination.js??201903120900';
 
 let serverUrl = 'http://47.99.170.54:9020/rest/'  //业务代码
 let serverUrlLogin = 'https://www.china-mz.cn/'//登录代码
@@ -13,7 +13,7 @@ export function AjaxAPI(url, type,data, config){
         $.ajax({
             url:serverUrl+url,
             type:type,
-            timeout:5000,
+            timeout:30000,
             async:true,
             beforeSend: function(xhr) {
                 xhr.withCredentials = true;
@@ -189,35 +189,39 @@ export function stringDispose(str){
     return newstr
 }
 
-export function customer_informationF(url,id,type){
-    let typeS,data;
-    $(loading_div).show();
-    if(type == "png")
-    typeS = "image/"
-    else
-    typeS = "application/"
-    var xhr = new XMLHttpRequest();    
-    xhr.open("get", url+id+'.'+type, true);
-    xhr.responseType = "blob";
-    xhr.onload = function() {
-        if (this.status == 200) {
-            var blob=new Blob([this.response],{type:typeS+type}); 
-            const url = window.URL || window.webkitURL || window.moxURL
-            const downloadHref = url.createObjectURL(blob)
-            let downloadLink = document.createElement('a')
-            downloadLink.href = downloadHref
-            downloadLink.download = id+'.'+type;
-            // 触发点击事件执行下载
-            $(loading_div).hide()
-            reader.onload = function (e) {
-               data = e.currentTarget.result.replace(/[\r\n]/g,"");
-               window.localStorage.setItem("iframe",data);
-               window.location.href = "iframeFile.html"
+export function customer_informationF(url,id,type,str){
+        let typeS,data,newWindow = window.open('loading.html');
+        $(loading_div).show();
+        if(type == "png")
+        typeS = "image/"
+        else
+        typeS = "application/"
+        var xhr = new XMLHttpRequest();    
+        xhr.open("get", url+id+'.'+type, true);
+        xhr.responseType = "blob";
+        xhr.onload = function() {
+            if (this.status == 200) {
+                var blob=new Blob([this.response],{type:typeS+type}); 
+                const url = window.URL || window.webkitURL || window.moxURL
+                const downloadHref = url.createObjectURL(blob)
+                let downloadLink = document.createElement('a')
+                downloadLink.href = downloadHref
+                downloadLink.download = id+'.'+type;
+                // 触发点击事件执行下载
+                $(loading_div).hide();
+                reader.onload = function (e) {
+                    data = e.currentTarget.result.replace(/[\r\n]/g,"");
+                    window.localStorage.setItem("iframe",data);
+                    setTimeout(()=>{
+                        window.location.reload();
+                        newWindow.location = "iframeFile.html?2019";
+                    },10);
+                }
+                reader.readAsDataURL(blob);
             }
-            reader.readAsDataURL(blob);
-        }
-    };
-    xhr.send();
+        };
+        xhr.send();
+
 }
 
 export default{

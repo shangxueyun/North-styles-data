@@ -129,7 +129,7 @@ margin:0;padding:0;border:0
 	padding: 0 1.5rem 0 1.5rem;
 }
 .right_c_login{
-    width: 80%;
+    width: 88%;
     margin: 0 auto;
     text-align: right;
 }
@@ -228,6 +228,20 @@ margin:0;padding:0;border:0
 	}
 }
 </style>
+<!--[if lte IE 9]>
+	<style>
+		.main{
+			display:none;
+		}
+	</style>
+	IE9以及IE9以上版本可识别
+	<!--[else]>
+			<style>
+				.main{
+					display:black;
+				}
+			</style>
+		<![endif]-->
 </head>
 
 <body>
@@ -263,7 +277,7 @@ margin:0;padding:0;border:0
 </body>
     <script src="webdoc/js/jquery-3.3.1.min.js"></script>
     <script type="module">
-    import AJAX from './webdoc/js/api.js'
+    import AJAX from './webdoc/js/api.js?201903120900'
     
 	$(password).keydown(fn=>{
 
@@ -316,5 +330,10 @@ margin:0;padding:0;border:0
             //alert("服务器内部错误")
         })
     }
+    window.onresize = fn =>{
+		let width = $(".section").height();
+		if(width<508)
+		$(".section").css("height","508px")
+	}
     </script>
 </html>

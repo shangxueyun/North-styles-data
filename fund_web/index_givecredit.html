@@ -7,11 +7,11 @@
 <meta http-equiv="cache-control" content="no-cache"/>
 <meta name="robots" content="all" />
 
-<script src="webdoc/js/settime.js"></script>
+<script src="webdoc/js/settime.js?201903120900"></script>
 <link rel="shortcut icon" href="webdoc/img/favicon.ico">
-<script src="webdoc/js/popbox.js"></script>
-<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-<link rel="stylesheet" type="text/css" href="./webdoc/css/pagination.css">
+<script src="webdoc/js/popbox.js?201903120900"></script>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css?201903120900">
+<link rel="stylesheet" type="text/css" href="./webdoc/css/pagination.css?201903120900">
 <title>我的工作台 - 授信批复</title>
 <style>
 #loading_div{
@@ -130,8 +130,8 @@
 			<hr>
 			<div class="btnbox">
 				<a href="javascript:void(0);" class="btn_hollow" id="customer_information">客户信息详情</a>
-				<a href="javascript:void(0);" class="btn_hollow">发票数据分析报告</a>
-				<a href="javascript:void(0);" class="btn_hollow">相关证照</a>
+				<a href="javascript:void(0);" class="btn_hollow" id="invoice_Data">发票数据分析报告</a>
+				<a href="javascript:void(0);" class="btn_hollow" id="Relevant_certificates">相关证照</a>
 			</div>
 			<div class="gapBoxH">
 				<div class="tablebox">
@@ -204,16 +204,16 @@
 	<div class="loading"></div>
 </div>
 
-<script src="./webdoc/js/HTML.js"></script>
+<script src="./webdoc/js/HTML.js?201903120900"></script>
 <script>
 var reader = new FileReader();
 </script>
 <script type="module">
-		import AJAX from './webdoc/js/api.js'
+		import AJAX from './webdoc/js/api.js?201903141144'
 		window.onload = fn =>{
 			Status_select.value = window.location.search.replace("?","")
 		}
-		let pageS,numpage,popboxer,status,parameter = {},numpageData
+		let pageS,numpage,popboxer,status,parameter = {},numpageData,ajaxUrl = "http://47.99.170.54:9020/rest/companyMember/";
 
 		(()=>{
 			status = window.location.search.replace("?","")
@@ -298,29 +298,7 @@ var reader = new FileReader();
 					$(dataList_ELE).empty();
 					$(dataList_ELE).append(HTML)
 
-					$(customer_information).click(fn=>{
-						let checkbox_ChengArr = document.getElementsByClassName("checkbox_Cheng"),arr = [],ele;
-						for(var i in checkbox_ChengArr)
-						{
-							if(checkbox_ChengArr[i].checked == true)
-							{
-
-								arr.push(checkbox_ChengArr[i])
-								if(arr.length==1)
-								{
-									ele = checkbox_ChengArr[i]
-								}
-							}
-						}
-						if(arr.length>1)
-						{
-							alert("不能选择多条记录")
-						}else if(arr.length==0){
-							alert("请选择一条记录进行操作")
-						}else{
-							AJAX.customer_informationF("http://47.99.170.54:9020/rest/companyMember/tCompanyMember_photo/",arr[0].attributes.data_memberid.value,"pdf")
-						}
-					})
+					DDCC();
 					checkbox_Func();
 					$(".AUDIT").click(fn=>{
 						parameter.companyName = fn.currentTarget.attributes.data_name.value;
@@ -428,6 +406,72 @@ var reader = new FileReader();
 				})
 			});
 		}
+
+		function checkbox_ChengS(){
+			let checkbox_ChengArr = document.getElementsByClassName("checkbox_Cheng"),arr = [],ele;
+			for(var i in checkbox_ChengArr)
+			{
+				if(checkbox_ChengArr[i].checked == true)
+				{
+
+					arr.push(checkbox_ChengArr[i])
+					if(arr.length==1)
+					{
+						ele = checkbox_ChengArr[i]
+					}
+				}
+			}
+			if(arr.length>1)
+			{
+				DDCC()
+				alert("不能选择多条记录")
+			}else if(arr.length==0){
+				DDCC()
+				alert("请选择一条记录进行操作")
+			}else{
+				return arr[0].attributes.data_memberid.value;
+			}
+		}
+
+		function DDCC(){
+			$(customer_information).one("click",fn=>{
+				let str = checkbox_ChengS();
+				if(str)
+				AJAX.customer_informationF(ajaxUrl+"tCompanyMember_photo/",str,"pdf","customer_information")
+			});
+			$(Relevant_certificates).one("click",fn=>{
+				let str = checkbox_ChengS();
+				if(str)
+				photoImgs("companyMember/tCompanyMember_photo2/"+str)
+			});
+			$(invoice_Data).one("click",fn=>{
+				let str = checkbox_ChengS();
+				if(str)
+				AJAX.customer_informationF(ajaxUrl+"getInvoiceReportData/",str,"pdf","invoice_Data")
+			});
+		}
+
+		function photoImgs(url,str){
+			$(loading_div).show()
+			let newWindow = window.open('loading.html');
+			AJAX.AjaxAPI(url,'get',null,'application/json')
+            .then(function(response){
+            $(loading_div).hide();
+				if(response.code=="0"){
+					window.localStorage.setItem("iframe",JSON.stringify(response));
+					setTimeout(()=>{
+                        window.location.reload();
+                        newWindow.location = "iframeFile.html?2019";
+                    },10);
+				}else{
+					alert(response.message)
+				}
+			}, err => {
+				$(loading_div).hide()
+				alert("请求失败")
+			})
+		}
+
 		$(updateCreditAmountinput).keyup(fn=>{
 			let arr = ["个","十","百","千","万","十万","百万","千万","亿","十亿","百亿","千亿"];
 			$(".updateCreditAmountspan").text(arr[fn.currentTarget.value.length-1]);

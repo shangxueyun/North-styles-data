@@ -8,6 +8,9 @@
         width: 100%;
         height: 100%;
     }
+    img{
+        width: 700;
+    }
 
 </style>
 
@@ -16,7 +19,21 @@
     <script>
         window.onload = fn =>{
             var iframe = document.getElementById("iframe")
-            iframe.src = window.localStorage.getItem("iframe")
+            let images = window.localStorage.getItem("iframe")
+            if(images.indexOf('images"')>0)
+            {
+                iframe.style.display = "none"
+                let imagesArr = JSON.parse(images)
+                imagesArr.images.forEach((v,i)=>{
+                    let img = new Image;
+                    img.src = v;
+                    document.body.append(img)
+                    document.body.append(document.createElement("br"))
+                });
+            }else{
+                iframe.src = window.localStorage.getItem("iframe")
+                iframe.style.display = "block"
+            }
         }
     </script>
 </body>
