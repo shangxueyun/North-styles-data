@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="format-detection" content="telephone=no" />
-<meta http-equiv="cache-control" content="no-cache"/>
-<meta name="robots" content="all" />
 <link rel="shortcut icon" href="webdoc/img/favicon.ico">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires"  content="0">
 
-<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-<title>溟宗供应链</title>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css?201903120900">
+<title>融资企业管理后台</title>
 </head>
 <style type="text/css">
 	._div{
@@ -176,7 +176,8 @@
 					<p>
 						<!--<a class="button btn_hollow_2" href="javascript:void(0);" onclick="history.back(-1);return false;">取消</a>-->
 						<!--<a class="button btn_block_2" href="javascript:void(0);">下一步</a>-->
-						<input id="input-button" value='下一步' type="submit"/>
+						<input class="input-button" value='上一步' onclick="window.location.href='bankaccount_opening_step2.html'" type="submit"/>
+						<input id="input-button" class="input-button" value='下一步' type="submit"/>
 					</p>
 				</li>
 			</ul>
@@ -197,17 +198,17 @@
 </body>
 </html>
 <script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
-<script type="text/javascript" src="webdoc/js/home.js" ></script>
-<script type="text/javascript" src="webdoc/js/BANK_CODE.js" ></script>
+<script type="text/javascript" src="webdoc/js/home.js?201903120900" ></script>
+<script type="text/javascript" src="webdoc/js/BANK_CODE.js?201903120900" ></script>
 <script>
 var BANK_CARD;
 </script>
-<script type="text/javascript" src="webdoc/js/bankaccount_opening_step3.js" ></script>
+<script type="text/javascript" src="webdoc/js/bankaccount_opening_step3.js?201903211436" ></script>
 <script  type="module">
 		
-import AJAX from './webdoc/js/api.js';
+import AJAX from './webdoc/js/api.js?201903120900';
 
-(function(){
+(()=>{
 	$(loading_div).show()
 	let data = JSON.parse(sessionStorage.data)
 	data.bizContent.queryContentList = ["BANK_CARD"]
@@ -242,12 +243,13 @@ import AJAX from './webdoc/js/api.js';
 })()
 </script>
 <style>
-	#input-button{
-		width:5.5rem;
-		height:2rem !important;
+	.input-button{
+		width: 88px;
+		height: 32px !important;
 		border: 0;
 		background: #2d3f81;
 		color: #FFFFFF;
-		border-radius:3px;	
+		border-radius:3px;
+		margin-right: 24px;
 	}
 </style>

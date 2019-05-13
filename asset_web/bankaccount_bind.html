@@ -4,15 +4,34 @@
 <meta charset="UTF-8">
 <meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="format-detection" content="telephone=no" />
-<meta http-equiv="cache-control" content="no-cache"/>
-<meta name="robots" content="all" />
 <link rel="shortcut icon" href="webdoc/img/favicon.ico">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires"  content="0">
 
-<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-<title>溟宗供应链</title>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css?201903120900">
+<title>融资企业管理后台</title>
 </head>
-
+<style>
+#loading_div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 111;
+}
+.loading {
+	top: 50%;
+}
+.loading:before {
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 2px solid #fff;
+	border-top: 2px solid rgba(0,0,0,.1);
+}
+</style>
 <body>
 <section class="header">
 	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
@@ -65,15 +84,36 @@
 		</div>
 	</div>
 </section>
+<div id="loading_div" style="display: none;">
+	<div class="loading"></div>
+</div>
 </body>
 </html>
-<script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js" ></script>
-<script type="text/javascript" src="webdoc/js/home.js" ></script>
-<script type="text/javascript">
-	let resultData = JSON.parse(sessionStorage.getItem("result"));
-	var _bankCardInfo=String_clear("Object",resultData.bizData.bankCardInfo);
-	$(".pbox").find("em").eq(0).html(_bankCardInfo.accountName)
-	$(".pbox").find("em").eq(1).html(_bankCardInfo.accountNo)
-	$(".pbox").find("em").eq(2).html(_bankCardInfo.bankName+_bankCardInfo.branchName)
-	$(".pbox").find("em").eq(3).html(_bankCardInfo.bankNo)
+<script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js?201903120900" ></script>
+<script type="text/javascript" src="webdoc/js/home.js?201903120900" ></script>
+<script  type="module">
+
+	import AJAX from './webdoc/js/api.js?201903251523';
+
+	$(loading_div).show()
+	let data = JSON.parse(sessionStorage.data)
+	data.bizContent.queryContentList = ["BANK_CARD"]
+	AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
+		$(loading_div).hide()
+		if(result.requestStatus=="SUCCESS"){
+			let bankCardInfo = result.bizData.bankCardInfo;
+			$(".pbox").find("em").eq(0).html(bankCardInfo.accountName)
+			$(".pbox").find("em").eq(1).html(bankCardInfo.accountNo)
+			$(".pbox").find("em").eq(2).html(bankCardInfo.bankName+bankCardInfo.branchName)
+			$(".pbox").find("em").eq(3).html(bankCardInfo.bankNo)
+		}else{
+			$(loading_div).hide()
+			alert(result.returnMessage)
+		}
+	}, err => {
+		$(loading_div).hide()
+		alert("请求失败")
+	})
+	.catch((error) => {
+	})
 </script>

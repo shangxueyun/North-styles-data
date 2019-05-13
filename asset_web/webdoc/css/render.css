@@ -262,6 +262,9 @@ not supported by any browser */
 input[type="file"]{width:4.5rem}
 .err-tipBox{display: flex;align-items: center;display: none;}
 .err-tipBox i{color: #f03 !important}
+.innerBox i.open:before,
+.invoicebox .item01 i.close_eye:before {color:#989898;font-size:1.2rem;vertical-align:middle;margin-left:.5rem;cursor:pointer;display:inline-block;}
+.innerBox i.open:before {content:"\e909";}
 @media screen and (min-width:0) and (max-width:567px) {}
 @media screen and (min-width:568px) and (max-width:768px) {}
 @media screen and (min-width:769px) and (max-width:1024px) {

@@ -1,34 +1,27 @@
 //提现查询调会员信息资金账户信息
+let bizData
 function _queryAcount(){
-    var _data = {
-        "service": _service(),
-        "version": _version(),
-        "partnerId": _partnerId(),
-        "bizContent":{
-            "requestNo":_requestNo(),
-            "requestTime":formateDateAndTimeToString(),
-            "inputCharset":'utf-8',
-            "signType":'RSA',
-            "sign":'sign',
-            "token":window.sessionStorage.getItem("token"),
-
-            "extension":null,
-        }
-    }
+	let data = JSON.parse(sessionStorage.data)
+    data.bizContent.queryContentList = ["BANK_ACCOUNT"];
     $(loading_div).show();
     $.ajax({
         url:_url()+"/memberInfoQuery",
         type:"POST",
         async:true,
         contentType:'application/json',
-        data:JSON.stringify(_data),
+        data:JSON.stringify(data),
         success:function(result){
             $(loading_div).hide();
             if(result.bizData!=null){
                 var bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
                 if(bankAccountInfo!=null){
-                    $(".list_info").find("p").eq(0).text(bankAccountInfo.accountName);
-                    $(".list_info").find("p").eq(1).text(bankAccountInfo.accountNo);
+                    if(bankAccountInfo.status=='1'){
+                        $(".list_info").find("p").eq(0).text(bankAccountInfo.accountName);
+                        $(".list_info").find("p").eq(1).text(bankAccountInfo.accountNo);
+                    }else{
+                        $(".list_info").find("p").eq(0).text("-");
+                        $(".list_info").find("p").eq(1).text("-");
+                    }
                     if(bankAccountInfo.accountBalance=="-")
                     $(".list_info").find("p").eq(2).text(stringDispose(bankAccountInfo.accountBalance.toString())+' 元');
                     else
@@ -61,7 +54,8 @@ window.onload=function(){
 function withdrawal(){
     var withdrewBalance=$('#withdrewBalance').val();
     var _applyAmount=$('#_applyAmount').val();
-    if(_applyAmount>withdrewBalance){
+    if(Number(_applyAmount)<=0||Number(_applyAmount)>Number(withdrewBalance)){
+        alert`输入金额不正确，请输入正确金额`
         return;
     }
     var _data = {
@@ -75,7 +69,7 @@ function withdrawal(){
             "signType":'RSA',
             "sign":'sign',
             "token":window.sessionStorage.getItem("token"),
-            "applyAmount":$("#_applyAmount").val(),
+            "applyAmount":_applyAmount,
             "password":$('input[type="password"]').val(),
             "extension":null,
         }
@@ -92,8 +86,6 @@ function withdrawal(){
             if(result.requestStatus=="SUCCESS"){
                 window.location.href='bankaccount_transaction_record.html'
             }else{
-//		   	$('input[type="password"]').addClass("err_border")
-//		   	$(".warntxt").show()
                 alert(result.returnMessage)
             }
         }

@@ -1,16 +1,18 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="format-detection" content="telephone=no" />
-<meta http-equiv="cache-control" content="no-cache"/>
-<meta name="robots" content="all" />
-<link rel="shortcut icon" href="webdoc/img/favicon.ico">
+		<meta charset="UTF-8">
+		<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<link rel="shortcut icon" href="webdoc/img/favicon.ico">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires"  content="0">
 
-<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-<title>溟宗供应链</title>
+<link rel="stylesheet" type="text/css" href="webdoc/css/font-awesome.min.css?201903191709">
+<link rel="stylesheet" type="text/css" href="webdoc/css/jquery.magnify.css?201903191709">
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css?201903221146">
+<title>融资企业管理后台</title>
 </head>
 <style>
 #loading_div{
@@ -34,8 +36,49 @@
 .Box .innerBox {
     min-height: 13rem;
 }
+.input-button{
+	width: 88px;
+	height: 32px;
+	border: 0;
+	background: #2d3f81;
+	color: #FFFFFF;
+	border-radius:3px;
+	padding: 0;
+}
 </style>
-
+  <style>
+	.magnify-modal {
+	  box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.3);
+	}
+  
+	.magnify-header .magnify-toolbar {
+	  background-color: rgba(0, 0, 0, .5);
+	}
+  
+	.magnify-stage {
+	  top: 0;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  border-width: 0;
+	}
+  
+	.magnify-footer .magnify-toolbar {
+	  background-color: rgba(0, 0, 0, .5);
+	  border-top-left-radius: 5px;
+	  border-top-right-radius: 5px;
+	}
+  
+	.magnify-header,
+	.magnify-footer {
+	  pointer-events: none;
+	}
+  
+	.magnify-button {
+	  pointer-events: auto;
+	}
+  
+	</style>
 <body>
 <section class="header">
 	<a class="logo" href="home.html"><img src="webdoc/img/logo.svg"></a>
@@ -74,7 +117,7 @@
 			</ul>
 	
 			<h2 class="heading01"><span>企业信息</span><i class="important">必填项</i>
-				<a href="webdoc/js/kaihuliucheng.pdf"  target="_blank" style="font-size: 0.12rem;margin-left: 0.4rem;">点击下载开户流程图</a></h2>
+				<a href="webdoc/js/Account-opening-process.pdf"  target="_blank" style="font-size: 0.12rem;margin-left: 0.4rem;">点击查看开户流程图</a></h2>
 			<div class="innerBox">	
 				<ul class="list_info wide01 companyInfo_one">
 					<li>
@@ -130,6 +173,12 @@
 							<option value="2">三证合一</option>
 							<option value="1">三证三号</option>
 							<option value="0">个体工商户</option></select>
+						</p>
+					</li>
+					<li>
+						<span class="important">开户许可证核准号：</span>
+						<p><input autocomplete="off" class="input01" type="text" name="openLicCmii">
+							<i class="err-tipBox"><img src="webdoc/img/err.png"/><i>请输入必选项</i></i>
 						</p>
 					</li>
 					<li>
@@ -229,8 +278,8 @@
 						<span class="important">法定代表人身份证正反面影印件：</span>
 						<p>
 							<i><img src="webdoc/img/img.svg" /></i>
-							<a name="name_show_img" data-img="" href="javascript:void(0);" id="legalIdCardPhotoFrontUrl">查看图片</a>
-							<a name="name_show_img" data-img="" href="javascript:void(0);" id="legalIdCardPhotoBehindUrl">查看图片</a>
+							<a name="name_show_img" data-magnify="gallery" data-caption="身份证正面" id="legalIdCardPhotoFrontUrl">点击查看</a>
+							<a name="name_show_img" data-magnify="gallery" data-caption="身份证反面" id="legalIdCardPhotoBehindUrl">点击查看</a>
 						</p>
 					</li>
 				</ul>
@@ -241,7 +290,7 @@
 			<ul class="list_info wide01">
 				<li>
 					<span>&nbsp;</span>
-					<button class="button btn_block_2">下一步</button>
+					<button class="button btn_block_2 input-button">下一步</button>
 				</li>
 			</ul>
 		</div>
@@ -258,6 +307,11 @@
 </div>
 
 </body>
+<script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
+<script type="text/javascript" src="webdoc/js/home.js?201903221146" ></script>
+<script src="webdoc/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="webdoc/js/bankaccount_opening_step1.js?201903221146" ></script>
+<script src="webdoc/js/jquery.magnify.min.js"></script>
 </html>
 
 <script  type="module">
@@ -266,11 +320,9 @@
 //1. 触发显示图片功能元素，需要提前给该元素的属性赋值（data-img）
 //2. 所有触发显示图片功能元素的name属性值，必须一致
 //showImage(触发显示图片功能的元素name属性值，关闭图片弹框的ID值，图片弹框的ID值，图片容器的ID值)
-	var name_show_img = new ShowImage;
-	name_show_img.init("name_show_img","hideImg01","popbox_1","imgbox");
 
 
-	import AJAX from './webdoc/js/api.js';
+	import AJAX from './webdoc/js/api.js?201903120900';
 
 (function(){
 	$(loading_div).show()
@@ -281,12 +333,8 @@
 		if(result.requestStatus=="SUCCESS"){
 			//公司数据渲染
 			let _companyMember=result.bizData.companyInfo;
-			$("#taxNoPhoto").attr("data-img",_companyMember.licenseNoPhoto)
-			$("#organizationNoPhoto").attr("data-img",_companyMember.licenseNoPhoto)
-			$("#openingPermitPhoto").attr("data-img",_companyMember.openingPermitPhoto)
-			$("#legalIdCardPhotoFrontUrl").attr("data-img",_companyMember.legalIdCardPhotoFrontUrl)
-			$("#legalIdCardPhotoBehindUrl").attr("data-img",_companyMember.legalIdCardPhotoBehindUrl)	
-			$("#licenseNoPhoto").attr("data-img",_companyMember.licenseNoPhoto)
+			$("#legalIdCardPhotoFrontUrl").attr("href",_companyMember.legalIdCardPhotoFrontUrl)
+			$("#legalIdCardPhotoBehindUrl").attr("href",_companyMember.legalIdCardPhotoBehindUrl)	
 			$(".companyInfo_one").find("input").eq(0).val(_companyMember.companyName)
 			$(".companyInfo_one").find("input").eq(1).val(_companyMember.licenseNo)
 			$(".companyInfo_one").find("input").eq(2).val(_companyMember.organizationNo)
@@ -297,6 +345,7 @@
 			$("input[name='licenseAddress']").val(_companyMember.licenseAddress);
 			$("input[name='licenseExpire_date']").val(_companyMember.licenseExpireDate);
 			$("input[name='telephone']").val(_companyMember.telephone);
+			$("input[name='openLicCmii']").val(_companyMember.openLicCmii);
 		}else{
 			alert(result.returnMessage)
 		}
@@ -308,9 +357,24 @@
 		//alert("服务器内部错误")
 	})
 })()
-	
 </script>
-<script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
-<script src="webdoc/js/popimg.js" language="javascript"></script>
-<script type="text/javascript" src="webdoc/js/home.js" ></script>
-<script type="text/javascript" src="webdoc/js/bankaccount_opening_step1.js" ></script>
+<script>
+$('[data-magnify]').magnify({
+	headToolbar: [
+		'maximize',
+		'close'
+	],
+	footToolbar: [
+		'prev',
+		'next',
+		'zoomIn',
+		'zoomOut',
+		'fullscreen',
+		'actualSize',
+		'rotateLeft',
+		'rotateRight'
+	],
+	modalWidth:window.screen.width/2,
+	modalHeight:window.screen.height/2
+});
+</script>

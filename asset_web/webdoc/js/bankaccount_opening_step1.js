@@ -43,13 +43,32 @@ $(function () {
 			alert("企业联系电话输入不正确，请从新输入")
 		}
 	}
+	$("input[name='openLicCmii']").on("blur",function(e){
+		if($(this).val()!="")
+		{
+			$(this).siblings(".err-tipBox").hide();
+		}else
+		{
+			$(this).siblings(".err-tipBox").show();
+			$(this).focus();
+		}
+	});
 //  点击下一步
     $('.button').click(function () {
     	var _dataInfo={
     		"bizContent":{
     			"companyInfo":{}
     		}
-    	};
+		};
+
+		if($("input[name='openLicCmii']").val()=="")
+		{
+			$("input[name='openLicCmii']").siblings(".err-tipBox").show();
+			return
+		}
+		else
+		$("input[name='openLicCmii']").siblings(".err-tipBox").hide();
+
     	if($("input[name='telephone']").val()){
 			var d = {};
 			let str = false;
@@ -96,7 +115,7 @@ $(function () {
 				}
 			});
     	}else{
-    		$(".err-tipBox").show()
+    		$("input[name='telephone']").siblings(".err-tipBox").show()
     		return
     	}
     });

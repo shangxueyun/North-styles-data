@@ -4,13 +4,15 @@
 <meta charset="UTF-8">
 <meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="format-detection" content="telephone=no" />
-<meta http-equiv="cache-control" content="no-cache"/>
-<meta name="robots" content="all" />
 <link rel="shortcut icon" href="webdoc/img/favicon.ico">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires"  content="0">
 
-<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-<title>溟宗供应链</title>
+<link rel="stylesheet" type="text/css" href="webdoc/css/font-awesome.min.css?201903191709">
+<link rel="stylesheet" type="text/css" href="webdoc/css/jquery.magnify.css?201903191709">
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css?201903271602">
+<title>融资企业管理后台</title>
 </head>
 <style>
 #loading_div{
@@ -31,7 +33,45 @@
 	border: 2px solid #fff;
 	border-top: 2px solid rgba(0,0,0,.1);
 }
+.list_info p .input01[disabled='disabled']{
+	background: #eee;
+}
 </style>
+  <style>
+	.magnify-modal {
+	  box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.3);
+	}
+  
+	.magnify-header .magnify-toolbar {
+	  background-color: rgba(0, 0, 0, .5);
+	}
+  
+	.magnify-stage {
+	  top: 0;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  border-width: 0;
+	}
+  
+	.magnify-footer .magnify-toolbar {
+	  background-color: rgba(0, 0, 0, .5);
+	  border-top-left-radius: 5px;
+	  border-top-right-radius: 5px;
+	}
+  
+	.magnify-header,
+	.magnify-footer {
+	  pointer-events: none;
+	}
+  
+	.magnify-button {
+	  pointer-events: auto;
+	}
+	.companybox ul li {
+		padding: 0 1rem;
+	}
+	</style>
 
 <body style="height:100%">
 
@@ -44,7 +84,7 @@
 	<ul class="menu">
 		<li class="on"><a href="home.html"><p class="basedInfo">基本信息</p></a></li>
 		<li><a href="loan_info.html"><p class="loanInfo">贷款信息</p></a></li>
-		<li><a href="bankaccount.html"><p class="bankAccount">资金监管专户</p></a></li>
+		<li><a href="bankaccount.html?2019"><p class="bankAccount">资金监管专户</p></a></li>
 		<li><a href="invoice.html"><p class="invoice">发票池信息</p></a></li>
 		<li><a href="receivables.html"><p class="receivables">收款账户变更</p></a></li>
 	</ul>
@@ -68,19 +108,23 @@
 					<div>
 						<h3 style="height: 40px;"></h3>
 						<p class="open_p">
-							<i class="red">您还未开通资金监管账户</i>
+							<i class="closed">您还未开通资金监管账户</i>
 							<a class="open_btn">&raquo;点击开通</a>
 						</p>
-						<p class="open_p1">
+						<p class="open_p1" style="display:none">
 							<a >资金监管账户开通中></a>
 							<a class="open_btn">点击打款验证</a>
+						</p>
+						<p class="open_p2" style="display:none">
+							<i class="closed">资金监管账户开户失败</i>
+							<a class="open_btn">点击查看》</a>
 						</p>
 					</div>
 					
 				</div>
 				<ul>
-					<li><p>账户余额</p> <p><b class="_accountBalance">-</b><i>元</i> </p></li>
-					<li><p>可提现余额</p> <p><b class="_withdrewBalance">-</b><i>元</i> </p></li>
+					<li><p style="width: 126px;">账户余额<i class="open open_yarn"></i></p><p><b class="_accountBalance">-</b><i>元</i> </p></li>
+					<li><p style="width: 126px;">可提现余额</p><p><b class="_withdrewBalance">-</b><i>元</i> </p></li>
 				</ul>
 			</div>
 			<hr class="hr01" />
@@ -101,7 +145,7 @@
 				<p>
 					<i>营业执照照片：</i>
 					<em><img src="webdoc/img/img.svg"></em>
-					<a name="name_show_img" href="javascript:void(0);" id="licenseNoPhoto">点击查看</a>
+					<a name="name_show_img" data-magnify="gallery" data-caption="营业执照" id="licenseNoPhoto">点击查看</a>
 				</p>
 			</div>
 			<hr class="hr01" />
@@ -122,8 +166,8 @@
 				<p>
 					<i>身份证正反面：</i>
 					<em><img src="webdoc/img/img.svg"></em>
-					<a name="name_show_img" href="javascript:void(0);" id="legalIdCardPhotoFrontUrl">点击查看</a>
-					<a name="name_show_img" href="javascript:void(0);" id="legalIdCardPhotoBehindUrl">点击查看</a>
+					<a name="name_show_img" data-magnify="gallery" data-caption="身份证正面" id="legalIdCardPhotoFrontUrl">点击查看</a>
+					<a name="name_show_img" data-magnify="gallery" data-caption="身份证反面" id="legalIdCardPhotoBehindUrl">点击查看</a>
 				</p>
 			</div>
 		</div>
@@ -157,102 +201,136 @@
 </body>
 </html>
 <script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
-<script src="webdoc/js/popimg.js" language="javascript"></script>
-<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="text/javascript" src="webdoc/js/home.js?201904011656" ></script>
+<script>
+var TRANSACTOR;
+let Base64Obj = {};
+</script>
+<script src="webdoc/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="webdoc/js/lrz.bundle.js" ></script>
+<script src="webdoc/js/jquery.magnify.min.js"></script>
 <script type="module">
 /////////
 //请注意//
 //1. 触发显示图片功能元素，需要提前给该元素的属性赋值（data-img）
 //2. 所有触发显示图片功能元素的name属性值，必须一致
 //showImage(触发显示图片功能的元素name属性值，关闭图片弹框的ID值，图片弹框的ID值，图片容器的ID值)
-import AJAX from './webdoc/js/api.js';
+</script>
+<script  type="module">
 
-var name_show_img = new ShowImage;
-name_show_img.init("name_show_img","hideImg01","popbox_1","imgbox");
-$(function(){
-	var _result
-	let data = JSON.parse(sessionStorage.data)
-	$("#loading_div").show()
-	AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
-		$("#loading_div").hide()
-		if(result.requestStatus=="SUCCESS"){
-			var imgurl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550467935343&di=33e8eb3e45ec318dccff86574af9ff70&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180731%2F865308976a824f9d9d7768a4a9140d53.jpeg"
-			sessionStorage.setItem('result',JSON.stringify(result));
-			var _companyMember=String_clear("Object",result.bizData.companyInfo);
-				var _bankAccountInfo = result.bizData.bankAccountInfo;
-				let Account_status = window.localStorage.getItem("Account_status");
-				$(".companybox").find("h3").text(_companyMember.companyName)
-				if(_bankAccountInfo.status==null){
-					if(Account_status=="SUCCESS"){
-						//openFundAccountAdvance
-						$(".open_p1").show();
-						$(".open_p").hide();
-						$(".open_btn").attr("href","bankaccount_opening_done.html")
-					}else if(Account_status=="1"){
-						$("._accountBalance").html(stringDispose(((Number(obj.accountBalance)/100).toFixed(2)).toString()))
-						$("._withdrewBalance").html(stringDispose(((Number(obj.withdrewBalance)/100).toFixed(2)).toString()))
-						$(".open_p").hide()
-						$(".open_p1").hide()
-					}else{
-						$(".open_p1").hide();
-						$(".open_p").show();
+		import AJAX from './webdoc/js/api.js?201903251523';
+		
+		
+		$(".open_p").hide();
+		$(".open_p1").hide();
+		$(".open_p2").hide();
+		(function(){
+			$(loading_div).show()
+			let data = JSON.parse(sessionStorage.data)
+			data.bizContent.queryContentList = ["COMPANY"]
+			AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
+				$(loading_div).hide();
+				if(result.requestStatus=="SUCCESS"){
+					sessionStorage.setItem('result',JSON.stringify(result));
+					//公司数据渲染
+					let company = result.bizData.companyInfo;
+					var _companyMember=String_clear("Object",result.bizData.companyInfo);
+					if(company)
+					{
+						$("#licenseNoPhoto").attr("href",company.licenseNoPhoto);
+						$("#legalIdCardPhotoFrontUrl").attr("href",company.legalIdCardPhotoFrontUrl);
+						$("#legalIdCardPhotoBehindUrl").attr("href",company.legalIdCardPhotoBehindUrl);
+						$(".companyInfo").find("em").eq(0).html(company.companyName)
+						$(".companyInfo").find("em").eq(1).html(company.licenseNo)
+						$(".companyInfo").find("em").eq(2).html(company.licenseAddress)
+						$(".LegalPerInfo").find("em").eq(0).html(company.legalPersonName)
+						$(".LegalPerInfo").find("em").eq(1).html(company.legalPersonPhone)
+						$(".LegalPerInfo").find("em").eq(2).html(company.legalPersonId);
+						$(".companybox").find("h3").text(company.companyName)
+						let data = JSON.parse(sessionStorage.data);
+						data.bizContent.queryContentList = ["BANK_CARD","CREDIT_ACCOUNT","BANK_ACCOUNT","TRANSACTOR"];
+						$(loading_div).show();
+						AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
+							$(loading_div).hide();
+							if(result.requestStatus=="SUCCESS"){
+									var imgurl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550467935343&di=33e8eb3e45ec318dccff86574af9ff70&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180731%2F865308976a824f9d9d7768a4a9140d53.jpeg"
+									var resultData = JSON.parse(sessionStorage.getItem("result"));
+									delete result.bizData.companyInfo
+									resultData = {bizData:Object.assign(resultData.bizData,result.bizData)}
+									sessionStorage.setItem('result',JSON.stringify(resultData));
+									var _bankAccountInfo = result.bizData.bankAccountInfo;
+									if(_bankAccountInfo.status==null){
+										$(".open_p").show();
+									}else if(_bankAccountInfo.status==1){
+										$("._accountBalance").html(stringDispose(((Number(_bankAccountInfo.accountBalance)/100).toFixed(2)).toString()))
+										$("._withdrewBalance").html(stringDispose(((Number(_bankAccountInfo.withdrewBalance)/100).toFixed(2)).toString()))
+									}else if(_bankAccountInfo.status==3){
+										//openFundAccountAdvance
+										$(".open_p1").show();
+										$(".open_btn").attr("href","bankaccount_opening_done.html")
+									}else if(_bankAccountInfo.status==4){
+										$(".open_p2").show();
+										$(".open_btn").attr("href","bankaccount_opening_fail.html")
+									}
+								}else{
+								$("#loading_div").hide()
+								alert(result.returnMessage)
+							}
+						}, err => {
+							$("#loading_div").hide()
+							alert("请求失败")
+						})
+						.catch((error) => {
+
+						})
 					}
-				}else if(_bankAccountInfo.status==1){
-					$("._accountBalance").html(stringDispose(((Number(obj.accountBalance)/100).toFixed(2)).toString()))
-					$("._withdrewBalance").html(stringDispose(((Number(obj.withdrewBalance)/100).toFixed(2)).toString()))
-					$(".open_p").hide()
-					$(".open_p1").hide()
+				}else{
+					alert(result.returnMessage)
 				}
-				$(".companyInfo").find("em").eq(0).html(_companyMember.companyName)
-				$(".companyInfo").find("em").eq(1).html(_companyMember.licenseNo)
-				$(".companyInfo").find("em").eq(2).html(_companyMember.licenseAddress)
-				$(".LegalPerInfo").find("em").eq(0).html(_companyMember.legalPersonName)
-				$(".LegalPerInfo").find("em").eq(1).html(_companyMember.legalPersonPhone)
-				$(".LegalPerInfo").find("em").eq(2).html(_companyMember.legalPersonId);
-				if(_companyMember.licenseNoPhoto!="-"){
-					$("#licenseNoPhoto").attr("data-img",_companyMember.licenseNoPhoto);
-				}else {
-					$("#licenseNoPhoto").attr("data-img",imgurl)
-				}
-				if(_companyMember.legalIdCardPhotoFrontUrl!="-"){
-					$("#legalIdCardPhotoFrontUrl").attr("data-img",_companyMember.legalIdCardPhotoFrontUrl)
-				}else {
-					$("#legalIdCardPhotoFrontUrl").attr("data-img",imgurl)
-				}
-				if(_companyMember.legalIdCardPhotoBehindUrl!="-"){
-					$("#legalIdCardPhotoBehindUrl").attr("data-img",_companyMember.legalIdCardPhotoBehindUrl)
-				}else {
-					$("#legalIdCardPhotoBehindUrl").attr("data-img",imgurl)
-				}
-		}else{
-			$("#loading_div").hide()
-			alert(result.returnMessage)
-		}
-	}, err => {
-		$("#loading_div").hide()
-		alert("请求失败")
-	})
-	.catch((error) => {
+			}, err => {
+				$(loading_div).hide()
+				alert("请求失败")
+			})
+			.catch((error) => {
+				//alert("服务器内部错误")
+			})
 
-	})
-//根据接口返回信息,跳转到相应的开户步骤页面
-	$(".open_btn").click(function(){
-		var resultData = JSON.parse(sessionStorage.getItem("result"));
-		if(resultData.bizData.companyInfo.telephone)
-		{
-			if(resultData.bizData.transactorInfo)
+		$(".open_btn").click(function(){
+			var resultData = JSON.parse(sessionStorage.getItem("result"));
+			if(resultData.bizData.companyInfo.telephone)
 			{
-				if(resultData.bizData.bankCardInfo.bankCode)
+				if(resultData.bizData.transactorInfo)
 				{
-					window.location.href='bankaccount_confirm_info.html'
+					if(resultData.bizData.bankCardInfo.bankCode)
+					{
+						window.location.href='bankaccount_confirm_info.html'
+					}else
+					window.location.href='bankaccount_opening_step3.html'
 				}else
-				window.location.href='bankaccount_opening_step3.html'
-			}else
-			window.location.href='bankaccount_opening_step2.html'
-		}
-		else
-		window.location.href='bankaccount_opening_step1.html'
-	})
-	
+				window.location.href='bankaccount_opening_step2.html'
+			}
+			else
+			window.location.href='bankaccount_opening_step1.html'
+		})
+})()
+</script>
+<script>
+$('[data-magnify]').magnify({
+	headToolbar: [
+		'maximize',
+		'close'
+	],
+	footToolbar: [
+		'prev',
+		'next',
+		'zoomIn',
+		'zoomOut',
+		'fullscreen',
+		'actualSize',
+		'rotateLeft',
+		'rotateRight'
+	],
+	modalWidth:window.screen.width/2,
+	modalHeight:window.screen.height/2
 });
 </script>

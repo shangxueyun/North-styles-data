@@ -4,14 +4,14 @@
 	<meta charset="UTF-8">
 	<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="format-detection" content="telephone=no" />
-	<meta http-equiv="cache-control" content="no-cache"/>
-	<meta name="robots" content="all" />
 	<link rel="shortcut icon" href="webdoc/img/favicon.ico">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires"  content="0">
 	<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
 	<link rel="stylesheet" href="./webdoc/css/pagination.css" />
 	<script src="webdoc/js/order_toggle.js"></script>
-	<title>溟宗供应链</title>
+	<title>融资企业管理后台</title>
 </head>
 <style>
 	.cib {
@@ -138,6 +138,115 @@
 .inlineBlock .inputbox {
     padding:0;
 }
+#Payment_bounced{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(0, 0, 0, .5);
+    top: 0;
+    left: 0;
+    z-index: 11;
+}
+#Payment_bounced>div{
+	margin: 0 auto;
+    width: 28rem;
+    background: #f2f2f2;
+    margin-top: 8%;
+    height: 34rem;
+    border-radius: .5rem;
+	position: relative;
+}
+.centent_centent .ul_li li{
+	list-style: none;
+	float: left;
+	line-height: 2rem;
+	border-bottom: 1px solid #009900;
+	font-size: 1rem
+}
+#Payment_bounced h3{
+    font-size: 1.2rem;
+    font-weight: bolder;
+    padding: 1rem 2rem 1rem 1.5rem;
+}
+#Payment_bounced .frist:before{
+    content: "";
+    width: .5rem;
+    height: 1.6rem;
+    display: block;
+    margin-right: .5rem;
+    float: left;
+    background: rgba(35,118,229,1);
+}
+.centent_centent .repayment_amount{
+	font-size: 1.8rem !important;
+}
+.centent_centent .ul_li li:first-child{
+	width: 11rem;
+}
+.centent_centent .ul_li li:last-child{
+	width: 52%;
+	text-align: left;
+}
+.centent_centent .centent_li{
+	padding: 0 2rem;
+    height: 3rem;
+}
+.info_centent_b .centent_b{
+	width: 82%;
+    margin: 0 auto;
+}
+.info_centent_b .centent_b input{
+    width: 100%;
+    border-radius: .3rem;
+    background: #fff;
+    border: 1px solid;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+	color: #000;
+}
+.info_centent_b .centent_b button{
+	width: 70%;
+    height: 40px;
+    margin: 0rem 4rem;
+    border: 1px solid;
+    border-radius: .2rem;
+    background: #fff;
+    outline: 0;
+    cursor: pointer;
+}
+#Payment_bounced .cosle{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #fd3232;
+    border-radius: .75rem;
+    text-align: center;
+    line-height: 1.1rem;
+    font-size: 1.5rem;
+    color: #fff;
+	cursor: pointer;
+}
+.tablebox .Operating_reimbursement{
+	width: 2.8rem;
+    display: block;
+    height: 1.5rem;
+    border-radius: .2rem;
+    background: #169BD5;
+    line-height: 1.5rem;
+    color: #fff;
+    text-align: center;
+}
+.centent_li:not(:nth-child(5)) .ul_li li:first-child{
+	width: 7rem;
+}
+.centent_li:not(:nth-child(5)) .ul_li li:last-child{
+    width: 68%;
+}
+.tablebox .gray{
+	background: #CCCCCC;
+}	
 	</style>
 <body>
 <section class="header">
@@ -199,6 +308,7 @@
 						<th>利息</th>
 						<th>罚息</th>
 						<th>最后还款日</th>
+						<th>操作</th>
 					</tr>
 				</table>
 			</div>
@@ -208,6 +318,62 @@
 		</div>
 	</div>
 </section>
+<div id="Payment_bounced" style="display: none;">
+	<div>
+		<div class="cosle">x</div>
+		<div class="info_centent">
+			<h3 class="frist">还款信息</h3>
+			<div class="centent_centent">
+				<ul>
+					<li class="centent_li">
+						<ul class="ul_li">
+							<li>收款账户：</li>
+							<li id="Capital_bank_account">-</li>
+						</ul>
+					</li>
+					<li class="centent_li">
+						<ul class="ul_li">
+							<li>收款账号：</li>
+							<li id="Capital_bank_accountNo">-</li>
+						</ul>
+					</li>
+					<li class="centent_li">
+						<ul class="ul_li">
+							<li>还款账户：</li>
+							<li id="bank_account">-</li>
+						</ul>
+					</li>
+					<li class="centent_li">
+						<ul class="ul_li">
+							<li>还款账号：</li>
+							<li id="bank_accountNo">-</li>
+						</ul>
+					</li>
+					<li class="centent_li">
+						<ul class="ul_li">
+							<li>还款账号可用余额(元)：</li>
+							<li id="creditAmount">-</li>
+						</ul>
+					</li>
+					<li class="centent_li">
+						<ul class="ul_li">
+							<li>还款金额(元)：</li>
+							<li class="repayment_amount" id="repayment_amount">-</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="info_centent_b">
+			<h3>请输入交易密码</h3>
+			<div class="centent_b">
+				<input id="transaction_password" autocomplete="new-password" type="password">
+				<br>
+				<button id="repayment_submit">确认还款</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div id="loading_div" style="display: none;">
 	<div class="loading"></div>
@@ -249,9 +415,9 @@
 <script src="webdoc/js/highlight.min.js" language="javascript"></script>
 <script src="webdoc/js/jquery-3.3.1.min.js" language="javascript"></script>
 <script type="text/javascript" src="webdoc/js/jquery.pagination.js" ></script>
-<script type="text/javascript" src="webdoc/js/home.js?2019221" ></script>
-<script type="text/javascript" src="webdoc/js/pageHTML.js" ></script>
-<script type="text/javascript" src="webdoc/js/reimbursement.js?2019221" ></script>
+<script type="text/javascript" src="webdoc/js/home.js?201903120900" ></script>
+<script type="text/javascript" src="webdoc/js/pageHTML.js?201903120900" ></script>
+<script type="text/javascript" src="webdoc/js/reimbursement.js?20190507" ></script>
 <script src="webdoc/laydate/laydate.js"></script>
 <script>
 	lay('#version').html('-v'+ laydate.v);

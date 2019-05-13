@@ -18,6 +18,7 @@ $(function(){
                    if(result.requestStatus=="SUCCESS"){
                         window.location.href="index.html";
                         window.sessionStorage.removeItem("token");
+                        window.sessionStorage.removeItem("result");
                    }else{
                         alert(result.returnMessage)
                     }
@@ -41,7 +42,7 @@ function _service(){
 }
 
 function _version(){
-    var _version = "1.0"
+    var _version = "1.0.8"
     return _version
 }
 
@@ -256,3 +257,32 @@ let stringDispose = (str)=>{
     newstr = arr.toString().replace(/,/g,"").replace(/ /g,",")
     return newstr
   }
+
+$(".open_yarn").click(fn=>{
+    let bankAccountInfo = JSON.parse(sessionStorage.result).bizData.bankAccountInfo,
+    arr = ['accountBalance','withdrewBalance','freezeBalance'],
+    ele = $(fn.currentTarget.parentElement.parentElement.parentElement).find("b").get();
+    if($(ele[0]).text() == "***")
+    {
+        for(let i in ele)
+        {
+            if(i!="length")
+            {
+                for(let key in bankAccountInfo){
+                    if(key == ele[i].className.replace("_",""))
+                    {
+                        $(ele[i]).text(stringDispose(((Number(bankAccountInfo[key])/100).toFixed(2)).toString())+" ");
+                    }
+                }
+            }
+        }
+    }else{
+        for(let i in ele)
+        {
+            if(i!="length")
+            {
+                $(ele[i]).text("***")
+            }
+        }
+    }
+})

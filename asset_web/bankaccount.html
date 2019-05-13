@@ -4,13 +4,13 @@
 	<meta charset="UTF-8">
 	<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="format-detection" content="telephone=no" />
-	<meta http-equiv="cache-control" content="no-cache"/>
-	<meta name="robots" content="all" />
 	<link rel="shortcut icon" href="webdoc/img/favicon.ico">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires"  content="0">
 
-	<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-	<title>溟宗供应链</title>
+	<link rel="stylesheet" type="text/css" href="webdoc/css/render.css?201903271515">
+	<title>融资企业管理后台</title>
 </head>
 <style>
 #loading_div{
@@ -30,6 +30,18 @@
 	height: 2.5rem;
 	border: 2px solid #fff;
 	border-top: 2px solid rgba(0,0,0,.1);
+}
+.companybox ul li {
+    padding: 0 1rem;
+}
+.btn_hollow_2 {
+	color: #fff;
+	background: #06123c;
+	font-weight: 400;
+	width: 4rem;
+}
+.btn_hollow_2:hover{
+	color: #fff;
 }
 </style>
 
@@ -60,7 +72,7 @@
 		</div>
 	</div>
 	<div class="Box">
-		<h2 class="heading01"><span>基本信息</span></h2>
+		<h2 class="heading01"><span>资金监管专户信息</span></h2>
 		<div class="innerBox">
 			<div class="companybox companybox01" style="display: none;">
 				<div class="companybox_left">
@@ -68,15 +80,16 @@
 					<div>
 						<h3>某某科技公司</h3>
 						<p>
+							<span>账户状态：</span>
 							<i class="opened">已开通</i>
 						</p>
 					</div>
 				</div>
 				<ul>
-					<li><p>账户余额</p><p><b class="_accountBalance">0.00</b><i>元</i> </p></li>
-					<li><p>冻结余额</p><p><b class="_freezeBalance">0.00</b><i>元</i> </p></li>
-					<li><p>可提现余额</p><p><b class="_withdrewBalance">0.00</b><i>元</i> </p></li>
-					<li><a class="button btn_hollow_2" href="bankaccount_drawback.html">申请提现</a></li>
+					<li><p style="width: 126px;">账户余额<i class="open open_yarn"></i></p><p><b class="_accountBalance">0.00</b><i>元</i> </p></li>
+					<li><p style="width: 126px;">冻结余额</p><p><b class="_freezeBalance">0.00</b><i>元</i> </p></li>
+					<li><p style="width: 126px;">可提现余额</p><p><b class="_withdrewBalance">0.00</b><i>元</i> </p></li>
+					<li><a class="button btn_hollow_2" href="javascript:viod(0)">提&nbsp;现</a></li>
 				</ul>
 			</div>
 			<div class="companybox companybox02" style="display: none;">
@@ -91,10 +104,10 @@
 					</div>
 				</div>
 				<ul>
-					<li><p>账户余额</p><p><b class="_accountBalance">0.00</b><i>元</i> </p></li>
+					<li><p>账户余额<i class="open open_yarn"></i></p><p><b class="_accountBalance">0.00</b><i>元</i> </p></li>
 					<li><p>冻结余额</p><p><b class="_freezeBalance">0.00</b><i>元</i> </p></li>
 					<li><p>可提现余额</p><p><b class="_withdrewBalance">0.00</b><i>元</i> </p></li>
-					<li><a class="button btn_hollow_2" href="bankaccount_drawback.html">申请提现</a></li>
+					<li><a class="button btn_hollow_2" href="javascript:viod(0)">提&nbsp;现</a></li>
 				</ul>
 			</div>
 			<div class="companybox companybox03" style="display: none;">
@@ -103,16 +116,16 @@
 					<div>
 						<h3>某某科技公司</h3>
 						<p>
-							<i class="opening">开通中</i>
-							<a id="OpenAccount_course" href="bankaccount_drawback.html">点击打款验证 &raquo;</a>
+							<i id="status_P" class="opening">开通中</i>
+							<a id="OpenAccount_course" href="javascript:viod(0)">点击打款验证 &raquo;</a>
 						</p>
 					</div>
 				</div>
 				<ul>
-					<li><p>账户余额</p><p><b class="_accountBalance">0.00</b><i>元</i> </p></li>
+					<li><p>账户余额<i class="open open_yarn"></i></p><p><b class="_accountBalance">0.00</b><i>元</i> </p></li>
 					<li><p>冻结余额</p><p><b class="_freezeBalance">0.00</b><i>元</i> </p></li>
 					<li><p>可提现余额</p><p><b class="_withdrewBalance">0.00</b><i>元</i> </p></li>
-					<li><a class="button btn_hollow_2" href="bankaccount_drawback.html">申请提现</a></li>
+					<li><a class="button btn_hollow_2" href="javascript:viod(0)">提&nbsp;现</a></li>
 				</ul>
 			</div>
 			<hr class="hr01" />
@@ -127,17 +140,36 @@
 					<em></em>
 				</p>
 				<p>
+					<i>开户行：</i>
+					<em>-</em>
+				</p>
+				<p>
 					<i>账户性质：</i>
 					<em>众邦银行E帐通子账户</em>
 				</p>
 			</div>
+			<hr class="hr01" />
+			<h3 class="heading02">经办人信息</h3>
+			<div class="pbox pbox1">
+				<p>
+					<i>姓名：</i>
+					<em>-</em>
+				</p>
+				<p>
+					<i>联系方式：</i>
+					<em>-</em>
+				</p>
+			</div>
 			<hr class="hr01" /><div class="gap16"></div>
-			<div class="pbox">
+			<div class="pbox pbox2">
 				<p style="padding: 0px 0px 6px 0px;">
-					<a href="bankaccount_transaction_record.html">交易记录 &raquo;</a>
+					<a href="bankaccount_transaction_record.html">交易记录&raquo;</a>
 				</p>
 				<p style="border-top: 1px solid #dedede;border-bottom: 1px solid #dedede;padding: 1rem 0;">
-					<a href="bankaccount_bind.html">绑定企业账户 &raquo;</a>
+					<a href="bankaccount_bind.html">绑定企业账户&raquo;</a>
+				</p>
+				<p style="border-bottom: 1px solid #dedede;padding: 1rem 0;">
+					<a href="passwordRetrieve.html">忘记交易密码？&raquo;</a>
 				</p>
 			</div>
 		</div>
@@ -150,56 +182,78 @@
 </body>
 </html>
 <script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js" ></script>
-<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="text/javascript" src="webdoc/js/home.js?201904011656" ></script>
 <script type="module">
 
-import AJAX from './webdoc/js/api.js';
+import AJAX from './webdoc/js/api.js?201903251523';
 
+$(".pbox2").hide();
+let bizData
 (function(){
-	$(loading_div).show()
+	$(loading_div).show();
 	let data = JSON.parse(sessionStorage.data)
-	data.bizContent.queryContentList = ["COMPANY","BANK_CARD","BANK_ACCOUNT"]
+	data.bizContent.queryContentList = ["BANK_ACCOUNT"];
 	AJAX.AjaxResult('memberInfoQuery','POST',data,'application/json').then(function(result){
 		$(loading_div).hide()
-		
+		bizData = JSON.parse(sessionStorage.getItem("result")).bizData;
 		if(result.requestStatus=="SUCCESS"){
-			sessionStorage.setItem('result',JSON.stringify(result));
-			let Account_status = window.localStorage.getItem("Account_status");
 			if(result.bizData.bankAccountInfo.status==null){
-				if(Account_status=="SUCCESS"){
-					//openFundAccountAdvance
-					var _bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
-					StatusSWich($(".companybox03"),_bankAccountInfo,result.bizData.companyInfo.companyName)
-					$(".companybox03").show();
-					$(OpenAccount_course).attr("href","bankaccount_opening_done.html")
-				}else if(Account_status=="1"){
-					var _bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
-						StatusSWich($(".companybox01"),_bankAccountInfo,result.bizData.companyInfo.companyName)
-						$(".companybox01").show()
-				}else{
-						var _bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
-						StatusSWich($(".companybox02"),_bankAccountInfo,result.bizData.companyInfo.companyName)
-						$(".companybox02").show();
-						if(result.bizData.bankCardInfo.bankCode){
-							$(".companybox02 .closed1").attr("href","bankaccount_confirm_info.html");
-						} 
-						else if(result.bizData.transactorInfo){
-							$(".companybox02 .closed1").attr("href","bankaccount_opening_step3.html");
-						}else if(result.bizData.companyInfo.telephone){
-							$(".companybox02 .closed1").attr("href","bankaccount_opening_step2.html");
-						}else{
-							$(".companybox02 .closed1").attr("href","bankaccount_opening_step1.html");
-						}
-				}
-
-				
-			}else if(result.bizData.bankAccountInfo.status==1){
 				var _bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
-					StatusSWich($(".companybox01"),_bankAccountInfo,result.bizData.companyInfo.companyName)
-					$(".companybox01").show()
+				StatusSWich($(".companybox02"),_bankAccountInfo,bizData.companyInfo.companyName)
+				$(".companybox02").show();
+				if(bizData.bankCardInfo.bankCode){
+					$(".companybox02 .closed1").attr("href","bankaccount_confirm_info.html");
+				} 
+				else if(bizData.transactorInfo){
+					$(".companybox02 .closed1").attr("href","bankaccount_opening_step3.html");
+				}else if(bizData.companyInfo.telephone){
+					$(".companybox02 .closed1").attr("href","bankaccount_opening_step2.html");
+				}else{
+					$(".companybox02 .closed1").attr("href","bankaccount_opening_step1.html");
+				}
+			}else if(result.bizData.bankAccountInfo.status==1){
+				var transactorInfo = String_clear("Object",bizData.transactorInfo);
+				var bankAccountInfo = String_clear("Object",result.bizData.bankAccountInfo);
+				StatusSWich($(".companybox01"),result.bizData.bankAccountInfo,bizData.companyInfo.companyName)
+				$(".pbox").find("em").eq(0).html(bankAccountInfo.accountName)
+				$(".pbox").find("em").eq(1).html(bankAccountInfo.accountNo)
+				$(".pbox").find("em").eq(2).html(bankAccountInfo.bankName)
+				$(".pbox1").find("em").eq(0).html(transactorInfo.operatorName)
+				$(".pbox1").find("em").eq(1).html(transactorInfo.operatorPhone)
+				$(".companybox01").show();$(".pbox2").show();
+			}else if(result.bizData.bankAccountInfo.status==3){
+				//openFundAccountAdvance
+				for(let i in result.bizData.bankAccountInfo)
+				{
+					result.bizData.bankAccountInfo[i] = null
+				}
+				var _bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
+				StatusSWich($(".companybox03"),_bankAccountInfo,bizData.companyInfo.companyName)
+				$(status_P).text("开通中");
+				$(status_P).attr("class","opening");
+				$(".companybox03").show();
+				$(OpenAccount_course).text("点击打款验证");
+				$(OpenAccount_course).attr("href","bankaccount_opening_done.html");
+			}else if(result.bizData.bankAccountInfo.status==4){
+				//openFundAccountAdvance
+				for(let i in result.bizData.bankAccountInfo)
+				{
+					result.bizData.bankAccountInfo[i] = null
+				}
+				var _bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
+				StatusSWich($(".companybox03"),_bankAccountInfo,bizData.companyInfo.companyName)
+				$(status_P).text("开户失败");
+				$(status_P).attr("class","closed");
+				$(".companybox03").show();
+				$(OpenAccount_course).text("点击查看》");
+				$(OpenAccount_course).attr("href","bankaccount_opening_fail.html");
 			}
-			$(".pbox").find("em").eq(0).html(result.bizData.bankAccountInfo.accountName)
-			$(".pbox").find("em").eq(1).html(result.bizData.bankAccountInfo.accountNo)
+			if(result.bizData.bankAccountInfo.withdrewBalance>0)
+			{
+				$(".btn_hollow_2").click(fn=>{
+					window.location.href = "bankaccount_drawback.html?no=123456"
+				})
+			}
 		}else{
 			$(loading_div).hide()
 			alert(result.returnMessage)

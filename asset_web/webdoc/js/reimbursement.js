@@ -95,10 +95,12 @@ function PageFUNC(Page,status){
                         '<td>'+stringDispose(res.amount.toString())+'</td>'+
                         '<td>'+stringDispose(res.principal.toString())+'</td>'+
                         '<td>'+stringDispose(res.interest.toString())+'</td>'+
-                        '<td>'+stringDispose(res.payFine.toString())+'</td>'+
-                        '<td>'+res.lastRepayDate+'</td>'+
-                        '</tr>';
-                    $("table").append(ApplyRecordList)
+                        '<td>'+stringDispose(res.payFine.toString())+'</td>';
+                        if(res.status == '待还款')
+                        ApplyRecordList += '<td>'+res.lastRepayDate+'</td><td><a applyAmount="'+res.amount+'" agreementId="'+res.agreementId+'" repayPlanId="'+res.id+'" href="javascript:;" class="Operating_reimbursement reimbursement_F">还款</a></td></tr>';
+                        else if(res.status == '已还清')
+                        ApplyRecordList += '<td>'+res.lastRepayDate+'</td><td><a href="javascript:;" class="Operating_reimbursement gray">还款</a></td></tr>';
+                    $("table").append(ApplyRecordList);
                 })
             }else
             {
@@ -127,6 +129,75 @@ function PageFUNC(Page,status){
     });
 
 };
+
+
+$(document).click(fn=>{
+    if(fn.target.className.indexOf("reimbursement_F")>=0)
+    {
+        let {applyamount,agreementid,repayplanid} = fn.target.attributes;
+        let data = JSON.parse(sessionStorage.data);
+        data.bizContent.repayPlanId = repayplanid.value;
+        data.bizContent.agreementId = agreementid.value;
+        data.bizContent.applyAmount = applyamount.value;
+        let {bankAccountInfo,bankCardInfo,creditAccountInfo} = JSON.parse(window.sessionStorage.result).bizData;
+        if(bankAccountInfo.status=='1')
+        {
+            //接入回显
+            $(Capital_bank_account).text();
+            $(Capital_bank_accountNo).text();
+            
+            $(bank_account).text(bankCardInfo.accountName);
+            $(bank_accountNo).text(bankCardInfo.bankNo);
+            $(creditAmount).text(`￥${stringDispose((creditAccountInfo.creditAmount - creditAccountInfo.useAmount).toString())}`);
+            $(repayment_amount).text(stringDispose(applyamount.value));
+            $(Payment_bounced).show();
+            $(".cosle").click(fn=>{
+                $(Payment_bounced).hide();
+                $(Capital_bank_account).text("-");
+                $(Capital_bank_accountNo).text("-");
+                $(bank_account).text("-");
+                $(bank_accountNo).text("-");
+                $(creditAmount).text("-");
+                $(repayment_amount).text("-");
+            });
+            $(repayment_submit).unbind();
+            $(repayment_submit).click(fn=>{
+                if((Number(bankAccountInfo.withdrewBalance)/100)-Number(applyamount.value)>=0)
+                {
+                    if($(transaction_password).val() != "")
+                    {
+                        data.bizContent.tradePassword = $(transaction_password).val();
+                        $(loading_div).show();
+                        $.ajax({
+                            url:_url()+"/manualRepayApply",
+                            type:"POST",
+                            async:true,
+                            contentType:'application/json',
+                            data:JSON.stringify(data),
+                            success:function(result){
+                                $(loading_div).hide();
+                                if(result.requestStatus=="SUCCESS"){
+                                    window.location.reload();
+                                }else{
+                                    alert(result.returnMessage)
+                                }
+                            },
+                        });
+                    }else
+                    alert("交易密码不能为空！");
+
+                }else
+                alert("资金监管账号可用小于还款金额！");
+            })
+        }else
+        {
+            alert("您没有开通资金监管账户不能进行还款！");
+            return false;      
+        }
+    }
+})
+
+
 $(function(){
     $('.magnifier').click(function () {
         PageFUNC(1,null);

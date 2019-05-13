@@ -4,14 +4,13 @@
 <meta charset="UTF-8">
 <meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="format-detection" content="telephone=no" />
-<meta http-equiv="cache-control" content="no-cache"/>
-<meta name="robots" content="all" />
 <link rel="shortcut icon" href="webdoc/img/favicon.ico">
-
-<script src="webdoc/js/popimg.js" language="javascript"></script>
-<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-<title>溟宗供应链</title>
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires"  content="0">
+<script src="webdoc/js/popimg.js?201903120900" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css?201903120900">
+<title>融资企业管理后台</title>
 </head>
 
 <body>
@@ -53,6 +52,14 @@
 	</div>
 </section>
 <script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js" ></script>
-<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="text/javascript" src="webdoc/js/home.js?201903120900" ></script>
+<script>
+if(sessionStorage.FAIL)
+$(".info_txt").text(`原因：${sessionStorage.FAIL}`)
+else
+$(".info_txt").text("原因：审核拒绝")
+
+sessionStorage.removeItem("FAIL")
+</script>
 </body>
 </html>

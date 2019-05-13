@@ -50,9 +50,28 @@
 .popbox .loading {position:absolute;left:50%;top:50%;}
 .loading {position:relative;text-align:center;padding-top:3rem;}
 .loading:before {content:"";position:absolute;left:50%;top:0;width:1rem;height:1rem;border:2px solid #333;border-top:2px solid rgba(0,0,0,.1);border-radius:100rem;animation:rotate .8s infinite linear;}
-.img_div{    position: fixed;
+.img_div{    
+    position: fixed;
     left: 40%;
-    top: 30%;}
+    top: 30%;
+    overflow: scroll;
+    cursor: zoom-in;
+}
+/*滚动条样式*/
+.img_div::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 2px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 2px;
+}
+.img_div::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
+}
+.img_div::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+}
 .close1{position: fixed;background: rgba(51, 51, 51, .5)}
 .close1:before {width:3rem;height:3rem;line-height:3rem;text-align:center;color:#ccc;}
 .close1:hover:before {color:#fff;}

@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="format-detection" content="telephone=no" />
-<meta http-equiv="cache-control" content="no-cache"/>
-<meta name="robots" content="all" />
 <link rel="shortcut icon" href="webdoc/img/favicon.ico">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires"  content="0">
 
-<script src="webdoc/js/popimg.js" language="javascript"></script>
-<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-<title>溟宗供应链</title>
+<script src="webdoc/js/popimg.js?201903120900" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css?201903120900">
+<title>融资企业管理后台</title>
 <style>
 #loading_div{
 	width: 100%;
@@ -40,6 +40,18 @@
 	content: "最多可提交三次";
 	width: 10rem;
 	height: 10rem;
+}
+.info_txt {
+    padding-top: 10px;
+}
+.info_heading {
+    font-size: 24px;
+}
+.span_c{
+	display: block;
+    width: 350px;
+    margin: 0 auto;
+    text-align: left;
 }
 </style>
 </head>
@@ -75,20 +87,20 @@
 	<div class="Box">
 		<h2 class="heading01"><span>账户开通状态</span></h2>
 		<div class="innerBox infobox">
-			<div class="info_icon_done">icon-done</div>
-			<p class="info_heading">审核通过，将进行打款验证</p>
-			<p class="info_txt">打款金额可在企业绑定实体账户查询。</p>
+			<p class="info_heading">开户处理中，审核通过将进行打款验证！</p>
+			<p class="info_txt"><span class="span_c"><b>&bull;&nbsp;</b>开户申请将在1-3个工作日内审核完成。</span></p>
+			<p class="info_txt"><span class="span_c"><b>&bull;&nbsp;</b>验证金额可在企业开户时绑定的企业实体账户进行查询。</span></p>
 			<br/>
 			<div class="Box_centent">
-				<div><span>银行账户&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<span id="bankAccount" style="font-size: 18px;">-</span>&nbsp;&nbsp;</span></div>
+				<div><span>企业账号&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<span id="bankAccount" style="font-size: 18px;">-</span>&nbsp;&nbsp;</span></div>
 				<div></div>
 			</div>
 			<div class="Box_centent">
-				<div><span>打款金额&nbsp;:&nbsp;&nbsp;<input autocomplete="off" style="margin: -3px 10px 10px;" class="input01" id="money" type="text" placeholder="请输入打款金额(元)"></span></div>
+				<div><span>验证金额(元)&nbsp;:&nbsp;&nbsp;<input autocomplete="off" style="margin: -3px 10px 10px;" class="input01" id="money" type="text" placeholder="请输入打款金额"></span></div>
 				<div></div>
 			</div>
 
-			<p class="info_btnbox"><a style="margin-left: 7rem;" class="button btn_block_1">提交</a><span style="color: #1976d3;font-size: 14px">(最多可提交三次)</span></p>
+			<p class="info_btnbox"><a style="margin-left: 7rem;" class="button btn_block_1">提交验证</a><span style="color: #1976d3;font-size: 14px">(只有三次验证机会)</span></p>
 			<!--仅供测试：正式环境不应包含以下内容-->
 			<!-- <p class="info_txt">仅供测试：正式环境不应包含以下内容</p>
 			<p class="info_txt"><a href="bankaccount_opening_fail.html">发票贷首页 - 资金监管专户 - 开户失败1</a></p> -->
@@ -103,10 +115,10 @@
 </body>
 </html>
 <script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js" ></script>
-<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="text/javascript" src="webdoc/js/home.js?201903120900" ></script>
 <script type="module">
 
-	import AJAX from './webdoc/js/api.js';
+	import AJAX from './webdoc/js/api.js?201903120900';
 	$(function(){
 		(()=>{
 			let data = JSON.parse(sessionStorage.data)
@@ -147,7 +159,7 @@
 		   			"sign":'sign',
 					"token":window.sessionStorage.getItem("token"),
 					"bankAccount":$(bankAccount).text(),
-					"verifyAmount":Number($(money).val())*100,
+					"verifyAmount":Number(parseInt($(money).val()*100)),
 					"extension":null,
 				}
 		   	}
@@ -161,7 +173,6 @@
 		   		success:function(result){
 					$(loading_div).hide();
 		   			if(result.requestStatus=="SUCCESS"){
-						window.localStorage.setItem("Account_status","1");
 						window.location.href="bankaccount.html"
 		   			}else{
 						let num = Number(sessionStorage.getItem("remit"))

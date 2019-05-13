@@ -32,11 +32,11 @@ $(function () {
 				$(".list_info").find("p").eq(2).text(_companyInfo.telephone)
 				$(".list_info").find("p").eq(3).text(_companyInfo.legalPersonName)
 				$(".list_info").find("p").eq(4).text(_companyInfo.legalPersonId)
-				$(".list_info").find("p").eq(7).text(_companyInfo.email)
 				if(result.bizData.transactorInfo){
 					var _transactorInfo = result.bizData.transactorInfo
 					$(".list_info").find("p").eq(5).text(_transactorInfo.operatorName)
 					$(".list_info").find("p").eq(6).text(_transactorInfo.operatorPhone)
+					$(".list_info").find("p").eq(7).text(_transactorInfo.operatorEmail)
 				}
 
 				var  _bankCardInfo = result.bizData.bankCardInfo

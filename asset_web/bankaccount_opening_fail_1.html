@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="format-detection" content="telephone=no" />
-<meta http-equiv="cache-control" content="no-cache"/>
-<meta name="robots" content="all" />
 <link rel="shortcut icon" href="webdoc/img/favicon.ico">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires"  content="0">
 
-<script src="webdoc/js/popimg.js" language="javascript"></script>
-<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-<title>溟宗供应链</title>
+<script src="webdoc/js/popimg.js?201903120900" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css?201903120900">
+<title>融资企业管理后台</title>
 </head>
 
 <body>
@@ -53,23 +53,27 @@
 	</div>
 </section>
 <script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js" ></script>
-<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="text/javascript" src="webdoc/js/home.js?201903120900" ></script>
 <script>
 	window.onload = fu =>{
 		let num = Number(sessionStorage.getItem("remit"))
 		if(num == 3)
 		{
-			$(".info_icon_warn").hide();
-			$(".info_heading").hide();
-			$(".info_txt").text("认证次数已超过三次,请点击确认从新开户");
-			$(".info_txt").attr("class","info_heading");
-			$(".info_heading").css("margin","4rem auto 1rem auto")
-			$(".btn_block_1").text("确认");
+			$(".info_btnbox").empty();
+			$(".info_txt").text("您已超过验证次数，请线下联系平台运营人员重新验证！");
+			$(".info_txt").css("color","red");
+			$(".info_btnbox").css("color","red");
+			$(".info_btnbox").text("联系我们")
 			$(".btn_block_1").click(fn=>{
 				sessionStorage.removeItem("remit");
 				window.location.href="bankaccount_opening_step1.html"
 			})
 		}else{
+			$(".info_btnbox").empty();
+			$(".info_txt").text("原因：打款认证失败");
+			$(".info_txt").css("color","#999");
+			$(".info_btnbox").css("color","#");
+			$(".info_btnbox").append("<a class='button btn_block_1' >重新认证</a>")
 			$(".btn_block_1").click(fn=>{
 				window.location.href="bankaccount_opening_done.html"
 			})

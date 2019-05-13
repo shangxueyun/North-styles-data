@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="format-detection" content="telephone=no" />
-<meta http-equiv="cache-control" content="no-cache"/>
-<meta name="robots" content="all" />
 <link rel="shortcut icon" href="webdoc/img/favicon.ico">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires"  content="0">
 
-<script src="webdoc/js/popimg.js" language="javascript"></script>
-<link rel="stylesheet" type="text/css" href="webdoc/css/render.css">
-<title>溟宗供应链</title>
+<script src="webdoc/js/popimg.js?201903120900" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="webdoc/css/render.css?201903120900">
+<title>融资企业管理后台</title>
 </head>
 <style>
 	.red_err{
@@ -105,10 +105,10 @@
 </body>
 </html>
 <script type="text/javascript" src="webdoc/js/jquery-3.3.1.min.js" ></script>
-<script type="text/javascript" src="webdoc/js/home.js" ></script>
+<script type="text/javascript" src="webdoc/js/home.js?201903120900" ></script>
 <script type="module">
 
-import AJAX from './webdoc/js/api.js';
+import AJAX from './webdoc/js/api.js?201903120900';
 
 	$(function(){
 		$("#OpenAccount").click(function(){
@@ -128,11 +128,10 @@ import AJAX from './webdoc/js/api.js';
 					AJAX.AjaxResult('openFundAccount','POST',data,'application/json').then(function(result){
 						$(loading_div).hide()
 						if(result.requestStatus=="SUCCESS"){
-							window.localStorage.setItem("Account_status",result.requestStatus);
 							window.location.href="bankaccount_opening_done.html"
 						}else{
-							$(loading_div).hide()
-							alert(result.returnMessage)
+							sessionStorage.setItem("FAIL",result.returnMessage)
+							window.location.href='bankaccount_opening_fail.html'
 						}
 					}, err => {
 						$(loading_div).hide()

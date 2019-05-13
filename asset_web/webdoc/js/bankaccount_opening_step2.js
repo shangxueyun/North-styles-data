@@ -14,26 +14,27 @@
 			Eleshow(v,showBox)
 		});
 		$(operatorName).focus();
-//		2）上传
+//		2）上传{width: 700,quality:0.9}
 	   	$("#idCardPhotoFrontUrl").on("change",function(e){
-			let NameObj = e.currentTarget.files[0];
-			
+			let NameObj = e.currentTarget.files[0],oFileReader = new FileReader();
 			if(NameObj)
 			{
 				$(".idCardPhotoFront_img").text("");
 				$(".idCardPhotoFront_img").text(NameObj.name);
-				lrz(this.files[0],{width: 500})
-				.then(function (rst) {
-					Base64Obj['idCardPhotoFrontUrl'] = rst.base64
-					$('.idCardPhotoFront_img').attr("data-img",rst.base64);
-					$('.idCardPhotoFront_img').show();
-					$('.idCardPhotoFront_i').hide();
-				})
-				.catch(function (err) {
-					$('.idCardPhotoFront_i').show();
-				})
-				.always(function (err) {
-				});
+				if(NameObj.size > 370200 && NameObj.size < 1024000)
+				{
+					lrzFUNC($(".idCardPhotoFront_img"),"idCardPhotoFrontUrl",this.files[0],0.7)
+				}else if(NameObj.size > 1024000){
+					lrzFUNC($(".idCardPhotoFront_img"),"idCardPhotoFrontUrl",this.files[0],0.)
+				}else{
+                    oFileReader.onloadend = function (e) {
+						Base64Obj['idCardPhotoFrontUrl'] = e.target.result
+						$('.idCardPhotoFront_img').attr("herf",e.target.result);
+						$('.idCardPhotoFront_img').show();
+						$(this).siblings(".err-tipBox").hide()
+                    };
+                    oFileReader.readAsDataURL(this.files[0]);
+				}
 			}
 			else
 			{
@@ -42,25 +43,27 @@
 		})
 	
 		$("#idCardPhotoBehindUrl").on("change",function(e){
-			let NameObj = e.currentTarget.files[0];
+			let NameObj = e.currentTarget.files[0],oFileReader = new FileReader();
 			
 			if(NameObj)
 			{	
 
 				$(".idCardPhotoBehind_img").text("");
 				$(".idCardPhotoBehind_img").text(NameObj.name);
-				lrz(this.files[0],{width: 500})
-				.then(function (rst) {
-					Base64Obj['idCardPhotoBehindUrl'] = rst.base64
-					$('.idCardPhotoBehind_img').attr("data-img",rst.base64);
-					$('.idCardPhotoBehind_img').show();
-					$(this).siblings(".err-tipBox").hide()
-				})
-				.catch(function (err) {
-					$(this).siblings(".err-tipBox").show()
-				})
-				.always(function (err) {
-				});
+				if(NameObj.size > 370200 && NameObj.size < 1024000)
+				{
+					lrzFUNC($(".idCardPhotoBehind_img"),"idCardPhotoBehindUrl",this.files[0],0.7)
+				}else if(NameObj.size > 1024000){
+					lrzFUNC($(".idCardPhotoBehind_img"),"idCardPhotoBehindUrl",this.files[0],0.)
+				}else{
+                    oFileReader.onloadend = function (e) {
+						Base64Obj['idCardPhotoBehindUrl'] = e.target.result
+						$('.idCardPhotoBehind_img').attr("data-img",e.target.result);
+						$('.idCardPhotoBehind_img').show();
+						$(this).siblings(".err-tipBox").hide()
+                    };
+                    oFileReader.readAsDataURL(this.files[0]);
+				}
 			}
 			else
 			{
@@ -69,63 +72,67 @@
 		})
 		
 //	   	法人委托授权书影印：
-	   	$("#arrestPhotoUrl").on("change",function(e){
-			let NameObj = e.currentTarget.files[0];
+	   	// $("#arrestPhotoUrl").on("change",function(e){
+		// 	let NameObj = e.currentTarget.files[0],oFileReader = new FileReader();
 			
-			if(NameObj)
-			{
-				$(".arrestPhotoUrl_img").text("");
-				$(".arrestPhotoUrl_img").text(NameObj.name);
-				lrz(this.files[0],{width: 500})
-				.then(function (rst) {
-					Base64Obj['arrestPhotoUrl'] = rst.base64
-					$('.arrestPhotoUrl_img').attr("data-img",rst.base64);
-					$('.arrestPhotoUrl_img').show();
-					$(this).siblings(".err-tipBox").hide()
-				})
-				.catch(function (err) {
-					$(this).siblings(".err-tipBox").show()
-				})
-				.always(function (err) {
-				});
-			}
-			else
-			{
-				$(this).siblings(".err-tipBox").hide()
-			}
-			})
+		// 	if(NameObj)
+		// 	{
+		// 		$(".arrestPhotoUrl_img").text("");
+		// 		$(".arrestPhotoUrl_img").text(NameObj.name);
+		// 		if(NameObj.size > 370200 && NameObj.size < 1024000)
+		// 		{
+		// 			lrzFUNC($(".arrestPhotoUrl_img"),"arrestPhotoUrl",this.files[0],0.7)
+		// 		}else if(NameObj.size > 1024000){
+		// 			lrzFUNC($(".arrestPhotoUrl_img"),"arrestPhotoUrl",this.files[0],0.)
+		// 		}else{
+        //             oFileReader.onloadend = function (e) {
+		// 				Base64Obj['arrestPhotoUrl'] = e.target.result
+		// 				$('.arrestPhotoUrl_img').attr("data-img",e.target.result);
+		// 				$('.arrestPhotoUrl_img').show();
+		// 				$(this).siblings(".err-tipBox").hide()
+        //             };
+        //             oFileReader.readAsDataURL(this.files[0]);
+		// 		}
+		// 	}
+		// 	else
+		// 	{
+		// 		$(this).siblings(".err-tipBox").hide()
+		// 	}
+		// 	})
 		
-//	   	企业授权书影印：
-		$("#companyAuthorizationFilePath").on("change",function(e){
-			let NameObj = e.currentTarget.files[0];
+// //	   	企业授权书影印：
+// 		$("#companyAuthorizationFilePath").on("change",function(e){
+// 			let NameObj = e.currentTarget.files[0],oFileReader = new FileReader();
 			
-			if(NameObj)
-			{
-				$(".companyAuthorizationFilePath_img").text("");
-				$(".companyAuthorizationFilePath_img").text(NameObj.name);
-				lrz(this.files[0],{width: 500})
-				.then(function (rst) {
-					Base64Obj['companyAuthorizationFilePath'] = rst.base64
-					$('.companyAuthorizationFilePath_img').attr("data-img",rst.base64);
-					$('.companyAuthorizationFilePath_img').show();
-					$(this).siblings(".err-tipBox").hide()
-				})
-				.catch(function (err) {
-					$(this).siblings(".err-tipBox").show()
-				})
-				.always(function (err) {
-				});
-			}
-			else
-			{
-				$(this).siblings(".err-tipBox").hide()
-			}
-		})
+// 			if(NameObj)
+// 			{
+// 				$(".companyAuthorizationFilePath_img").text("");
+// 				$(".companyAuthorizationFilePath_img").text(NameObj.name);
+// 				if(NameObj.size > 370200 && NameObj.size < 1024000)
+// 				{
+// 					lrzFUNC($(".companyAuthorizationFilePath_img"),"companyAuthorizationFilePath",this.files[0],0.7)
+// 				}else if(NameObj.size > 1024000){
+// 					lrzFUNC($(".companyAuthorizationFilePath_img"),"companyAuthorizationFilePath",this.files[0],0.)
+// 				}else{
+//                     oFileReader.onloadend = function (e) {
+// 						Base64Obj['companyAuthorizationFilePath'] = e.target.result
+// 						$('.companyAuthorizationFilePath_img').attr("data-img",e.target.result);
+// 						$('.companyAuthorizationFilePath_img').show();
+// 						$(this).siblings(".err-tipBox").hide()
+//                     };
+//                     oFileReader.readAsDataURL(this.files[0]);
+// 				}
+// 			}
+// 			else
+// 			{
+// 				$(this).siblings(".err-tipBox").hide()
+// 			}
+// 		})
 
 //      表单提交
 		$(".err-tipBox").css("color","red")
 		$(".err-tipBox").hide()
-    $('#input-button').click(function () {
+    	$('#input-button').click(function () {
 			let _dataInfo={"bizContent":{'transactorInfo':{}}},dataObj = $('#operatorForm').serializeArray();
 			
 			for(var i in dataObj){
@@ -208,4 +215,21 @@
 					$(this).siblings("."+ showBox).show()
 				}
 			})
+		}
+
+		function lrzFUNC(ele,str,data,quality){
+			let type = data.type;
+			lrz(data,{quality:quality})
+			.then(function (rst) {
+				rst.base64 = rst.base64.replace("data:image/jpeg;","data:"+type+";");
+				Base64Obj[str] = rst.base64
+				ele.attr("herf",rst.base64);
+				ele.show();
+				ele.siblings(".err-tipBox").hide()
+			})
+			.catch(function (err) {
+				ele.siblings(".err-tipBox").show()
+			})
+			.always(function (err) {
+			});
 		}

@@ -32,7 +32,52 @@ $(function(){
 let numpage,pages,result_status;//总记录数，每页显示数，总页数
 
 (()=>{
-    PageFUNC();
+	let data = JSON.parse(sessionStorage.data)
+    data.bizContent.queryContentList = ["BANK_ACCOUNT"];
+    $(loading_div).show();
+    $.ajax({
+        url:_url()+"/memberInfoQuery",
+        type:"POST",
+        async:true,
+        contentType:'application/json',
+        data:JSON.stringify(data),
+        success:function(result){
+            $(loading_div).hide();
+            PageFUNC();
+            var bankAccountInfo=String_clear("Object",result.bizData.bankAccountInfo);
+            if(bankAccountInfo!=null){
+                $('#accountBalance').text((Number(bankAccountInfo.accountBalance)/100).toFixed(2)+" ");
+                if(bankAccountInfo.status=='1'){
+                    $("#status").text("已开通");
+                }else{
+                    $("#status").text("未开通");
+                }
+            }else {
+                $("#status").text("未开通");
+            }
+            if(bankAccountInfo.status=='1'){
+                debugger
+                let newbankAccountInfo = {bizData:{}}
+                $('#accountNo').text(bankAccountInfo.accountNo);
+                $('#accountName').text(bankAccountInfo.accountName);
+                $('#bankName').text(bankAccountInfo.bankName);
+                var resultData = JSON.parse(sessionStorage.getItem("result"));
+                newbankAccountInfo.bizData.bankAccountInfo = result.bizData.bankAccountInfo
+                
+                resultData = {bizData:Object.assign(resultData.bizData,newbankAccountInfo.bizData)}
+                sessionStorage.setItem('result',JSON.stringify(resultData));
+            }else{
+                $('#accountNo').text("-");
+                $('#accountName').text("-");
+            }
+            if(result.requestStatus=="SUCCESS"){}else{
+                alert(result.returnMessage)
+            }
+        },
+        error:function(){
+            alert("数据加载失败");
+        }
+    });
 })()
 
 //查询交易记录
@@ -74,6 +119,7 @@ function PageFUNC(Page){
         contentType:'application/json',
         data:JSON.stringify(_data),
         success:function(result){
+            $(loading_div).hide();
             if(result_status==1)
             $(loading_div).hide();
             if(result.bizData!=null){
@@ -124,7 +170,7 @@ function PageFUNC(Page){
                     ApplyRecordList +=   '<td class="_outDate">'+status+'</td>';
                     // '<td class="_outDate">'+res.memo+'</td>'+
                     if(status=="成功")
-                    ApplyRecordList +=   '<td class="_outDate"><a applyNo="'+res.applyNo+'" class="generate" target="html" download>下载</a></td>'; //交易凭证
+                    ApplyRecordList +=   '<td class="_outDate"><a applyNo="'+res.applyNo+'" class="generate" target="html" download>查看</a></td>'; //交易凭证
                     else
                     ApplyRecordList +=   '<td class="_outDate">-</td>'; 
                     ApplyRecordList +=    '<td class="_outDate">'+res.memo+'</td>';
@@ -154,43 +200,6 @@ function PageFUNC(Page){
 };
 let data_C = sessionStorage.data
 //提现查询调会员信息资金账户信息
-$(loading_div).show()
-$.ajax({
-    url:_url()+"/memberInfoQuery",
-    type:"POST",
-    async:true,
-    contentType:'application/json',
-    data:data_C,
-    success:function(result){
-        $(loading_div).hide();
-        result_status = 1
-        if(result.requestStatus=="SUCCESS"){
-            bankAccountInfo = result.bizData.bankAccountInfo,
-            bankCardInfo = result.bizData.bankCardInfo;
-            
-            if(bankAccountInfo!=null){
-                $('#accountBalance').text((Number(bankAccountInfo.accountBalance)/100).toFixed(2)+" ");
-                if(bankAccountInfo.status=='0'){
-                    $("#status").text("未开通");
-                }
-                if(bankAccountInfo.status=='1'){
-                    $("#status").text("已开通");
-                }
-            }else {
-                $("#status").text("未开通");
-            }
-            if(bankCardInfo!=null){
-                $('#accountNo').text(bankAccountInfo.accountNo);
-                $('#accountName').text(bankAccountInfo.accountName);
-            }
-        }else{
-            alert(result.returnMessage)
-        }
-    },
-    // error:function(){
-    //     alert("数据加载失败");
-    // }
-});
 
 let generateELE;
 function generate(fn){
